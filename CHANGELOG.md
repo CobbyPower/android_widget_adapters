@@ -1,4 +1,4 @@
 Change-Log
 ===============
 
-> **RELEASE VERSION** (*RELEASE DATE*)
+> **RELEASE VERSION** (<i>RELEASE DATE</i>)

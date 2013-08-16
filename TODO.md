@@ -1,7 +1,7 @@
 TODO:
 ===============
 
-> **JOB** - DESCRIPTION (*ESTIMATED RELEASE DATE*)
+> **JOB** - DESCRIPTION (<i>ESTIMATED RELEASE DATE</i>)
 
 ### High Priority ###
 
