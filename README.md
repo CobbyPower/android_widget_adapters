@@ -29,7 +29,7 @@ Please see official [wiki](https://github.com/Wolf-ITechnologies/android_widget_
 
 ## Compatibility ##
 
-Fully supported from **Android API version 7**, so every Android powered device out there :).
+Fully supported from **Android API version 8**.
 
 ## Related Projects
 
