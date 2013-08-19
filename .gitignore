@@ -21,6 +21,7 @@ local.properties
 
 # Gradle build directory
 android_widget_adapters/build/
+examples/build
 
 # Idea files
 .idea/
