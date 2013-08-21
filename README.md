@@ -3,7 +3,7 @@ Android Widget Adapters
 
 Effective and optimized adapters for Android widgets as [ListView](http://developer.android.com/reference/android/widget/ListView.html) and [GridView](http://developer.android.com/reference/android/widget/GridView.html).
 
-#### From [Android Daily Development](http://github.wolf-itechnologies.com "GitHub (Wolf-ITechnologies)") series by [Wolf-ITechnologies](http://wolf-itechnologies.com "Wolf-ITechnologies")
+#### From [Android Daily Development]() series by [Wolf-ITechnologies]()
 
 ## Overview ##
 
@@ -23,7 +23,7 @@ Effective and optimized adapters for Android widgets as [ListView](http://develo
 
 ## Known Issues ##
 
-Please see official [wiki](https://github.com/Wolf-ITechnologies/android_widget_adapters/wiki/Known-Issues) page.
+Please see official wiki [page](https://github.com/Wolf-ITechnologies/android_widget_adapters/wiki/Known-Issues).
 
 ## Developer info ##
 
