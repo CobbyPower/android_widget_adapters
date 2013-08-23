@@ -25,3 +25,7 @@ examples/build/
 
 # Idea files
 .idea/
+
+# =============== RELEASE ====================
+# exclude instrument tests
+android_widget_adapters/src/instrumentTest
