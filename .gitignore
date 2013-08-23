@@ -28,4 +28,4 @@ examples/build/
 
 # =============== RELEASE ====================
 # exclude instrument tests
-android_widget_adapters/src/instrumentTest
+android_widget_adapters/src/instrumentTest/
