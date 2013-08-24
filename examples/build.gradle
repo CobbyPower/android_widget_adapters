@@ -1,0 +1,15 @@
+apply plugin: 'android'
+
+dependencies {
+    compile project(':android_widget_adapters')
+}
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+    }
+}
