@@ -18,11 +18,11 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.and.internal.widget.adapter;
+package com.wit.and.widget.adapter.internal.module;
 
 import com.wit.and.widget.adapter.OptBaseAdapter;
-import com.wit.and.widget.adapter.SelectableItem;
-import com.wit.and.widget.adapter.SelectionModule;
+import com.wit.and.widget.adapter.module.SelectableItem;
+import com.wit.and.widget.adapter.module.SelectionModule;
 
 /**
  * <p>
@@ -30,7 +30,7 @@ import com.wit.and.widget.adapter.SelectionModule;
  * </p>
  * <h5>DefaultSelectionModule</h5>
  * <p>
- * extends {@link com.wit.and.widget.adapter.SelectionModule}
+ * extends {@link com.wit.and.widget.adapter.module.SelectionModule}
  * </p>
  * <h4>Class Overview</h4>
  * <p>

@@ -18,38 +18,38 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.and.widget;
+package com.wit.and.widget.adapter.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
-import com.wit.and.internal.view.IStateView;
-import com.wit.and.view.StateView.OnStateViewVisibilityListener;
+import com.wit.and.widget.adapter.internal.view.IStateView;
+import com.wit.and.widget.adapter.view.StateView;
 
 /**
  * <p>
  * public class
  * </p>
- * <h5>StateLinearLayout</h5>
+ * <h5>StateRelativeLayout</h5>
  * <p>
- * extends {@link LinearLayout}<br/>
+ * extends {@link RelativeLayout}<br/>
  * implements {@link IStateView}
  * </p>
  * <h4>Class Overview</h4>
  * <p>
- * Updated <code>LinearLayout</code> to handle custom handling of the states in
- * the list view (especially when the ListView or GridView should provide
- * multiple selection mode). This can be also used as a dialog linear layout in
- * your xml layouts.
+ * Updated <code>RelativeLayout</code> to handle custom handling of the states
+ * in the list view (especially when the ListView or GridView should provide
+ * multiple selection mode). This can be also used as a dialog relative layout
+ * in your xml layouts.
  * </p>
  * 
- * @see LinearLayout
+ * @see RelativeLayout
  * @see IStateView
  * @author Martin Albedinsky
  */
-public class StateLinearLayout extends LinearLayout implements IStateView {
+public class StateRelativeLayout extends RelativeLayout implements IStateView {
 
 	/**
 	 * Constants =============================
@@ -58,7 +58,7 @@ public class StateLinearLayout extends LinearLayout implements IStateView {
     /**
      * Log TAG.
      */
-    // private static final String TAG = StateLinearLayout.class.getSimpleName();
+    // private static final String TAG = StateRelativeLayout.class.getSimpleName();
 
     /**
      * Indicates if debug private output trough log-cat is enabled.
@@ -89,7 +89,7 @@ public class StateLinearLayout extends LinearLayout implements IStateView {
 	/**
 	 * Visibility changed callback.
 	 */
-	private OnStateViewVisibilityListener iVisibilityListener;
+	private StateView.OnStateViewVisibilityListener iVisibilityListener;
 
 	/**
 	 * Arrays --------------------------------
@@ -110,7 +110,7 @@ public class StateLinearLayout extends LinearLayout implements IStateView {
 
 	/**
 	 * <br/>
-	 * <h5><i>public StateLinearLayout(Context context)</i></h5>
+	 * <h5><i>public StateRelativeLayout(Context context)</i></h5>
 	 * <p>
 	 * Constructor #1.
 	 * </p>
@@ -118,13 +118,14 @@ public class StateLinearLayout extends LinearLayout implements IStateView {
 	 * @param context
 	 *            The actual application context.
 	 */
-	public StateLinearLayout(Context context) {
+	public StateRelativeLayout(Context context) {
 		super(context);
 	}
 
 	/**
 	 * <br/>
-	 * <h5><i>public StateLinearLayout(Context context, AttributeSet attrs)</i></h5>
+	 * <h5><i>public StateRelativeLayout(Context context, AttributeSet
+	 * attrs)</i></h5>
 	 * <p>
 	 * Constructor #2.
 	 * </p>
@@ -133,8 +134,25 @@ public class StateLinearLayout extends LinearLayout implements IStateView {
 	 *            The actual application context.
 	 * @param attrs
 	 */
-	public StateLinearLayout(Context context, AttributeSet attrs) {
+	public StateRelativeLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
+	}
+
+	/**
+	 * <br/>
+	 * <h5><i>public StateRelativeLayout(Context context, AttributeSet attrs,
+	 * int defStyle)</i></h5>
+	 * <p>
+	 * Constructor #3.
+	 * </p>
+	 * 
+	 * @param context
+	 *            The actual application context.
+	 * @param attrs
+	 * @param defStyle
+	 */
+	public StateRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
 	}
 
 	/**
@@ -167,6 +185,7 @@ public class StateLinearLayout extends LinearLayout implements IStateView {
 	}
 
 	/**
+	 * 
 	 */
 	@Override
 	public void setSelected(boolean selected, boolean override) {
@@ -174,6 +193,7 @@ public class StateLinearLayout extends LinearLayout implements IStateView {
 	}
 
 	/**
+	 * 
 	 */
 	@Override
 	public void setHandleDefaultStates(boolean handle) {
@@ -181,6 +201,7 @@ public class StateLinearLayout extends LinearLayout implements IStateView {
 	}
 
 	/**
+	 * 
 	 */
 	@Override
 	public boolean handleDefaultStates() {
@@ -188,9 +209,10 @@ public class StateLinearLayout extends LinearLayout implements IStateView {
 	}
 
 	/**
- 	 */
+	 * 
+ 	*/
 	@Override
-	public void setOnVisibilityListener(OnStateViewVisibilityListener listener) {
+	public void setOnVisibilityListener(StateView.OnStateViewVisibilityListener listener) {
 		iVisibilityListener = listener;
 	}
 
@@ -199,6 +221,7 @@ public class StateLinearLayout extends LinearLayout implements IStateView {
 	 */
 
 	/**
+	 * 
 	 */
 	@Override
 	protected void onVisibilityChanged(View changedView, int visibility) {

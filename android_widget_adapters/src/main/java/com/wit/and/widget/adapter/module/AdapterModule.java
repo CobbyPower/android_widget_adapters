@@ -18,7 +18,7 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.and.widget.adapter;
+package com.wit.and.widget.adapter.module;
 
 import android.os.Bundle;
 import android.widget.BaseAdapter;
@@ -97,31 +97,29 @@ public abstract class AdapterModule<Adapter extends BaseAdapter> {
 	 * Public --------------------------------
 	 */
 
-	/**
-	 * <br/>
-	 * <h5><i>public void onSaveInstanceState(Bundle outState)</i></h5>
-	 * <p>
-	 * Invoked to save the module state.
-	 * </p>
-	 * 
-	 * @param outState
-	 *            Outgoing bundle state.
-	 */
-	public void onSaveInstanceState(Bundle outState) {
-	}
+    /**
+     *
+     * @param outState
+     */
+    public void dispatchSaveInstnceState(Bundle outState) {
+        onSaveInstanceState(outState);
+    }
 
-	/**
-	 * <br/>
-	 * <h5><i>public void onRestoreInstanceState(Bundle savedState)</i></h5>
-	 * <p>
-	 * Invoked to restore the module state.
-	 * </p>
-	 * 
-	 * @param savedState
-	 *            Saved adapter state.
-	 */
-	public void onRestoreInstanceState(Bundle savedState) {
-	}
+    /**
+     *
+     * @param savedState
+     */
+    public void dispatchRestoreInstanceState(Bundle savedState) {
+        onRestoreInstanceState(savedState);
+    }
+
+    /**
+     *
+     * @param adapter
+     */
+    public final void dispatchAttachToAdapter(Adapter adapter) {
+        onAttachToAdapter(adapter);
+    }
 
 	/**
 	 * Getters + Setters ---------------------
@@ -130,6 +128,28 @@ public abstract class AdapterModule<Adapter extends BaseAdapter> {
 	/**
 	 * Protected -----------------------------
 	 */
+
+    /**
+     * <p>
+     * Invoked to save state of this module.
+     * </p>
+     *
+     * @param outState
+     *            Outgoing bundle state.
+     */
+    protected void onSaveInstanceState(Bundle outState) {
+    }
+
+    /**
+     * <p>
+     * Invoked to restore saved state of this module.
+     * </p>
+     *
+     * @param savedState
+     *            Saved adapter state.
+     */
+    protected void onRestoreInstanceState(Bundle savedState) {
+    }
 
 	protected void onAttachToAdapter(Adapter adapter) {
 		mAdapter = adapter;

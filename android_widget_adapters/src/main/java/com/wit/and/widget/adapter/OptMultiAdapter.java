@@ -24,8 +24,11 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.SparseArray;
 
-import com.wit.and.internal.widget.adapter.DefaultSelectionModule;
-import com.wit.and.widget.StateRelativeLayout;
+import com.wit.and.widget.adapter.internal.BaseAdapter;
+import com.wit.and.widget.adapter.internal.IMultiAdapter;
+import com.wit.and.widget.adapter.internal.module.DefaultSelectionModule;
+import com.wit.and.widget.adapter.module.AdapterModule;
+import com.wit.and.widget.adapter.widget.StateRelativeLayout;
 
 /**
  * <p>
@@ -34,20 +37,20 @@ import com.wit.and.widget.StateRelativeLayout;
  * <h5>OptMultiAdapter</h5>
  * <p>
  * extends {@link OptBaseAdapter},<br/>
- * implements {@link IMultiAdapter}
+ * implements {@link com.wit.and.widget.adapter.internal.IMultiAdapter}
  * </p>
  * <h4>Class Overview</h4>
  * <p>
  * </p>
  * <p>
- * As default contains default {@link SelectionModule} implementation. Selector module can be
+ * As default contains default {@link com.wit.and.widget.adapter.module.SelectionModule} implementation. Selector module can be
  * obtained under the {@link #MODULE_SELECTOR} id.
  * </p>
  * 
  * @see OptBaseAdapter
- * @see com.wit.and.widget.StateLinearLayout
+ * @see com.wit.and.widget.adapter.widget.StateLinearLayout
  * @see StateRelativeLayout
- * @see com.wit.and.view.StateView
+ * @see com.wit.and.widget.adapter.view.StateView
  * 
  * @author Martin Albedinsky
  * 
@@ -139,7 +142,7 @@ public abstract class OptMultiAdapter<Adapter extends OptBaseAdapter> extends Op
 	@SuppressWarnings("unchecked")
 	@Override
 	public void addModule(AdapterModule<Adapter> module, int moduleID) {
-		module.onAttachToAdapter((Adapter) this);
+		module.dispatchAttachToAdapter((Adapter) this);
 		MODULES_MANAGER.addModule(module, moduleID);
 	}
 
@@ -283,13 +286,13 @@ public abstract class OptMultiAdapter<Adapter extends OptBaseAdapter> extends Op
 
 		void dispatchOnSaveState(Bundle outState) {
 			for (int i = 0; i < aModules.size(); i++) {
-				aModules.get(aModules.keyAt(i)).onSaveInstanceState(outState);
+				aModules.get(aModules.keyAt(i)).dispatchSaveInstnceState(outState);
 			}
 		}
 
 		void dispatchOnRestoreState(Bundle savedState) {
 			for (int i = 0; i < aModules.size(); i++) {
-				aModules.get(aModules.keyAt(i)).onRestoreInstanceState(savedState);
+				aModules.get(aModules.keyAt(i)).dispatchRestoreInstanceState(savedState);
 			}
 		}
 	}

@@ -1,1 +1,4 @@
-include ':android_widget_adapters'
+// Release:
+//include ':android_widget_adapters'
+// Examples:
+include ':android_widget_adapters', ':examples'

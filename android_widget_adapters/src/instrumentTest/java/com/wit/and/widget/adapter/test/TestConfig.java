@@ -1,4 +1,4 @@
-package com.wit.and.test;
+package com.wit.and.widget.adapter.test;
 
 /**
  * @author Martin Albedinsky

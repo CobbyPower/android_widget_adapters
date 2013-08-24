@@ -18,7 +18,7 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.and.widget.adapter;
+package com.wit.and.widget.adapter.internal;
 
 import android.app.Activity;
 import android.content.Context;

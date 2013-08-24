@@ -18,10 +18,12 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.and.widget.adapter;
+package com.wit.and.widget.adapter.module;
 
 import android.os.Bundle;
 import android.util.SparseIntArray;
+
+import com.wit.and.widget.adapter.internal.BaseAdapter;
 
 /**
  * <p>
@@ -33,7 +35,7 @@ import android.util.SparseIntArray;
  * </p>
  * <h4>Class Overview</h4>
  * <p>
- * Selection manager for the {@link IMultiAdapter}.
+ * Selection manager for the {@link com.wit.and.widget.adapter.internal.IMultiAdapter}.
  * </p>
  *
  * @param <Item>

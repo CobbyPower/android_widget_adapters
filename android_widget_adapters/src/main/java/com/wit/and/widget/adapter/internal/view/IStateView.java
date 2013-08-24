@@ -18,9 +18,9 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.and.internal.view;
+package com.wit.and.widget.adapter.internal.view;
 
-import com.wit.and.view.StateView;
+import com.wit.and.widget.adapter.view.StateView;
 
 /**
  * <p>

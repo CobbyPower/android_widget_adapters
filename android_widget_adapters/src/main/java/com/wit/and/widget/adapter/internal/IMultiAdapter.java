@@ -18,9 +18,11 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.and.widget.adapter;
+package com.wit.and.widget.adapter.internal;
 
 import android.os.Bundle;
+
+import com.wit.and.widget.adapter.module.AdapterModule;
 
 /**
  * <p>
@@ -40,7 +42,7 @@ import android.os.Bundle;
  * 
  * @author Martin Albedinsky
  * 
- * @see OptMultiAdapter
+ * @see com.wit.and.widget.adapter.OptMultiAdapter
  */
 public interface IMultiAdapter<Adapter extends BaseAdapter> {
 

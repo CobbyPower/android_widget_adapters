@@ -18,14 +18,15 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.and.widget.adapter;
+package com.wit.and.widget.adapter.module;
 
 import android.view.View;
 
-import com.wit.and.internal.view.IStateView;
-import com.wit.and.view.StateView;
-import com.wit.and.widget.StateLinearLayout;
-import com.wit.and.widget.StateRelativeLayout;
+import com.wit.and.widget.adapter.internal.module.ISelectable;
+import com.wit.and.widget.adapter.internal.view.IStateView;
+import com.wit.and.widget.adapter.view.StateView;
+import com.wit.and.widget.adapter.widget.StateLinearLayout;
+import com.wit.and.widget.adapter.widget.StateRelativeLayout;
 
 /**
  * <p>
@@ -33,7 +34,7 @@ import com.wit.and.widget.StateRelativeLayout;
  * </p>
  * <h5>SelectableItem</h5>
  * <p>
- * implements {@link ISelectable}
+ * implements {@link com.wit.and.widget.adapter.internal.module.ISelectable}
  * </p>
  * <h4>Class Overview</h4>
  * <p>

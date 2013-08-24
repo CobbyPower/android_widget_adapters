@@ -18,38 +18,38 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.and.widget;
+package com.wit.and.widget.adapter.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.RelativeLayout;
 
-import com.wit.and.internal.view.IStateView;
-import com.wit.and.view.StateView;
+import com.wit.and.widget.adapter.internal.view.IStateView;
+import com.wit.and.widget.adapter.widget.StateRelativeLayout;
 
 /**
  * <p>
  * public class
  * </p>
- * <h5>StateRelativeLayout</h5>
+ * <h5>StateView</h5>
  * <p>
- * extends {@link RelativeLayout}<br/>
+ * extends {@link View}<br/>
  * implements {@link IStateView}
  * </p>
  * <h4>Class Overview</h4>
  * <p>
- * Updated <code>RelativeLayout</code> to handle custom handling of the states
- * in the list view (especially when the ListView or GridView should provide
- * multiple selection mode). This can be also used as a dialog relative layout
- * in your xml layouts.
+ * Updated <code>View</code> to handle custom handling of the states in the list
+ * view (especially when the ListView or GridView should provide multiple
+ * selection mode). This can be also used as a dialog view in your xml layouts.
+ * See also {@link com.wit.and.widget.adapter.widget.StateLinearLayout} and {@link StateRelativeLayout} which
+ * provides this functionality too.
  * </p>
  * 
- * @see RelativeLayout
+ * @see View
  * @see IStateView
  * @author Martin Albedinsky
  */
-public class StateRelativeLayout extends RelativeLayout implements IStateView {
+public class StateView extends View implements IStateView {
 
 	/**
 	 * Constants =============================
@@ -58,7 +58,7 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
     /**
      * Log TAG.
      */
-    // private static final String TAG = StateRelativeLayout.class.getSimpleName();
+    // private static final String TAG = StateView.class.getSimpleName();
 
     /**
      * Indicates if debug private output trough log-cat is enabled.
@@ -89,7 +89,7 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	/**
 	 * Visibility changed callback.
 	 */
-	private StateView.OnStateViewVisibilityListener iVisibilityListener;
+	private OnStateViewVisibilityListener iVisibilityListener;
 
 	/**
 	 * Arrays --------------------------------
@@ -110,7 +110,7 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 
 	/**
 	 * <br/>
-	 * <h5><i>public StateRelativeLayout(Context context)</i></h5>
+	 * <h5><i></i></h5>
 	 * <p>
 	 * Constructor #1.
 	 * </p>
@@ -118,14 +118,13 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	 * @param context
 	 *            The actual application context.
 	 */
-	public StateRelativeLayout(Context context) {
+	public StateView(Context context) {
 		super(context);
 	}
 
 	/**
 	 * <br/>
-	 * <h5><i>public StateRelativeLayout(Context context, AttributeSet
-	 * attrs)</i></h5>
+	 * <h5><i></i></h5>
 	 * <p>
 	 * Constructor #2.
 	 * </p>
@@ -134,14 +133,13 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	 *            The actual application context.
 	 * @param attrs
 	 */
-	public StateRelativeLayout(Context context, AttributeSet attrs) {
+	public StateView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
 	/**
 	 * <br/>
-	 * <h5><i>public StateRelativeLayout(Context context, AttributeSet attrs,
-	 * int defStyle)</i></h5>
+	 * <h5><i></i></h5>
 	 * <p>
 	 * Constructor #3.
 	 * </p>
@@ -151,7 +149,7 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	 * @param attrs
 	 * @param defStyle
 	 */
-	public StateRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
+	public StateView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 
@@ -212,7 +210,7 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	 * 
  	*/
 	@Override
-	public void setOnVisibilityListener(StateView.OnStateViewVisibilityListener listener) {
+	public void setOnVisibilityListener(OnStateViewVisibilityListener listener) {
 		iVisibilityListener = listener;
 	}
 
@@ -248,4 +246,44 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	/**
 	 * Interface =============================
 	 */
+
+	/**
+	 * <p>
+	 * public static interface
+	 * </p>
+	 * <h5>OnStateViewVisibilityListener</h5>
+	 * <p>
+	 * 
+	 * </p>
+	 * <h4>Interface Overview</h4>
+	 * <p>
+	 * Interface to handle callback when the state view visibility was changed.
+	 * </p>
+	 * 
+	 * @author Martin Albedinsky
+	 * 
+	 */
+	public static interface OnStateViewVisibilityListener {
+
+		/**
+		 * Methods ===============================
+		 */
+
+		/**
+		 * <br/>
+		 * <h5><i>public void onVisibilityChanged(View stateView, int
+		 * visibility)</i></h5>
+		 * <p>
+		 * Invoked from the state view when its (see {@link View} .
+		 * <code>onVisibilityChanged()</code> description) visibility was
+		 * changed.
+		 * </p>
+		 * 
+		 * @param stateView
+		 *            This isn't necessary the <code>IStateView</code> child.
+		 * @param visibility
+		 *            Actual visibility of the passed view.
+		 */
+		public void onVisibilityChanged(View stateView, int visibility);
+	}
 }
