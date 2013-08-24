@@ -25,6 +25,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.wit.and.widget.adapter.internal.BaseAdapter;
+
 /**
  * <p>
  * public abstract class
