@@ -2,6 +2,8 @@ apply plugin: 'android-library'
 
 dependencies {
     compile rootProject.supportLibrary
+    // FIXME: Only for release purpose.
+    compile files('../lib/android-widget-adapters.jar', '../lib/android-widget-adapters-with-doc.jar')
 }
 
 android {
