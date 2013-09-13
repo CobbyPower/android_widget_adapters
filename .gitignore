@@ -1,30 +1,19 @@
-# built application files
-*.apk
-*.ap_
-
-# files for the dex VM
-*.dex
-
-# Java class files
-*.class
-
-# generated files
-bin/
-gen/
-
+# =============== GLOBAL =====================
 # Local configuration file (sdk path, etc)
 local.properties
 
-# Eclipse project files
-.classpath
-.project
-
-# Gradle build directory
+# Modules build directories
 android_widget_adapters/build/
 examples/build/
 
-# Idea files
-.idea/
-
 # Gradle files
-.gradle/
+.gradle
+
+# Intellij files
+.idea/workspace.xml
+
+# =============== RELEASE ====================
+# exclude instrument tests
+android_widget_adapters/src/instrumentTest/
+# exclude project build script
+project.bat
