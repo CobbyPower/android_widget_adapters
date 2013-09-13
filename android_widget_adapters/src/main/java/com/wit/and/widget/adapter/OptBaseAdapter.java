@@ -28,13 +28,6 @@ import android.view.ViewGroup;
 import com.wit.and.widget.adapter.internal.BaseAdapter;
 
 /**
- * <p>
- * public abstract class
- * </p>
- * <h5>OptBaseAdapter</h5>
- * <p>
- * extends {@link BaseAdapter}
- * </p>
  * <h4>Class Overview</h4>
  * <p>
  * Optimized base adapter to handle optimization of creating views for the
@@ -80,7 +73,7 @@ public abstract class OptBaseAdapter extends BaseAdapter {
 	/**
 	 * Optimization manager for getView() method.
 	 */
-	private final AdapterOptimizer OPTIMIZER = new AdapterOptimizer();
+	private final Optimizer OPTIMIZER = new Optimizer();
 
 	/**
 	 * Listeners -----------------------------
@@ -99,13 +92,12 @@ public abstract class OptBaseAdapter extends BaseAdapter {
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>public OptBaseAdapter(Context context)</i></h5>
 	 * <p>
 	 * See {@link BaseAdapter#BaseAdapter(Context)}.
 	 * </p>
 	 * 
 	 * @param context
+     *          Context in which is being adapter created.
 	 */
 	public OptBaseAdapter(Context context) {
 		super(context);
@@ -143,9 +135,6 @@ public abstract class OptBaseAdapter extends BaseAdapter {
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>protected View onCreateItemView(LayoutInflater inflater,
-	 * ViewGroup root)</i></h5>
 	 * <p>
 	 * Invoked to create view for the item from the adapter data set. This is
 	 * invoked only if the convert view is equal to <code>null</code>. To create
@@ -160,9 +149,6 @@ public abstract class OptBaseAdapter extends BaseAdapter {
 	protected abstract View onCreateItemView(int position, LayoutInflater inflater, ViewGroup root);
 
 	/**
-	 * <br/>
-	 * <h5><i>protected void onBindItemView(int position, Object
-	 * viewHolder)</i></h5>
 	 * <p>
 	 * Invoked to bind item view by data. This is invoked whether the
 	 * <code>getView()</code> method on the adapter is called.
@@ -172,14 +158,12 @@ public abstract class OptBaseAdapter extends BaseAdapter {
 	 * @param viewHolder
 	 *            View holder of the actual item view on the given position.
 	 *            This is also holder which was set to the view by
-	 *            <code>onGetItemViewHolder()</code> method while was view created.
+	 *            <code>onCreateItemViewHolder()</code> method while was view created.
 	 */
 	protected abstract void onBindItemView(int position, Object viewHolder);
 
 	/**
-	 * <br/>
-	 * <h5><i>protected Object onGetItemViewHolder(View itemView)</i></h5>
-	 * <p>
+     * <p>
 	 * Invoked to obtain view holder for the actually created item view.
 	 * </p>
 	 * 
@@ -188,19 +172,13 @@ public abstract class OptBaseAdapter extends BaseAdapter {
 	 *            View returned by <code>onCreateItemView</code> method.
 	 * @return
 	 */
-	protected abstract Object onGetItemViewHolder(int position, View itemView);
+	protected abstract Object onCreateItemViewHolder(int position, View itemView);
 
 	/**
 	 * Inner classes =========================
 	 */
 
 	/**
-	 * <p>
-	 * protected class
-	 * </p>
-	 * <h5>AdapterOptimizer</h5>
-	 * <p>
-	 * </p>
 	 * <h4>Class Overview</h4>
 	 * <p>
 	 * Optimization manager which handles the optimization of the
@@ -209,7 +187,7 @@ public abstract class OptBaseAdapter extends BaseAdapter {
 	 * 
 	 * @author Martin Albedinsky
 	 */
-	protected class AdapterOptimizer {
+	protected class Optimizer {
 
 		/**
 		 * Constants =============================
@@ -218,7 +196,7 @@ public abstract class OptBaseAdapter extends BaseAdapter {
         /**
          * Log TAG.
          */
-        // private static final String TAG = AdapterOptimizer.class.getSimpleName();
+        // private static final String TAG = Optimizer.class.getSimpleName();
 
 		/**
 		 * Enums =================================
@@ -304,7 +282,7 @@ public abstract class OptBaseAdapter extends BaseAdapter {
                 }
 
 				// Set holder to the new view.
-				convertView.setTag(viewHolder = onGetItemViewHolder(position, convertView));
+				convertView.setTag(viewHolder = onCreateItemViewHolder(position, convertView));
 			} else {
 				viewHolder = convertView.getTag();
 			}

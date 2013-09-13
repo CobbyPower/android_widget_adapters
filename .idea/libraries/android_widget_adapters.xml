@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="android-widget-adapters">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/android-widget-adapters.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
