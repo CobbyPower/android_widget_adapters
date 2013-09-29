@@ -143,6 +143,13 @@ public abstract class BaseCursorAdapter<C extends Cursor> extends BaseAdapter {
      */
 
     /**
+     */
+    @Override
+    public int getCount() {
+        return mCursor != null ? mCursor.getCount() : 0;
+    }
+
+    /**
      * <p>
      * Same as {@link #getCursorAt(int)}.
      * </p>
