@@ -28,13 +28,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 /**
- * <p>
- * public abstract class
- * </p>
- * <h5>BaseAndroidAdapter</h5>
- * <p>
- * extends {@link android.widget.BaseAdapter}
- * </p>
  * <h4>Class Overview</h4>
  * <p>
  * Updated <code>BaseAndroidAdapter</code> for better handling of using the adapters.
@@ -108,10 +101,7 @@ public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>public BaseAndroidAdapter()</i></h5>
 	 * <p>
-	 * Constructor #1.
 	 * </p>
 	 */
 	public BaseAndroidAdapter() {
@@ -119,11 +109,8 @@ public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i>public BaseAndroidAdapter(Context context)</i></h5>
 	 * <p>
-	 * Constructor #2.
-	 * </p>
+     * </p>
 	 * 
 	 * @param context
 	 *            Context in which will be this adapter used.
@@ -145,8 +132,6 @@ public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>public void onSaveState(Bundle outState)</i></h5>
 	 * <p>
 	 * Invoked from the parent context which being currently destroyed to save actual
 	 * adapter state.
@@ -156,12 +141,9 @@ public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
 	 *            Outgoing state.
 	 */
 	public void onSaveInstanceState(Bundle outState) {
-		// Custom implementation.
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i>public void onRestoreState(Bundle savedState)</i></h5>
 	 * <p>
 	 * Invoked from the parent context which was restored with previous saved
 	 * instance state to restore adapter state.
@@ -172,7 +154,6 @@ public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
 	 *            {@link #onSaveInstanceState(Bundle)}.
 	 */
 	public void onRestoreInstanceState(Bundle savedState) {
-		// Custom implementation.
 	}
 
 	/**
@@ -180,8 +161,6 @@ public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>public final Context getContext()</i></h5>
 	 * <p>
 	 * Returns context in which was this adapter initialized.
 	 * </p>
@@ -189,38 +168,33 @@ public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
 	 * @return Can be {@link Activity} context or {@link Context} or
 	 *         <code>null</code>.
 	 */
-	public final Context getContext() {
+	public Context getContext() {
 		return mContext;
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i>public final LayoutInflater getLayoutInflater()</i></h5>
 	 * <p>
 	 * Returns layout inflater from parent activity.
 	 * </p>
 	 * 
 	 * @return
 	 */
-	public final LayoutInflater getLayoutInflater() {
+	public LayoutInflater getLayoutInflater() {
 		return mLayoutInflater;
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i>public final Resources getResources()</i></h5>
 	 * <p>
 	 * Returns application resources.
 	 * </p>
 	 * 
 	 * @return
 	 */
-	public final Resources getResources() {
+	public Resources getResources() {
 		return mResources;
 	}
 
 	/**
-	 * 
 	 */
 	@Override
 	public long getItemId(int position) {
@@ -232,13 +206,11 @@ public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>protected final View inflate(int resource)</i></h5>
 	 * <p>
-	 * Inflates the given layout resource id.
+	 * Inflates the layout for the given resource id.
 	 * </p>
 	 * 
-	 * @param resource
+	 * @param resource Resource id of layout to inflate.
 	 * @return Inflated layout if the given resource id exists.
 	 */
 	protected final View inflate(int resource) {
