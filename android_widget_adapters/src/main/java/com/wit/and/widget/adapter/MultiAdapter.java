@@ -46,8 +46,7 @@ import com.wit.and.widget.adapter.widget.StateRelativeLayout;
  * 
  * @author Martin Albedinsky
  * 
- * @param <Adapter>
- *            Type of the adapter which extends this adapter.
+ * @param <Adapter> Type of the adapter which extends this adapter.
  */
 public abstract class MultiAdapter<Adapter extends BaseAdapter> extends BaseAdapter implements IMultiAdapter<Adapter> {
 	/**
@@ -109,10 +108,10 @@ public abstract class MultiAdapter<Adapter extends BaseAdapter> extends BaseAdap
 
 	/**
 	 * <p>
-	 * See {@link BaseAdapter#BaseAdapter(Context)}.
 	 * </p>
 	 * 
 	 * @param context
+     * @see BaseAdapter#BaseAdapter(Context)
 	 */
 	public MultiAdapter(Context context) {
 		super(context);
