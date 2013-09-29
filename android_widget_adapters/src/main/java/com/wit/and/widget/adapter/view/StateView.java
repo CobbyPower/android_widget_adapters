@@ -28,14 +28,6 @@ import com.wit.and.widget.adapter.internal.view.IStateView;
 import com.wit.and.widget.adapter.widget.StateRelativeLayout;
 
 /**
- * <p>
- * public class
- * </p>
- * <h5>StateView</h5>
- * <p>
- * extends {@link View}<br/>
- * implements {@link IStateView}
- * </p>
  * <h4>Class Overview</h4>
  * <p>
  * Updated <code>View</code> to handle custom handling of the states in the list
@@ -123,13 +115,10 @@ public class StateView extends View implements IStateView {
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i></i></h5>
 	 * <p>
-	 * Constructor #2.
-	 * </p>
-	 * 
-	 * @param context
+     * </p>
+     *
+     * @param context
 	 *            The actual application context.
 	 * @param attrs
 	 */
@@ -138,13 +127,10 @@ public class StateView extends View implements IStateView {
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i></i></h5>
 	 * <p>
-	 * Constructor #3.
-	 * </p>
-	 * 
-	 * @param context
+     * </p>
+     *
+     * @param context
 	 *            The actual application context.
 	 * @param attrs
 	 * @param defStyle
@@ -248,13 +234,6 @@ public class StateView extends View implements IStateView {
 	 */
 
 	/**
-	 * <p>
-	 * public static interface
-	 * </p>
-	 * <h5>OnStateViewVisibilityListener</h5>
-	 * <p>
-	 * 
-	 * </p>
 	 * <h4>Interface Overview</h4>
 	 * <p>
 	 * Interface to handle callback when the state view visibility was changed.

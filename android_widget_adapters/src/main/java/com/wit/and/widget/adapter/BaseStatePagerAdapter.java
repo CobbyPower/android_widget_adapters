@@ -49,7 +49,7 @@ public abstract class BaseStatePagerAdapter extends FragmentStatePagerAdapter {
     /**
      * Log TAG.
      */
-    // private static final String TAG = BaseAdapter.class.getSimpleName();
+    // private static final String TAG = BaseAndroidAdapter.class.getSimpleName();
 
     /**
      * Indicates if debug private output trough log-cat is enabled.

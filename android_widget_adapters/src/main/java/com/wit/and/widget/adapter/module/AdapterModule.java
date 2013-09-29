@@ -24,12 +24,6 @@ import android.os.Bundle;
 import android.widget.BaseAdapter;
 
 /**
- * <p>
- * public abstract class
- * </p>
- * <h5>AdapterModule</h5>
- * <p>
- * </p>
  * <h4>Class Overview</h4>
  * <p>
  * </p>
@@ -40,7 +34,8 @@ import android.widget.BaseAdapter;
  * @author Martin Albedinsky
  */
 public abstract class AdapterModule<Adapter extends BaseAdapter> {
-	/**
+
+    /**
 	 * Constants =============================
 	 */
 
@@ -71,6 +66,9 @@ public abstract class AdapterModule<Adapter extends BaseAdapter> {
 	 * Members ===============================
 	 */
 
+    /**
+     *
+     */
 	private Adapter mAdapter;
 
 	/**
@@ -98,14 +96,18 @@ public abstract class AdapterModule<Adapter extends BaseAdapter> {
 	 */
 
     /**
+     * <p>
+     * </p>
      *
      * @param outState
      */
-    public void dispatchSaveInstnceState(Bundle outState) {
+    public void dispatchSaveInstanceState(Bundle outState) {
         onSaveInstanceState(outState);
     }
 
     /**
+     * <p>
+     * </p>
      *
      * @param savedState
      */
@@ -114,6 +116,8 @@ public abstract class AdapterModule<Adapter extends BaseAdapter> {
     }
 
     /**
+     * <p>
+     * </p>
      *
      * @param adapter
      */
@@ -151,21 +155,30 @@ public abstract class AdapterModule<Adapter extends BaseAdapter> {
     protected void onRestoreInstanceState(Bundle savedState) {
     }
 
+    /**
+     * <p>
+     * </p>
+     *
+     * @param adapter
+     */
 	protected void onAttachToAdapter(Adapter adapter) {
 		mAdapter = adapter;
 	}
 
 	/**
-	 * 
-	 * @return
+	 * <p>
+     * </p>
+     *
+     * @return
 	 */
 	protected final Adapter getAdapter() {
 		return mAdapter;
 	}
 
 	/**
-	 * 
-	 */
+	 * <p>
+     * </p>
+     */
 	protected final void notifyAdapter() {
 		this.mAdapter.notifyDataSetChanged();
 	}

@@ -31,27 +31,28 @@ import android.view.View;
  * <p>
  * public abstract class
  * </p>
- * <h5>BaseAdapter</h5>
+ * <h5>BaseAndroidAdapter</h5>
  * <p>
  * extends {@link android.widget.BaseAdapter}
  * </p>
  * <h4>Class Overview</h4>
  * <p>
- * Updated <code>BaseAdapter</code> for better handling of using the adapters.
+ * Updated <code>BaseAndroidAdapter</code> for better handling of using the adapters.
  * </p>
  * 
  * @see android.widget.BaseAdapter
  * @author Martin Albedinsky
  */
-public abstract class BaseAdapter extends android.widget.BaseAdapter {
-	/**
+public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
+
+    /**
 	 * Constants =============================
 	 */
 
     /**
      * Log TAG.
      */
-    // private static final String TAG = BaseAdapter.class.getSimpleName();
+    // private static final String TAG = BaseAndroidAdapter.class.getSimpleName();
 
     /**
      * Indicates if debug private output trough log-cat is enabled.
@@ -108,18 +109,18 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter {
 
 	/**
 	 * <br/>
-	 * <h5><i>public BaseAdapter()</i></h5>
+	 * <h5><i>public BaseAndroidAdapter()</i></h5>
 	 * <p>
 	 * Constructor #1.
 	 * </p>
 	 */
-	public BaseAdapter() {
+	public BaseAndroidAdapter() {
 		this(null);
 	}
 
 	/**
 	 * <br/>
-	 * <h5><i>public BaseAdapter(Context context)</i></h5>
+	 * <h5><i>public BaseAndroidAdapter(Context context)</i></h5>
 	 * <p>
 	 * Constructor #2.
 	 * </p>
@@ -127,7 +128,7 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter {
 	 * @param context
 	 *            Context in which will be this adapter used.
 	 */
-	public BaseAdapter(Context context) {
+	public BaseAndroidAdapter(Context context) {
 		if (context != null) {
 			this.mContext = context;
 			this.mLayoutInflater = LayoutInflater.from(context);

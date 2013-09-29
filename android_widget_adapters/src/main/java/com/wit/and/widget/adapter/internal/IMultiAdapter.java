@@ -42,9 +42,9 @@ import com.wit.and.widget.adapter.module.AdapterModule;
  * 
  * @author Martin Albedinsky
  * 
- * @see com.wit.and.widget.adapter.OptMultiAdapter
+ * @see com.wit.and.widget.adapter.MultiAdapter
  */
-public interface IMultiAdapter<Adapter extends BaseAdapter> {
+public interface IMultiAdapter<Adapter extends BaseAndroidAdapter> {
 
 	/**
 	 * Methods ===============================

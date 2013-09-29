@@ -20,28 +20,21 @@
  */
 package com.wit.and.widget.adapter.internal.module;
 
-import com.wit.and.widget.adapter.OptBaseAdapter;
+import com.wit.and.widget.adapter.BaseAdapter;
 import com.wit.and.widget.adapter.module.SelectableItem;
 import com.wit.and.widget.adapter.module.SelectionModule;
 
 /**
- * <p>
- * public class
- * </p>
- * <h5>DefaultSelectionModule</h5>
- * <p>
- * extends {@link com.wit.and.widget.adapter.module.SelectionModule}
- * </p>
  * <h4>Class Overview</h4>
  * <p>
  * </p>
  * 
  * @param <Adapter>
- *            Type of the {@link OptBaseAdapter}.
+ *            Type of the {@link com.wit.and.widget.adapter.BaseAdapter}.
  * 
  * @author Martin Albedinsky
  */
-public class DefaultSelectionModule<Adapter extends OptBaseAdapter> extends SelectionModule<SelectableItem, Adapter> {
+public class DefaultSelectionModule<Adapter extends BaseAdapter> extends SelectionModule<SelectableItem, Adapter> {
 
 	/**
 	 * Constants =============================
@@ -119,14 +112,16 @@ public class DefaultSelectionModule<Adapter extends OptBaseAdapter> extends Sele
 		notifyAdapter();
 	}
 
+    /**
+     */
 	@Override
 	public void selectAll() {
-		// TODO Auto-generated method stub
 	}
 
+    /**
+     */
 	@Override
 	public void selectRange(int startPosition, int count) {
-		// TODO Auto-generated method stub
 	}
 
 	/**

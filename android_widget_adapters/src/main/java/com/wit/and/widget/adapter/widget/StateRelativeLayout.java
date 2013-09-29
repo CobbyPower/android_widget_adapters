@@ -29,14 +29,6 @@ import com.wit.and.widget.adapter.internal.view.IStateView;
 import com.wit.and.widget.adapter.view.StateView;
 
 /**
- * <p>
- * public class
- * </p>
- * <h5>StateRelativeLayout</h5>
- * <p>
- * extends {@link RelativeLayout}<br/>
- * implements {@link IStateView}
- * </p>
  * <h4>Class Overview</h4>
  * <p>
  * Updated <code>RelativeLayout</code> to handle custom handling of the states
@@ -109,13 +101,10 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>public StateRelativeLayout(Context context)</i></h5>
 	 * <p>
-	 * Constructor #1.
-	 * </p>
-	 * 
-	 * @param context
+     * </p>
+     *
+     * @param context
 	 *            The actual application context.
 	 */
 	public StateRelativeLayout(Context context) {
@@ -123,14 +112,10 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i>public StateRelativeLayout(Context context, AttributeSet
-	 * attrs)</i></h5>
 	 * <p>
-	 * Constructor #2.
-	 * </p>
-	 * 
-	 * @param context
+     * </p>
+     *
+     * @param context
 	 *            The actual application context.
 	 * @param attrs
 	 */
@@ -139,14 +124,10 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i>public StateRelativeLayout(Context context, AttributeSet attrs,
-	 * int defStyle)</i></h5>
 	 * <p>
-	 * Constructor #3.
-	 * </p>
-	 * 
-	 * @param context
+     * </p>
+     *
+     * @param context
 	 *            The actual application context.
 	 * @param attrs
 	 * @param defStyle

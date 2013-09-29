@@ -23,16 +23,9 @@ package com.wit.and.widget.adapter.module;
 import android.os.Bundle;
 import android.util.SparseIntArray;
 
-import com.wit.and.widget.adapter.internal.BaseAdapter;
+import com.wit.and.widget.adapter.internal.BaseAndroidAdapter;
 
 /**
- * <p>
- * public abstract class
- * </p>
- * <h5>SelectionModule</h5>
- * <p>
- * extends {@link AdapterModule}
- * </p>
  * <h4>Class Overview</h4>
  * <p>
  * Selection manager for the {@link com.wit.and.widget.adapter.internal.IMultiAdapter}.
@@ -46,7 +39,7 @@ import com.wit.and.widget.adapter.internal.BaseAdapter;
  * @author Martin Albedinsky
  *
  */
-public abstract class SelectionModule<Item extends SelectableItem, Adapter extends BaseAdapter> extends AdapterModule<Adapter> {
+public abstract class SelectionModule<Item extends SelectableItem, Adapter extends BaseAndroidAdapter> extends AdapterModule<Adapter> {
 
 	/**
 	 * Constants =============================
@@ -68,16 +61,12 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
     // private static final boolean USER_LOG = true;
 
     /**
-     * <br/>
-     * <h5><i</i></h5>
      * <p>
      * </p>
      */
     public static final int MODE_SINGLE = 0x00;
 
     /**
-     * <br/>
-     * <h5><i</i></h5>
      * <p>
      * </p>
      */
@@ -88,7 +77,9 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
 	 */
 
 	/**
-	 */
+     * <p>
+     * </p>
+     */
 	protected static final String BUNDLE_SELECTED_ITEMS = "com.wit.and.widget.SelectionModule.Bundle.SelectedItems";
 
 	/**
@@ -116,6 +107,9 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
 	 * Arrays --------------------------------
 	 */
 
+    /**
+     *
+     */
 	private SparseIntArray aSelectedItems = new SparseIntArray();
 
 	/**
@@ -135,8 +129,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>public boolean isSelected(int position)</i></h5>
 	 * <p>
 	 * Checks if the item at the given position is currently selected.
 	 * </p>
@@ -155,8 +147,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>public void toggleItemSelectedState(int position)</i></h5>
 	 * <p>
 	 * Resolves the select-able item selected state. If the item is selected the
 	 * flag will be set to <code>false</code> otherwise to <code>true</code>.
@@ -175,8 +165,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i>public SparseIntArray getSelectedItems()</i></h5>
 	 * <p>
 	 * Returns the sparse array with currently selected items positions.
 	 * </p>
@@ -190,8 +178,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i>public &lt;I&gt; getSelectedOption(int position)</i></h5>
 	 * <p>
 	 * Returns the selected item at the given position.
 	 * </p>
@@ -204,8 +190,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
 	}
 
     /**
-     * <br/>
-     * <h5><i>public int getSelectedPosition()</i></h5>
      * <p>
      * </p>
      * <p>
@@ -224,8 +208,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
     }
 
 	/**
-	 * <br/>
-	 * <h5><i>public int[] getSelectedPositions()</i></h5>
 	 * <p>
 	 * Returns the array with positions of currently selected items.
 	 * </p>
@@ -244,8 +226,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
 	}
 
 	/**
-     * <br/>
-     * <h5><i>public void clearSelection()</i></h5>
      * <p>
      * Sets the selected state to <code>false</code> for all select-able items.
      * </p>
@@ -283,8 +263,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
 	}
 
     /**
-     * <br/>
-     * <h5><i></i></h5>
      * <p>
      * </p>
      *
@@ -295,8 +273,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
     }
 
     /**
-     * <br/>
-     * <h5><i></i></h5>
      * <p>
      * </p>
      *
@@ -311,8 +287,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>protected final boolean contains(int position)</i></h5>
 	 * <p>
 	 * Returns flag indicating if the selected items array contains at the
 	 * requested position some selected item.
@@ -328,8 +302,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i>protected final void add(int position)</i></h5>
 	 * <p>
 	 * Adds the item with given position into array of selected items.
 	 * </p>
@@ -348,8 +320,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
     }
 
 	/**
-	 * <br/>
-	 * <h5><i>protected final I get(int position)</i></h5>
 	 * <p>
 	 * Returns the select-able item at the requested position. Same as
 	 * {@link #getSelectedItem(int)}.
@@ -366,8 +336,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i>protected final void remove(int position)</i></h5>
 	 * <p>
 	 * Removes the item at the requested position from selected items array.
 	 * </p>
@@ -385,8 +353,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
 	}
 
     /**
-     * <br/>
-     * <h5><i>protected void clearSelection(boolean notify)</i></h5>
      * <p>
      * Sets the selected state to <code>false</code> for all select-able items.
      * </p>
@@ -418,8 +384,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>public void setItemSelected(int position, boolean selected)</i></h5>
 	 * <p>
 	 * Sets the given selected state of the select-able item at the given
 	 * position.
@@ -437,8 +401,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
 	public abstract void setItemSelected(int position, boolean selected);
 
 	/**
-	 * <br/>
-	 * <h5><i>public void selectAll()</i></h5>
 	 * <p>
 	 * Sets the selected state to <code>true</code> for all select-able items.
 	 * </p>
@@ -450,8 +412,6 @@ public abstract class SelectionModule<Item extends SelectableItem, Adapter exten
 	public abstract void selectAll();
 
 	/**
-	 * <br/>
-	 * <h5><i>public void selectRange(int startPosition, int count)</i></h5>
 	 * <p>
 	 * Sets the selected state to <code>true</code> for the select-able items at
 	 * the positions <code>(startPosition, startPosition + count)</code>.

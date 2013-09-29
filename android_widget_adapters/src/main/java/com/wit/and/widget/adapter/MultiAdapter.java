@@ -24,21 +24,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.SparseArray;
 
-import com.wit.and.widget.adapter.internal.BaseAdapter;
+import com.wit.and.widget.adapter.internal.BaseAndroidAdapter;
 import com.wit.and.widget.adapter.internal.IMultiAdapter;
 import com.wit.and.widget.adapter.internal.module.DefaultSelectionModule;
 import com.wit.and.widget.adapter.module.AdapterModule;
 import com.wit.and.widget.adapter.widget.StateRelativeLayout;
 
 /**
- * <p>
- * public abstract class
- * </p>
- * <h5>OptMultiAdapter</h5>
- * <p>
- * extends {@link OptBaseAdapter},<br/>
- * implements {@link com.wit.and.widget.adapter.internal.IMultiAdapter}
- * </p>
  * <h4>Class Overview</h4>
  * <p>
  * </p>
@@ -47,7 +39,7 @@ import com.wit.and.widget.adapter.widget.StateRelativeLayout;
  * obtained under the {@link #MODULE_SELECTOR} id.
  * </p>
  * 
- * @see OptBaseAdapter
+ * @see BaseAdapter
  * @see com.wit.and.widget.adapter.widget.StateLinearLayout
  * @see StateRelativeLayout
  * @see com.wit.and.widget.adapter.view.StateView
@@ -57,7 +49,7 @@ import com.wit.and.widget.adapter.widget.StateRelativeLayout;
  * @param <Adapter>
  *            Type of the adapter which extends this adapter.
  */
-public abstract class OptMultiAdapter<Adapter extends OptBaseAdapter> extends OptBaseAdapter implements IMultiAdapter<Adapter> {
+public abstract class MultiAdapter<Adapter extends BaseAdapter> extends BaseAdapter implements IMultiAdapter<Adapter> {
 	/**
 	 * Constants =============================
 	 */
@@ -65,7 +57,7 @@ public abstract class OptMultiAdapter<Adapter extends OptBaseAdapter> extends Op
     /**
      * Log TAG.
      */
-    // private static final String TAG = OptMultiAdapter.class.getSimpleName();
+    // private static final String TAG = MultiAdapter.class.getSimpleName();
 
     /**
      * Indicates if debug private output trough log-cat is enabled.
@@ -116,15 +108,13 @@ public abstract class OptMultiAdapter<Adapter extends OptBaseAdapter> extends Op
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>public OptMultiAdapter(Context context)</i></h5>
 	 * <p>
-	 * See {@link OptBaseAdapter#OptBaseAdapter(Context)}.
+	 * See {@link BaseAdapter#BaseAdapter(Context)}.
 	 * </p>
 	 * 
 	 * @param context
 	 */
-	public OptMultiAdapter(Context context) {
+	public MultiAdapter(Context context) {
 		super(context);
         addModule(new DefaultSelectionModule<Adapter>(), MODULE_SELECTOR);
 	}
@@ -162,6 +152,8 @@ public abstract class OptMultiAdapter<Adapter extends OptBaseAdapter> extends Op
 		MODULES_MANAGER.dispatchOnSaveState(outState);
 	}
 
+    /**
+     */
 	@Override
 	public void onRestoreInstanceState(Bundle savedState) {
 		super.onRestoreInstanceState(savedState);
@@ -189,24 +181,17 @@ public abstract class OptMultiAdapter<Adapter extends OptBaseAdapter> extends Op
 	 */
 
 	/**
-	 * <p>
-	 * protected static class
-	 * </p>
-	 * <h5>ModuleManager</h5>
-	 * <p>
-	 * </p>
 	 * <h4>Class Overview</h4>
 	 * <p>
-	 * Manager to handle {@link OptMultiAdapter} modules.
+	 * Manager to handle {@link MultiAdapter} modules.
 	 * </p>
 	 * 
 	 * @param <Adapter>
 	 *            Type of the adapter in which is this module manager presented.
 	 * 
 	 * @author Martin Albedinsky
-	 * 
 	 */
-	protected static class ModuleManager<Adapter extends BaseAdapter> {
+	protected static class ModuleManager<Adapter extends BaseAndroidAdapter> {
 
 		/**
 		 * Constants =============================
@@ -276,20 +261,46 @@ public abstract class OptMultiAdapter<Adapter extends OptBaseAdapter> extends Op
 		 * Protected -----------------------------
 		 */
 
+        /**
+         * <p>
+         * </p>
+         *
+         * @param module
+         * @param moduleID
+         */
 		void addModule(AdapterModule<Adapter> module, int moduleID) {
 			aModules.append(moduleID, module);
 		}
 
+        /**
+         * <p>
+         * </p>
+         *
+         * @param moduleID
+         * @return
+         */
 		AdapterModule<Adapter> getModule(int moduleID) {
 			return aModules.get(moduleID);
 		}
 
+        /**
+         * <p>
+         * </p>
+         *
+         * @param outState
+         */
 		void dispatchOnSaveState(Bundle outState) {
 			for (int i = 0; i < aModules.size(); i++) {
-				aModules.get(aModules.keyAt(i)).dispatchSaveInstnceState(outState);
+				aModules.get(aModules.keyAt(i)).dispatchSaveInstanceState(outState);
 			}
 		}
 
+        /**
+         * <p>
+         * </p>
+         *
+         * @param savedState
+         */
 		void dispatchOnRestoreState(Bundle savedState) {
 			for (int i = 0; i < aModules.size(); i++) {
 				aModules.get(aModules.keyAt(i)).dispatchRestoreInstanceState(savedState);

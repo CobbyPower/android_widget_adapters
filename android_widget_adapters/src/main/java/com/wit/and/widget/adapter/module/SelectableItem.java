@@ -29,16 +29,8 @@ import com.wit.and.widget.adapter.widget.StateLinearLayout;
 import com.wit.and.widget.adapter.widget.StateRelativeLayout;
 
 /**
- * <p>
- * public class
- * </p>
- * <h5>SelectableItem</h5>
- * <p>
- * implements {@link com.wit.and.widget.adapter.internal.module.ISelectable}
- * </p>
  * <h4>Class Overview</h4>
  * <p>
- * 
  * </p>
  * 
  * @author Martin Albedinsky
@@ -105,14 +97,10 @@ public class SelectableItem implements ISelectable, StateView.OnStateViewVisibil
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>public SelectableItem()</i></h5>
 	 * <p>
-	 * Constructor #1.
-	 * </p>
-	 */
+     * </p>
+     */
 	public SelectableItem() {
-		// Empty.
 	}
 
 	/**
@@ -159,8 +147,6 @@ public class SelectableItem implements ISelectable, StateView.OnStateViewVisibil
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i>public void invalidateState()</i></h5>
 	 * <p>
 	 * Invalidates the states of this object to actual one. Invoke this whenever
 	 * the states of this object were changed.
@@ -185,8 +171,6 @@ public class SelectableItem implements ISelectable, StateView.OnStateViewVisibil
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i>public void reloadView(View view)</i></h5>
 	 * <p>
 	 * Reloads the view of this item. This should be {@link IStateView}
 	 * otherwise the selection mode will be not handled.
@@ -213,8 +197,6 @@ public class SelectableItem implements ISelectable, StateView.OnStateViewVisibil
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i>public View getListItemView()</i></h5>
 	 * <p>
 	 * Returns this item's view.
 	 * </p>

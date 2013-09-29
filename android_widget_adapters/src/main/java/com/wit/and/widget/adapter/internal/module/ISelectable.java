@@ -21,11 +21,6 @@
 package com.wit.and.widget.adapter.internal.module;
 
 /**
- * <p>
- * public interface
- * </p>
- * <h5>ISelectable</h5>
- * 
  * <h4>Interface Overview</h4>
  * <p>
  * Simple interface for selectable objects. This can be used for list view items
@@ -35,13 +30,12 @@ package com.wit.and.widget.adapter.internal.module;
  * @author Martin Albedinsky
  */
 public interface ISelectable {
-	/**
+
+    /**
 	 * Methods ===============================
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>public void setSelected(boolean selected)</i></h5>
 	 * <p>
 	 * Changes the selection state of this object.
 	 * </p>
@@ -52,8 +46,6 @@ public interface ISelectable {
 	public void setSelected(boolean selected);
 
 	/**
-	 * <br/>
-	 * <h5><i>public boolean isSelected()</i></h5>
 	 * <p>
 	 * Checks the selection state of this object.
 	 * </p>
