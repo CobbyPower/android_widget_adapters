@@ -246,17 +246,21 @@ public abstract class BaseCursorAdapter<C extends Cursor> extends BaseAdapter {
     }
 
     /**
-     * Private -------------------------------
-     */
-
-    /**
+     * <p>
+     * Moves the current cursor to the requested position.
+     * </p>
      *
-     * @param position
-     * @return
+     * @param position Position to move cursor to.
+     * @return <code>True</code> if cursor was moved to requested position,
+     *         <code>false</code> otherwise.
      */
-    private boolean moveCursorTo(int position) {
+    protected boolean moveCursorTo(int position) {
         return (mCursor != null && mCursor.getCount() > position && mCursor.moveToPosition(position));
     }
+
+    /**
+     * Private -------------------------------
+     */
 
     /**
      * Abstract methods ----------------------

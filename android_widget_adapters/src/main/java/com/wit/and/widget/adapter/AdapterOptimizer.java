@@ -95,7 +95,7 @@ public class AdapterOptimizer {
      * @param optimizedAdapter Base adapter which should be optimized.
      */
     public AdapterOptimizer(OptimizedAdapter optimizedAdapter) {
-        if (mOptimizedAdapter == null)
+        if (optimizedAdapter == null)
             throw  new IllegalArgumentException("Invalid optimized adapter.");
 
         // Assign.

@@ -73,7 +73,7 @@ public abstract class BaseAdapter extends BaseAndroidAdapter implements AdapterO
     /**
      * Optimization manager for getView() method.
      */
-    private final AdapterOptimizer OPTIMIZER = new AdapterOptimizer(this);
+    private final AdapterOptimizer OPTIMIZER = new AdapterOptimizer(this);;
 
     /**
      * Listeners -----------------------------
