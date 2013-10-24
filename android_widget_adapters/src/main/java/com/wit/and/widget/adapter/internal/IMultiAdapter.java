@@ -27,17 +27,17 @@ import com.wit.and.widget.adapter.module.AdapterModule;
 /**
  * <h4>Interface Overview</h4>
  * <p>
- * Required interface for selection adapter.
+ * Required interface for multi-module adapter.
  * </p>
  * 
  * @param <Adapter>
- *            Type of the adapter.
+ *            Type of the multi-module adapter.
  * 
  * @author Martin Albedinsky
  * 
- * @see com.wit.and.widget.adapter.MultiAdapter
+ * @see com.wit.and.widget.adapter.BaseMultiAdapter
  */
-public interface IMultiAdapter<Adapter extends BaseAndroidAdapter> {
+public interface IMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> {
 
 	/**
 	 * Methods ===============================

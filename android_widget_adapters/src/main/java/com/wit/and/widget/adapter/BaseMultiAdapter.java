@@ -24,9 +24,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.SparseArray;
 
-import com.wit.and.widget.adapter.internal.BaseAndroidAdapter;
 import com.wit.and.widget.adapter.internal.IMultiAdapter;
-import com.wit.and.widget.adapter.internal.module.DefaultSelectionModule;
 import com.wit.and.widget.adapter.module.AdapterModule;
 import com.wit.and.widget.adapter.widget.StateRelativeLayout;
 
@@ -34,11 +32,7 @@ import com.wit.and.widget.adapter.widget.StateRelativeLayout;
  * <h4>Class Overview</h4>
  * <p>
  * </p>
- * <p>
- * As default contains default {@link com.wit.and.widget.adapter.module.SelectionModule} implementation. Selector module can be
- * obtained under the {@link #MODULE_SELECTOR} id.
- * </p>
- * 
+ *
  * @see BaseAdapter
  * @see com.wit.and.widget.adapter.widget.StateLinearLayout
  * @see StateRelativeLayout
@@ -46,9 +40,9 @@ import com.wit.and.widget.adapter.widget.StateRelativeLayout;
  * 
  * @author Martin Albedinsky
  * 
- * @param <Adapter> Type of the adapter which extends this adapter.
+ * @param <Adapter> Type of the adapter which extends this base multi-module adapter.
  */
-public abstract class MultiAdapter<Adapter extends BaseAdapter> extends BaseAdapter implements IMultiAdapter<Adapter> {
+public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> extends BaseAdapter implements IMultiAdapter<Adapter> {
 	/**
 	 * Constants =============================
 	 */
@@ -56,7 +50,7 @@ public abstract class MultiAdapter<Adapter extends BaseAdapter> extends BaseAdap
     /**
      * Log TAG.
      */
-    // private static final String TAG = MultiAdapter.class.getSimpleName();
+    // private static final String TAG = BaseMultiAdapter.class.getSimpleName();
 
     /**
      * Indicates if debug private output trough log-cat is enabled.
@@ -67,11 +61,6 @@ public abstract class MultiAdapter<Adapter extends BaseAdapter> extends BaseAdap
      * Indicates if logging for user output trough log-cat is enabled.
      */
     // private static final boolean USER_LOG = true;
-
-	/**
-	 * 
-	 */
-	public static final int MODULE_SELECTOR = 0x2001;
 
 	/**
 	 * Enums =================================
@@ -113,9 +102,8 @@ public abstract class MultiAdapter<Adapter extends BaseAdapter> extends BaseAdap
 	 * @param context
      * @see BaseAdapter#BaseAdapter(Context)
 	 */
-	public MultiAdapter(Context context) {
+	public BaseMultiAdapter(Context context) {
 		super(context);
-        addModule(new DefaultSelectionModule<Adapter>(), MODULE_SELECTOR);
 	}
 
 	/**
@@ -182,7 +170,7 @@ public abstract class MultiAdapter<Adapter extends BaseAdapter> extends BaseAdap
 	/**
 	 * <h4>Class Overview</h4>
 	 * <p>
-	 * Manager to handle {@link MultiAdapter} modules.
+	 * Manager to handle {@link BaseMultiAdapter} modules.
 	 * </p>
 	 * 
 	 * @param <Adapter>
@@ -190,31 +178,10 @@ public abstract class MultiAdapter<Adapter extends BaseAdapter> extends BaseAdap
 	 * 
 	 * @author Martin Albedinsky
 	 */
-	protected static class ModuleManager<Adapter extends BaseAndroidAdapter> {
-
-		/**
-		 * Constants =============================
-		 */
-
-        /**
-         * Log TAG.
-         */
-        // private static final String TAG =  ModuleManager.class.getSimpleName();
-
-		/**
-		 * Enums =================================
-		 */
+	protected static class ModuleManager<Adapter extends AdapterModule.ModuleAdapter> {
 
 		/**
 		 * Members ===============================
-		 */
-
-		/**
-		 * Listeners -----------------------------
-		 */
-
-		/**
-		 * Static --------------------------------
 		 */
 
 		/**
@@ -227,33 +194,7 @@ public abstract class MultiAdapter<Adapter extends BaseAdapter> extends BaseAdap
 		private SparseArray<AdapterModule<Adapter>> aModules = new SparseArray<AdapterModule<Adapter>>();
 
 		/**
-		 * Booleans ------------------------------
-		 */
-
-		/**
-		 * Indicates if debug private output trough log-cat is enabled.
-		 */
-		// private static final boolean DEBUG = true;
-
-		/**
-		 * Indicates if logging for user output trough log-cat is enabled.
-		 */
-		// private static final boolean USER_LOG = true;
-
-		/**
-		 * Constructors ==========================
-		 */
-
-		/**
 		 * Methods ===============================
-		 */
-
-		/**
-		 * Public --------------------------------
-		 */
-
-		/**
-		 * Getters + Setters ---------------------
 		 */
 
 		/**

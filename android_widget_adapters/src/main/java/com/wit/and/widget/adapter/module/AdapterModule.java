@@ -21,7 +21,6 @@
 package com.wit.and.widget.adapter.module;
 
 import android.os.Bundle;
-import android.widget.BaseAdapter;
 
 /**
  * <h4>Class Overview</h4>
@@ -33,7 +32,7 @@ import android.widget.BaseAdapter;
  * 
  * @author Martin Albedinsky
  */
-public abstract class AdapterModule<Adapter extends BaseAdapter> {
+public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter> {
 
     /**
 	 * Constants =============================
@@ -122,6 +121,7 @@ public abstract class AdapterModule<Adapter extends BaseAdapter> {
      * @param adapter
      */
     public final void dispatchAttachToAdapter(Adapter adapter) {
+	    mAdapter = adapter;
         onAttachToAdapter(adapter);
     }
 
@@ -162,7 +162,6 @@ public abstract class AdapterModule<Adapter extends BaseAdapter> {
      * @param adapter
      */
 	protected void onAttachToAdapter(Adapter adapter) {
-		mAdapter = adapter;
 	}
 
 	/**
@@ -180,7 +179,7 @@ public abstract class AdapterModule<Adapter extends BaseAdapter> {
      * </p>
      */
 	protected final void notifyAdapter() {
-		this.mAdapter.notifyDataSetChanged();
+		mAdapter.notifyDataSetChanged();
 	}
 
 	/**
@@ -198,4 +197,32 @@ public abstract class AdapterModule<Adapter extends BaseAdapter> {
 	/**
 	 * Interface =============================
 	 */
+
+	/**
+	 * <h4>Interface Overview</h4>
+	 * <p>
+	 * Base interface for "module based" adapter.
+	 * </p>
+	 *
+	 * @author Martin Albedinsky
+	 */
+	public static interface ModuleAdapter {
+		/**
+		 * Methods ===============================
+		 */
+
+		/**
+		 * <p>
+		 * See {@link android.widget.BaseAdapter#notifyDataSetChanged()}.
+		 * </p>
+		 */
+		public void notifyDataSetChanged();
+
+		/**
+		 * <p>
+		 * See {@link android.widget.BaseAdapter#getCount()}.
+		 * </p>
+		 */
+		public int getCount();
+	}
 }

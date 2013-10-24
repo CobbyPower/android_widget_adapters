@@ -208,11 +208,8 @@ public abstract class BaseCursorAdapter<C extends Cursor> extends BaseAdapter {
             mCursor.close();
             mCursor = null;
         }
-
-        if (cursor != null) {
-            // Assign new cursor.
-            this.reloadCursor(cursor);
-        }
+	    // Assign new cursor.
+	    this.reloadCursor(cursor);
     }
 
     /**
@@ -238,11 +235,11 @@ public abstract class BaseCursorAdapter<C extends Cursor> extends BaseAdapter {
      */
     protected final boolean reloadCursor(C cursor) {
         this.mCursor = cursor;
-        if (mCursor.moveToFirst()) {
-            notifyDataSetChanged();
-            return true;
-        }
-        return false;
+	    if (mCursor != null) {
+		    mCursor.moveToFirst();
+	    }
+	    notifyDataSetChanged();
+        return true;
     }
 
     /**
