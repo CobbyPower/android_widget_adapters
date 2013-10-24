@@ -30,40 +30,41 @@ import android.view.View;
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Updated <code>BaseAndroidAdapter</code> for better handling of using the adapters.
+ * Updated {@link android.widget.BaseAdapter} for better handling and using the widget adapters.
  * </p>
- * 
+ *
  * @see android.widget.BaseAdapter
+ *
  * @author Martin Albedinsky
  */
-public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
+public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 
-    /**
+	/**
 	 * Constants =============================
 	 */
 
-    /**
-     * Log TAG.
-     */
-    // private static final String TAG = BaseAndroidAdapter.class.getSimpleName();
+	/**
+	 * Log TAG.
+	 */
+	// private static final String TAG = BaseWidgetAdapter.class.getSimpleName();
 
-    /**
-     * Indicates if debug private output trough log-cat is enabled.
-     */
-    // private static final boolean DEBUG = true;
+	/**
+	 * Indicates if debug private output trough log-cat is enabled.
+	 */
+	// private static final boolean DEBUG = true;
 
-    /**
-     * Indicates if logging for user output trough log-cat is enabled.
-     */
-    // private static final boolean USER_LOG = true;
+	/**
+	 * Indicates if logging for user output trough log-cat is enabled.
+	 */
+	// private static final boolean USER_LOG = true;
 
-    /**
-     * Enums =================================
-     */
+	/**
+	 * Enums =================================
+	 */
 
-    /**
-     * Static members ========================
-     */
+	/**
+	 * Static members ========================
+	 */
 
 	/**
 	 * Members ===============================
@@ -104,18 +105,17 @@ public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
 	 * <p>
 	 * </p>
 	 */
-	public BaseAndroidAdapter() {
+	public BaseWidgetAdapter() {
 		this(null);
 	}
 
 	/**
 	 * <p>
-     * </p>
-	 * 
-	 * @param context
-	 *            Context in which will be this adapter used.
+	 * </p>
+	 *
+	 * @param context Context in which will be this adapter used.
 	 */
-	public BaseAndroidAdapter(Context context) {
+	public BaseWidgetAdapter(Context context) {
 		if (context != null) {
 			this.mContext = context;
 			this.mLayoutInflater = LayoutInflater.from(context);
@@ -136,9 +136,8 @@ public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
 	 * Invoked from the parent context which being currently destroyed to save actual
 	 * adapter state.
 	 * </p>
-	 * 
-	 * @param outState
-	 *            Outgoing state.
+	 *
+	 * @param outState Outgoing state.
 	 */
 	public void onSaveInstanceState(Bundle outState) {
 	}
@@ -148,10 +147,9 @@ public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
 	 * Invoked from the parent context which was restored with previous saved
 	 * instance state to restore adapter state.
 	 * </p>
-	 * 
-	 * @param savedState
-	 *            Bundle from parent context with saved data populated in
-	 *            {@link #onSaveInstanceState(Bundle)}.
+	 *
+	 * @param savedState Bundle from parent context with saved data populated in
+	 *                   {@link #onSaveInstanceState(Bundle)}.
 	 */
 	public void onRestoreInstanceState(Bundle savedState) {
 	}
@@ -164,9 +162,9 @@ public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
 	 * <p>
 	 * Returns context in which was this adapter initialized.
 	 * </p>
-	 * 
+	 *
 	 * @return Can be {@link Activity} context or {@link Context} or
-	 *         <code>null</code>.
+	 * <code>null</code>.
 	 */
 	public Context getContext() {
 		return mContext;
@@ -176,7 +174,7 @@ public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
 	 * <p>
 	 * Returns layout inflater from parent activity.
 	 * </p>
-	 * 
+	 *
 	 * @return
 	 */
 	public LayoutInflater getLayoutInflater() {
@@ -187,7 +185,7 @@ public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
 	 * <p>
 	 * Returns application resources.
 	 * </p>
-	 * 
+	 *
 	 * @return
 	 */
 	public Resources getResources() {
@@ -209,7 +207,7 @@ public abstract class BaseAndroidAdapter extends android.widget.BaseAdapter {
 	 * <p>
 	 * Inflates the layout for the given resource id.
 	 * </p>
-	 * 
+	 *
 	 * @param resource Resource id of layout to inflate.
 	 * @return Inflated layout if the given resource id exists.
 	 */

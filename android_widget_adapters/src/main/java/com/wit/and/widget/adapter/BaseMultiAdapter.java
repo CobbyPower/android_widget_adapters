@@ -33,42 +33,40 @@ import com.wit.and.widget.adapter.widget.StateRelativeLayout;
  * <p>
  * </p>
  *
+ * @param <Adapter> Type of the adapter which extends this base multi-module adapter.
+ * @author Martin Albedinsky
  * @see BaseAdapter
  * @see com.wit.and.widget.adapter.widget.StateLinearLayout
  * @see StateRelativeLayout
  * @see com.wit.and.widget.adapter.view.StateView
- * 
- * @author Martin Albedinsky
- * 
- * @param <Adapter> Type of the adapter which extends this base multi-module adapter.
  */
 public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> extends BaseAdapter implements IMultiAdapter<Adapter> {
 	/**
 	 * Constants =============================
 	 */
 
-    /**
-     * Log TAG.
-     */
-    // private static final String TAG = BaseMultiAdapter.class.getSimpleName();
+	/**
+	 * Log TAG.
+	 */
+	// private static final String TAG = BaseMultiAdapter.class.getSimpleName();
 
-    /**
-     * Indicates if debug private output trough log-cat is enabled.
-     */
-    // private static final boolean DEBUG = true;
+	/**
+	 * Indicates if debug private output trough log-cat is enabled.
+	 */
+	// private static final boolean DEBUG = true;
 
-    /**
-     * Indicates if logging for user output trough log-cat is enabled.
-     */
-    // private static final boolean USER_LOG = true;
+	/**
+	 * Indicates if logging for user output trough log-cat is enabled.
+	 */
+	// private static final boolean USER_LOG = true;
 
 	/**
 	 * Enums =================================
 	 */
 
-    /**
-     * Static members ========================
-     */
+	/**
+	 * Static members ========================
+	 */
 
 	/**
 	 * Members ===============================
@@ -98,9 +96,9 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	/**
 	 * <p>
 	 * </p>
-	 * 
+	 *
 	 * @param context
-     * @see BaseAdapter#BaseAdapter(Context)
+	 * @see BaseAdapter#BaseAdapter(Context)
 	 */
 	public BaseMultiAdapter(Context context) {
 		super(context);
@@ -139,8 +137,8 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		MODULES_MANAGER.dispatchOnSaveState(outState);
 	}
 
-    /**
-     */
+	/**
+	 */
 	@Override
 	public void onRestoreInstanceState(Bundle savedState) {
 		super.onRestoreInstanceState(savedState);
@@ -172,10 +170,8 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	 * <p>
 	 * Manager to handle {@link BaseMultiAdapter} modules.
 	 * </p>
-	 * 
-	 * @param <Adapter>
-	 *            Type of the adapter in which is this module manager presented.
-	 * 
+	 *
+	 * @param <Adapter> Type of the adapter in which is this module manager presented.
 	 * @author Martin Albedinsky
 	 */
 	protected static class ModuleManager<Adapter extends AdapterModule.ModuleAdapter> {
@@ -201,46 +197,46 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		 * Protected -----------------------------
 		 */
 
-        /**
-         * <p>
-         * </p>
-         *
-         * @param module
-         * @param moduleID
-         */
+		/**
+		 * <p>
+		 * </p>
+		 *
+		 * @param module
+		 * @param moduleID
+		 */
 		void addModule(AdapterModule<Adapter> module, int moduleID) {
 			aModules.append(moduleID, module);
 		}
 
-        /**
-         * <p>
-         * </p>
-         *
-         * @param moduleID
-         * @return
-         */
+		/**
+		 * <p>
+		 * </p>
+		 *
+		 * @param moduleID
+		 * @return
+		 */
 		AdapterModule<Adapter> getModule(int moduleID) {
 			return aModules.get(moduleID);
 		}
 
-        /**
-         * <p>
-         * </p>
-         *
-         * @param outState
-         */
+		/**
+		 * <p>
+		 * </p>
+		 *
+		 * @param outState
+		 */
 		void dispatchOnSaveState(Bundle outState) {
 			for (int i = 0; i < aModules.size(); i++) {
 				aModules.get(aModules.keyAt(i)).dispatchSaveInstanceState(outState);
 			}
 		}
 
-        /**
-         * <p>
-         * </p>
-         *
-         * @param savedState
-         */
+		/**
+		 * <p>
+		 * </p>
+		 *
+		 * @param savedState
+		 */
 		void dispatchOnRestoreState(Bundle savedState) {
 			for (int i = 0; i < aModules.size(); i++) {
 				aModules.get(aModules.keyAt(i)).dispatchRestoreInstanceState(savedState);

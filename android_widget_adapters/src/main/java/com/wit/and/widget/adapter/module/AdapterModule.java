@@ -26,48 +26,47 @@ import android.os.Bundle;
  * <h4>Class Overview</h4>
  * <p>
  * </p>
- * 
- * @param <Adapter>
- *            Type of the adapter for which is this module created.
- * 
+ *
+ * @param <Adapter> Type of the adapter for which is this module created.
+ *
  * @author Martin Albedinsky
  */
 public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter> {
 
-    /**
+	/**
 	 * Constants =============================
 	 */
 
-    /**
-     * Log TAG.
-     */
-    // private static final String TAG = AdapterModule.class.getSimpleName();
+	/**
+	 * Log TAG.
+	 */
+	// private static final String TAG = AdapterModule.class.getSimpleName();
 
-    /**
-     * Indicates if debug private output trough log-cat is enabled.
-     */
-    // private static final boolean DEBUG = true;
+	/**
+	 * Indicates if debug private output trough log-cat is enabled.
+	 */
+	// private static final boolean DEBUG = true;
 
-    /**
-     * Indicates if logging for user output trough log-cat is enabled.
-     */
-    // private static final boolean USER_LOG = true;
+	/**
+	 * Indicates if logging for user output trough log-cat is enabled.
+	 */
+	// private static final boolean USER_LOG = true;
 
-    /**
-     * Enums =================================
-     */
+	/**
+	 * Enums =================================
+	 */
 
-    /**
-     * Static members ========================
-     */
+	/**
+	 * Static members ========================
+	 */
 
 	/**
 	 * Members ===============================
 	 */
 
-    /**
-     *
-     */
+	/**
+	 *
+	 */
 	private Adapter mAdapter;
 
 	/**
@@ -94,36 +93,36 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 * Public --------------------------------
 	 */
 
-    /**
-     * <p>
-     * </p>
-     *
-     * @param outState
-     */
-    public void dispatchSaveInstanceState(Bundle outState) {
-        onSaveInstanceState(outState);
-    }
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param outState
+	 */
+	public void dispatchSaveInstanceState(Bundle outState) {
+		onSaveInstanceState(outState);
+	}
 
-    /**
-     * <p>
-     * </p>
-     *
-     * @param savedState
-     */
-    public void dispatchRestoreInstanceState(Bundle savedState) {
-        onRestoreInstanceState(savedState);
-    }
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param savedState
+	 */
+	public void dispatchRestoreInstanceState(Bundle savedState) {
+		onRestoreInstanceState(savedState);
+	}
 
-    /**
-     * <p>
-     * </p>
-     *
-     * @param adapter
-     */
-    public final void dispatchAttachToAdapter(Adapter adapter) {
-	    mAdapter = adapter;
-        onAttachToAdapter(adapter);
-    }
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param adapter
+	 */
+	public final void dispatchAttachToAdapter(Adapter adapter) {
+		mAdapter = adapter;
+		onAttachToAdapter(adapter);
+	}
 
 	/**
 	 * Getters + Setters ---------------------
@@ -133,42 +132,40 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 * Protected -----------------------------
 	 */
 
-    /**
-     * <p>
-     * Invoked to save state of this module.
-     * </p>
-     *
-     * @param outState
-     *            Outgoing bundle state.
-     */
-    protected void onSaveInstanceState(Bundle outState) {
-    }
+	/**
+	 * <p>
+	 * Invoked to save state of this module.
+	 * </p>
+	 *
+	 * @param outState Outgoing bundle state.
+	 */
+	protected void onSaveInstanceState(Bundle outState) {
+	}
 
-    /**
-     * <p>
-     * Invoked to restore saved state of this module.
-     * </p>
-     *
-     * @param savedState
-     *            Saved adapter state.
-     */
-    protected void onRestoreInstanceState(Bundle savedState) {
-    }
+	/**
+	 * <p>
+	 * Invoked to restore saved state of this module.
+	 * </p>
+	 *
+	 * @param savedState Saved adapter state.
+	 */
+	protected void onRestoreInstanceState(Bundle savedState) {
+	}
 
-    /**
-     * <p>
-     * </p>
-     *
-     * @param adapter
-     */
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param adapter
+	 */
 	protected void onAttachToAdapter(Adapter adapter) {
 	}
 
 	/**
 	 * <p>
-     * </p>
-     *
-     * @return
+	 * </p>
+	 *
+	 * @return
 	 */
 	protected final Adapter getAdapter() {
 		return mAdapter;
@@ -176,8 +173,8 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 
 	/**
 	 * <p>
-     * </p>
-     */
+	 * </p>
+	 */
 	protected final void notifyAdapter() {
 		mAdapter.notifyDataSetChanged();
 	}

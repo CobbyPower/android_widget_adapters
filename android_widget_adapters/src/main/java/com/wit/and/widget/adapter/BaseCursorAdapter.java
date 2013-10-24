@@ -28,256 +28,256 @@ import android.database.Cursor;
  * <p>
  * </p>
  *
- * @author Martin Albedinsky
- *
  * @param <C> Type of the cursor from which will this adapter bind the views.
+ *
+ * @author Martin Albedinsky
  */
 public abstract class BaseCursorAdapter<C extends Cursor> extends BaseAdapter {
 
-    /**
-     * Constants =============================
-     */
+	/**
+	 * Constants =============================
+	 */
 
-    /**
-     * Log TAG.
-     */
-    private static final String TAG = BaseCursorAdapter.class.getSimpleName();
+	/**
+	 * Log TAG.
+	 */
+	private static final String TAG = BaseCursorAdapter.class.getSimpleName();
 
-    /**
-     * Indicates if debug private output trough log-cat is enabled.
-     */
-    // private static final boolean DEBUG = true;
+	/**
+	 * Indicates if debug private output trough log-cat is enabled.
+	 */
+	// private static final boolean DEBUG = true;
 
-    /**
-     * Indicates if logging for user output trough log-cat is enabled.
-     */
-    // private static final boolean USER_LOG = true;
+	/**
+	 * Indicates if logging for user output trough log-cat is enabled.
+	 */
+	// private static final boolean USER_LOG = true;
 
-    /**
-     * Enums =================================
-     */
+	/**
+	 * Enums =================================
+	 */
 
-    /**
-     * Static members ========================
-     */
+	/**
+	 * Static members ========================
+	 */
 
-    /**
-     * Members ===============================
-     */
+	/**
+	 * Members ===============================
+	 */
 
-    /**
-     * Cursor with data for this adapter.
-     */
-    private C mCursor;
+	/**
+	 * Cursor with data for this adapter.
+	 */
+	private C mCursor;
 
-    /**
-     * Listeners -----------------------------
-     */
+	/**
+	 * Listeners -----------------------------
+	 */
 
-    /**
-     * Arrays --------------------------------
-     */
+	/**
+	 * Arrays --------------------------------
+	 */
 
-    /**
-     * Booleans ------------------------------
-     */
+	/**
+	 * Booleans ------------------------------
+	 */
 
-    /**
-     * Constructors ==========================
-     */
+	/**
+	 * Constructors ==========================
+	 */
 
-    /**
-     * <p>
-     * </p>
-     *
-     * @param context
-     * @see BaseAdapter#BaseAdapter(Context)
-     */
-    public BaseCursorAdapter(Context context) {
-        this(context, null);
-    }
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param context
+	 * @see BaseAdapter#BaseAdapter(Context)
+	 */
+	public BaseCursorAdapter(Context context) {
+		this(context, null);
+	}
 
-    /**
-     * <p>
-     * </p>
-     *
-     * @param context
-     * @param cursor
-     * @see BaseAdapter#BaseAdapter(Context)
-     */
-    public BaseCursorAdapter(Context context, C cursor) {
-        super(context);
-        this.mCursor = cursor;
-    }
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param context
+	 * @param cursor
+	 * @see BaseAdapter#BaseAdapter(Context)
+	 */
+	public BaseCursorAdapter(Context context, C cursor) {
+		super(context);
+		this.mCursor = cursor;
+	}
 
-    /**
-     * Methods ===============================
-     */
+	/**
+	 * Methods ===============================
+	 */
 
-    /**
-     * Public --------------------------------
-     */
+	/**
+	 * Public --------------------------------
+	 */
 
-    /**
-     * <p>
-     * </p>
-     *
-     * @return
-     */
-    public boolean hasCursor() {
-        return mCursor != null;
-    }
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @return
+	 */
+	public boolean hasCursor() {
+		return mCursor != null;
+	}
 
-    /**
-     * <p>
-     * </p>
-     *
-     * @return
-     */
-    public boolean hasData() {
-        return mCursor != null && mCursor.getCount() > 0;
-    }
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @return
+	 */
+	public boolean hasData() {
+		return mCursor != null && mCursor.getCount() > 0;
+	}
 
-    /**
-     * Getters + Setters ---------------------
-     */
+	/**
+	 * Getters + Setters ---------------------
+	 */
 
-    /**
-     */
-    @Override
-    public int getCount() {
-        return mCursor != null ? mCursor.getCount() : 0;
-    }
+	/**
+	 */
+	@Override
+	public int getCount() {
+		return mCursor != null ? mCursor.getCount() : 0;
+	}
 
-    /**
-     * <p>
-     * Same as {@link #getCursorAt(int)}.
-     * </p>
-     */
-    @Override
-    public Object getItem(int position) {
-        return getCursorAt(position);
-    }
+	/**
+	 * <p>
+	 * Same as {@link #getCursorAt(int)}.
+	 * </p>
+	 */
+	@Override
+	public Object getItem(int position) {
+		return getCursorAt(position);
+	}
 
-    /**
-     * <p>
-     * </p>
-     *
-     * @param position
-     * @return
-     */
-    public C getCursorAt(int position) {
-        return moveCursorTo(position) ? mCursor : null;
-    }
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param position
+	 * @return
+	 */
+	public C getCursorAt(int position) {
+		return moveCursorTo(position) ? mCursor : null;
+	}
 
-    /**
-     * <p>
-     * Returns current cursor hold by this adapter.
-     * </p>
-     *
-     * @return Current cursor.
-     */
-    public C getCursor() {
-        return mCursor;
-    }
+	/**
+	 * <p>
+	 * Returns current cursor hold by this adapter.
+	 * </p>
+	 *
+	 * @return Current cursor.
+	 */
+	public C getCursor() {
+		return mCursor;
+	}
 
-    /**
-     * <p>
-     * </p>
-     *
-     * @param cursor
-     * @return
-     */
-    public C swapCursor(C cursor) {
-        C current = mCursor;
-        // Assign new cursor.
-        this.reloadCursor(cursor);
-        // Return previous one.
-        return current;
-    }
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param cursor
+	 * @return
+	 */
+	public C swapCursor(C cursor) {
+		C current = mCursor;
+		// Assign new cursor.
+		this.reloadCursor(cursor);
+		// Return previous one.
+		return current;
+	}
 
-    /**
-     * <p>
-     * </p>
-     *
-     * @param cursor
-     */
-    public void changeCursor(C cursor) {
-        // Close the previous cursor.
-        if (mCursor != null) {
-            mCursor.close();
-            mCursor = null;
-        }
-	    // Assign new cursor.
-	    this.reloadCursor(cursor);
-    }
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param cursor
+	 */
+	public void changeCursor(C cursor) {
+		// Close the previous cursor.
+		if (mCursor != null) {
+			mCursor.close();
+			mCursor = null;
+		}
+		// Assign new cursor.
+		this.reloadCursor(cursor);
+	}
 
-    /**
-     * Protected -----------------------------
-     */
+	/**
+	 * Protected -----------------------------
+	 */
 
-    /**
-     */
-    @Override
-    public void onBindItemView(int position, Object viewHolder) {
-        if (moveCursorTo(position)) {
-            onBindItemView(position, mCursor, viewHolder);
-        }
-    }
+	/**
+	 */
+	@Override
+	public void onBindItemView(int position, Object viewHolder) {
+		if (moveCursorTo(position)) {
+			onBindItemView(position, mCursor, viewHolder);
+		}
+	}
 
-    /**
-     * <p>
-     * Reloads the current cursor with the given one.
-     * </p>
-     *
-     * @param cursor Must be valid cursor.
-     * @return <code>True</code> if cursor was successfully reloaded, <code>false</code> otherwise.
-     */
-    protected final boolean reloadCursor(C cursor) {
-        this.mCursor = cursor;
-	    if (mCursor != null) {
-		    mCursor.moveToFirst();
-	    }
-	    notifyDataSetChanged();
-        return true;
-    }
+	/**
+	 * <p>
+	 * Reloads the current cursor with the given one.
+	 * </p>
+	 *
+	 * @param cursor Must be valid cursor.
+	 * @return <code>True</code> if cursor was successfully reloaded, <code>false</code> otherwise.
+	 */
+	protected final boolean reloadCursor(C cursor) {
+		this.mCursor = cursor;
+		if (mCursor != null) {
+			mCursor.moveToFirst();
+		}
+		notifyDataSetChanged();
+		return true;
+	}
 
-    /**
-     * <p>
-     * Moves the current cursor to the requested position.
-     * </p>
-     *
-     * @param position Position to move cursor to.
-     * @return <code>True</code> if cursor was moved to requested position,
-     *         <code>false</code> otherwise.
-     */
-    protected boolean moveCursorTo(int position) {
-        return (mCursor != null && mCursor.getCount() > position && mCursor.moveToPosition(position));
-    }
+	/**
+	 * <p>
+	 * Moves the current cursor to the requested position.
+	 * </p>
+	 *
+	 * @param position Position to move cursor to.
+	 * @return <code>True</code> if cursor was moved to requested position,
+	 * <code>false</code> otherwise.
+	 */
+	protected boolean moveCursorTo(int position) {
+		return (mCursor != null && mCursor.getCount() > position && mCursor.moveToPosition(position));
+	}
 
-    /**
-     * Private -------------------------------
-     */
+	/**
+	 * Private -------------------------------
+	 */
 
-    /**
-     * Abstract methods ----------------------
-     */
+	/**
+	 * Abstract methods ----------------------
+	 */
 
-    /**
-     * <p>
-     * </p>
-     *
-     * @param position
-     * @param cursor
-     * @param viewHolder
-     */
-    protected abstract void onBindItemView(int position, C cursor, Object viewHolder);
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param position
+	 * @param cursor
+	 * @param viewHolder
+	 */
+	protected abstract void onBindItemView(int position, C cursor, Object viewHolder);
 
-    /**
-     * Inner classes =========================
-     */
+	/**
+	 * Inner classes =========================
+	 */
 
-    /**
-     * Interface =============================
-     */
+	/**
+	 * Interface =============================
+	 */
 }

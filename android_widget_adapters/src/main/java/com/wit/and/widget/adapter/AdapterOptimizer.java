@@ -35,203 +35,199 @@ import android.view.ViewGroup;
  */
 public class AdapterOptimizer {
 
-    /**
-     * Constants =============================
-     */
+	/**
+	 * Constants =============================
+	 */
 
-    /**
-     * Log TAG.
-     */
-    //private static final String TAG = AdapterOptimizer.class.getSimpleName();
+	/**
+	 * Log TAG.
+	 */
+	//private static final String TAG = AdapterOptimizer.class.getSimpleName();
 
-    /**
-     * Indicates if debug private output trough log-cat is enabled.
-     */
-    // private static final boolean DEBUG = true;
+	/**
+	 * Indicates if debug private output trough log-cat is enabled.
+	 */
+	// private static final boolean DEBUG = true;
 
-    /**
-     * Indicates if logging for user output trough log-cat is enabled.
-     */
-    // private static final boolean USER_LOG = true;
+	/**
+	 * Indicates if logging for user output trough log-cat is enabled.
+	 */
+	// private static final boolean USER_LOG = true;
 
-    /**
-     * Enums =================================
-     */
+	/**
+	 * Enums =================================
+	 */
 
-    /**
-     * Static members ========================
-     */
+	/**
+	 * Static members ========================
+	 */
 
-    /**
-     * Members ===============================
-     */
+	/**
+	 * Members ===============================
+	 */
 
-    /**
-     * Base adapter to optimize.
-     */
-    private OptimizedAdapter mOptimizedAdapter;
+	/**
+	 * Base adapter to optimize.
+	 */
+	private OptimizedAdapter mOptimizedAdapter;
 
-    /**
-     * Listeners -----------------------------
-     */
+	/**
+	 * Listeners -----------------------------
+	 */
 
-    /**
-     * Arrays --------------------------------
-     */
+	/**
+	 * Arrays --------------------------------
+	 */
 
-    /**
-     * Booleans ------------------------------
-     */
+	/**
+	 * Booleans ------------------------------
+	 */
 
-    /**
-     * Constructors ==========================
-     */
+	/**
+	 * Constructors ==========================
+	 */
 
-    /**
-     * <p>
-     * Creates new instance of adapter optimizer.
-     * </p>
-     *
-     * @param optimizedAdapter Base adapter which should be optimized.
-     */
-    public AdapterOptimizer(OptimizedAdapter optimizedAdapter) {
-        if (optimizedAdapter == null)
-            throw  new IllegalArgumentException("Invalid optimized adapter.");
+	/**
+	 * <p>
+	 * Creates new instance of adapter optimizer.
+	 * </p>
+	 *
+	 * @param optimizedAdapter Base adapter which should be optimized.
+	 */
+	public AdapterOptimizer(OptimizedAdapter optimizedAdapter) {
+		if (optimizedAdapter == null)
+			throw new IllegalArgumentException("Invalid optimized adapter.");
 
-        // Assign.
-        this.mOptimizedAdapter = optimizedAdapter;
-    }
+		// Assign.
+		this.mOptimizedAdapter = optimizedAdapter;
+	}
 
-    /**
-     * Methods ===============================
-     */
+	/**
+	 * Methods ===============================
+	 */
 
-    /**
-     * Public --------------------------------
-     */
+	/**
+	 * Public --------------------------------
+	 */
 
-    /**
-     * <p>
-     * Runs the optimized algorithm for the
-     * {@link android.widget.BaseAdapter#getView(int, View, ViewGroup)}
-     * method of the current optimized adapter.
-     * </p>
-     *
-     * @param position
-     *            Position of the item in the adapter.
-     * @param convertView
-     *            Convert view for the item.
-     * @param root
-     *            Parent view.
-     * @return Created item's view.
-     */
-    public View performOptimizedGetView(int position, View convertView, ViewGroup root) {
-        Object viewHolder;
+	/**
+	 * <p>
+	 * Runs the optimized algorithm for the
+	 * {@link android.widget.BaseAdapter#getView(int, View, ViewGroup)}
+	 * method of the current optimized adapter.
+	 * </p>
+	 *
+	 * @param position    Position of the item in the adapter.
+	 * @param convertView Convert view for the item.
+	 * @param root        Parent view.
+	 * @return Created item's view.
+	 */
+	public View performOptimizedGetView(int position, View convertView, ViewGroup root) {
+		Object viewHolder;
 
-        // Check if we have converted view.
-        if (convertView == null) {
-            convertView = mOptimizedAdapter.onCreateItemView(position, mOptimizedAdapter.getLayoutInflater(), root);
+		// Check if we have converted view.
+		if (convertView == null) {
+			convertView = mOptimizedAdapter.onCreateItemView(position, mOptimizedAdapter.getLayoutInflater(), root);
 
-            if (convertView == null) {
-                throw new NullPointerException("Convert view at position(" + position + ") can't be NULL.");
-            }
+			if (convertView == null) {
+				throw new NullPointerException("Convert view at position(" + position + ") can't be NULL.");
+			}
 
-            // Set holder to the new view.
-            convertView.setTag(viewHolder = mOptimizedAdapter.onCreateItemViewHolder(position, convertView));
-        } else {
-            viewHolder = convertView.getTag();
-        }
+			// Set holder to the new view.
+			convertView.setTag(viewHolder = mOptimizedAdapter.onCreateItemViewHolder(position, convertView));
+		} else {
+			viewHolder = convertView.getTag();
+		}
 
-        // Bind item view with data.
-        mOptimizedAdapter.onBindItemView(position, viewHolder);
+		// Bind item view with data.
+		mOptimizedAdapter.onBindItemView(position, viewHolder);
 
-        // Return new/recreated item view with binded data.
-        return convertView;
-    }
+		// Return new/recreated item view with binded data.
+		return convertView;
+	}
 
-    /**
-     * Getters + Setters ---------------------
-     */
+	/**
+	 * Getters + Setters ---------------------
+	 */
 
-    /**
-     * Protected -----------------------------
-     */
+	/**
+	 * Protected -----------------------------
+	 */
 
-    /**
-     * Private -------------------------------
-     */
+	/**
+	 * Private -------------------------------
+	 */
 
-    /**
-     * Abstract methods ----------------------
-     */
+	/**
+	 * Abstract methods ----------------------
+	 */
 
-    /**
-     * Inner classes =========================
-     */
+	/**
+	 * Inner classes =========================
+	 */
 
-    /**
-     * Interface =============================
-     */
+	/**
+	 * Interface =============================
+	 */
 
-    /**
-     * <h4>Class Overview</h4>
-     * <p>
-     * </p>
-     *
-     * @author Martin Albedinsky
-     */
-    public static interface OptimizedAdapter {
+	/**
+	 * <h4>Class Overview</h4>
+	 * <p>
+	 * </p>
+	 *
+	 * @author Martin Albedinsky
+	 */
+	public static interface OptimizedAdapter {
 
-        /**
-         * Methods ===============================
-         */
+		/**
+		 * Methods ===============================
+		 */
 
-        /**
-         * <p>
-         * Invoked to create view for the item from the adapter data set. This is
-         * invoked only if the convert view is equal to <code>null</code>. To create
-         * view you can use the given inflater or create it manually.
-         * </p>
-         *
-         * @param position Position of view in the adapter view.
-         * @param inflater Layout inflater provided by {@link #getLayoutInflater()}.
-         * @param root     Parent view.
-         * @return Created item view.
-         */
-        public View onCreateItemView(int position, LayoutInflater inflater, ViewGroup root);
+		/**
+		 * <p>
+		 * Invoked to create view for the item from the adapter data set. This is
+		 * invoked only if the convert view is equal to <code>null</code>. To create
+		 * view you can use the given inflater or create it manually.
+		 * </p>
+		 *
+		 * @param position Position of view in the adapter view.
+		 * @param inflater Layout inflater provided by {@link #getLayoutInflater()}.
+		 * @param root     Parent view.
+		 * @return Created item view.
+		 */
+		public View onCreateItemView(int position, LayoutInflater inflater, ViewGroup root);
 
-        /**
-         * <p>
-         * Invoked to bind item view with data. This is invoked whether the
-         * <code>getView()</code> method on the adapter is called.
-         * </p>
-         *
-         * @param position   Position of view in the adapter view.
-         * @param viewHolder View holder of the actual item view on the given position.
-         *                   This is also holder which was set to the view by
-         *                   <code>onCreateItemViewHolder()</code> method while was view created.
-         */
-        public void onBindItemView(int position, Object viewHolder);
+		/**
+		 * <p>
+		 * Invoked to bind item view with data. This is invoked whether the
+		 * <code>getView()</code> method on the adapter is called.
+		 * </p>
+		 *
+		 * @param position   Position of view in the adapter view.
+		 * @param viewHolder View holder of the actual item view on the given position.
+		 *                   This is also holder which was set to the view by
+		 *                   <code>onCreateItemViewHolder()</code> method while was view created.
+		 */
+		public void onBindItemView(int position, Object viewHolder);
 
-        /**
-         * <p>
-         * Invoked to obtain view holder for the actually created item view.
-         * </p>
-         *
-         * @param position Position of the <var>itemView</var> in the adapter view.
-         * @param itemView
-         *            View returned by <code>onCreateItemView</code> method.
-         * @return Holder for the requested item's view.
-         */
-        public Object onCreateItemViewHolder(int position, View itemView);
+		/**
+		 * <p>
+		 * Invoked to obtain view holder for the actually created item view.
+		 * </p>
+		 *
+		 * @param position Position of the <var>itemView</var> in the adapter view.
+		 * @param itemView View returned by <code>onCreateItemView</code> method.
+		 * @return Holder for the requested item's view.
+		 */
+		public Object onCreateItemViewHolder(int position, View itemView);
 
-        /**
-         * <p>
-         * Returns layout inflater.
-         * </p>
-         *
-         * @return Layout inflater.
-         */
-        public LayoutInflater getLayoutInflater();
-    }
+		/**
+		 * <p>
+		 * Returns layout inflater.
+		 * </p>
+		 *
+		 * @return Layout inflater.
+		 */
+		public LayoutInflater getLayoutInflater();
+	}
 }

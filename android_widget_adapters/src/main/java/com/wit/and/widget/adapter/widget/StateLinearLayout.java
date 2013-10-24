@@ -31,14 +31,14 @@ import com.wit.and.widget.adapter.view.StateView.OnStateViewVisibilityListener;
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Updated <code>LinearLayout</code> to handle custom handling of the states in
+ * Updated {@link LinearLayout} to handle custom management of the states in
  * the list view (especially when the ListView or GridView should provide
- * multiple selection mode). This can be also used as a dialog linear layout in
- * your xml layouts.
+ * multiple selection mode).
  * </p>
  * 
  * @see LinearLayout
  * @see IStateView
+ *
  * @author Martin Albedinsky
  */
 public class StateLinearLayout extends LinearLayout implements IStateView {

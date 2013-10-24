@@ -32,37 +32,38 @@ import com.wit.and.widget.adapter.widget.StateRelativeLayout;
  * <h4>Class Overview</h4>
  * <p>
  * </p>
- * 
- * @author Martin Albedinsky
+ *
  * @see ISelectable
+ *
+ * @author Martin Albedinsky
  */
 public class SelectableItem implements ISelectable, StateView.OnStateViewVisibilityListener {
 	/**
 	 * Constants =============================
 	 */
 
-    /**
-     * Log TAG.
-     */
-    // private static final String TAG = SelectableItem.class.getSimpleName();
+	/**
+	 * Log TAG.
+	 */
+	// private static final String TAG = SelectableItem.class.getSimpleName();
 
-    /**
-     * Indicates if debug private output trough log-cat is enabled.
-     */
-    // private static final boolean DEBUG = true;
+	/**
+	 * Indicates if debug private output trough log-cat is enabled.
+	 */
+	// private static final boolean DEBUG = true;
 
-    /**
-     * Indicates if logging for user output trough log-cat is enabled.
-     */
-    // private static final boolean USER_LOG = true;
+	/**
+	 * Indicates if logging for user output trough log-cat is enabled.
+	 */
+	// private static final boolean USER_LOG = true;
 
 	/**
 	 * Enums =================================
 	 */
 
-    /**
-     * Static members ========================
-     */
+	/**
+	 * Static members ========================
+	 */
 
 	/**
 	 * Members ===============================
@@ -98,8 +99,8 @@ public class SelectableItem implements ISelectable, StateView.OnStateViewVisibil
 
 	/**
 	 * <p>
-     * </p>
-     */
+	 * </p>
+	 */
 	public SelectableItem() {
 	}
 
@@ -112,7 +113,7 @@ public class SelectableItem implements ISelectable, StateView.OnStateViewVisibil
 	 */
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void onVisibilityChanged(View stateView, int visibility) {
@@ -131,7 +132,7 @@ public class SelectableItem implements ISelectable, StateView.OnStateViewVisibil
 	 */
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void setSelected(boolean selected) {
@@ -139,7 +140,7 @@ public class SelectableItem implements ISelectable, StateView.OnStateViewVisibil
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public boolean isSelected() {
@@ -179,7 +180,7 @@ public class SelectableItem implements ISelectable, StateView.OnStateViewVisibil
 	 * Also invalidates the given view to handle current state of the background
 	 * selector.
 	 * </p>
-	 * 
+	 *
 	 * @param view
 	 */
 	public void reloadView(View view) {
@@ -200,7 +201,7 @@ public class SelectableItem implements ISelectable, StateView.OnStateViewVisibil
 	 * <p>
 	 * Returns this item's view.
 	 * </p>
-	 * 
+	 *
 	 * @return
 	 */
 	public View getItemView() {

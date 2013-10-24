@@ -32,10 +32,10 @@ import com.wit.and.widget.adapter.module.AdapterModule;
  * 
  * @param <Adapter>
  *            Type of the multi-module adapter.
- * 
- * @author Martin Albedinsky
- * 
+ *
  * @see com.wit.and.widget.adapter.BaseMultiAdapter
+ *
+ * @author Martin Albedinsky
  */
 public interface IMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> {
 

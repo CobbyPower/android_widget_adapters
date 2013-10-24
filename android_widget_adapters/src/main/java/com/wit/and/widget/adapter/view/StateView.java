@@ -30,15 +30,18 @@ import com.wit.and.widget.adapter.widget.StateRelativeLayout;
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Updated <code>View</code> to handle custom handling of the states in the list
+ * Updated {@link View} to handle custom management of the states in the adapter
  * view (especially when the ListView or GridView should provide multiple
- * selection mode). This can be also used as a dialog view in your xml layouts.
+ * selection mode).
+ * </p>
+ * <p>
  * See also {@link com.wit.and.widget.adapter.widget.StateLinearLayout} and {@link StateRelativeLayout} which
  * provides this functionality too.
  * </p>
- * 
+ *
  * @see View
  * @see IStateView
+ *
  * @author Martin Albedinsky
  */
 public class StateView extends View implements IStateView {
@@ -47,28 +50,28 @@ public class StateView extends View implements IStateView {
 	 * Constants =============================
 	 */
 
-    /**
-     * Log TAG.
-     */
-    // private static final String TAG = StateView.class.getSimpleName();
+	/**
+	 * Log TAG.
+	 */
+	// private static final String TAG = StateView.class.getSimpleName();
 
-    /**
-     * Indicates if debug private output trough log-cat is enabled.
-     */
-    // private static final boolean DEBUG = true;
+	/**
+	 * Indicates if debug private output trough log-cat is enabled.
+	 */
+	// private static final boolean DEBUG = true;
 
-    /**
-     * Indicates if logging for user output trough log-cat is enabled.
-     */
-    // private static final boolean USER_LOG = true;
+	/**
+	 * Indicates if logging for user output trough log-cat is enabled.
+	 */
+	// private static final boolean USER_LOG = true;
 
 	/**
 	 * Enums =================================
 	 */
 
-    /**
-     * Static members ========================
-     */
+	/**
+	 * Static members ========================
+	 */
 
 	/**
 	 * Members ===============================
@@ -106,9 +109,8 @@ public class StateView extends View implements IStateView {
 	 * <p>
 	 * Constructor #1.
 	 * </p>
-	 * 
-	 * @param context
-	 *            The actual application context.
+	 *
+	 * @param context The actual application context.
 	 */
 	public StateView(Context context) {
 		super(context);
@@ -116,10 +118,9 @@ public class StateView extends View implements IStateView {
 
 	/**
 	 * <p>
-     * </p>
-     *
-     * @param context
-	 *            The actual application context.
+	 * </p>
+	 *
+	 * @param context The actual application context.
 	 * @param attrs
 	 */
 	public StateView(Context context, AttributeSet attrs) {
@@ -128,10 +129,9 @@ public class StateView extends View implements IStateView {
 
 	/**
 	 * <p>
-     * </p>
-     *
-     * @param context
-	 *            The actual application context.
+	 * </p>
+	 *
+	 * @param context  The actual application context.
 	 * @param attrs
 	 * @param defStyle
 	 */
@@ -152,7 +152,7 @@ public class StateView extends View implements IStateView {
 	 */
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void setSelected(boolean selected) {
@@ -169,7 +169,7 @@ public class StateView extends View implements IStateView {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void setSelected(boolean selected, boolean override) {
@@ -177,7 +177,7 @@ public class StateView extends View implements IStateView {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void setHandleDefaultStates(boolean handle) {
@@ -185,7 +185,7 @@ public class StateView extends View implements IStateView {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public boolean handleDefaultStates() {
@@ -193,8 +193,8 @@ public class StateView extends View implements IStateView {
 	}
 
 	/**
-	 * 
- 	*/
+	 *
+	 */
 	@Override
 	public void setOnVisibilityListener(OnStateViewVisibilityListener listener) {
 		iVisibilityListener = listener;
@@ -205,7 +205,7 @@ public class StateView extends View implements IStateView {
 	 */
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	protected void onVisibilityChanged(View changedView, int visibility) {
@@ -238,9 +238,8 @@ public class StateView extends View implements IStateView {
 	 * <p>
 	 * Interface to handle callback when the state view visibility was changed.
 	 * </p>
-	 * 
+	 *
 	 * @author Martin Albedinsky
-	 * 
 	 */
 	public static interface OnStateViewVisibilityListener {
 
@@ -257,11 +256,9 @@ public class StateView extends View implements IStateView {
 		 * <code>onVisibilityChanged()</code> description) visibility was
 		 * changed.
 		 * </p>
-		 * 
-		 * @param stateView
-		 *            This isn't necessary the <code>IStateView</code> child.
-		 * @param visibility
-		 *            Actual visibility of the passed view.
+		 *
+		 * @param stateView  This isn't necessary the <code>IStateView</code> child.
+		 * @param visibility Actual visibility of the passed view.
 		 */
 		public void onVisibilityChanged(View stateView, int visibility);
 	}

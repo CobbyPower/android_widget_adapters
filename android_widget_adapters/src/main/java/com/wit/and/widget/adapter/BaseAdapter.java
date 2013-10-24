@@ -24,7 +24,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wit.and.widget.adapter.internal.BaseAndroidAdapter;
+import com.wit.and.widget.adapter.internal.BaseWidgetAdapter;
 
 /**
  * <h4>Class Overview</h4>
@@ -34,10 +34,10 @@ import com.wit.and.widget.adapter.internal.BaseAndroidAdapter;
  * </p>
  *
  * @author Martin Albedinsky
- * @see com.wit.and.widget.adapter.internal.BaseAndroidAdapter
+ * @see com.wit.and.widget.adapter.internal.BaseWidgetAdapter
  * @see com.wit.and.widget.adapter.AdapterOptimizer
  */
-public abstract class BaseAdapter extends BaseAndroidAdapter implements AdapterOptimizer.OptimizedAdapter {
+public abstract class BaseAdapter extends BaseWidgetAdapter implements AdapterOptimizer.OptimizedAdapter {
 
     /**
      * Constants =============================
@@ -93,7 +93,7 @@ public abstract class BaseAdapter extends BaseAndroidAdapter implements AdapterO
 
     /**
      * <p>
-     * See {@link com.wit.and.widget.adapter.internal.BaseAndroidAdapter#BaseAndroidAdapter(Context)}.
+     * See {@link com.wit.and.widget.adapter.internal.BaseWidgetAdapter#BaseWidgetAdapter(Context)}.
      * </p>
      *
      * @param context Context in which is being adapter created.
