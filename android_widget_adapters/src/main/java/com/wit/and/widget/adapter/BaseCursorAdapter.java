@@ -129,13 +129,10 @@ public abstract class BaseCursorAdapter<C extends Cursor> extends BaseAdapter {
 	}
 
 	/**
-	 * <p>
-	 * </p>
-	 *
-	 * @return
 	 */
-	public boolean hasData() {
-		return mCursor != null && mCursor.getCount() > 0;
+	@Override
+	public boolean isEmpty() {
+		return mCursor == null || mCursor.getCount() == 0;
 	}
 
 	/**

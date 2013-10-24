@@ -34,9 +34,11 @@ import java.util.List;
  * <p>
  * </p>
  *
+ * @param <Adapter>
+ *
  * @author Martin Albedinsky
  */
-public abstract class AlphabeticHeaders extends BaseHeadersModule<AlphabeticHeaders.AlphabeticHeader> {
+public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> extends BaseHeadersModule<AlphabeticHeaders.AlphabeticHeader, Adapter> {
 
 	/**
 	 * Constants =============================
@@ -108,7 +110,7 @@ public abstract class AlphabeticHeaders extends BaseHeadersModule<AlphabeticHead
 	@Override
 	public void clearHeaders() {
 		super.clearHeaders();
-		this.mLastChar = "";
+		this.resetLastChar();
 	}
 
 	/**
@@ -137,28 +139,40 @@ public abstract class AlphabeticHeaders extends BaseHeadersModule<AlphabeticHead
 	/**
 	 * <p>
 	 * </p>
+	 * <p>
+	 * Also adapter will be notified about data set change.
+	 * </p>
 	 *
 	 * @param cursor
 	 * @param <C>
 	 */
 	public <C extends Cursor & AlphabeticItem> void processAlphabeticCursor(C cursor) {
 		if (cursor.getCount() > 0 && cursor.moveToFirst()) {
+			this.resetLastChar();
 			do  {
 				this.processAlphabeticItem(cursor, cursor.getPosition());
 			} while (cursor.moveToNext());
+			this.resetLastChar();
 		}
+		notifyAdapter();
 	}
 
 	/**
 	 * <p>
 	 * </p>
+	 * <p>
+	 * Also adapter will be notified about data set change.
+	 * </p>
 	 *
 	 * @param itemList
 	 */
 	public void processAlphabeticList(List<AlphabeticItem> itemList) {
+		this.resetLastChar();
 		for (int i = 0; i < itemList.size(); i++) {
 			this.processAlphabeticItem(itemList.get(i), i);
 		}
+		this.resetLastChar();
+		notifyAdapter();
 	}
 
 	/**
@@ -218,6 +232,13 @@ public abstract class AlphabeticHeaders extends BaseHeadersModule<AlphabeticHead
 	/**
 	 * Private -------------------------------
 	 */
+
+	/**
+	 *
+	 */
+	private void resetLastChar() {
+		this.mLastChar = "";
+	}
 
 	/**
 	 * Abstract methods ----------------------

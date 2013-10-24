@@ -21,8 +21,8 @@
 package com.wit.and.widget.adapter;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.util.SparseArray;
 
 import com.wit.and.widget.adapter.internal.IMultiAdapter;
 import com.wit.and.widget.adapter.module.AdapterModule;
@@ -33,10 +33,12 @@ import com.wit.and.widget.adapter.module.AdapterModule;
  * </p>
  *
  * @param <Adapter> Type of the adapter which extends this base multi-module adapter.
+ * @param <C> Type of the cursor from which will this adapter bind the views.
  *
  * @author Martin Albedinsky
  */
-public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> extends BaseAdapter implements IMultiAdapter<Adapter> {
+public abstract class BaseCursorMultiAdapter<C extends Cursor, Adapter extends AdapterModule.ModuleAdapter> extends BaseCursorAdapter<C> implements IMultiAdapter<Adapter> {
+
 	/**
 	 * Constants =============================
 	 */
@@ -71,7 +73,7 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	/**
 	 * Modules manager.
 	 */
-	private final ModuleManager<Adapter> MODULES_MANAGER = new ModuleManager<Adapter>();
+	private final BaseMultiAdapter.ModuleManager<Adapter> MODULES_MANAGER = new BaseMultiAdapter.ModuleManager<Adapter>();
 
 	/**
 	 * Listeners -----------------------------
@@ -94,9 +96,9 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	 * </p>
 	 *
 	 * @param context
-	 * @see BaseAdapter#BaseAdapter(Context)
+	 * @see com.wit.and.widget.adapter.BaseAdapter#BaseAdapter(android.content.Context)
 	 */
-	public BaseMultiAdapter(Context context) {
+	public BaseCursorMultiAdapter(Context context) {
 		super(context);
 	}
 
@@ -160,85 +162,6 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	/**
 	 * Inner classes =========================
 	 */
-
-	/**
-	 * <h4>Class Overview</h4>
-	 * <p>
-	 * Manager to handle {@link BaseMultiAdapter} modules.
-	 * </p>
-	 *
-	 * @param <Adapter> Type of the adapter in which is this module manager presented.
-	 * @author Martin Albedinsky
-	 */
-	protected static class ModuleManager<Adapter extends AdapterModule.ModuleAdapter> {
-
-		/**
-		 * Members ===============================
-		 */
-
-		/**
-		 * Arrays --------------------------------
-		 */
-
-		/**
-		 * Array with adapter modules.
-		 */
-		private SparseArray<AdapterModule<Adapter>> aModules = new SparseArray<AdapterModule<Adapter>>();
-
-		/**
-		 * Methods ===============================
-		 */
-
-		/**
-		 * Protected -----------------------------
-		 */
-
-		/**
-		 * <p>
-		 * </p>
-		 *
-		 * @param module
-		 * @param moduleID
-		 */
-		void addModule(AdapterModule<Adapter> module, int moduleID) {
-			aModules.append(moduleID, module);
-		}
-
-		/**
-		 * <p>
-		 * </p>
-		 *
-		 * @param moduleID
-		 * @return
-		 */
-		AdapterModule<Adapter> getModule(int moduleID) {
-			return aModules.get(moduleID);
-		}
-
-		/**
-		 * <p>
-		 * </p>
-		 *
-		 * @param outState
-		 */
-		void dispatchOnSaveState(Bundle outState) {
-			for (int i = 0; i < aModules.size(); i++) {
-				aModules.get(aModules.keyAt(i)).dispatchSaveInstanceState(outState);
-			}
-		}
-
-		/**
-		 * <p>
-		 * </p>
-		 *
-		 * @param savedState
-		 */
-		void dispatchOnRestoreState(Bundle savedState) {
-			for (int i = 0; i < aModules.size(); i++) {
-				aModules.get(aModules.keyAt(i)).dispatchRestoreInstanceState(savedState);
-			}
-		}
-	}
 
 	/**
 	 * Interface =============================

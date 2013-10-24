@@ -33,9 +33,12 @@ import java.util.List;
  * <p>
  * </p>
  *
+ * @param <Header>
+ * @param <Adapter>
+ *
  * @author Martin Albedinsky
  */
-public abstract class BaseHeadersModule<Header> {
+public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.ModuleAdapter> extends AdapterModule<Adapter> {
 
 	/**
 	 * Constants =============================

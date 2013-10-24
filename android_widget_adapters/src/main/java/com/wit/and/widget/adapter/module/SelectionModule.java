@@ -144,8 +144,7 @@ public class SelectionModule<Item extends SelectableItem, Adapter extends Select
 	 * flag will be set to <code>false</code> otherwise to <code>true</code>.
 	 * </p>
 	 * <p>
-	 * <i>Note that this also notify the adapter that the data set was
-	 * changed.</i>
+	 * Also adapter will be notified about data set change.
 	 * </p>
 	 *
 	 * @param position Position of the select-able item in the adapter.
