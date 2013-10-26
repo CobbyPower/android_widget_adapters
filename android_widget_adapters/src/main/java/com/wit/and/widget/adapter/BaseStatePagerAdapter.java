@@ -26,16 +26,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 /**
- * <p>
- * public abstract class
- * </p>
- * <h5>BasePagerAdapter</h5>
- * <p>
- * extends {@link android.support.v4.app.FragmentStatePagerAdapter}
- * </p>
  * <h4>Class Overview</h4>
  * <p>
- *
  * </p>
  *
  * @author Martin Albedinsky
@@ -46,28 +38,28 @@ public abstract class BaseStatePagerAdapter extends FragmentStatePagerAdapter {
 	 * Constants =============================
 	 */
 
-    /**
-     * Log TAG.
-     */
-    // private static final String TAG = BaseAdapter.class.getSimpleName();
+	/**
+	 * Log TAG.
+	 */
+	// private static final String TAG = BaseWidgetAdapter.class.getSimpleName();
 
-    /**
-     * Indicates if debug private output trough log-cat is enabled.
-     */
-    // private static final boolean DEBUG = true;
+	/**
+	 * Indicates if debug private output trough log-cat is enabled.
+	 */
+	// private static final boolean DEBUG = true;
 
-    /**
-     * Indicates if logging for user output trough log-cat is enabled.
-     */
-    // private static final boolean USER_LOG = true;
+	/**
+	 * Indicates if logging for user output trough log-cat is enabled.
+	 */
+	// private static final boolean USER_LOG = true;
 
-    /**
-     * Enums =================================
-     */
+	/**
+	 * Enums =================================
+	 */
 
-    /**
-     * Static members ========================
-     */
+	/**
+	 * Static members ========================
+	 */
 
 	/**
 	 * Members ===============================
@@ -121,8 +113,7 @@ public abstract class BaseStatePagerAdapter extends FragmentStatePagerAdapter {
 	 * </p>
 	 *
 	 * @param fragmentManager
-	 * @param context
-	 *            Context in which will be this adapter used.
+	 * @param context         Context in which will be this adapter used.
 	 */
 	public BaseStatePagerAdapter(FragmentManager fragmentManager, Context context) {
 		super(fragmentManager);
@@ -143,7 +134,7 @@ public abstract class BaseStatePagerAdapter extends FragmentStatePagerAdapter {
 	 * @return
 	 */
 	public CharSequence[] getItems() {
-		return new CharSequence[] {};
+		return new CharSequence[]{};
 	}
 
 	/**
@@ -153,8 +144,7 @@ public abstract class BaseStatePagerAdapter extends FragmentStatePagerAdapter {
 	 * Returns page title.
 	 * </p>
 	 *
-	 * @param position
-	 *            Position of the fragment for which you want title.
+	 * @param position Position of the fragment for which you want title.
 	 * @return
 	 */
 	public CharSequence getPageTitle(int position) {
@@ -181,7 +171,7 @@ public abstract class BaseStatePagerAdapter extends FragmentStatePagerAdapter {
 	 * </p>
 	 *
 	 * @return Can be {@link android.app.Activity} context or {@link android.content.Context} or
-	 *         <code>null</code>.
+	 * <code>null</code>.
 	 */
 	public final Context getContext() {
 		return mContext;
@@ -193,7 +183,7 @@ public abstract class BaseStatePagerAdapter extends FragmentStatePagerAdapter {
 	 * <p>
 	 * Returns resources from parent activity.
 	 * </p>
-	 * 
+	 *
 	 * @return
 	 */
 	public final Resources getResources() {

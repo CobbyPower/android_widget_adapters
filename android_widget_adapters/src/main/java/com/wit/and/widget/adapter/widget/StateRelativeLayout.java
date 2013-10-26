@@ -29,25 +29,16 @@ import com.wit.and.widget.adapter.internal.view.IStateView;
 import com.wit.and.widget.adapter.view.StateView;
 
 /**
- * <p>
- * public class
- * </p>
- * <h5>StateRelativeLayout</h5>
- * <p>
- * extends {@link RelativeLayout}<br/>
- * implements {@link IStateView}
- * </p>
  * <h4>Class Overview</h4>
  * <p>
- * Updated <code>RelativeLayout</code> to handle custom handling of the states
- * in the list view (especially when the ListView or GridView should provide
- * multiple selection mode). This can be also used as a dialog relative layout
- * in your xml layouts.
+ * Updated {@link android.widget.RelativeLayout} to handle custom management of the states in
+ * the list view (especially when the ListView or GridView should provide
+ * multiple selection mode).
  * </p>
- * 
+ *
+ * @author Martin Albedinsky
  * @see RelativeLayout
  * @see IStateView
- * @author Martin Albedinsky
  */
 public class StateRelativeLayout extends RelativeLayout implements IStateView {
 
@@ -55,28 +46,28 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	 * Constants =============================
 	 */
 
-    /**
-     * Log TAG.
-     */
-    // private static final String TAG = StateRelativeLayout.class.getSimpleName();
+	/**
+	 * Log TAG.
+	 */
+	// private static final String TAG = StateRelativeLayout.class.getSimpleName();
 
-    /**
-     * Indicates if debug private output trough log-cat is enabled.
-     */
-    // private static final boolean DEBUG = true;
+	/**
+	 * Indicates if debug private output trough log-cat is enabled.
+	 */
+	// private static final boolean DEBUG = true;
 
-    /**
-     * Indicates if logging for user output trough log-cat is enabled.
-     */
-    // private static final boolean USER_LOG = true;
+	/**
+	 * Indicates if logging for user output trough log-cat is enabled.
+	 */
+	// private static final boolean USER_LOG = true;
 
 	/**
 	 * Enums =================================
 	 */
 
-    /**
-     * Static members ========================
-     */
+	/**
+	 * Static members ========================
+	 */
 
 	/**
 	 * Members ===============================
@@ -109,29 +100,20 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>public StateRelativeLayout(Context context)</i></h5>
 	 * <p>
-	 * Constructor #1.
 	 * </p>
-	 * 
-	 * @param context
-	 *            The actual application context.
+	 *
+	 * @param context The actual application context.
 	 */
 	public StateRelativeLayout(Context context) {
 		super(context);
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i>public StateRelativeLayout(Context context, AttributeSet
-	 * attrs)</i></h5>
 	 * <p>
-	 * Constructor #2.
 	 * </p>
-	 * 
-	 * @param context
-	 *            The actual application context.
+	 *
+	 * @param context The actual application context.
 	 * @param attrs
 	 */
 	public StateRelativeLayout(Context context, AttributeSet attrs) {
@@ -139,15 +121,10 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i>public StateRelativeLayout(Context context, AttributeSet attrs,
-	 * int defStyle)</i></h5>
 	 * <p>
-	 * Constructor #3.
 	 * </p>
-	 * 
-	 * @param context
-	 *            The actual application context.
+	 *
+	 * @param context  The actual application context.
 	 * @param attrs
 	 * @param defStyle
 	 */
@@ -168,7 +145,7 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	 */
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void setSelected(boolean selected) {
@@ -185,7 +162,7 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void setSelected(boolean selected, boolean override) {
@@ -193,7 +170,7 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void setHandleDefaultStates(boolean handle) {
@@ -201,7 +178,7 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public boolean handleDefaultStates() {
@@ -209,8 +186,8 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	}
 
 	/**
-	 * 
- 	*/
+	 *
+	 */
 	@Override
 	public void setOnVisibilityListener(StateView.OnStateViewVisibilityListener listener) {
 		iVisibilityListener = listener;
@@ -221,7 +198,7 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	 */
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	protected void onVisibilityChanged(View changedView, int visibility) {

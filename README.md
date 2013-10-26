@@ -1,43 +1,11 @@
-Android Widget Adapters (RELEASE PREVIEW)
+<a href="http://www.android.com/">
+<img align="left" src="http://github.wolf-itechnologies.com/images/wit/android/global/icons/wit_ic_android_master_100.png" />
+</a>
+
+Android Widget Adapters (Master)
 ===============
 
-<b>Note, that this is still under development and there can be in some release versions made some big changes in the logic. Please be careful, when You are
-pulling new version. Thank You for understanding. We hope, that this library will be soon available in the RELEASE version.</b>
+### Master branch ###
+This branch is only for **testing** and **bug fixing purpose**. Contains stable and _almost_ tested code, but if You decide to checkout it, it will be only at **Your** own **"risk"**.
 
-#### From [Android Daily Development]() series by [![](http://www.wolf-itechnologies.com/images/wit/main/logo/wit_ic_logo_50.png "")]() [Wolf-ITechnologies]() ####
-
-Effective and optimized adapters for Android widgets as [ListView](http://developer.android.com/reference/android/widget/ListView.html) and [GridView](http://developer.android.com/reference/android/widget/GridView.html).
-
-## Overview ##
-
-## Example Usage ##
-
-### Samples ##
-
-## Getting Started ##
-
-## Design Goals ##
-
-## Detailed Usage ##
-
-### Examples ###
-
-### How it works ###
-
-## Known Issues ##
-
-Please see official wiki [page](https://github.com/Wolf-ITechnologies/android_widget_adapters/wiki/Known-Issues).
-
-## Developer info ##
-
-## Compatibility ##
-
-Fully supported from **Android API version 8**.
-
-## Related Projects
-
-## Support ##
-
-If You have any questions related to this project, feel free and contact us at [github.public@wolf-itechnologies.com](mailto:github.public@wolf-itechnologies.com).
-
-## Other ##
+If You would like to checkout **officially released** code of this library, please switch to one of the **[Release](https://github.com/Wolf-ITechnologies/android_widget_adapters "Officially released code")** branches.
