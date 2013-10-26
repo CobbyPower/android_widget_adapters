@@ -82,6 +82,11 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 */
 
 	/**
+	 *
+	 */
+	private boolean bAdapterNotificationEnabled = true;
+
+	/**
 	 * Constructors ==========================
 	 */
 
@@ -127,6 +132,26 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	/**
 	 * Getters + Setters ---------------------
 	 */
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @return
+	 */
+	public boolean isAdapterNotificationEnabled() {
+		return bAdapterNotificationEnabled;
+	}
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param enable
+	 */
+	public void enableAdapterNotification(boolean enable) {
+		this.bAdapterNotificationEnabled = enable;
+	}
 
 	/**
 	 * Protected -----------------------------
@@ -176,7 +201,9 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 * </p>
 	 */
 	protected final void notifyAdapter() {
-		mAdapter.notifyDataSetChanged();
+		if (isAdapterNotificationEnabled()) {
+			mAdapter.notifyDataSetChanged();
+		}
 	}
 
 	/**

@@ -121,7 +121,17 @@ public abstract class BaseAdapter extends BaseWidgetAdapter implements AdapterOp
      * Getters + Setters ---------------------
      */
 
-    /**
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @return
+	 */
+	public int getCurrentItemViewType() {
+		return OPTIMIZER.getCurrentItemViewType();
+	}
+
+	/**
      * Protected -----------------------------
      */
 

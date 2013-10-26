@@ -154,8 +154,11 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 	public int getHeadersCountAboveItem(int itemPosition) {
 		int count = 0;
 		for (int i = 0; i < aHeaders.size(); i++) {
-			if (aHeaders.keyAt(i) < itemPosition)
+			if (aHeaders.keyAt(i) < itemPosition) {
 				count++;
+			} else {
+				break;
+			}
 		}
 		return count;
 	}

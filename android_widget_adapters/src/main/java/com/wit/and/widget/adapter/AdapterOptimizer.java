@@ -72,6 +72,11 @@ public class AdapterOptimizer {
 	private OptimizedAdapter mOptimizedAdapter;
 
 	/**
+	 *
+	 */
+	private int mCurrentItemViewType = 0;
+
+	/**
 	 * Listeners -----------------------------
 	 */
 
@@ -125,6 +130,9 @@ public class AdapterOptimizer {
 	public View performOptimizedGetView(int position, View convertView, ViewGroup root) {
 		Object viewHolder;
 
+		// Obtain current item view type.
+		this.mCurrentItemViewType = mOptimizedAdapter.getItemViewType(position);
+
 		// Check if we have converted view.
 		if (convertView == null) {
 			convertView = mOptimizedAdapter.onCreateItemView(position, mOptimizedAdapter.getLayoutInflater(), root);
@@ -149,6 +157,16 @@ public class AdapterOptimizer {
 	/**
 	 * Getters + Setters ---------------------
 	 */
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @return
+	 */
+	public int getCurrentItemViewType() {
+		return mCurrentItemViewType;
+	}
 
 	/**
 	 * Protected -----------------------------
@@ -229,5 +247,12 @@ public class AdapterOptimizer {
 		 * @return Layout inflater.
 		 */
 		public LayoutInflater getLayoutInflater();
+
+		/**
+		 * <p>
+		 * See {@link android.widget.BaseAdapter#getItemViewType(int)}.
+		 * </p>
+		 */
+		public int getItemViewType(int position);
 	}
 }

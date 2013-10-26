@@ -22,6 +22,7 @@ package com.wit.and.widget.adapter.module;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -132,7 +133,12 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	@Override
 	public void bindHeaderView(int position, Object headerHolder) {
 		if (headerHolder instanceof HeaderHolder) {
-			((HeaderHolder) headerHolder).mTextView.setText(getHeader(position).getAlphabeticChar());
+			AlphabeticHeader header = getHeader(position);
+			if (header != null) {
+				((HeaderHolder) headerHolder).mTextView.setText(header.getAlphabeticChar());
+			} else {
+				Log.e(TAG, "Invalid header at position(" + position + ").");
+			}
 		}
 	}
 
@@ -220,8 +226,11 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 			// Obtain first char from item name.
 			String currentChar = name.substring(0, 1);
 
+			Log.d(TAG, "processAlphabeticItem("+name+", "+position+")");
+
 			if (!currentChar.equals(mLastChar)) {
-				addHeader(new BaseAlphabeticHeader(currentChar), position);
+				Log.d(TAG, "creating new header for("+currentChar+", "+position+")");
+				addHeader(new BaseAlphabeticHeader(currentChar), getHeadersCount() + position);
 			}
 
 			// Save current as last.
