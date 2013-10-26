@@ -18,7 +18,7 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.and.widget.adapter.module;
+package com.wit.and.widget.adapter.model;
 
 import android.view.View;
 

@@ -23,6 +23,8 @@ package com.wit.and.widget.adapter.module;
 import android.os.Bundle;
 import android.util.SparseIntArray;
 
+import com.wit.and.widget.adapter.model.SelectableItem;
+
 /**
  * <h4>Class Overview</h4>
  * <p>
@@ -568,7 +570,7 @@ public class SelectionModule<Item extends SelectableItem, Adapter extends Select
 	 * be items selected according to theirs position in the adapter. So if you have for
 	 * example implementation of {@link com.wit.and.widget.adapter.BaseCursorAdapter}, than you
 	 * have all your items provided by that adapter stored in <code>Cursor</code> which can't
-	 * extends {@link com.wit.and.widget.adapter.module.SelectableItem} so you just return
+	 * extends {@link com.wit.and.widget.adapter.model.SelectableItem} so you just return
 	 * in the {@link #hasSelectableItems()} method <code>false</code> and you can check for
 	 * selected item by calling {@link com.wit.and.widget.adapter.module.SelectionModule#isSelected(int)}
 	 * method on your selection module of that adapter.
@@ -576,7 +578,7 @@ public class SelectionModule<Item extends SelectableItem, Adapter extends Select
 	 *
 	 * @param <Item> The select-able item type.
 	 * @author Martin Albedinsky
-	 * @see com.wit.and.widget.adapter.module.SelectableItem
+	 * @see com.wit.and.widget.adapter.model.SelectableItem
 	 * @see com.wit.and.widget.adapter.module.SelectionModule
 	 */
 	public static interface SelectableItemsAdapter<Item extends SelectableItem> extends ModuleAdapter {
