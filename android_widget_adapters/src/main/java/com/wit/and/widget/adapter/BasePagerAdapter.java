@@ -27,16 +27,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 /**
- * <p>
- * public abstract class
- * </p>
- * <h5>BasePagerAdapter</h5>
- * <p>
- * extends {@link FragmentPagerAdapter}
- * </p>
  * <h4>Class Overview</h4>
  * <p>
- * 
  * </p>
  * 
  * @author Martin Albedinsky

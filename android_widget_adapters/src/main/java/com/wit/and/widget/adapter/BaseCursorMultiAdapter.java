@@ -1,0 +1,169 @@
+/*
+ * =================================================================================
+ * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
+ * =================================================================================
+ * Licensed under the Apache License, Version 2.0 or later (further "License" only);
+ * ---------------------------------------------------------------------------------
+ * You may use this file only in compliance with the License. More details and copy
+ * of this License you may obtain at
+ * 
+ * 		http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * You can redistribute, modify or publish any part of the code written in this
+ * file but as it is described in the License, the software distributed under the 
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES or CONDITIONS OF
+ * ANY KIND.
+ * 
+ * See the License for the specific language governing permissions and limitations
+ * under the License.
+ * =================================================================================
+ */
+package com.wit.and.widget.adapter;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.os.Bundle;
+
+import com.wit.and.widget.adapter.internal.IMultiAdapter;
+import com.wit.and.widget.adapter.module.AdapterModule;
+
+/**
+ * <h4>Class Overview</h4>
+ * <p>
+ * </p>
+ *
+ * @param <Adapter> Type of the adapter which extends this base multi-module adapter.
+ * @param <C> Type of the cursor from which will this adapter bind the views.
+ *
+ * @author Martin Albedinsky
+ */
+public abstract class BaseCursorMultiAdapter<C extends Cursor, Adapter extends AdapterModule.ModuleAdapter> extends BaseCursorAdapter<C> implements IMultiAdapter<Adapter> {
+
+	/**
+	 * Constants =============================
+	 */
+
+	/**
+	 * Log TAG.
+	 */
+	// private static final String TAG = BaseMultiAdapter.class.getSimpleName();
+
+	/**
+	 * Indicates if debug private output trough log-cat is enabled.
+	 */
+	// private static final boolean DEBUG = true;
+
+	/**
+	 * Indicates if logging for user output trough log-cat is enabled.
+	 */
+	// private static final boolean USER_LOG = true;
+
+	/**
+	 * Enums =================================
+	 */
+
+	/**
+	 * Static members ========================
+	 */
+
+	/**
+	 * Members ===============================
+	 */
+
+	/**
+	 * Modules manager.
+	 */
+	private final BaseMultiAdapter.ModuleManager<Adapter> MODULES_MANAGER = new BaseMultiAdapter.ModuleManager<Adapter>();
+
+	/**
+	 * Listeners -----------------------------
+	 */
+
+	/**
+	 * Arrays --------------------------------
+	 */
+
+	/**
+	 * Booleans ------------------------------
+	 */
+
+	/**
+	 * Constructors ==========================
+	 */
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param context
+	 * @see com.wit.and.widget.adapter.BaseAdapter#BaseAdapter(android.content.Context)
+	 */
+	public BaseCursorMultiAdapter(Context context) {
+		super(context);
+	}
+
+	/**
+	 * Methods ===============================
+	 */
+
+	/**
+	 * Public --------------------------------
+	 */
+
+	/**
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public void addModule(AdapterModule<Adapter> module, int moduleID) {
+		module.dispatchAttachToAdapter((Adapter) this);
+		MODULES_MANAGER.addModule(module, moduleID);
+	}
+
+	/**
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public <M> M getModule(int moduleID) {
+		return (M) MODULES_MANAGER.getModule(moduleID);
+	}
+
+	/**
+	 */
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		MODULES_MANAGER.dispatchOnSaveState(outState);
+	}
+
+	/**
+	 */
+	@Override
+	public void onRestoreInstanceState(Bundle savedState) {
+		super.onRestoreInstanceState(savedState);
+		MODULES_MANAGER.dispatchOnRestoreState(savedState);
+	}
+
+	/**
+	 * Getters + Setters ---------------------
+	 */
+
+	/**
+	 * Protected -----------------------------
+	 */
+
+	/**
+	 * Private -------------------------------
+	 */
+
+	/**
+	 * Abstract methods ----------------------
+	 */
+
+	/**
+	 * Inner classes =========================
+	 */
+
+	/**
+	 * Interface =============================
+	 */
+}

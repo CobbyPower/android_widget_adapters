@@ -21,43 +21,34 @@
 package com.wit.and.widget.adapter.internal.module;
 
 /**
- * <p>
- * public interface
- * </p>
- * <h5>ISelectable</h5>
- * 
  * <h4>Interface Overview</h4>
  * <p>
  * Simple interface for selectable objects. This can be used for list view items
  * for example.
  * </p>
- * 
+ *
  * @author Martin Albedinsky
  */
 public interface ISelectable {
+
 	/**
 	 * Methods ===============================
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>public void setSelected(boolean selected)</i></h5>
 	 * <p>
 	 * Changes the selection state of this object.
 	 * </p>
-	 * 
-	 * @param selected
-	 *            True if the object must be selected otherwise false.
+	 *
+	 * @param selected True if the object must be selected otherwise false.
 	 */
 	public void setSelected(boolean selected);
 
 	/**
-	 * <br/>
-	 * <h5><i>public boolean isSelected()</i></h5>
 	 * <p>
 	 * Checks the selection state of this object.
 	 * </p>
-	 * 
+	 *
 	 * @return True if this object is selected otherwise false.
 	 */
 	public boolean isSelected();

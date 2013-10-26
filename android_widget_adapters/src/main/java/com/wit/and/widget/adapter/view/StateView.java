@@ -28,25 +28,20 @@ import com.wit.and.widget.adapter.internal.view.IStateView;
 import com.wit.and.widget.adapter.widget.StateRelativeLayout;
 
 /**
- * <p>
- * public class
- * </p>
- * <h5>StateView</h5>
- * <p>
- * extends {@link View}<br/>
- * implements {@link IStateView}
- * </p>
  * <h4>Class Overview</h4>
  * <p>
- * Updated <code>View</code> to handle custom handling of the states in the list
+ * Updated {@link View} to handle custom management of the states in the adapter
  * view (especially when the ListView or GridView should provide multiple
- * selection mode). This can be also used as a dialog view in your xml layouts.
+ * selection mode).
+ * </p>
+ * <p>
  * See also {@link com.wit.and.widget.adapter.widget.StateLinearLayout} and {@link StateRelativeLayout} which
  * provides this functionality too.
  * </p>
- * 
+ *
  * @see View
  * @see IStateView
+ *
  * @author Martin Albedinsky
  */
 public class StateView extends View implements IStateView {
@@ -55,28 +50,28 @@ public class StateView extends View implements IStateView {
 	 * Constants =============================
 	 */
 
-    /**
-     * Log TAG.
-     */
-    // private static final String TAG = StateView.class.getSimpleName();
+	/**
+	 * Log TAG.
+	 */
+	// private static final String TAG = StateView.class.getSimpleName();
 
-    /**
-     * Indicates if debug private output trough log-cat is enabled.
-     */
-    // private static final boolean DEBUG = true;
+	/**
+	 * Indicates if debug private output trough log-cat is enabled.
+	 */
+	// private static final boolean DEBUG = true;
 
-    /**
-     * Indicates if logging for user output trough log-cat is enabled.
-     */
-    // private static final boolean USER_LOG = true;
+	/**
+	 * Indicates if logging for user output trough log-cat is enabled.
+	 */
+	// private static final boolean USER_LOG = true;
 
 	/**
 	 * Enums =================================
 	 */
 
-    /**
-     * Static members ========================
-     */
+	/**
+	 * Static members ========================
+	 */
 
 	/**
 	 * Members ===============================
@@ -114,23 +109,18 @@ public class StateView extends View implements IStateView {
 	 * <p>
 	 * Constructor #1.
 	 * </p>
-	 * 
-	 * @param context
-	 *            The actual application context.
+	 *
+	 * @param context The actual application context.
 	 */
 	public StateView(Context context) {
 		super(context);
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i></i></h5>
 	 * <p>
-	 * Constructor #2.
 	 * </p>
-	 * 
-	 * @param context
-	 *            The actual application context.
+	 *
+	 * @param context The actual application context.
 	 * @param attrs
 	 */
 	public StateView(Context context, AttributeSet attrs) {
@@ -138,14 +128,10 @@ public class StateView extends View implements IStateView {
 	}
 
 	/**
-	 * <br/>
-	 * <h5><i></i></h5>
 	 * <p>
-	 * Constructor #3.
 	 * </p>
-	 * 
-	 * @param context
-	 *            The actual application context.
+	 *
+	 * @param context  The actual application context.
 	 * @param attrs
 	 * @param defStyle
 	 */
@@ -166,7 +152,7 @@ public class StateView extends View implements IStateView {
 	 */
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void setSelected(boolean selected) {
@@ -183,7 +169,7 @@ public class StateView extends View implements IStateView {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void setSelected(boolean selected, boolean override) {
@@ -191,7 +177,7 @@ public class StateView extends View implements IStateView {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void setHandleDefaultStates(boolean handle) {
@@ -199,7 +185,7 @@ public class StateView extends View implements IStateView {
 	}
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public boolean handleDefaultStates() {
@@ -207,8 +193,8 @@ public class StateView extends View implements IStateView {
 	}
 
 	/**
-	 * 
- 	*/
+	 *
+	 */
 	@Override
 	public void setOnVisibilityListener(OnStateViewVisibilityListener listener) {
 		iVisibilityListener = listener;
@@ -219,7 +205,7 @@ public class StateView extends View implements IStateView {
 	 */
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	protected void onVisibilityChanged(View changedView, int visibility) {
@@ -248,20 +234,12 @@ public class StateView extends View implements IStateView {
 	 */
 
 	/**
-	 * <p>
-	 * public static interface
-	 * </p>
-	 * <h5>OnStateViewVisibilityListener</h5>
-	 * <p>
-	 * 
-	 * </p>
 	 * <h4>Interface Overview</h4>
 	 * <p>
 	 * Interface to handle callback when the state view visibility was changed.
 	 * </p>
-	 * 
+	 *
 	 * @author Martin Albedinsky
-	 * 
 	 */
 	public static interface OnStateViewVisibilityListener {
 
@@ -278,11 +256,9 @@ public class StateView extends View implements IStateView {
 		 * <code>onVisibilityChanged()</code> description) visibility was
 		 * changed.
 		 * </p>
-		 * 
-		 * @param stateView
-		 *            This isn't necessary the <code>IStateView</code> child.
-		 * @param visibility
-		 *            Actual visibility of the passed view.
+		 *
+		 * @param stateView  This isn't necessary the <code>IStateView</code> child.
+		 * @param visibility Actual visibility of the passed view.
 		 */
 		public void onVisibilityChanged(View stateView, int visibility);
 	}

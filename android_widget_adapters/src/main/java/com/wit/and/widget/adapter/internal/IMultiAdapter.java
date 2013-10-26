@@ -25,34 +25,25 @@ import android.os.Bundle;
 import com.wit.and.widget.adapter.module.AdapterModule;
 
 /**
+ * <h4>Interface Overview</h4>
  * <p>
- * public interface
- * </p>
- * <h5>IMultiAdapter</h5>
- * <p>
- * 
- * </p>
- * <h4>Intervace Overview</h4>
- * <p>
- * Required interface for selection adapter.
+ * Required interface for multi-module adapter.
  * </p>
  * 
  * @param <Adapter>
- *            Type of the adapter.
- * 
+ *            Type of the multi-module adapter.
+ *
+ * @see com.wit.and.widget.adapter.BaseMultiAdapter
+ *
  * @author Martin Albedinsky
- * 
- * @see com.wit.and.widget.adapter.OptMultiAdapter
  */
-public interface IMultiAdapter<Adapter extends BaseAdapter> {
+public interface IMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> {
 
 	/**
 	 * Methods ===============================
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i>public void onSaveInstanceState(Bundle outState)</i></h5>
 	 * <p>
 	 * Invoked to handle saving of the adapter state.
 	 * </p>
@@ -63,8 +54,6 @@ public interface IMultiAdapter<Adapter extends BaseAdapter> {
 	public void onSaveInstanceState(Bundle outState);
 
 	/**
-	 * <br/>
-	 * <h5><i>public void onRestoreInstanceState(Bundle savedInstanceState)</i></h5>
 	 * <p>
 	 * Invoked to handle restoring of the adapter state.
 	 * </p>
@@ -75,9 +64,6 @@ public interface IMultiAdapter<Adapter extends BaseAdapter> {
 	public void onRestoreInstanceState(Bundle savedInstanceState);
 
 	/**
-	 * <br/>
-	 * <h5><i>public void addModule(AdapterModule&lt;A&gt; module, int
-	 * moduleID)</i></h5>
 	 * <p>
 	 * Adds the {@link AdapterModule} into this adapter.
 	 * </p>
@@ -90,8 +76,6 @@ public interface IMultiAdapter<Adapter extends BaseAdapter> {
 	public void addModule(AdapterModule<Adapter> module, int moduleID);
 
 	/**
-	 * <br/>
-	 * <h5><i>public <M> M getModule(int moduleID)</i></h5>
 	 * <p>
 	 * Returns the {@link AdapterModule} of this adapter.
 	 * </p>
