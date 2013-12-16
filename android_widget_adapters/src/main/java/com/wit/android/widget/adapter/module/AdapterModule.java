@@ -125,7 +125,7 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 * @param adapter
 	 */
 	public final void dispatchAttachToAdapter(Adapter adapter) {
-		mAdapter = adapter;
+		this.mAdapter = adapter;
 		onAttachToAdapter(adapter);
 	}
 

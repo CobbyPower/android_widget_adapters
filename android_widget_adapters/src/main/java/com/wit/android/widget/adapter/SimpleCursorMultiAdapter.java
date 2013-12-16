@@ -37,7 +37,7 @@ import com.wit.android.widget.adapter.module.AdapterModule;
  *
  * @author Martin Albedinsky
  */
-public abstract class BaseCursorMultiAdapter<C extends Cursor, Adapter extends AdapterModule.ModuleAdapter> extends BaseCursorAdapter<C> implements IMultiAdapter<Adapter> {
+public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends AdapterModule.ModuleAdapter> extends SimpleCursorAdapter<C> implements IMultiAdapter<Adapter> {
 
 	/**
 	 * Constants =============================
@@ -98,7 +98,7 @@ public abstract class BaseCursorMultiAdapter<C extends Cursor, Adapter extends A
 	 * @param context
 	 * @see com.wit.android.widget.adapter.BaseAdapter#BaseAdapter(android.content.Context)
 	 */
-	public BaseCursorMultiAdapter(Context context) {
+	public SimpleCursorMultiAdapter(Context context) {
 		super(context);
 	}
 

@@ -32,7 +32,7 @@ import android.database.Cursor;
  *
  * @author Martin Albedinsky
  */
-public abstract class BaseCursorAdapter<C extends Cursor> extends BaseAdapter {
+public abstract class SimpleCursorAdapter<C extends Cursor> extends BaseAdapter {
 
 	/**
 	 * Constants =============================
@@ -41,7 +41,7 @@ public abstract class BaseCursorAdapter<C extends Cursor> extends BaseAdapter {
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = BaseCursorAdapter.class.getSimpleName();
+	private static final String TAG = SimpleCursorAdapter.class.getSimpleName();
 
 	/**
 	 * Indicates if debug private output trough log-cat is enabled.
@@ -93,7 +93,7 @@ public abstract class BaseCursorAdapter<C extends Cursor> extends BaseAdapter {
 	 * @param context
 	 * @see BaseAdapter#BaseAdapter(Context)
 	 */
-	public BaseCursorAdapter(Context context) {
+	public SimpleCursorAdapter(Context context) {
 		this(context, null);
 	}
 
@@ -105,7 +105,7 @@ public abstract class BaseCursorAdapter<C extends Cursor> extends BaseAdapter {
 	 * @param cursor
 	 * @see BaseAdapter#BaseAdapter(Context)
 	 */
-	public BaseCursorAdapter(Context context, C cursor) {
+	public SimpleCursorAdapter(Context context, C cursor) {
 		super(context);
 		this.mCursor = cursor;
 	}

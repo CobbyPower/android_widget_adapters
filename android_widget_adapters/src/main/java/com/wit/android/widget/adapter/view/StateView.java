@@ -163,7 +163,7 @@ public class StateView extends View implements IStateView {
 		 * method implemented below is override for this to handle custom
 		 * selecting of the view.
 		 */
-		if (this.bHandleDefaultStates) {
+		if (handleDefaultStates()) {
 			super.setSelected(selected);
 		}
 	}

@@ -568,7 +568,7 @@ public class SelectionModule<Item extends SelectableItem, Adapter extends Select
 	 * Note that the {@link #getSelectableItem(int)} method doesn't require to be implemented
 	 * to be selection module functional, because with or without this implementation will
 	 * be items selected according to theirs position in the adapter. So if you have for
-	 * example implementation of {@link com.wit.android.widget.adapter.BaseCursorAdapter}, than you
+	 * example implementation of {@link com.wit.android.widget.adapter.SimpleCursorAdapter}, than you
 	 * have all your items provided by that adapter stored in <code>Cursor</code> which can't
 	 * extends {@link com.wit.android.widget.adapter.model.SelectableItem} so you just return
 	 * in the {@link #hasSelectableItems()} method <code>false</code> and you can check for
