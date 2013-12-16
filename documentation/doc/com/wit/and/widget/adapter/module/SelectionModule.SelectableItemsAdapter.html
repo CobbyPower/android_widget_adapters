@@ -36,7 +36,7 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html" title="class in com.wit.and.widget.adapter.module"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html" title="class in com.wit.android.widget.adapter.module"><span class="strong">Prev Class</span></a></li>
 <li>Next Class</li>
 </ul>
 <ul class="navList">
@@ -79,8 +79,8 @@
 <!-- ========= END OF TOP NAVBAR ========= -->
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
-<div class="subTitle">com.wit.and.widget.adapter.module</div>
-<h2 title="Interface SelectionModule.SelectableItemsAdapter" class="title">Interface SelectionModule.SelectableItemsAdapter&lt;Item extends <a href="../../../../../../com/wit/and/widget/adapter/model/SelectableItem.html" title="class in com.wit.and.widget.adapter.model">SelectableItem</a>&gt;</h2>
+<div class="subTitle">com.wit.android.widget.adapter.module</div>
+<h2 title="Interface SelectionModule.SelectableItemsAdapter" class="title">Interface SelectionModule.SelectableItemsAdapter&lt;Item extends <a href="../../../../../../com/wit/and/widget/adapter/model/SelectableItem.html" title="class in com.wit.android.widget.adapter.model">SelectableItem</a>&gt;</h2>
 </div>
 <div class="contentContainer">
 <div class="description">
@@ -89,37 +89,37 @@
 <dl><dt><span class="strong">Type Parameters:</span></dt><dd><code>Item</code> - The select-able item type.</dd></dl>
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../../../com/wit/and/widget/adapter/module/AdapterModule.ModuleAdapter.html" title="interface in com.wit.and.widget.adapter.module">AdapterModule.ModuleAdapter</a></dd>
+<dd><a href="../../../../../../com/wit/and/widget/adapter/module/AdapterModule.ModuleAdapter.html" title="interface in com.wit.android.widget.adapter.module">AdapterModule.ModuleAdapter</a></dd>
 </dl>
 <dl>
 <dt>Enclosing class:</dt>
-<dd><a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html" title="class in com.wit.and.widget.adapter.module">SelectionModule</a>&lt;<a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html" title="type parameter in SelectionModule">Item</a> extends <a href="../../../../../../com/wit/and/widget/adapter/model/SelectableItem.html" title="class in com.wit.and.widget.adapter.model">SelectableItem</a>,<a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html" title="type parameter in SelectionModule">Adapter</a> extends <a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.SelectableItemsAdapter.html" title="interface in com.wit.and.widget.adapter.module">SelectionModule.SelectableItemsAdapter</a>&lt;<a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html" title="type parameter in SelectionModule">Item</a>&gt;&gt;</dd>
+<dd><a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html" title="class in com.wit.android.widget.adapter.module">SelectionModule</a>&lt;<a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html" title="type parameter in SelectionModule">Item</a> extends <a href="../../../../../../com/wit/and/widget/adapter/model/SelectableItem.html" title="class in com.wit.android.widget.adapter.model">SelectableItem</a>,<a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html" title="type parameter in SelectionModule">Adapter</a> extends <a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.SelectableItemsAdapter.html" title="interface in com.wit.android.widget.adapter.module">SelectionModule.SelectableItemsAdapter</a>&lt;<a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html" title="type parameter in SelectionModule">Item</a>&gt;&gt;</dd>
 </dl>
 <hr>
 <br>
-<pre>public static interface <span class="strong">SelectionModule.SelectableItemsAdapter&lt;Item extends <a href="../../../../../../com/wit/and/widget/adapter/model/SelectableItem.html" title="class in com.wit.and.widget.adapter.model">SelectableItem</a>&gt;</span>
-extends <a href="../../../../../../com/wit/and/widget/adapter/module/AdapterModule.ModuleAdapter.html" title="interface in com.wit.and.widget.adapter.module">AdapterModule.ModuleAdapter</a></pre>
+<pre>public static interface <span class="strong">SelectionModule.SelectableItemsAdapter&lt;Item extends <a href="../../../../../../com/wit/and/widget/adapter/model/SelectableItem.html" title="class in com.wit.android.widget.adapter.model">SelectableItem</a>&gt;</span>
+extends <a href="../../../../../../com/wit/and/widget/adapter/module/AdapterModule.ModuleAdapter.html" title="interface in com.wit.android.widget.adapter.module">AdapterModule.ModuleAdapter</a></pre>
 <div class="block"><h4>Interface Overview</h4>
  <p>
  Base required interface for adapter with selectable items which is using the
- <a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html" title="class in com.wit.and.widget.adapter.module"><code>SelectionModule</code></a> to provide management
+ <a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html" title="class in com.wit.android.widget.adapter.module"><code>SelectionModule</code></a> to provide management
  with its selectable items.
  </p>
  <p>
  Note that the <a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.SelectableItemsAdapter.html#getSelectableItem(int)"><code>getSelectableItem(int)</code></a> method doesn't require to be implemented
  to be selection module functional, because with or without this implementation will
  be items selected according to theirs position in the adapter. So if you have for
- example implementation of <a href="../../../../../../com/wit/and/widget/adapter/BaseCursorAdapter.html" title="class in com.wit.and.widget.adapter"><code>BaseCursorAdapter</code></a>, than you
+ example implementation of <a href="../../../../../../com/wit/and/widget/adapter/BaseCursorAdapter.html" title="class in com.wit.android.widget.adapter"><code>BaseCursorAdapter</code></a>, than you
  have all your items provided by that adapter stored in <code>Cursor</code> which can't
- extends <a href="../../../../../../com/wit/and/widget/adapter/model/SelectableItem.html" title="class in com.wit.and.widget.adapter.model"><code>SelectableItem</code></a> so you just return
+ extends <a href="../../../../../../com/wit/and/widget/adapter/model/SelectableItem.html" title="class in com.wit.android.widget.adapter.model"><code>SelectableItem</code></a> so you just return
  in the <a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.SelectableItemsAdapter.html#hasSelectableItems()"><code>hasSelectableItems()</code></a> method <code>false</code> and you can check for
  selected item by calling <a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html#isSelected(int)"><code>SelectionModule.isSelected(int)</code></a>
  method on your selection module of that adapter.
  </p></div>
 <dl><dt><span class="strong">Author:</span></dt>
   <dd>Martin Albedinsky</dd>
-<dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../com/wit/and/widget/adapter/model/SelectableItem.html" title="class in com.wit.and.widget.adapter.model"><code>SelectableItem</code></a>, 
-<a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html" title="class in com.wit.and.widget.adapter.module"><code>SelectionModule</code></a></dd></dl>
+<dt><span class="strong">See Also:</span></dt><dd><a href="../../../../../../com/wit/and/widget/adapter/model/SelectableItem.html" title="class in com.wit.android.widget.adapter.model"><code>SelectableItem</code></a>,
+<a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html" title="class in com.wit.android.widget.adapter.module"><code>SelectionModule</code></a></dd></dl>
 </li>
 </ul>
 </div>
@@ -155,10 +155,10 @@ extends <a href="../../../../../../com/wit/and/widget/adapter/module/AdapterModu
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="methods_inherited_from_class_com.wit.and.widget.adapter.module.AdapterModule.ModuleAdapter">
+<li class="blockList"><a name="methods_inherited_from_class_com.wit.android.widget.adapter.module.AdapterModule.ModuleAdapter">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;com.wit.and.widget.adapter.module.<a href="../../../../../../com/wit/and/widget/adapter/module/AdapterModule.ModuleAdapter.html" title="interface in com.wit.and.widget.adapter.module">AdapterModule.ModuleAdapter</a></h3>
+<h3>Methods inherited from interface&nbsp;com.wit.and.widget.adapter.module.<a href="../../../../../../com/wit/and/widget/adapter/module/AdapterModule.ModuleAdapter.html" title="interface in com.wit.android.widget.adapter.module">AdapterModule.ModuleAdapter</a></h3>
 <code><a href="../../../../../../com/wit/and/widget/adapter/module/AdapterModule.ModuleAdapter.html#getCount()">getCount</a>, <a href="../../../../../../com/wit/and/widget/adapter/module/AdapterModule.ModuleAdapter.html#notifyDataSetChanged()">notifyDataSetChanged</a></code></li>
 </ul>
 </li>
@@ -230,7 +230,7 @@ extends <a href="../../../../../../com/wit/and/widget/adapter/module/AdapterModu
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html" title="class in com.wit.and.widget.adapter.module"><span class="strong">Prev Class</span></a></li>
+<li><a href="../../../../../../com/wit/and/widget/adapter/module/SelectionModule.html" title="class in com.wit.android.widget.adapter.module"><span class="strong">Prev Class</span></a></li>
 <li>Next Class</li>
 </ul>
 <ul class="navList">
