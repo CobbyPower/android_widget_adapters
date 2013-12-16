@@ -6,3 +6,5 @@ Android Widget Adapters (Examples)
 ===============
 
 This simple examples project shows how to use the source code provided in this repository.
+
+**COMING SOON**
