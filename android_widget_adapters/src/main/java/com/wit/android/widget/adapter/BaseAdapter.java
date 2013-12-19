@@ -96,7 +96,7 @@ public abstract class BaseAdapter extends BaseWidgetAdapter implements AdapterOp
      * See {@link com.wit.android.widget.adapter.internal.BaseWidgetAdapter#BaseWidgetAdapter(Context)}.
      * </p>
      *
-     * @param context Context in which is being adapter created.
+     * @param context Context in which will be this adapter used.
      */
     public BaseAdapter(Context context) {
         super(context);

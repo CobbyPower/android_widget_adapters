@@ -21,7 +21,7 @@
  * =================================================================================
  */
 -->
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-          style="@style/App.ListItem.Widget.Label.Single"
+<com.wit.android.widget.adapter.widget.StateTextView xmlns:android="http://schemas.android.com/apk/res/android"
+          style="@style/Ex.App.ListItem.Widget.Label.Single"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"/>

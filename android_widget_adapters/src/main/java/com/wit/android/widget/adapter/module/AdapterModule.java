@@ -105,7 +105,9 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 * @param outState
 	 */
 	public void dispatchSaveInstanceState(Bundle outState) {
-		onSaveInstanceState(outState);
+		if (outState != null) {
+			onSaveInstanceState(outState);
+		}
 	}
 
 	/**
@@ -115,7 +117,9 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 * @param savedState
 	 */
 	public void dispatchRestoreInstanceState(Bundle savedState) {
-		onRestoreInstanceState(savedState);
+		if (savedState != null) {
+			onRestoreInstanceState(savedState);
+		}
 	}
 
 	/**
@@ -162,7 +166,7 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 * Invoked to save state of this module.
 	 * </p>
 	 *
-	 * @param outState Outgoing bundle state.
+	 * @param outState Outgoing bundle state. Always valid bundle.
 	 */
 	protected void onSaveInstanceState(Bundle outState) {
 	}
@@ -172,7 +176,7 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 * Invoked to restore saved state of this module.
 	 * </p>
 	 *
-	 * @param savedState Saved adapter state.
+	 * @param savedState Saved adapter state. Always valid bundle.
 	 */
 	protected void onRestoreInstanceState(Bundle savedState) {
 	}

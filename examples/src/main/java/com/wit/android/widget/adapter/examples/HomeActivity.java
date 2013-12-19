@@ -26,7 +26,7 @@ import com.wit.android.examples.app.ExHomeActivity;
 import com.wit.android.examples.model.navigation.NavigationHeader;
 import com.wit.android.examples.model.navigation.NavigationItem;
 import com.wit.android.examples.model.navigation.NavigationLabel;
-import com.wit.android.widget.adapter.examples.fragment.FragmentsFactory;
+import com.wit.android.widget.adapter.examples.fragment.factory.FragmentsFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,10 +55,12 @@ public class HomeActivity extends ExHomeActivity {
 	protected List<NavigationItem> onCreateNavigationItems() {
 		final List<NavigationItem> items = new ArrayList<NavigationItem>();
 		items.add(new NavigationHeader(getString(R.string.Navigation_Header_Examples)));
-		items.add(new NavigationLabel(getString(R.string.Navigation_Label_BaseAdapter), FragmentsFactory.FRAGMENT_BASE_ADAPTER));
-		items.add(new NavigationLabel(getString(R.string.Navigation_Label_SelectionModule), FragmentsFactory.FRAGMENT_SELECTION_MODULE));
-		items.add(new NavigationLabel(getString(R.string.Navigation_Label_HeadersModule), FragmentsFactory.FRAGMENT_HEADERS_MODULE));
-		items.add(new NavigationLabel(getString(R.string.Navigation_Label_SelectionAndHeadersModule), FragmentsFactory.FRAGMENT_SELECTION_AND_HEADERS_MODULE));
+		items.add(this.createItem(R.string.Navigation_Label_SimpleAdapter, FragmentsFactory.FRAGMENT_SIMPLE_ADAPTER));
+		items.add(this.createItem(R.string.Navigation_Label_SelectionAdapter_Simple, FragmentsFactory.FRAGMENT_SELECTION_SIMPLE_ADAPTER));
+		items.add(this.createItem(R.string.Navigation_Label_SelectionAdapter_Check, FragmentsFactory.FRAGMENT_SELECTION_CHECK_ADAPTER));
+		items.add(this.createItem(R.string.Navigation_Label_HeadersAdapter_Alphabetic, FragmentsFactory.FRAGMENT_HEADERS_ALPHABETIC_ADAPTER));
+		items.add(this.createItem(R.string.Navigation_Label_HeadersAdapter_Groups, FragmentsFactory.FRAGMENT_HEADERS_GROUPS_ADAPTER));
+		items.add(this.createItem(R.string.Navigation_Label_SelectionAndHeadersAdapter, FragmentsFactory.FRAGMENT_SELECTION_AND_HEADERS_ADAPTER));
 		return items;
 	}
 
@@ -71,5 +73,9 @@ public class HomeActivity extends ExHomeActivity {
 			}
 		});
 		return true;
+	}
+
+	private NavigationLabel createItem(int textRes, int fragmentID) {
+		return new NavigationLabel(getString(textRes), fragmentID);
 	}
 }

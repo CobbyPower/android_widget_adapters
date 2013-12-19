@@ -25,7 +25,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.wit.android.examples.app.fragment.ExListFragment;
-import com.wit.android.widget.adapter.examples.adapter.BaseAdapterImpl;
+import com.wit.android.widget.adapter.examples.adapter.HeadersGroupsAdapter;
 
 /**
  * <p>
@@ -34,25 +34,23 @@ import com.wit.android.widget.adapter.examples.adapter.BaseAdapterImpl;
  *
  * @author Martin Albedinsky
  */
-public class BaseAdapterFragment extends ExListFragment<BaseAdapterImpl> {
+public class HeadersGroupsAdapterFragment extends ExListFragment<HeadersGroupsAdapter> {
 
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = BaseAdapterFragment.class.getSimpleName();
+	private static final String TAG = HeadersGroupsAdapterFragment.class.getSimpleName();
 
-	public static BaseAdapterFragment newInstance() {
-		return new BaseAdapterFragment();
+	public static HeadersGroupsAdapterFragment newInstance() {
+		return new HeadersGroupsAdapterFragment();
 	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		setAdapter(new BaseAdapterImpl(getActivity()));
+		setAdapter(new HeadersGroupsAdapter(getActivity()));
 	}
 
 	@Override
-	protected void onListItemClick(ListView listView, int i, long l) {
-
-	}
+	protected void onListItemClick(ListView listView, int i, long l) {}
 }

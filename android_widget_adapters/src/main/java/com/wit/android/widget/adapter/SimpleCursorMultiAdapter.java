@@ -132,7 +132,7 @@ public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		MODULES_MANAGER.dispatchOnSaveState(outState);
+		MODULES_MANAGER.dispatchSaveState(outState);
 	}
 
 	/**
@@ -140,7 +140,7 @@ public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends
 	@Override
 	public void onRestoreInstanceState(Bundle savedState) {
 		super.onRestoreInstanceState(savedState);
-		MODULES_MANAGER.dispatchOnRestoreState(savedState);
+		MODULES_MANAGER.dispatchRestoreState(savedState);
 	}
 
 	/**

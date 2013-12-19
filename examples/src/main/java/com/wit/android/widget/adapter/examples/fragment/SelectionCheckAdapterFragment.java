@@ -18,38 +18,41 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.internal.module;
+package com.wit.android.widget.adapter.examples.fragment;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
+
+import com.wit.android.examples.app.fragment.ExListFragment;
+import com.wit.android.widget.adapter.examples.adapter.SelectionCheckAdapter;
 
 /**
- * <h4>Interface Overview</h4>
  * <p>
- * Simple interface for selectable objects. This can be used for list view items
- * for example.
+ * Description.
  * </p>
  *
  * @author Martin Albedinsky
  */
-public interface ISelectable {
+public class SelectionCheckAdapterFragment extends ExListFragment<SelectionCheckAdapter> {
 
 	/**
-	 * Methods ===============================
+	 * Log TAG.
 	 */
+	private static final String TAG = SelectionCheckAdapterFragment.class.getSimpleName();
 
-	/**
-	 * <p>
-	 * Changes the selection state of this object.
-	 * </p>
-	 *
-	 * @param selected True if the object must be selected otherwise false.
-	 */
-	public void setSelected(boolean selected);
+	public static SelectionCheckAdapterFragment newInstance() {
+		return new SelectionCheckAdapterFragment();
+	}
 
-	/**
-	 * <p>
-	 * Checks the selection state of this object.
-	 * </p>
-	 *
-	 * @return True if this object is selected otherwise false.
-	 */
-	public boolean isSelected();
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		setAdapter(new SelectionCheckAdapter(getActivity()));
+	}
+
+	@Override
+	protected void onListItemClick(ListView listView, int i, long l) {
+
+	}
 }

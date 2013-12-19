@@ -21,9 +21,8 @@
 package com.wit.android.widget.adapter.module;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseIntArray;
-
-import com.wit.android.widget.adapter.model.SelectableItem;
 
 /**
  * <h4>Class Overview</h4>
@@ -31,12 +30,11 @@ import com.wit.android.widget.adapter.model.SelectableItem;
  * Selection manager for the {@link com.wit.android.widget.adapter.internal.IMultiAdapter}.
  * </p>
  *
- * @param <Item>    The select-able item type.
  * @param <Adapter> Type of the adapter for which is this module created.
  *
  * @author Martin Albedinsky
  */
-public class SelectionModule<Item extends SelectableItem, Adapter extends SelectionModule.SelectableItemsAdapter<Item>> extends AdapterModule<Adapter> {
+public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extends AdapterModule<Adapter> {
 
 	/**
 	 * Constants =============================
@@ -45,7 +43,7 @@ public class SelectionModule<Item extends SelectableItem, Adapter extends Select
 	/**
 	 * Log TAG.
 	 */
-	// private static final String TAG = SelectionModule.class.getSimpleName();
+	private static final String TAG = SelectionModule.class.getSimpleName();
 
 	/**
 	 * Indicates if debug private output trough log-cat is enabled.
@@ -154,7 +152,6 @@ public class SelectionModule<Item extends SelectableItem, Adapter extends Select
 	 */
 	public void toggleItemSelectedState(int position) {
 		setItemSelected(position, !contains(position));
-		notifyAdapter();
 	}
 
 	/**
@@ -338,18 +335,6 @@ public class SelectionModule<Item extends SelectableItem, Adapter extends Select
 
 	/**
 	 * <p>
-	 * Returns the selected item at the given position.
-	 * </p>
-	 *
-	 * @return Item which is at this time selected or <code>null</code> if there
-	 * is no item selected at the given position.
-	 */
-	public Item getSelectedItem(int position) {
-		return getItem(position);
-	}
-
-	/**
-	 * <p>
 	 * </p>
 	 *
 	 * @return
@@ -415,7 +400,7 @@ public class SelectionModule<Item extends SelectableItem, Adapter extends Select
 	 * <code>false</code> otherwise.
 	 */
 	protected final boolean contains(int position) {
-		return aSelectedItems.get(position) != 0;
+		return aSelectedItems.indexOfKey(position) >= 0;
 	}
 
 	/**
@@ -428,15 +413,6 @@ public class SelectionModule<Item extends SelectableItem, Adapter extends Select
 	protected final void selectItem(int position) {
 		// Add into selected items.
 		aSelectedItems.append(position, position);
-
-		// Select also adapter item if is available.
-		if (hasAdapterSelectableItems()) {
-			Item item = getItem(position);
-			if (item != null) {
-				// Select item.
-				item.setSelected(true);
-			}
-		}
 	}
 
 	/**
@@ -448,31 +424,7 @@ public class SelectionModule<Item extends SelectableItem, Adapter extends Select
 	 */
 	protected final void deselectItem(int position) {
 		// Remove from selected items.
-		aSelectedItems.removeAt(position);
-
-		// Deselect also adapter item if is available.
-		if (hasAdapterSelectableItems()) {
-			Item item = getItem(position);
-			if (item != null && item.isSelected()) {
-				// Un-select item.
-				item.setSelected(false);
-			}
-		}
-	}
-
-	/**
-	 * <p>
-	 * Returns the select-able item at the requested position. Same as
-	 * {@link #getSelectedItem(int)}.
-	 * </p>
-	 *
-	 * @param position Position of the item.
-	 * @return Select-able item or <code>null</code> if there is no item at the
-	 * given position.
-	 */
-	@SuppressWarnings("unchecked")
-	protected final Item getItem(int position) {
-		return getAdapter().getSelectableItem(position);
+		aSelectedItems.removeAt(aSelectedItems.indexOfKey(position));
 	}
 
 	/**
@@ -485,17 +437,6 @@ public class SelectionModule<Item extends SelectableItem, Adapter extends Select
 	 *               data set change.
 	 */
 	protected void clearSelection(boolean notify) {
-		// Deselect adapter items if are available.
-		if (hasAdapterSelectableItems()) {
-			for (int i = 0; i < aSelectedItems.size(); i++) {
-				Item item = getItem(aSelectedItems.keyAt(i));
-				if (item != null) {
-					// Un-select item.
-					item.setSelected(false);
-				}
-			}
-		}
-
 		// Clear also selected items.
 		aSelectedItems.clear();
 		if (notify) {
@@ -536,16 +477,6 @@ public class SelectionModule<Item extends SelectableItem, Adapter extends Select
 	}
 
 	/**
-	 * Returns flag indicating, whether the attached adapter has selectable items
-	 * presented or not.
-	 *
-	 * @return <code>True</code> if adapter has selectable items, <code>false</code> otherwise.
-	 */
-	private boolean hasAdapterSelectableItems() {
-		return getAdapter().hasSelectableItems();
-	}
-
-	/**
 	 * Abstract methods ----------------------
 	 */
 
@@ -556,58 +487,4 @@ public class SelectionModule<Item extends SelectableItem, Adapter extends Select
 	/**
 	 * Interface =============================
 	 */
-
-	/**
-	 * <h4>Interface Overview</h4>
-	 * <p>
-	 * Base required interface for adapter with selectable items which is using the
-	 * {@link com.wit.android.widget.adapter.module.SelectionModule} to provide management
-	 * with its selectable items.
-	 * </p>
-	 * <p>
-	 * Note that the {@link #getSelectableItem(int)} method doesn't require to be implemented
-	 * to be selection module functional, because with or without this implementation will
-	 * be items selected according to theirs position in the adapter. So if you have for
-	 * example implementation of {@link com.wit.android.widget.adapter.SimpleCursorAdapter}, than you
-	 * have all your items provided by that adapter stored in <code>Cursor</code> which can't
-	 * extends {@link com.wit.android.widget.adapter.model.SelectableItem} so you just return
-	 * in the {@link #hasSelectableItems()} method <code>false</code> and you can check for
-	 * selected item by calling {@link com.wit.android.widget.adapter.module.SelectionModule#isSelected(int)}
-	 * method on your selection module of that adapter.
-	 * </p>
-	 *
-	 * @param <Item> The select-able item type.
-	 * @author Martin Albedinsky
-	 * @see com.wit.android.widget.adapter.model.SelectableItem
-	 * @see com.wit.android.widget.adapter.module.SelectionModule
-	 */
-	public static interface SelectableItemsAdapter<Item extends SelectableItem> extends ModuleAdapter {
-		/**
-		 * Methods ===============================
-		 */
-
-		/**
-		 * <p>
-		 * Returns selectable item for the requested position.
-		 * </p>
-		 *
-		 * @param position Position of the select-able item in the adapter.
-		 * @return Selectable item from adapter, or <code>null</code> if the given position
-		 * is out of items range or adapter doesn't have any selectable items presented.
-		 * @see #hasSelectableItems()
-		 */
-		public Item getSelectableItem(int position);
-
-		/**
-		 * <p>
-		 * Returns flag indicating, whether adapter has selectable items presented
-		 * (accessible by {@link #getSelectableItem(int)}) or not.
-		 * </p>
-		 *
-		 * @return <code>True</code> if adapter has selectable items presented, <code>false</code> otherwise.
-		 * @see #getSelectableItem(int)
-		 */
-		public boolean hasSelectableItems();
-	}
-
 }

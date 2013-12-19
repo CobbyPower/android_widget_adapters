@@ -18,50 +18,55 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.internal;
+package com.wit.android.widget.adapter.examples.adapter;
 
-import com.wit.android.widget.adapter.module.AdapterModule;
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.wit.android.widget.adapter.BaseMultiAdapter;
 
 /**
- * <h4>Interface Overview</h4>
  * <p>
- * Required interface for multi-module adapter.
+ * Description.
  * </p>
- * 
- * @param <Adapter>
- *            Type of the multi-module adapter.
- *
- * @see com.wit.android.widget.adapter.BaseMultiAdapter
  *
  * @author Martin Albedinsky
  */
-public interface IMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> {
+public class HeadersAlphabeticAdapter extends BaseMultiAdapter<HeadersAlphabeticAdapter> {
 
 	/**
-	 * Methods ===============================
+	 * Log TAG.
 	 */
+	private static final String TAG = HeadersAlphabeticAdapter.class.getSimpleName();
 
-	/**
-	 * <p>
-	 * Adds the {@link AdapterModule} into this adapter.
-	 * </p>
-	 * 
-	 * @param module
-	 *            Specific module.
-	 * @param moduleID
-	 *            Module id by which can be the module later obtained.
-	 */
-	public void addModule(AdapterModule<Adapter> module, int moduleID);
+	public HeadersAlphabeticAdapter(Context context) {
+		super(context);
+	}
 
-	/**
-	 * <p>
-	 * Returns the {@link AdapterModule} of this adapter.
-	 * </p>
-	 * 
-	 * @param moduleID
-	 *            Id of the module.
-	 * @return Specific adapter module or <code>null</code> if there is no
-	 *         module for the requested id. See {@link 
-	 */
-	public <M> M getModule(int moduleID);
+	@Override
+	public int getCount() {
+		return 0;
+	}
+
+	@Override
+	public Object getItem(int position) {
+		return null;
+	}
+
+	@Override
+	public View onCreateItemView(int position, LayoutInflater inflater, ViewGroup root) {
+		return null;
+	}
+
+	@Override
+	public void onBindItemView(int position, Object viewHolder) {
+
+	}
+
+	@Override
+	public Object onCreateItemViewHolder(int position, View itemView) {
+		return null;
+	}
 }

@@ -102,10 +102,9 @@ public class StateLinearLayout extends LinearLayout implements IStateView {
 
 	/**
 	 * <p>
-     * </p>
-     *
-     * @param context
-	 *            The actual application context.
+	 * </p>
+	 *
+	 * @param context Current context.
 	 */
 	public StateLinearLayout(Context context) {
 		super(context);
@@ -113,10 +112,9 @@ public class StateLinearLayout extends LinearLayout implements IStateView {
 
 	/**
 	 * <p>
-     * </p>
-     *
-     * @param context
-	 *            The actual application context.
+	 * </p>
+	 *
+	 * @param context Current context.
 	 * @param attrs
 	 */
 	public StateLinearLayout(Context context, AttributeSet attrs) {
@@ -142,12 +140,12 @@ public class StateLinearLayout extends LinearLayout implements IStateView {
 	public void setSelected(boolean selected) {
 		/**
 		 * We don't want to support this operation. The main reason is that when
-		 * the user select some item in the ListView this ListView reselects
+		 * the user selects some item in the AdapterView and that AdapterView re-selects
 		 * each item which is in the current time selected using this method. So
-		 * method implemented below is override for this to handle custom
-		 * selecting of the view.
+		 * method implemented below allows handle selection of this view from
+		 * adapter which doesn't touch other items in the AdapterView
 		 */
-		if (this.bHandleDefaultStates) {
+		if (bHandleDefaultStates) {
 			super.setSelected(selected);
 		}
 	}
@@ -155,7 +153,7 @@ public class StateLinearLayout extends LinearLayout implements IStateView {
 	/**
 	 */
 	@Override
-	public void setSelected(boolean selected, boolean override) {
+	public void setSelectionState(boolean selected) {
 		super.setSelected(selected);
 	}
 

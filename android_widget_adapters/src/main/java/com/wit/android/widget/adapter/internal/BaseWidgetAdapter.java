@@ -133,25 +133,26 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 
 	/**
 	 * <p>
-	 * Invoked from the parent context which being currently destroyed to save actual
-	 * adapter state.
 	 * </p>
 	 *
-	 * @param outState Outgoing state.
+	 * @param outState
 	 */
-	public void onSaveInstanceState(Bundle outState) {
+	public void dispatchSaveInstanceState(Bundle outState) {
+		if (outState != null) {
+			onSaveInstanceState(outState);
+		}
 	}
 
 	/**
 	 * <p>
-	 * Invoked from the parent context which was restored with previous saved
-	 * instance state to restore adapter state.
 	 * </p>
 	 *
-	 * @param savedState Bundle from parent context with saved data populated in
-	 *                   {@link #onSaveInstanceState(Bundle)}.
+	 * @param savedState
 	 */
-	public void onRestoreInstanceState(Bundle savedState) {
+	public void dispatchRestoreInstanceState(Bundle savedState) {
+		if (savedState != null) {
+			onRestoreInstanceState(savedState);
+		}
 	}
 
 	/**
@@ -213,6 +214,29 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 	 */
 	protected final View inflate(int resource) {
 		return mLayoutInflater.inflate(resource, null, false);
+	}
+
+	/**
+	 * <p>
+	 * Invoked from the parent context which being currently destroyed to save actual
+	 * adapter state.
+	 * </p>
+	 *
+	 * @param outState Outgoing state. Always valid bundle.
+	 */
+	protected void onSaveInstanceState(Bundle outState) {
+	}
+
+	/**
+	 * <p>
+	 * Invoked from the parent context which was restored with previous saved
+	 * instance state to restore adapter state.
+	 * </p>
+	 *
+	 * @param savedState Bundle from parent context with saved data populated in
+	 *                   {@link #onSaveInstanceState(Bundle)}. Always valid bundle.
+	 */
+	protected void onRestoreInstanceState(Bundle savedState) {
 	}
 
 	/**

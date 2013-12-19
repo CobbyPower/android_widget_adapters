@@ -33,10 +33,18 @@
     <!-- ## Navigation strings ## -->
     <eat-comment/>
     <string name="Navigation.Header.Examples">Examples</string>
-    <string name="Navigation.Label.BaseAdapter">Base Adapter</string>
-    <string name="Navigation.Label.SelectionModule">Selection Module</string>
-    <string name="Navigation.Label.HeadersModule">Headers Module</string>
-    <string name="Navigation.Label.SelectionAndHeadersModule">Selection &amp; Headers Module</string>
+    <string name="Navigation.Label.SimpleAdapter">Simple Adapter</string>
+    <string name="Navigation.Label.SimpleAdapter.Description">Description</string>
+    <string name="Navigation.Label.SelectionAdapter.Simple">Selection Adapter (simple)</string>
+    <string name="Navigation.Label.SelectionAdapter.Simple.Description">Description</string>
+    <string name="Navigation.Label.SelectionAdapter.Check">Selection Adapter (check)</string>
+    <string name="Navigation.Label.SelectionAdapter.Check.Description">Description</string>
+    <string name="Navigation.Label.HeadersAdapter.Alphabetic">Headers Adapter (alphabetic)</string>
+    <string name="Navigation.Label.HeadersAdapter.Alphabetic.Description">Description</string>
+    <string name="Navigation.Label.HeadersAdapter.Groups">Headers Adapter (groups)</string>
+    <string name="Navigation.Label.HeadersAdapter.Groups.Description">Description</string>
+    <string name="Navigation.Label.SelectionAndHeadersAdapter">Selection &amp; Headers Module</string>
+    <string name="Navigation.Label.SelectionAndHeadersAdapter.Description">Description</string>
 
     <!-- ## Adapters data ## -->
     <string-array name="Data.Models" parent="">

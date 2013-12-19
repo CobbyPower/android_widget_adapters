@@ -24,10 +24,11 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import com.wit.android.widget.adapter.BaseAdapter;
+import com.wit.android.widget.adapter.BaseMultiAdapter;
 import com.wit.android.widget.adapter.examples.R;
+import com.wit.android.widget.adapter.module.SelectionModule;
+import com.wit.android.widget.adapter.widget.StateTextView;
 
 /**
  * <p>
@@ -36,18 +37,31 @@ import com.wit.android.widget.adapter.examples.R;
  *
  * @author Martin Albedinsky
  */
-public class BaseAdapterImpl extends BaseAdapter {
+public class SelectionSimpleAdapter extends BaseMultiAdapter<SelectionSimpleAdapter> {
 
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = BaseAdapterImpl.class.getSimpleName();
+	private static final String TAG = SelectionSimpleAdapter.class.getSimpleName();
+
+	private final SelectionModule<SelectionSimpleAdapter> SELECTOR = new SelectionModule<SelectionSimpleAdapter>();
+	{
+		// Enable multi-selection mode.
+		SELECTOR.setMode(SelectionModule.MODE_MULTIPLE);
+	}
 
 	final String[] MODELS;
 
-	public BaseAdapterImpl(Context context) {
+	public SelectionSimpleAdapter(Context context) {
 		super(context);
 		MODELS = context.getResources().getStringArray(R.array.Data_Models);
+		// Adding module, attaches this adapter to it and also saving/restoring state can be handled
+		// when invoking onSaveInstanceState() onRestoreInstanceState() on this adapter form its context.
+		addModule(SELECTOR, 0);
+	}
+
+	public void toggleItemSelectedState(int position) {
+		SELECTOR.toggleItemSelectedState(position);
 	}
 
 	@Override
@@ -62,12 +76,14 @@ public class BaseAdapterImpl extends BaseAdapter {
 
 	@Override
 	public View onCreateItemView(int position, LayoutInflater inflater, ViewGroup root) {
-		return inflate(R.layout.listitem_base_adapter);
+		return inflate(R.layout.listitem_simple_adapter);
 	}
 
 	@Override
 	public void onBindItemView(int position, Object viewHolder) {
-		((ViewHolder) viewHolder).setText((String) getItem(position));
+		final ViewHolder holder = (ViewHolder) viewHolder;
+		holder.setText((String) getItem(position));
+		holder.setSelected(SELECTOR.isSelected(position));
 	}
 
 	@Override
@@ -77,14 +93,20 @@ public class BaseAdapterImpl extends BaseAdapter {
 
 	private class ViewHolder {
 
-		TextView mTextView;
+		StateTextView mTextView;
 
 		ViewHolder(View itemView) {
-			mTextView = (TextView) itemView;
+			mTextView = (StateTextView) itemView;
+			// This is very important. Without this false flag the selection will not be working.
+			mTextView.setHandleDefaultStates(false);
 		}
 
 		void setText(CharSequence text) {
 			mTextView.setText(text);
+		}
+
+		void setSelected(boolean selected) {
+			mTextView.setSelectionState(selected);
 		}
 	}
 }

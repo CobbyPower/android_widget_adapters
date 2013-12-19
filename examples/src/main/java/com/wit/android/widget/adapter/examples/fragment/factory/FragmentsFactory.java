@@ -18,13 +18,19 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.examples.fragment;
+package com.wit.android.widget.adapter.examples.fragment.factory;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.wit.android.examples.internal.app.fragment.ExFragmentController;
 import com.wit.android.examples.internal.app.fragment.ExFragmentFactory;
+import com.wit.android.widget.adapter.examples.fragment.HeadersAlphabeticAdapterFragment;
+import com.wit.android.widget.adapter.examples.fragment.HeadersGroupsAdapterFragment;
+import com.wit.android.widget.adapter.examples.fragment.SelectionAndHeadersAdapterFragment;
+import com.wit.android.widget.adapter.examples.fragment.SelectionCheckAdapterFragment;
+import com.wit.android.widget.adapter.examples.fragment.SelectionSimpleAdapterFragment;
+import com.wit.android.widget.adapter.examples.fragment.SimpleAdapterFragment;
 
 /**
  * <p>
@@ -35,10 +41,12 @@ import com.wit.android.examples.internal.app.fragment.ExFragmentFactory;
  */
 public class FragmentsFactory extends ExFragmentFactory {
 
-	public static final int FRAGMENT_BASE_ADAPTER = 0x01;
-	public static final int FRAGMENT_SELECTION_MODULE = 0x02;
-	public static final int FRAGMENT_HEADERS_MODULE = 0x03;
-	public static final int FRAGMENT_SELECTION_AND_HEADERS_MODULE = 0x04;
+	public static final int FRAGMENT_SIMPLE_ADAPTER = 0x01;
+	public static final int FRAGMENT_SELECTION_SIMPLE_ADAPTER = 0x02;
+	public static final int FRAGMENT_SELECTION_CHECK_ADAPTER = 0x03;
+	public static final int FRAGMENT_HEADERS_ALPHABETIC_ADAPTER = 0x04;
+	public static final int FRAGMENT_HEADERS_GROUPS_ADAPTER = 0x05;
+	public static final int FRAGMENT_SELECTION_AND_HEADERS_ADAPTER = 0x06;
 
 	/**
 	 * Log TAG.
@@ -49,17 +57,23 @@ public class FragmentsFactory extends ExFragmentFactory {
 	public Fragment createFragmentInstance(int fragmentID, Bundle bundle) {
 		Fragment fragment = null;
 		switch (fragmentID) {
-			case FRAGMENT_BASE_ADAPTER:
-				fragment = BaseAdapterFragment.newInstance();
+			case FRAGMENT_SIMPLE_ADAPTER:
+				fragment = SimpleAdapterFragment.newInstance();
 				break;
-			case FRAGMENT_SELECTION_MODULE:
-				fragment = BaseAdapterFragment.newInstance();
+			case FRAGMENT_SELECTION_SIMPLE_ADAPTER:
+				fragment = SelectionSimpleAdapterFragment.newInstance();
 				break;
-			case FRAGMENT_HEADERS_MODULE:
-				fragment = BaseAdapterFragment.newInstance();
+			case FRAGMENT_SELECTION_CHECK_ADAPTER:
+				fragment = SelectionCheckAdapterFragment.newInstance();
 				break;
-			case FRAGMENT_SELECTION_AND_HEADERS_MODULE:
-				fragment = BaseAdapterFragment.newInstance();
+			case FRAGMENT_HEADERS_ALPHABETIC_ADAPTER:
+				fragment = HeadersAlphabeticAdapterFragment.newInstance();
+				break;
+			case FRAGMENT_HEADERS_GROUPS_ADAPTER:
+				fragment = HeadersGroupsAdapterFragment.newInstance();
+				break;
+			case FRAGMENT_SELECTION_AND_HEADERS_ADAPTER:
+				fragment = SelectionAndHeadersAdapterFragment.newInstance();
 				break;
 		}
 		return fragment;

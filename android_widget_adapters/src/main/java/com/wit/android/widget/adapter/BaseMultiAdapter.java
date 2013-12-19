@@ -36,7 +36,7 @@ import com.wit.android.widget.adapter.module.AdapterModule;
  *
  * @author Martin Albedinsky
  */
-public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> extends BaseAdapter implements IMultiAdapter<Adapter> {
+public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> extends BaseAdapter implements IMultiAdapter<Adapter>, AdapterModule.ModuleAdapter {
 	/**
 	 * Constants =============================
 	 */
@@ -126,28 +126,28 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	}
 
 	/**
-	 */
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		MODULES_MANAGER.dispatchOnSaveState(outState);
-	}
-
-	/**
-	 */
-	@Override
-	public void onRestoreInstanceState(Bundle savedState) {
-		super.onRestoreInstanceState(savedState);
-		MODULES_MANAGER.dispatchOnRestoreState(savedState);
-	}
-
-	/**
 	 * Getters + Setters ---------------------
 	 */
 
 	/**
 	 * Protected -----------------------------
 	 */
+
+	/**
+	 */
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		MODULES_MANAGER.dispatchSaveState(outState);
+	}
+
+	/**
+	 */
+	@Override
+	protected void onRestoreInstanceState(Bundle savedState) {
+		super.onRestoreInstanceState(savedState);
+		MODULES_MANAGER.dispatchRestoreState(savedState);
+	}
 
 	/**
 	 * Private -------------------------------
@@ -200,7 +200,7 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		 * @param module
 		 * @param moduleID
 		 */
-		void addModule(AdapterModule<Adapter> module, int moduleID) {
+		protected void addModule(AdapterModule<Adapter> module, int moduleID) {
 			aModules.append(moduleID, module);
 		}
 
@@ -211,7 +211,7 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		 * @param moduleID
 		 * @return
 		 */
-		AdapterModule<Adapter> getModule(int moduleID) {
+		protected AdapterModule<Adapter> getModule(int moduleID) {
 			return aModules.get(moduleID);
 		}
 
@@ -221,7 +221,7 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		 *
 		 * @param outState
 		 */
-		void dispatchOnSaveState(Bundle outState) {
+		protected void dispatchSaveState(Bundle outState) {
 			for (int i = 0; i < aModules.size(); i++) {
 				aModules.get(aModules.keyAt(i)).dispatchSaveInstanceState(outState);
 			}
@@ -233,7 +233,7 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		 *
 		 * @param savedState
 		 */
-		void dispatchOnRestoreState(Bundle savedState) {
+		protected void dispatchRestoreState(Bundle savedState) {
 			for (int i = 0; i < aModules.size(); i++) {
 				aModules.get(aModules.keyAt(i)).dispatchRestoreInstanceState(savedState);
 			}

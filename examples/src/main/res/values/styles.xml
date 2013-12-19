@@ -26,33 +26,4 @@
     <!-- ###### EXAMPLES STYLES ###### -->
     <eat-comment/>
 
-    <!-- ## List item styles ## -->
-    <eat-comment/>
-    <style name="App.ListItem" parent="">
-        <item name="android:paddingLeft">10dip</item>
-        <item name="android:paddingTop">15dip</item>
-        <item name="android:paddingRight">10dip</item>
-        <item name="android:paddingBottom">15dip</item>
-    </style>
-
-    <style name="App.ListItem.Widget.Header" parent="Ex.App.Widget.TextView">
-
-    </style>
-
-    <style name="App.ListItem.Widget.Label" parent="Ex.App.Widget.TextView">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-
-    <style name="App.ListItem.Widget.Label.Single">
-        <item name="android:paddingLeft">10dip</item>
-        <item name="android:paddingTop">15dip</item>
-        <item name="android:paddingRight">10dip</item>
-        <item name="android:paddingBottom">15dip</item>
-    </style>
-
-    <style name="App.ListItem.Widget.Description" parent="Ex.App.Widget.TextView">
-
-    </style>
-
 </resources>

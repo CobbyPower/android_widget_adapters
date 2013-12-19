@@ -18,50 +18,40 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.internal;
+package com.wit.android.widget.adapter.examples.fragment;
 
-import com.wit.android.widget.adapter.module.AdapterModule;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ListView;
+
+import com.wit.android.examples.app.fragment.ExListFragment;
+import com.wit.android.widget.adapter.examples.adapter.SimpleAdapter;
 
 /**
- * <h4>Interface Overview</h4>
  * <p>
- * Required interface for multi-module adapter.
+ * Description.
  * </p>
- * 
- * @param <Adapter>
- *            Type of the multi-module adapter.
- *
- * @see com.wit.android.widget.adapter.BaseMultiAdapter
  *
  * @author Martin Albedinsky
  */
-public interface IMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> {
+public class SelectionAndHeadersAdapterFragment extends ExListFragment<SimpleAdapter> {
 
 	/**
-	 * Methods ===============================
+	 * Log TAG.
 	 */
+	private static final String TAG = SelectionAndHeadersAdapterFragment.class.getSimpleName();
 
-	/**
-	 * <p>
-	 * Adds the {@link AdapterModule} into this adapter.
-	 * </p>
-	 * 
-	 * @param module
-	 *            Specific module.
-	 * @param moduleID
-	 *            Module id by which can be the module later obtained.
-	 */
-	public void addModule(AdapterModule<Adapter> module, int moduleID);
+	public static SelectionAndHeadersAdapterFragment newInstance() {
+		return new SelectionAndHeadersAdapterFragment();
+	}
 
-	/**
-	 * <p>
-	 * Returns the {@link AdapterModule} of this adapter.
-	 * </p>
-	 * 
-	 * @param moduleID
-	 *            Id of the module.
-	 * @return Specific adapter module or <code>null</code> if there is no
-	 *         module for the requested id. See {@link 
-	 */
-	public <M> M getModule(int moduleID);
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+	}
+
+	@Override
+	protected void onListItemClick(ListView listView, int i, long l) {
+
+	}
 }

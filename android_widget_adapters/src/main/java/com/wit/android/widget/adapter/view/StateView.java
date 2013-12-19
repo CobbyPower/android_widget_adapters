@@ -158,7 +158,7 @@ public class StateView extends View implements IStateView {
 	public void setSelected(boolean selected) {
 		/**
 		 * We don't want to support this operation. The main reason is that when
-		 * the user select some item in the ListView this ListView reselects
+		 * the user select some item in the ListView this ListView re-selects
 		 * each item which is in the current time selected using this method. So
 		 * method implemented below is override for this to handle custom
 		 * selecting of the view.
@@ -172,7 +172,7 @@ public class StateView extends View implements IStateView {
 	 *
 	 */
 	@Override
-	public void setSelected(boolean selected, boolean override) {
+	public void setSelectionState(boolean selected) {
 		super.setSelected(selected);
 	}
 

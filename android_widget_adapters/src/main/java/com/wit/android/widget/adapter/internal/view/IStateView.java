@@ -61,14 +61,13 @@ public interface IStateView {
 
 	/**
 	 * <p>
-	 * Overrides handling of the selection mode of the state view.
+	 * Sets the selection state of this state view.
 	 * </p>
 	 * 
 	 * @param selected
-	 *            True if the view must be selected otherwise false.
-	 * @param override
+	 *            <code>True</code> for selected, <code>false</code> for unselected.
 	 */
-	public void setSelected(boolean selected, boolean override);
+	public void setSelectionState(boolean selected);
 
 	/**
 	 * <p>

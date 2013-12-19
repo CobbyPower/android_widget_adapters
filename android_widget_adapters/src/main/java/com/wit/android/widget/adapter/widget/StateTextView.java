@@ -23,7 +23,7 @@ package com.wit.android.widget.adapter.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.wit.android.widget.adapter.internal.view.IStateView;
 import com.wit.android.widget.adapter.view.StateView;
@@ -31,16 +31,12 @@ import com.wit.android.widget.adapter.view.StateView;
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Updated {@link android.widget.RelativeLayout} to handle custom management of the states in
- * the list view (especially when the ListView or GridView should provide
- * multiple selection mode).
+ * Description.
  * </p>
  *
  * @author Martin Albedinsky
- * @see RelativeLayout
- * @see IStateView
  */
-public class StateRelativeLayout extends RelativeLayout implements IStateView {
+public class StateTextView extends TextView implements IStateView {
 
 	/**
 	 * Constants =============================
@@ -49,7 +45,7 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	/**
 	 * Log TAG.
 	 */
-	// private static final String TAG = StateRelativeLayout.class.getSimpleName();
+	private static final String TAG = StateTextView.class.getSimpleName();
 
 	/**
 	 * Indicates if debug private output trough log-cat is enabled.
@@ -105,7 +101,7 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	 *
 	 * @param context Current context.
 	 */
-	public StateRelativeLayout(Context context) {
+	public StateTextView(Context context) {
 		super(context);
 	}
 
@@ -116,7 +112,7 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	 * @param context Current context.
 	 * @param attrs
 	 */
-	public StateRelativeLayout(Context context, AttributeSet attrs) {
+	public StateTextView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
@@ -128,7 +124,7 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	 * @param attrs
 	 * @param defStyle
 	 */
-	public StateRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
+	public StateTextView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 
@@ -139,6 +135,14 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	/**
 	 * Public --------------------------------
 	 */
+
+	/**
+	 *
+	 */
+	@Override
+	public boolean handleDefaultStates() {
+		return bHandleDefaultStates;
+	}
 
 	/**
 	 * Getters + Setters ---------------------
@@ -181,14 +185,6 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	 *
 	 */
 	@Override
-	public boolean handleDefaultStates() {
-		return bHandleDefaultStates;
-	}
-
-	/**
-	 *
-	 */
-	@Override
 	public void setOnVisibilityListener(StateView.OnStateViewVisibilityListener listener) {
 		iVisibilityListener = listener;
 	}
@@ -198,7 +194,6 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	 */
 
 	/**
-	 *
 	 */
 	@Override
 	protected void onVisibilityChanged(View changedView, int visibility) {
