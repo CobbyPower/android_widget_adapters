@@ -21,7 +21,6 @@
 package com.wit.android.widget.adapter.module;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseIntArray;
 
 /**
@@ -31,7 +30,6 @@ import android.util.SparseIntArray;
  * </p>
  *
  * @param <Adapter> Type of the adapter for which is this module created.
- *
  * @author Martin Albedinsky
  */
 public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extends AdapterModule<Adapter> {
@@ -41,9 +39,10 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	 */
 
 	/**
-	 * Log TAG.
+	 * <p>
+	 * </p>
 	 */
-	private static final String TAG = SelectionModule.class.getSimpleName();
+	public static final int MODE_SINGLE = 0x00;
 
 	/**
 	 * Indicates if debug private output trough log-cat is enabled.
@@ -59,23 +58,22 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	 * <p>
 	 * </p>
 	 */
-	public static final int MODE_SINGLE = 0x00;
-
-	/**
-	 * <p>
-	 * </p>
-	 */
 	public static final int MODE_MULTIPLE = 0x01;
-
-	/**
-	 * Bundle identifiers.
-	 */
 
 	/**
 	 * <p>
 	 * </p>
 	 */
 	protected static final String BUNDLE_SELECTED_ITEMS = "com.wit.and.widget.adapter.module.SelectionModule.Bundle.SelectedItems";
+
+	/**
+	 * Bundle identifiers.
+	 */
+
+	/**
+	 * Log TAG.
+	 */
+	private static final String TAG = SelectionModule.class.getSimpleName();
 
 	/**
 	 * Enums =================================
@@ -338,6 +336,16 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	 * </p>
 	 *
 	 * @return
+	 */
+	public int getSelectedItemsCount() {
+		return aSelectedItems.size();
+	}
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @return
 	 * @throws java.lang.IllegalStateException If current mode isn't set to {@link #MODE_SINGLE}.
 	 * @see #getSelectedPositions()
 	 */
@@ -348,21 +356,36 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 
 	/**
 	 * <p>
-	 * Returns the array with positions of currently selected items.
+	 * Same as {@link #getSelectedPositions(boolean)} with <code>true</code>, so items
+	 * in array will be sorted ascending.
 	 * </p>
-	 *
-	 * @return Array with positions of the currently selected items. Note that
-	 * this isn't necessary sorted array.
-	 * @throws java.lang.IllegalStateException If current mode isn't set to {@link #MODE_MULTIPLE}.
 	 */
 	public int[] getSelectedPositions() {
+		return getSelectedPositions(true);
+	}
+
+	/**
+	 * <p>
+	 * Returns array with positions of the currently selected items.
+	 * </p>
+	 * <p>
+	 * <b>Note</b>, that array is obtained/processed from the {@link android.util.SparseIntArray}, so
+	 * its items will be sorted ascending.
+	 * </p>
+	 *
+	 * @param ascending <code>True</code> to sort array items ascending, <code>false</code> to descending.
+	 * @return Array with positions of the currently selected items.
+	 * @throws java.lang.IllegalStateException If current mode isn't set to {@link #MODE_MULTIPLE}.
+	 * @see #getSelectedPositions()
+	 */
+	public int[] getSelectedPositions(boolean ascending) {
 		this.checkActualModeFor(MODE_MULTIPLE, "obtain selected items position");
 
-		int[] pos = new int[aSelectedItems.size()];
-		for (int i = 0; i < pos.length; i++) {
-			pos[i] = aSelectedItems.keyAt(i);
+		int[] positions = new int[aSelectedItems.size()];
+		for (int i = 0; i < positions.length; i++) {
+			positions[i] = aSelectedItems.keyAt(i);
 		}
-		return pos;
+		return ascending ? positions : reversePositions(positions);
 	}
 
 	/**
@@ -474,6 +497,20 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 				return "MODE_SINGLE";
 		}
 		return "";
+	}
+
+	/**
+	 * Reverses the given array of positions.
+	 *
+	 * @param positions Array to reverse.
+	 * @return Reversed array of given positions.
+	 */
+	private int[] reversePositions(int[] positions) {
+		final int[] reverse = new int[positions.length];
+		for (int i = 0; i < reverse.length; i++) {
+			reverse[i] = positions[positions.length - (i + 1)];
+		}
+		return reverse;
 	}
 
 	/**

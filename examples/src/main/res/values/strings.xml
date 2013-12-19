@@ -45,6 +45,10 @@
     <string name="Navigation.Label.HeadersAdapter.Groups.Description">Description</string>
     <string name="Navigation.Label.SelectionAndHeadersAdapter">Selection &amp; Headers Module</string>
     <string name="Navigation.Label.SelectionAndHeadersAdapter.Description">Description</string>
+    
+    <!-- ## String formats ## -->
+    <eat-comment/>
+    <string name="Format.SelectedItems">%d selected</string>
 
     <!-- ## Adapters data ## -->
     <string-array name="Data.Models" parent="">

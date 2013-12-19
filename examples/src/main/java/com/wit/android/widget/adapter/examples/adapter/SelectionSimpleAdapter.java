@@ -30,6 +30,10 @@ import com.wit.android.widget.adapter.examples.R;
 import com.wit.android.widget.adapter.module.SelectionModule;
 import com.wit.android.widget.adapter.widget.StateTextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * <p>
  * Description.
@@ -44,34 +48,70 @@ public class SelectionSimpleAdapter extends BaseMultiAdapter<SelectionSimpleAdap
 	 */
 	private static final String TAG = SelectionSimpleAdapter.class.getSimpleName();
 
+	final List<String> MODELS;
+
 	private final SelectionModule<SelectionSimpleAdapter> SELECTOR = new SelectionModule<SelectionSimpleAdapter>();
+
 	{
 		// Enable multi-selection mode.
 		SELECTOR.setMode(SelectionModule.MODE_MULTIPLE);
 	}
 
-	final String[] MODELS;
-
 	public SelectionSimpleAdapter(Context context) {
 		super(context);
-		MODELS = context.getResources().getStringArray(R.array.Data_Models);
+		MODELS = new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.Data_Models)));
 		// Adding module, attaches this adapter to it and also saving/restoring state can be handled
 		// when invoking onSaveInstanceState() onRestoreInstanceState() on this adapter form its context.
 		addModule(SELECTOR, 0);
 	}
 
+	/**
+	 * Toggles selection state of the item at the requested position.
+	 *
+	 * @param position
+	 */
 	public void toggleItemSelectedState(int position) {
 		SELECTOR.toggleItemSelectedState(position);
 	}
 
+	/**
+	 * Returns the count of currently selected items.
+	 *
+	 * @return
+	 */
+	public int getSelectedItemsCount() {
+		return SELECTOR.getSelectedItemsCount();
+	}
+
+	/**
+	 * Clears the selected items so no item will be selected.
+	 */
+	public void clearSelectedItems() {
+		// Selector will also fire notify data set change on the attached(this) adapter.
+		SELECTOR.clearSelection();
+	}
+
+	/**
+	 * Removes from the current data set all currently selected items.
+	 */
+	public void deleteSelectedItems() {
+		// Obtain positions of selected items from selector.
+		final int[] positions = SELECTOR.getSelectedPositions(false);
+		for (int pos : positions) {
+			MODELS.remove(pos);
+		}
+		// Clear selection.
+		clearSelectedItems();
+	}
+
 	@Override
 	public int getCount() {
-		return MODELS.length;
+		return MODELS.size();
 	}
 
 	@Override
 	public Object getItem(int position) {
-		return (position < MODELS.length) ? MODELS[position] : "";
+		return (position < MODELS.size()) ? MODELS.get(position) : "";
 	}
 
 	@Override
@@ -91,20 +131,38 @@ public class SelectionSimpleAdapter extends BaseMultiAdapter<SelectionSimpleAdap
 		return new ViewHolder(itemView);
 	}
 
+	/**
+	 * Item view holder.
+	 */
 	private class ViewHolder {
 
+		/**
+		 * Sate text view which can handle custom selection state.
+		 */
 		StateTextView mTextView;
 
 		ViewHolder(View itemView) {
 			mTextView = (StateTextView) itemView;
-			// This is very important. Without this false flag the selection will not be working.
+			/**
+			 * This is very important. Without this false flag the selection will not be working.
+			 */
 			mTextView.setHandleDefaultStates(false);
 		}
 
+		/**
+		 * Sets text of this item's holder.
+		 *
+		 * @param text
+		 */
 		void setText(CharSequence text) {
 			mTextView.setText(text);
 		}
 
+		/**
+		 * Changes selection state of this item's holder to the given one.
+		 *
+		 * @param selected
+		 */
 		void setSelected(boolean selected) {
 			mTextView.setSelectionState(selected);
 		}

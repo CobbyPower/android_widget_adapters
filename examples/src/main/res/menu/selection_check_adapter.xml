@@ -1,36 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
 /*
  * =================================================================================
  * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
  * =================================================================================
  * Licensed under the Apache License, Version 2.0 or later (further "License" only);
- * ---------------------------------------------------------------------------------
+ * *********************************************************************************
  * You may use this file only in compliance with the License. More details and copy
  * of this License you may obtain at
- * 
+ *
  * 		http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * You can redistribute, modify or publish any part of the code written in this
- * file but as it is described in the License, the software distributed under the 
+ * file but as it is described in the License, the software distributed under the
  * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES or CONDITIONS OF
  * ANY KIND.
- * 
+ *
  * See the License for the specific language governing permissions and limitations
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.examples;
+-->
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:compat="http://schemas.android.com/apk/res-auto">
 
-import com.wit.android.examples.annotations.ExHomeActivity;
-import com.wit.android.examples.annotations.ExLogo;
-import com.wit.android.examples.app.ExSplashActivity;
+    <item
+            android:id="@id/Ex.App.Menu.Discard"
+            android:icon="@drawable/ex_app_ic_action_discard"
+            android:title="@string/Ex.App.Menu.Discard"
+            compat:showAsAction="ifRoom|withText"/>
 
-/**
- * <p>
- * Simple splash activity with logo.
- * </p>
- *
- * @author Martin Albedinsky
- */
-@ExHomeActivity(HomeActivity.class)
-@ExLogo(R.drawable.ic_logo)
-public class SplashActivity extends ExSplashActivity {}
+</menu>

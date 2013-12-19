@@ -33,7 +33,7 @@ import java.util.List;
 
 /**
  * <p>
- * Description.
+ * Examples Home activity with the navigation and content container for fragments.
  * </p>
  *
  * @author Martin Albedinsky
@@ -75,7 +75,14 @@ public class HomeActivity extends ExHomeActivity {
 		return true;
 	}
 
-	private NavigationLabel createItem(int textRes, int fragmentID) {
-		return new NavigationLabel(getString(textRes), fragmentID);
+	/**
+	 * Creates navigation label item with the given text resource and id.
+	 *
+	 * @param textRes
+	 * @param itemID
+	 * @return
+	 */
+	private NavigationLabel createItem(int textRes, int itemID) {
+		return new NavigationLabel(getString(textRes), itemID);
 	}
 }
