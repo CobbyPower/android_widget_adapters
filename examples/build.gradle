@@ -1,7 +1,13 @@
 apply plugin: 'android'
 
+repositories {
+    mavenLocal()
+}
+
 dependencies {
     compile project(':android_widget_adapters')
+    compile 'com.wit.android:android-examples:0.+'
+    compile rootProject.appCompatLibrary
 }
 
 android {

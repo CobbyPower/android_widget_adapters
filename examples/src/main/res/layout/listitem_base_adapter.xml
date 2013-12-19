@@ -21,31 +21,7 @@
  * =================================================================================
  */
 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.wit.android.widget.adapter.examples"
-          android:versionCode="1"
-          android:versionName="1.0">
-
-    <uses-sdk
-            android:minSdkVersion="8"
-            android:targetSdkVersion="19"
-            android:maxSdkVersion="19"/>
-
-    <application
-            android:allowBackup="true"
-            android:icon="@drawable/ex_ic_launcher"
-            android:label="@string/App.name"
-            android:theme="@style/Ex.App.Theme">
-
-        <activity android:name=".SplashActivity" android:noHistory="true" android:theme="@style/Ex.Theme.Splash">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".HomeActivity" />
-
-    </application>
-
-</manifest>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+          style="@style/App.ListItem.Widget.Label.Single"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>

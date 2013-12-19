@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * =================================================================================
+ * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
+ * =================================================================================
+ * Licensed under the Apache License, Version 2.0 or later (further "License" only);
+ * *********************************************************************************
+ * You may use this file only in compliance with the License. More details and copy
+ * of this License you may obtain at
+ *
+ * 		http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * You can redistribute, modify or publish any part of the code written in this
+ * file but as it is described in the License, the software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES or CONDITIONS OF
+ * ANY KIND.
+ *
+ * See the License for the specific language governing permissions and limitations
+ * under the License.
+ * =================================================================================
+ */
+-->
+<resources>
+
+    <!-- ###### EXAMPLES STYLES ###### -->
+    <eat-comment/>
+
+    <!-- ## List item styles ## -->
+    <eat-comment/>
+    <style name="App.ListItem" parent="">
+        <item name="android:paddingLeft">10dip</item>
+        <item name="android:paddingTop">15dip</item>
+        <item name="android:paddingRight">10dip</item>
+        <item name="android:paddingBottom">15dip</item>
+    </style>
+
+    <style name="App.ListItem.Widget.Header" parent="Ex.App.Widget.TextView">
+
+    </style>
+
+    <style name="App.ListItem.Widget.Label" parent="Ex.App.Widget.TextView">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="App.ListItem.Widget.Label.Single">
+        <item name="android:paddingLeft">10dip</item>
+        <item name="android:paddingTop">15dip</item>
+        <item name="android:paddingRight">10dip</item>
+        <item name="android:paddingBottom">15dip</item>
+    </style>
+
+    <style name="App.ListItem.Widget.Description" parent="Ex.App.Widget.TextView">
+
+    </style>
+
+</resources>
