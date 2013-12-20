@@ -53,7 +53,7 @@ public class SelectionSingleAdapterFragment extends ExListFragment<SelectionSing
 
 	@Override
 	protected void onListItemClick(ListView listView, View itemView, int position, long id) {
-		getAdapter().toggleItemSelectedState(position);
+		getAdapter().toggleItemSelectionState(position);
 	}
 
 	@Override

@@ -77,7 +77,7 @@ public class SelectionMultiAdapter extends SelectionSingleAdapter implements Vie
 			case R.id.ListItem_Simple_Check_CheckBox:
 				// Clicked check box in the list item.
 				// Toggle item selection state.
-				toggleItemSelectedState((Integer) v.getTag());
+				toggleItemSelectionState((Integer) v.getTag());
 				break;
 		}
 	}

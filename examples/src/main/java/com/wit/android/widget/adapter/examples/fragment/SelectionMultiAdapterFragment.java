@@ -58,14 +58,9 @@ public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMulti
 	}
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		this.mSelectedItemsFormat = getString(R.string.Format_SelectedItems);
-	}
-
-	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		this.mSelectedItemsFormat = getString(R.string.Format_SelectedItems);
 		setAdapter(mAdapter = new SelectionMultiAdapter(getActivity()));
 	}
 
@@ -73,7 +68,7 @@ public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMulti
 	protected void onListItemClick(ListView listView, View itemView, int position, long id) {
 		// Update selected items only when in action mode.
 		if (mActionMode != null) {
-			mAdapter.toggleItemSelectedState(position);
+			mAdapter.toggleItemSelectionState(position);
 			// Update number of selected items in the contextual action bar.
 			this.updateSelectedItemsText(mAdapter.getSelectedItemsCount());
 		} else {
@@ -90,7 +85,7 @@ public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMulti
 
 		// Start the action mode.
 		this.mActionMode = ((ActionBarActivity) getActivity()).startSupportActionMode(new ActionModeCallback());
-		mAdapter.toggleItemSelectedState(position);
+		mAdapter.toggleItemSelectionState(position);
 		updateSelectedItemsText(mAdapter.getSelectedItemsCount());
 		return true;
 	}

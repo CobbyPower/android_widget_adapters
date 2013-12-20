@@ -130,7 +130,7 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	 * @return <code>True</code> if the item is selected, <code>false</code>
 	 * otherwise.
 	 * @see #setItemSelected(int, boolean)
-	 * @see #toggleItemSelectedState(int)
+	 * @see #toggleItemSelectionState(int)
 	 */
 	public boolean isSelected(int position) {
 		return contains(position);
@@ -148,7 +148,7 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	 * @param position Position of the select-able item in the adapter.
 	 * @see #setItemSelected(int, boolean)
 	 */
-	public void toggleItemSelectedState(int position) {
+	public void toggleItemSelectionState(int position) {
 		setItemSelected(position, !contains(position));
 	}
 

@@ -152,7 +152,10 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	 * @param cursor
 	 * @param <C>
 	 */
-	public <C extends Cursor & AlphabeticItem> void processAlphabeticCursor(C cursor) {
+	public <C extends Cursor & AlphabeticItem> void processAlphabeticalCursor(C cursor) {
+		// Clear current headers.
+		clearHeaders();
+		// Process the given cursor.
 		if (cursor.getCount() > 0 && cursor.moveToFirst()) {
 			this.resetLastChar();
 			do  {
@@ -172,8 +175,10 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	 *
 	 * @param itemList
 	 */
-	public void processAlphabeticList(List<AlphabeticItem> itemList) {
-		this.resetLastChar();
+	public void processAlphabeticalList(List<AlphabeticItem> itemList) {
+		// Clear current headers.
+		clearHeaders();
+		// Process the given list.
 		for (int i = 0; i < itemList.size(); i++) {
 			this.processAlphabeticItem(itemList.get(i), i);
 		}
