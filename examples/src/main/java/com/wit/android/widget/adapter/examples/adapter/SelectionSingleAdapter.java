@@ -67,7 +67,7 @@ public class SelectionSingleAdapter extends BaseMultiAdapter<SelectionSingleAdap
 	/**
 	 * Toggles selection state of the item at the requested position.
 	 *
-	 * @param position
+	 * @param position Position of item.
 	 */
 	public void toggleItemSelectionState(int position) {
 		SELECTOR.toggleItemSelectionState(position);

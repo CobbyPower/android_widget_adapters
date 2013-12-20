@@ -50,6 +50,11 @@ public class SelectionAndHeadersAdapter extends HeadersAlphabeticAdapter {
 		addModule(SELECTOR, 0x01);
 	}
 
+	/**
+	 * Toggles selection state of the item at the requested position.
+	 *
+	 * @param position Position of item.
+	 */
 	public void toggleItemSelectionState(int position) {
 		SELECTOR.toggleItemSelectionState(position);
 	}
@@ -57,7 +62,7 @@ public class SelectionAndHeadersAdapter extends HeadersAlphabeticAdapter {
 	/**
 	 * Returns the count of currently selected items.
 	 *
-	 * @return
+	 * @return Currently selected items count.
 	 */
 	public int getSelectedItemsCount() {
 		return SELECTOR.getSelectedItemsCount();
@@ -76,6 +81,12 @@ public class SelectionAndHeadersAdapter extends HeadersAlphabeticAdapter {
 	 */
 	public void deleteSelectedItems() {
 		// Obtain positions of selected items from selector in descending order.
+		/**
+		 * Remember that selector module holds positions as they are (it doesn't
+		 * know anything about the headers module, so the positions of the selected
+		 * items are real positions in the list view but not in the data set)
+		 * so don't forgot to always correct raw position with headers module.
+		 */
 		final int[] positions = SELECTOR.getSelectedPositions(false);
 		for (int pos : positions) {
 			// Safely (in reverse order) remove all items at selected positions.
@@ -90,10 +101,13 @@ public class SelectionAndHeadersAdapter extends HeadersAlphabeticAdapter {
 		clearSelectedItems();
 	}
 
+	/**
+	 */
 	@Override
 	public void onBindItemView(int position, Object viewHolder) {
 		switch (currentItemViewType()) {
 			case VIEW_TYPE_ITEM:
+				// Handle here only selection and let other stuffs to parent.
 				final ViewHolder holder = (ViewHolder) viewHolder;
 				holder.setSelected(SELECTOR.isSelected(position));
 			default:
