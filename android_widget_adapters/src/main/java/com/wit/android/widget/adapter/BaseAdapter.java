@@ -113,12 +113,16 @@ public abstract class BaseAdapter extends BaseWidgetAdapter implements AdapterOp
     /**
      */
     @Override
-    public View getView(int position, View convertView, ViewGroup root) {
-        return OPTIMIZER.performOptimizedGetView(position, convertView, root);
+    public View getView(int position, View convertView, ViewGroup parent) {
+        return OPTIMIZER.performOptimizedGetView(position, convertView, parent);
     }
 
     /**
      * Getters + Setters ---------------------
+     */
+
+	/**
+     * Protected -----------------------------
      */
 
 	/**
@@ -127,13 +131,9 @@ public abstract class BaseAdapter extends BaseWidgetAdapter implements AdapterOp
 	 *
 	 * @return
 	 */
-	public int getCurrentItemViewType() {
+	protected int currentItemViewType() {
 		return OPTIMIZER.getCurrentItemViewType();
 	}
-
-	/**
-     * Protected -----------------------------
-     */
 
     /**
      * Private -------------------------------

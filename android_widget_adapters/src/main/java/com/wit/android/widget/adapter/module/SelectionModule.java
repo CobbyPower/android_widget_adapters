@@ -45,6 +45,12 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	public static final int MODE_SINGLE = 0x00;
 
 	/**
+	 * <p>
+	 * </p>
+	 */
+	public static final int MODE_MULTIPLE = 0x01;
+
+	/**
 	 * Indicates if debug private output trough log-cat is enabled.
 	 */
 	// private static final boolean DEBUG = true;
@@ -53,12 +59,6 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	 * Indicates if logging for user output trough log-cat is enabled.
 	 */
 	// private static final boolean USER_LOG = true;
-
-	/**
-	 * <p>
-	 * </p>
-	 */
-	public static final int MODE_MULTIPLE = 0x01;
 
 	/**
 	 * <p>

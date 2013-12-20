@@ -21,10 +21,12 @@
 package com.wit.android.widget.adapter.examples.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ListView;
+import android.view.ViewGroup;
 
 import com.wit.android.examples.app.fragment.ExListFragment;
+import com.wit.android.widget.adapter.examples.R;
 import com.wit.android.widget.adapter.examples.adapter.HeadersAlphabeticAdapter;
 
 /**
@@ -46,11 +48,15 @@ public class HeadersAlphabeticAdapterFragment extends ExListFragment<HeadersAlph
 	}
 
 	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		setAdapter(new HeadersAlphabeticAdapter(getActivity()));
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.listview, null);
 	}
 
 	@Override
-	protected void onListItemClick(ListView listView, int i, long l) {}
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		// Do not show divider.
+		getListView().setDividerHeight(0);
+		setAdapter(new HeadersAlphabeticAdapter(getActivity()));
+	}
 }

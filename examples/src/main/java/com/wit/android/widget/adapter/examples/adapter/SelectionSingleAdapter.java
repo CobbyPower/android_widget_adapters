@@ -41,23 +41,22 @@ import java.util.List;
  *
  * @author Martin Albedinsky
  */
-public class SelectionSimpleAdapter extends BaseMultiAdapter<SelectionSimpleAdapter> {
+public class SelectionSingleAdapter extends BaseMultiAdapter<SelectionSingleAdapter> {
 
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = SelectionSimpleAdapter.class.getSimpleName();
+	private static final String TAG = SelectionSingleAdapter.class.getSimpleName();
 
 	final List<String> MODELS;
 
-	private final SelectionModule<SelectionSimpleAdapter> SELECTOR = new SelectionModule<SelectionSimpleAdapter>();
-
+	protected final SelectionModule<SelectionSingleAdapter> SELECTOR = new SelectionModule<SelectionSingleAdapter>();
 	{
-		// Enable multi-selection mode.
-		SELECTOR.setMode(SelectionModule.MODE_MULTIPLE);
+		// Set up single selection mode.
+		SELECTOR.setMode(SelectionModule.MODE_SINGLE);
 	}
 
-	public SelectionSimpleAdapter(Context context) {
+	public SelectionSingleAdapter(Context context) {
 		super(context);
 		MODELS = new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.Data_Models)));
 		// Adding module, attaches this adapter to it and also saving/restoring state can be handled
@@ -95,9 +94,10 @@ public class SelectionSimpleAdapter extends BaseMultiAdapter<SelectionSimpleAdap
 	 * Removes from the current data set all currently selected items.
 	 */
 	public void deleteSelectedItems() {
-		// Obtain positions of selected items from selector.
+		// Obtain positions of selected items from selector in descending order.
 		final int[] positions = SELECTOR.getSelectedPositions(false);
 		for (int pos : positions) {
+			// Safely (reverse order) remove all items at selected positions.
 			MODELS.remove(pos);
 		}
 		// Clear selection.
@@ -116,7 +116,7 @@ public class SelectionSimpleAdapter extends BaseMultiAdapter<SelectionSimpleAdap
 
 	@Override
 	public View onCreateItemView(int position, LayoutInflater inflater, ViewGroup root) {
-		return inflate(R.layout.listitem_simple_adapter);
+		return inflate(R.layout.listitem_simple);
 	}
 
 	@Override
@@ -154,7 +154,7 @@ public class SelectionSimpleAdapter extends BaseMultiAdapter<SelectionSimpleAdap
 		 *
 		 * @param text
 		 */
-		void setText(CharSequence text) {
+		void setText(String text) {
 			mTextView.setText(text);
 		}
 

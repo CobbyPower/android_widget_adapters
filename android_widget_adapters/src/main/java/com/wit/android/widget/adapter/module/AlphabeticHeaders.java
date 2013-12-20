@@ -225,14 +225,9 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 		if (name != null && name.length() > 0) {
 			// Obtain first char from item name.
 			String currentChar = name.substring(0, 1);
-
-			Log.d(TAG, "processAlphabeticItem("+name+", "+position+")");
-
 			if (!currentChar.equals(mLastChar)) {
-				Log.d(TAG, "creating new header for("+currentChar+", "+position+")");
 				addHeader(new BaseAlphabeticHeader(currentChar), getHeadersCount() + position);
 			}
-
 			// Save current as last.
 			this.mLastChar = currentChar;
 		}
@@ -323,7 +318,7 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	/**
 	 *
 	 */
-	private static  final class BaseAlphabeticHeader implements AlphabeticHeader {
+	private static final class BaseAlphabeticHeader implements AlphabeticHeader {
 
 		/**
 		 * Members ===============================

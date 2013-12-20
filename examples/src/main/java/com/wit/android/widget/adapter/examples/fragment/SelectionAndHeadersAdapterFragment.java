@@ -22,7 +22,6 @@ package com.wit.android.widget.adapter.examples.fragment;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
 
 import com.wit.android.examples.app.fragment.ExListFragment;
 import com.wit.android.widget.adapter.examples.adapter.SimpleAdapter;
@@ -48,10 +47,5 @@ public class SelectionAndHeadersAdapterFragment extends ExListFragment<SimpleAda
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-	}
-
-	@Override
-	protected void onListItemClick(ListView listView, int i, long l) {
-
 	}
 }

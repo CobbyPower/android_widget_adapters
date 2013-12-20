@@ -22,7 +22,6 @@ package com.wit.android.widget.adapter.examples.fragment;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ListView;
 
 import com.wit.android.examples.app.fragment.ExListFragment;
 import com.wit.android.widget.adapter.examples.adapter.HeadersGroupsAdapter;
@@ -50,7 +49,4 @@ public class HeadersGroupsAdapterFragment extends ExListFragment<HeadersGroupsAd
 		super.onViewCreated(view, savedInstanceState);
 		setAdapter(new HeadersGroupsAdapter(getActivity()));
 	}
-
-	@Override
-	protected void onListItemClick(ListView listView, int i, long l) {}
 }

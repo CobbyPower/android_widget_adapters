@@ -27,11 +27,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wit.android.examples.app.fragment.ExListFragment;
 import com.wit.android.widget.adapter.examples.R;
-import com.wit.android.widget.adapter.examples.adapter.SelectionCheckAdapter;
+import com.wit.android.widget.adapter.examples.adapter.SelectionMultiAdapter;
 
 /**
  * <p>
@@ -40,23 +40,21 @@ import com.wit.android.widget.adapter.examples.adapter.SelectionCheckAdapter;
  *
  * @author Martin Albedinsky
  */
-public class SelectionCheckAdapterFragment extends ExListFragment<SelectionCheckAdapter> {
+public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMultiAdapter> {
 
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = SelectionCheckAdapterFragment.class.getSimpleName();
+	private static final String TAG = SelectionMultiAdapterFragment.class.getSimpleName();
 
 	private ActionMode mActionMode;
 
 	private String mSelectedItemsFormat;
 
-	private SelectionCheckAdapter mAdapter;
+	private SelectionMultiAdapter mAdapter;
 
-	private TextView mActionModeTextView;
-
-	public static SelectionCheckAdapterFragment newInstance() {
-		return new SelectionCheckAdapterFragment();
+	public static SelectionMultiAdapterFragment newInstance() {
+		return new SelectionMultiAdapterFragment();
 	}
 
 	@Override
@@ -68,21 +66,23 @@ public class SelectionCheckAdapterFragment extends ExListFragment<SelectionCheck
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		setAdapter(mAdapter = new SelectionCheckAdapter(getActivity()));
+		setAdapter(mAdapter = new SelectionMultiAdapter(getActivity()));
 	}
 
 	@Override
-	protected void onListItemClick(ListView listView, int position, long id) {
+	protected void onListItemClick(ListView listView, View itemView, int position, long id) {
 		// Update selected items only when in action mode.
 		if (mActionMode != null) {
 			mAdapter.toggleItemSelectedState(position);
 			// Update number of selected items in the contextual action bar.
 			this.updateSelectedItemsText(mAdapter.getSelectedItemsCount());
+		} else {
+			Toast.makeText(getActivity(), R.string.Toast_LongPressToEnableActionMode, Toast.LENGTH_SHORT).show();
 		}
 	}
 
 	@Override
-	protected boolean onListItemLongClick(ListView listView, int position, long id) {
+	protected boolean onListItemLongClick(ListView listView, View itemView, int position, long id) {
 		if (mActionMode != null) {
 			// Already in the action mode.
 			return false;
@@ -109,7 +109,7 @@ public class SelectionCheckAdapterFragment extends ExListFragment<SelectionCheck
 
 	private void updateSelectedItemsText(int selectedCount) {
 		// Update number of selected items in the contextual action bar.
-		mActionModeTextView.setText(String.format(mSelectedItemsFormat, selectedCount));
+		mActionMode.setTitle(String.format(mSelectedItemsFormat, selectedCount));
 	}
 
 	/**
@@ -121,10 +121,6 @@ public class SelectionCheckAdapterFragment extends ExListFragment<SelectionCheck
 		@Override
 		public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
 			actionMode.getMenuInflater().inflate(R.menu.selection_check_adapter, menu);
-			actionMode.setCustomView(
-					// Set up custom action mode title.
-					mActionModeTextView = (TextView) getLayoutInflater(null).inflate(com.wit.android.examples.R.layout.ex_action_mode_title, null)
-			);
 			return true;
 		}
 
@@ -138,13 +134,14 @@ public class SelectionCheckAdapterFragment extends ExListFragment<SelectionCheck
 			boolean processed = false;
 			switch (menuItem.getItemId()) {
 				case com.wit.android.examples.R.id.Ex_App_Menu_Discard:
+					// Dispatch to adapter to delete all selected items.
 					mAdapter.deleteSelectedItems();
 					processed = true;
 					break;
 				default:
 			}
 			if (processed) {
-				// Hide the contextual action bar.
+				// Hide contextual action bar.
 				actionMode.finish();
 			}
 			return processed;
@@ -156,5 +153,4 @@ public class SelectionCheckAdapterFragment extends ExListFragment<SelectionCheck
 			mActionMode = null;
 		}
 	}
-
 }

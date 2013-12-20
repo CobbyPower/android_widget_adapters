@@ -21,31 +21,21 @@
  * =================================================================================
  */
 -->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.wit.android.widget.adapter.examples"
-          android:versionCode="1"
-          android:versionName="1.0">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
-    <uses-sdk
-            android:minSdkVersion="8"
-            android:targetSdkVersion="19"
-            android:maxSdkVersion="19"/>
+    <TextView
+            android:id="@android:id/empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone"/>
 
-    <application
-            android:allowBackup="true"
-            android:icon="@drawable/ex_ic_launcher"
-            android:label="@string/App.name"
-            android:theme="@style/App.Theme">
+    <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:listSelector="@drawable/ex_app_selector_transparent"/>
 
-        <activity android:name=".SplashActivity" android:noHistory="true" android:theme="@style/Ex.Theme.Splash">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".HomeActivity" />
-
-    </application>
-
-</manifest>
+</FrameLayout>

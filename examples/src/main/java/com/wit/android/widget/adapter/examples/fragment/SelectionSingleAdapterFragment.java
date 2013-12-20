@@ -25,7 +25,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.wit.android.examples.app.fragment.ExListFragment;
-import com.wit.android.widget.adapter.examples.adapter.SelectionSimpleAdapter;
+import com.wit.android.widget.adapter.examples.adapter.SelectionSingleAdapter;
 
 /**
  * <p>
@@ -34,25 +34,25 @@ import com.wit.android.widget.adapter.examples.adapter.SelectionSimpleAdapter;
  *
  * @author Martin Albedinsky
  */
-public class SelectionSimpleAdapterFragment extends ExListFragment<SelectionSimpleAdapter> {
+public class SelectionSingleAdapterFragment extends ExListFragment<SelectionSingleAdapter> {
 
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = SelectionSimpleAdapterFragment.class.getSimpleName();
+	private static final String TAG = SelectionSingleAdapterFragment.class.getSimpleName();
 
-	public static SelectionSimpleAdapterFragment newInstance() {
-		return new SelectionSimpleAdapterFragment();
+	public static SelectionSingleAdapterFragment newInstance() {
+		return new SelectionSingleAdapterFragment();
 	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		setAdapter(new SelectionSimpleAdapter(getActivity()));
+		setAdapter(new SelectionSingleAdapter(getActivity()));
 	}
 
 	@Override
-	protected void onListItemClick(ListView listView, int position, long id) {
+	protected void onListItemClick(ListView listView, View itemView, int position, long id) {
 		getAdapter().toggleItemSelectedState(position);
 	}
 

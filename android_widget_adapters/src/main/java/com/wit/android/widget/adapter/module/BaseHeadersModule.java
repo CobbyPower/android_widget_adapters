@@ -133,11 +133,11 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 	 * <p>
 	 * </p>
 	 *
-	 * @param itemPosition
+	 * @param position
 	 * @return
 	 */
-	public int correctPosition(int itemPosition) {
-		return itemPosition - getHeadersCountAboveItem(itemPosition);
+	public int correctPosition(int position) {
+		return position - getHeadersCountBeforePosition(position);
 	}
 
 	/**
@@ -148,13 +148,13 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 	 * <p>
 	 * </p>
 	 *
-	 * @param itemPosition
+	 * @param position
 	 * @return
 	 */
-	public int getHeadersCountAboveItem(int itemPosition) {
+	public int getHeadersCountBeforePosition(int position) {
 		int count = 0;
 		for (int i = 0; i < aHeaders.size(); i++) {
-			if (aHeaders.keyAt(i) < itemPosition) {
+			if (aHeaders.keyAt(i) < position) {
 				count++;
 			} else {
 				break;

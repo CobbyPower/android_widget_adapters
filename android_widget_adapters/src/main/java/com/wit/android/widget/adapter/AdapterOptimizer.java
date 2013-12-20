@@ -124,10 +124,10 @@ public class AdapterOptimizer {
 	 *
 	 * @param position    Position of the item in the adapter.
 	 * @param convertView Convert view for the item.
-	 * @param root        Parent view.
+	 * @param parent      Parent view.
 	 * @return Created item's view.
 	 */
-	public View performOptimizedGetView(int position, View convertView, ViewGroup root) {
+	public View performOptimizedGetView(int position, View convertView, ViewGroup parent) {
 		Object viewHolder;
 
 		// Obtain current item view type.
@@ -135,7 +135,7 @@ public class AdapterOptimizer {
 
 		// Check if we have converted view.
 		if (convertView == null) {
-			convertView = mOptimizedAdapter.onCreateItemView(position, mOptimizedAdapter.getLayoutInflater(), root);
+			convertView = mOptimizedAdapter.onCreateItemView(position, mOptimizedAdapter.getLayoutInflater(), parent);
 
 			if (convertView == null) {
 				throw new NullPointerException("Convert view at position(" + position + ") can't be NULL.");

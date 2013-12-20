@@ -95,7 +95,7 @@ public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends
 	 * <p>
 	 * </p>
 	 *
-	 * @param context
+	 * @param context Context in which will be this adapter used.
 	 * @see com.wit.android.widget.adapter.BaseAdapter#BaseAdapter(android.content.Context)
 	 */
 	public SimpleCursorMultiAdapter(Context context) {
@@ -112,8 +112,8 @@ public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends
 
 	/**
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public void addModule(AdapterModule<Adapter> module, int moduleID) {
 		module.dispatchAttachToAdapter((Adapter) this);
 		MODULES_MANAGER.addModule(module, moduleID);
@@ -121,26 +121,10 @@ public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends
 
 	/**
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public <M> M getModule(int moduleID) {
 		return (M) MODULES_MANAGER.getModule(moduleID);
-	}
-
-	/**
-	 */
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		MODULES_MANAGER.dispatchSaveState(outState);
-	}
-
-	/**
-	 */
-	@Override
-	public void onRestoreInstanceState(Bundle savedState) {
-		super.onRestoreInstanceState(savedState);
-		MODULES_MANAGER.dispatchRestoreState(savedState);
 	}
 
 	/**
@@ -150,6 +134,22 @@ public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends
 	/**
 	 * Protected -----------------------------
 	 */
+
+	/**
+	 */
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		MODULES_MANAGER.dispatchSaveState(outState);
+	}
+
+	/**
+	 */
+	@Override
+	protected void onRestoreInstanceState(Bundle savedState) {
+		super.onRestoreInstanceState(savedState);
+		MODULES_MANAGER.dispatchRestoreState(savedState);
+	}
 
 	/**
 	 * Private -------------------------------

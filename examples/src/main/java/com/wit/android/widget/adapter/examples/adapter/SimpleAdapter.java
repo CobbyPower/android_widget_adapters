@@ -62,7 +62,7 @@ public class SimpleAdapter extends BaseAdapter {
 
 	@Override
 	public View onCreateItemView(int position, LayoutInflater inflater, ViewGroup root) {
-		return inflate(R.layout.listitem_simple_adapter);
+		return inflate(R.layout.listitem_simple);
 	}
 
 	@Override

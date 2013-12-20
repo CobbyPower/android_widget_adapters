@@ -35,10 +35,10 @@
     <string name="Navigation.Header.Examples">Examples</string>
     <string name="Navigation.Label.SimpleAdapter">Simple Adapter</string>
     <string name="Navigation.Label.SimpleAdapter.Description">Description</string>
-    <string name="Navigation.Label.SelectionAdapter.Simple">Selection Adapter (simple)</string>
-    <string name="Navigation.Label.SelectionAdapter.Simple.Description">Description</string>
-    <string name="Navigation.Label.SelectionAdapter.Check">Selection Adapter (check)</string>
-    <string name="Navigation.Label.SelectionAdapter.Check.Description">Description</string>
+    <string name="Navigation.Label.SelectionAdapter.Single">Selection Adapter (single)</string>
+    <string name="Navigation.Label.SelectionAdapter.Single.Description">Description</string>
+    <string name="Navigation.Label.SelectionAdapter.Multi">Selection Adapter (multiple)</string>
+    <string name="Navigation.Label.SelectionAdapter.Multi.Description">Description</string>
     <string name="Navigation.Label.HeadersAdapter.Alphabetic">Headers Adapter (alphabetic)</string>
     <string name="Navigation.Label.HeadersAdapter.Alphabetic.Description">Description</string>
     <string name="Navigation.Label.HeadersAdapter.Groups">Headers Adapter (groups)</string>
@@ -49,6 +49,10 @@
     <!-- ## String formats ## -->
     <eat-comment/>
     <string name="Format.SelectedItems">%d selected</string>
+
+    <!-- ## Toast strings ## -->
+    <eat-comment/>
+    <string name="Toast.LongPressToEnableActionMode">Long press on some item to enable action mode</string>
 
     <!-- ## Adapters data ## -->
     <string-array name="Data.Models" parent="">

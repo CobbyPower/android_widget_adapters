@@ -28,8 +28,8 @@ import com.wit.android.examples.internal.app.fragment.ExFragmentFactory;
 import com.wit.android.widget.adapter.examples.fragment.HeadersAlphabeticAdapterFragment;
 import com.wit.android.widget.adapter.examples.fragment.HeadersGroupsAdapterFragment;
 import com.wit.android.widget.adapter.examples.fragment.SelectionAndHeadersAdapterFragment;
-import com.wit.android.widget.adapter.examples.fragment.SelectionCheckAdapterFragment;
-import com.wit.android.widget.adapter.examples.fragment.SelectionSimpleAdapterFragment;
+import com.wit.android.widget.adapter.examples.fragment.SelectionMultiAdapterFragment;
+import com.wit.android.widget.adapter.examples.fragment.SelectionSingleAdapterFragment;
 import com.wit.android.widget.adapter.examples.fragment.SimpleAdapterFragment;
 
 /**
@@ -61,10 +61,10 @@ public class FragmentsFactory extends ExFragmentFactory {
 				fragment = SimpleAdapterFragment.newInstance();
 				break;
 			case FRAGMENT_SELECTION_SIMPLE_ADAPTER:
-				fragment = SelectionSimpleAdapterFragment.newInstance();
+				fragment = SelectionSingleAdapterFragment.newInstance();
 				break;
 			case FRAGMENT_SELECTION_CHECK_ADAPTER:
-				fragment = SelectionCheckAdapterFragment.newInstance();
+				fragment = SelectionMultiAdapterFragment.newInstance();
 				break;
 			case FRAGMENT_HEADERS_ALPHABETIC_ADAPTER:
 				fragment = HeadersAlphabeticAdapterFragment.newInstance();
