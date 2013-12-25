@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="android-device-1.0">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/com/wit/android/android-device/1.0/android-device-1.0.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
