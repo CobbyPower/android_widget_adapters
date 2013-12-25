@@ -39,12 +39,11 @@
 @SET MAVEN_JAR_JAVADOC=%MAVEN_GROUP_PATH%%LIBRARY_NAME%\%LIBRARY_VERSION%\%LIBRARY_NAME%-%LIBRARY_VERSION%-javadoc.jar
 :: Library parameters
 @SET LIBRARY_DIR=..\
-@SET LIBRARY_LIB_DIR=%LIBRARY_DIR%\lib\
+@SET LIBRARY_ARTIFACTS_DIR=%LIBRARY_DIR%\artifacts\
 :: Build the names of jar files
-@SET LIBRARY_JAR=%LIBRARY_LIB_DIR%%LIBRARY_NAME%-%LIBRARY_VERSION%.jar
-@SET LIBRARY_JAR_WITH_JAVADOC=%LIBRARY_LIB_DIR%%LIBRARY_NAME%-%LIBRARY_VERSION%-with-javadoc.jar
-@SET LIBRARY_JAR_SOURCES=%LIBRARY_LIB_DIR%%LIBRARY_NAME%-%LIBRARY_VERSION%-sources.jar
-@SET LIBRARY_JAR_JAVADOC=%LIBRARY_LIB_DIR%%LIBRARY_NAME%-%LIBRARY_VERSION%-javadoc.jar
+@SET LIBRARY_JAR=%LIBRARY_ARTIFACTS_DIR%%LIBRARY_NAME%-%LIBRARY_VERSION%.jar
+@SET LIBRARY_JAR_SOURCES=%LIBRARY_ARTIFACTS_DIR%%LIBRARY_NAME%-%LIBRARY_VERSION%-sources.jar
+@SET LIBRARY_JAR_JAVADOC=%LIBRARY_ARTIFACTS_DIR%%LIBRARY_NAME%-%LIBRARY_VERSION%-javadoc.jar
 :: ------------------------------------------------------------------------------------
 :: Save input parameter.
 @SET PARAM=%1
@@ -52,13 +51,11 @@
 :: Check action to perform.
 IF [%PARAM%]==[-type] GOTO ListTypes
 IF [%PARAM%]==[jar] GOTO Jar
-IF [%PARAM%]==[jar-doc] GOTO JarDoc
 IF [%PARAM%]==[support] GOTO Support
 GOTO UnknownParameter
 :ListTypes
 ECHO.Use one of the types listed below:
 ECHO.- jar (to load jar file with compiled code)
-ECHO.- jar-doc (to load jar file with compiled code and also documentation)
 ECHO.- support (to load all support jars: sources + documentation)
 GOTO Finish
 :: ------------------------------------------------------------------------------------
@@ -73,20 +70,6 @@ IF EXIST %LIBRARY_JAR% (
     -DartifactId=%LIBRARY_NAME%^
     -Dversion=%LIBRARY_VERSION%^
     -Dfile=%LIBRARY_JAR%^
-    -Dpackaging=jar^
-    -DgeneratePom=true
-)
-GOTO Finish
-:: ------------------------------------------------------------------------------------
-:JarDoc
-ECHO.Loading jar file with compiled code and documentation into maven local repository ...
-:: Jar with compiled source code and java documentation
-IF EXIST %LIBRARY_JAR_WITH_JAVADOC% (
-    mvn install:install-file^
-    -DgroupId=%MAVEN_GROUP_ID%^
-    -DartifactId=%LIBRARY_NAME%^
-    -Dversion=%LIBRARY_VERSION%^
-    -Dfile=%LIBRARY_JAR_WITH_JAVADOC%^
     -Dpackaging=jar^
     -DgeneratePom=true
 )

@@ -1,0 +1,89 @@
+apply plugin: 'android-library'
+
+/**
+ * Library dependencies ======================================================
+ */
+dependencies {
+    compile rootProject.supportLibrary
+}
+
+/**
+ * Android Library options ===================================================
+ */
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    buildToolsVersion rootProject.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+    }
+}
+
+/**
+ * Additional gradle tasks ===================================================
+ */
+// Tasks to generate library, javadoc and sources .jar! files into build directory.
+android.libraryVariants.all { variant ->
+    task("${variant.name}GenerateJavadoc", type: Javadoc) {
+        description "Generates Javadoc for $variant.name."
+        source = variant.javaCompile.source
+        ext.androidJar = "${android.plugin.sdkDirectory}/platforms/${android.compileSdkVersion}/android.jar"
+        classpath = files(variant.javaCompile.classpath.files) + files(ext.androidJar)
+    }
+
+    task("${variant.name}Jar", type: Jar) {
+        description "Bundles compiled .class files into a .jar! file for $variant.name."
+        dependsOn variant.javaCompile
+        from variant.javaCompile.destinationDir
+        exclude '*R.class', '*R$*.class', '*R.html', '*R.*.html'
+    }
+
+    task("${variant.name}Javadoc", type: Jar) {
+        classifier = "javadoc"
+        description "Bundles Javadoc into a .jar! file for $variant.name."
+        from tasks["${variant.name}GenerateJavadoc"]
+    }
+
+    task("${variant.name}Sources", type: Jar) {
+        classifier = "sources"
+        description "Bundles Raw sources into a .jar! file for $variant.name."
+        from 'src/main/java'
+    }
+
+    task("${variant.name}Library", dependsOn: [assembleRelease, "${variant.name}Jar", "${variant.name}Javadoc", "${variant.name}Sources"]) {}
+}
+
+/**
+ * Task to update all(library, javadoc, sources) artifacts.
+ */
+task updateArtifacts {
+    // TODO: clean artifacts
+    // TODO: clean build/libs
+    updateArtifact('library')
+    updateArtifact('library-javadoc')
+    updateArtifact('library-sources')
+}
+
+/**
+ * Additional gradle methods =================================================
+ */
+/**
+ * Copies artifact file with the given name into artifacts directory
+ * and rename it to library name and current library version.
+ *
+ * @param artifactName
+ */
+def updateArtifact(artifactName) {
+    copy {
+        from 'build/libs/' + artifactName + '.jar'
+        into '../artifacts'
+
+        // Rename .jar! file to match library name and current library version.
+        rename { String fileName ->
+            fileName.replace(
+                    'library',
+                    rootProject.libraryName + '-' + rootProject.libraryVersion)
+        }
+    }
+}
