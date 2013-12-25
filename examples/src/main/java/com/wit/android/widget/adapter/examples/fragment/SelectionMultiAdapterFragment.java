@@ -93,13 +93,17 @@ public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMulti
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		mAdapter.dispatchSaveInstanceState(outState);
+		if (hasAdapter()) {
+			mAdapter.dispatchSaveInstanceState(outState);
+		}
 	}
 
 	@Override
 	public void onViewStateRestored(Bundle savedInstanceState) {
 		super.onViewStateRestored(savedInstanceState);
-		getAdapter().dispatchRestoreInstanceState(savedInstanceState);
+		if (hasAdapter()) {
+			getAdapter().dispatchRestoreInstanceState(savedInstanceState);
+		}
 	}
 
 	private void updateSelectedItemsText(int selectedCount) {

@@ -20,6 +20,7 @@
  */
 package com.wit.android.widget.adapter.examples;
 
+import com.wit.android.examples.annotations.ExDelay;
 import com.wit.android.examples.annotations.ExHomeActivity;
 import com.wit.android.examples.annotations.ExLogo;
 import com.wit.android.examples.app.ExSplashActivity;
@@ -31,6 +32,7 @@ import com.wit.android.examples.app.ExSplashActivity;
  *
  * @author Martin Albedinsky
  */
-@ExHomeActivity(HomeActivity.class)
+@ExDelay(1000)
 @ExLogo(R.drawable.ic_logo)
+@ExHomeActivity(HomeActivity.class)
 public class SplashActivity extends ExSplashActivity {}

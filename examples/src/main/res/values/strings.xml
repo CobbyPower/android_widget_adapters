@@ -43,7 +43,7 @@
     <string name="Navigation.Label.HeadersAdapter.Alphabetic.Description">Description</string>
     <string name="Navigation.Label.HeadersAdapter.Groups">Headers Adapter (groups)</string>
     <string name="Navigation.Label.HeadersAdapter.Groups.Description">Description</string>
-    <string name="Navigation.Label.SelectionAndHeadersAdapter">Selection &amp; Headers Module</string>
+    <string name="Navigation.Label.SelectionAndHeadersAdapter">Selection &amp; Headers Adapter</string>
     <string name="Navigation.Label.SelectionAndHeadersAdapter.Description">Description</string>
     
     <!-- ## String formats ## -->

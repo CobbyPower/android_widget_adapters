@@ -81,7 +81,9 @@ public class FragmentsFactory extends ExFragmentFactory {
 
 	@Override
 	public ExFragmentController.ShowOptions getFragmentShowOptions(int fragmentID) {
-		return new ExFragmentController.ShowOptions().showDirection(ExFragmentController.ShowDirection.FROM_RIGHT).addToBackStack(true);
+		return new ExFragmentController.ShowOptions()
+				.showDirection(ExFragmentController.ShowDirection.FROM_RIGHT)
+				.addToBackStack(false);
 	}
 
 	@Override

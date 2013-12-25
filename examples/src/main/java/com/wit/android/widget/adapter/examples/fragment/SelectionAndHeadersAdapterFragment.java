@@ -116,7 +116,9 @@ public class SelectionAndHeadersAdapterFragment extends ExListFragment<Selection
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		mAdapter.dispatchSaveInstanceState(outState);
+		if (hasAdapter()) {
+			getAdapter().dispatchSaveInstanceState(outState);
+		}
 	}
 
 	/**
@@ -124,7 +126,9 @@ public class SelectionAndHeadersAdapterFragment extends ExListFragment<Selection
 	@Override
 	public void onViewStateRestored(Bundle savedInstanceState) {
 		super.onViewStateRestored(savedInstanceState);
-		getAdapter().dispatchRestoreInstanceState(savedInstanceState);
+		if (hasAdapter()) {
+			getAdapter().dispatchRestoreInstanceState(savedInstanceState);
+		}
 	}
 
 	private void updateSelectedItemsText(int selectedCount) {

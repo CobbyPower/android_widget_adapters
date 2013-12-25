@@ -59,12 +59,16 @@ public class SelectionSingleAdapterFragment extends ExListFragment<SelectionSing
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
-		getAdapter().dispatchSaveInstanceState(outState);
+		if (hasAdapter()) {
+			getAdapter().dispatchSaveInstanceState(outState);
+		}
 	}
 
 	@Override
 	public void onViewStateRestored(Bundle savedInstanceState) {
 		super.onViewStateRestored(savedInstanceState);
-		getAdapter().dispatchRestoreInstanceState(savedInstanceState);
+		if (hasAdapter()) {
+			getAdapter().dispatchRestoreInstanceState(savedInstanceState);
+		}
 	}
 }

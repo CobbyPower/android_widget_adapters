@@ -19,11 +19,11 @@
  * under the License.
  * =================================================================================
  */
-
+ 
 /*
  * Global styling ========================
  */
-
+  
 body, html, p, span, div, ul, li, h1, h2, h3, h4, h5, h6 {
 	margin: 0;
 	border: 0;
@@ -32,7 +32,7 @@ body, html, p, span, div, ul, li, h1, h2, h3, h4, h5, h6 {
 html {
 	margin: 10px;
 }
-
+ 
 h1, h2, h3, h4, h5, h6 {
 	margin: 10px 0px 5px 0px;
 }
@@ -40,13 +40,13 @@ h1, h2, h3, h4, h5, h6 {
 p {
 	margin: 5px 0px;
 }
-
+ 
 body {
-	color: #fff;
+	color: #ffffff;
 }
-
+ 
 h1, h2, h3, h4, h5, h6{
-	color: #138cd9;
+	color: #4ece63;
 }
 
 a {
@@ -55,8 +55,8 @@ a {
 }
 
 a:HOVER {
-	color: #138cd9;
-	text-decoration: underline;
+	color: #4ece63;
+	text-decoration: underline;	
 }
 
 p {

@@ -64,7 +64,13 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	 * <p>
 	 * </p>
 	 */
-	protected static final String BUNDLE_SELECTED_ITEMS = "com.wit.and.widget.adapter.module.SelectionModule.Bundle.SelectedItems";
+	protected static final String BUNDLE_SELECTED_ITEMS = "com.wit.android.widget.adapter.module.SelectionModule.Bundle.SelectedItems";
+
+	/**
+	 * <p>
+	 * </p>
+	 */
+	protected static final String BUNDLE_MODE =  "com.wit.android.widget.adapter.module.SelectionModule.Bundle.Mode";
 
 	/**
 	 * Bundle identifiers.
@@ -291,30 +297,6 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	}
 
 	/**
-	 *
-	 */
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putIntArray(BUNDLE_SELECTED_ITEMS, getSelectedPositions());
-	}
-
-	/**
-	 *
-	 */
-	@Override
-	public void onRestoreInstanceState(Bundle savedState) {
-		super.onRestoreInstanceState(savedState);
-		int[] selected = savedState.getIntArray(BUNDLE_SELECTED_ITEMS);
-		if (selected != null && selected.length > 0) {
-			for (int i : selected) {
-				selectItem(i);
-			}
-		}
-		notifyAdapter();
-	}
-
-	/**
 	 * Getters + Setters ---------------------
 	 */
 
@@ -468,6 +450,41 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	}
 
 	/**
+	 *
+	 */
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+
+		// Save mode.
+		outState.putInt(BUNDLE_MODE, mMode);
+
+		// Change mode to obtain selected positions.
+		mMode = MODE_MULTIPLE;
+		// Save selected item positions.
+		outState.putIntArray(BUNDLE_SELECTED_ITEMS, getSelectedPositions());
+	}
+
+	/**
+	 *
+	 */
+	@Override
+	protected void onRestoreInstanceState(Bundle savedState) {
+		super.onRestoreInstanceState(savedState);
+
+		// Restore selected item positions.
+		int[] selected = savedState.getIntArray(BUNDLE_SELECTED_ITEMS);
+		if (selected != null && selected.length > 0) {
+			for (int i : selected) {
+				selectItem(i);
+			}
+		}
+		// Restore mode.
+		this.mMode = savedState.getInt(BUNDLE_MODE);
+		notifyAdapter();
+	}
+
+	/**
 	 * Private -------------------------------
 	 */
 
@@ -480,7 +497,7 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	 */
 	private void checkActualModeFor(int requiredMode, String action) {
 		if (mMode != requiredMode)
-			throw new IllegalStateException("Can't " + action + ". Not in required mode(" + getModeName(requiredMode) + ").");
+			throw new IllegalStateException("Can't " + action + ". Not in required(" + getModeName(requiredMode) + ") mode.");
 	}
 
 	/**
