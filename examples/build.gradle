@@ -5,7 +5,7 @@ repositories {
 }
 
 dependencies {
-    compile project(':android_widget_adapters')
+    compile project(':android-widget-adapters')
     compile 'com.wit.android:android-examples:+@aar'
     compile rootProject.appCompatLibrary
 }

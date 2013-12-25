@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/android-widget-adapters/android-widget-adapters.iml" filepath="$PROJECT_DIR$/android-widget-adapters/android-widget-adapters.iml" />
       <module fileurl="file://$PROJECT_DIR$/android_widget_adapters.iml" filepath="$PROJECT_DIR$/android_widget_adapters.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android_widget_adapters/android_widget_adapters-android_widget_adapters.iml" filepath="$PROJECT_DIR$/android_widget_adapters/android_widget_adapters-android_widget_adapters.iml" />
       <module fileurl="file://$PROJECT_DIR$/examples/examples.iml" filepath="$PROJECT_DIR$/examples/examples.iml" />
     </modules>
   </component>
