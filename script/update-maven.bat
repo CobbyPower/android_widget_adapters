@@ -33,13 +33,12 @@
 :: ------------------------------------------------------------------------------------
 :: Maven repository parameters
 @SET MAVEN_LOCAL_PATH=C:\Users\Martin\.m2\repository\
-@SET MAVEN_GROUP_PATH=%MAVEN_LOCAL_PATH%com\wit\android\
-@SET MAVEN_GROUP_ID=com.wit.android
-@SET MAVEN_JAR_SOURCES=%MAVEN_GROUP_PATH%%LIBRARY_NAME%\%LIBRARY_VERSION%\%LIBRARY_NAME%-%LIBRARY_VERSION%-sources.jar
-@SET MAVEN_JAR_JAVADOC=%MAVEN_GROUP_PATH%%LIBRARY_NAME%\%LIBRARY_VERSION%\%LIBRARY_NAME%-%LIBRARY_VERSION%-javadoc.jar
+@SET MAVEN_LIBRARY_GROUP_PATH=%MAVEN_LOCAL_PATH%com\wit\android\
+@SET MAVEN_LIBRARY_GROUP_ID=com.wit.android
+@SET MAVEN_LIBRARY_JAR_SOURCES=%MAVEN_LIBRARY_GROUP_PATH%%LIBRARY_NAME%\%LIBRARY_VERSION%\%LIBRARY_NAME%-%LIBRARY_VERSION%-sources.jar
+@SET MAVEN_LIBRARY_JAR_JAVADOC=%MAVEN_LIBRARY_GROUP_PATH%%LIBRARY_NAME%\%LIBRARY_VERSION%\%LIBRARY_NAME%-%LIBRARY_VERSION%-javadoc.jar
 :: Library parameters
-@SET LIBRARY_DIR=..\
-@SET LIBRARY_ARTIFACTS_DIR=%LIBRARY_DIR%\artifacts\
+@SET LIBRARY_ARTIFACTS_DIR=..\artifacts\
 :: Build the names of jar files
 @SET LIBRARY_JAR=%LIBRARY_ARTIFACTS_DIR%%LIBRARY_NAME%-%LIBRARY_VERSION%.jar
 @SET LIBRARY_JAR_SOURCES=%LIBRARY_ARTIFACTS_DIR%%LIBRARY_NAME%-%LIBRARY_VERSION%-sources.jar
@@ -66,7 +65,7 @@ ECHO.Loading jar file with compiled code into maven local repository ...
 :: Jar with compiled source code
 IF EXIST %LIBRARY_JAR% (
     mvn install:install-file^
-    -DgroupId=%MAVEN_GROUP_ID%^
+    -DgroupId=%MAVEN_LIBRARY_GROUP_ID%^
     -DartifactId=%LIBRARY_NAME%^
     -Dversion=%LIBRARY_VERSION%^
     -Dfile=%LIBRARY_JAR%^
@@ -80,11 +79,11 @@ ECHO.Loading support jar files (sources + documentation) into maven local reposi
 :: This actually only copies these jar files into local path
 :: Jar with only java documentation
 IF EXIST %LIBRARY_JAR_JAVADOC% (
-    COPY %LIBRARY_JAR_JAVADOC% %MAVEN_JAR_JAVADOC% /Y
+    COPY %LIBRARY_JAR_JAVADOC% %MAVEN_LIBRARY_JAR_JAVADOC% /Y
 )
 :: Jar with sources
 IF EXIST %LIBRARY_JAR_SOURCES% (
-    COPY %LIBRARY_JAR_SOURCES% %MAVEN_JAR_SOURCES% /Y
+    COPY %LIBRARY_JAR_SOURCES% %MAVEN_LIBRARY_JAR_SOURCES% /Y
 )
 ECHO.Loading of support jar files successfully finished.
 GOTO Finish
