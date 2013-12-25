@@ -3,7 +3,7 @@
 local.properties
 
 # Modules build directories
-android_widget_adapters/build/
+android-widget-adapters/build/
 examples/build/
 
 # Gradle files
