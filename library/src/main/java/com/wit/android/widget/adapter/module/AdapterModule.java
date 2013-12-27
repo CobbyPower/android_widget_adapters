@@ -25,10 +25,11 @@ import android.os.Bundle;
 /**
  * <h4>Class Overview</h4>
  * <p>
+ * Base implementation for adapter module, which can help to clearly manage
+ * a data set of an adapter.
  * </p>
  *
- * @param <Adapter> Type of the adapter for which is this module created.
- *
+ * @param <Adapter> Type of the adapter for which can be this module created and used.
  * @author Martin Albedinsky
  */
 public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter> {
@@ -65,7 +66,7 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 */
 
 	/**
-	 *
+	 * The adapter to which is this module attached.
 	 */
 	private Adapter mAdapter;
 
@@ -82,7 +83,8 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 */
 
 	/**
-	 *
+	 * Flag indicating whether the adapter to which is this module attached, should be
+	 * notified in case, that the data set of this adapter module was changed.
 	 */
 	private boolean bAdapterNotificationEnabled = true;
 
@@ -100,21 +102,32 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 
 	/**
 	 * <p>
+	 * Called to save state of this adapter module instance. If the given <var>outState</var>
+	 * is invalid, there will be created a new bundle and the {@link #onSaveInstanceState(android.os.Bundle)}
+	 * will be invoked immediately.
 	 * </p>
 	 *
-	 * @param outState
+	 * @param outState Outgoing state in which should this adapter module instance save its
+	 *                 state.
+	 * @see #onSaveInstanceState(android.os.Bundle)
 	 */
 	public void dispatchSaveInstanceState(Bundle outState) {
 		if (outState != null) {
-			onSaveInstanceState(outState);
+			outState = new Bundle();
 		}
+		onSaveInstanceState(outState);
 	}
 
 	/**
 	 * <p>
+	 * Called to restore state of this adapter module instance. If the given <var>savedState</var>
+	 * is valid, the {@link #onRestoreInstanceState(android.os.Bundle)} will be invoked
+	 * immediately.
 	 * </p>
 	 *
-	 * @param savedState
+	 * @param savedState Should be the bundle with saved state in
+	 *                   {@link #onSaveInstanceState(android.os.Bundle)}.
+	 * @see #onRestoreInstanceState(android.os.Bundle)
 	 */
 	public void dispatchRestoreInstanceState(Bundle savedState) {
 		if (savedState != null) {
@@ -124,13 +137,13 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 
 	/**
 	 * <p>
+	 * Called to attach this adapter module to the given adapter.
 	 * </p>
 	 *
-	 * @param adapter
+	 * @param adapter The adapter to which will be this adapter module attached.
 	 */
 	public final void dispatchAttachToAdapter(Adapter adapter) {
-		this.mAdapter = adapter;
-		onAttachToAdapter(adapter);
+		onAttachedToAdapter(mAdapter = adapter);
 	}
 
 	/**
@@ -139,9 +152,13 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 
 	/**
 	 * <p>
+	 * Returns flag indicating whether the adapter to which is this module attached
+	 * should be notified in case, that the data set of this adapter module was changed.
 	 * </p>
 	 *
-	 * @return
+	 * @return <code>True</code> in case, that adapter notification is enabled, <code>false</code>
+	 * otherwise.
+	 * @see #enableAdapterNotification(boolean)
 	 */
 	public boolean isAdapterNotificationEnabled() {
 		return bAdapterNotificationEnabled;
@@ -149,9 +166,13 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 
 	/**
 	 * <p>
+	 * Sets flag indicating whether the adapter to which is this module attached
+	 * should be notified in case, that the data set of this adapter module was
+	 * changed.
 	 * </p>
 	 *
-	 * @param enable
+	 * @param enable <code>True</code> to enable, <code>false</code> to disable.
+	 * @see #isAdapterNotificationEnabled()
 	 */
 	public void enableAdapterNotification(boolean enable) {
 		this.bAdapterNotificationEnabled = enable;
@@ -163,38 +184,46 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 
 	/**
 	 * <p>
-	 * Invoked to save state of this module.
+	 * Invoked to save state of this adapter module instance. This is invoked whenever the
+	 * {@link #dispatchSaveInstanceState(android.os.Bundle)} is called.
 	 * </p>
 	 *
-	 * @param outState Outgoing bundle state. Always valid bundle.
+	 * @param outState Outgoing state. Always valid bundle.
+	 * @see #onRestoreInstanceState(android.os.Bundle)
 	 */
 	protected void onSaveInstanceState(Bundle outState) {
 	}
 
 	/**
 	 * <p>
-	 * Invoked to restore saved state of this module.
+	 * Invoked to restore state of this adapter module instance. Note, that this is invoked
+	 * only in case that the bundle passed to the {@link #dispatchRestoreInstanceState(android.os.Bundle)}
+	 * is valid.
 	 * </p>
 	 *
-	 * @param savedState Saved adapter state. Always valid bundle.
+	 * @param savedState Bundle with saved data populated in the
+	 *                   {@link #onSaveInstanceState(Bundle)}. Always valid bundle.
 	 */
 	protected void onRestoreInstanceState(Bundle savedState) {
 	}
 
 	/**
 	 * <p>
+	 * Invoked immediately after the
+	 * {@link #dispatchAttachToAdapter(com.wit.android.widget.adapter.module.AdapterModule.ModuleAdapter)}.
 	 * </p>
 	 *
-	 * @param adapter
+	 * @param adapter The adapter to which was this module right now attached.
 	 */
-	protected void onAttachToAdapter(Adapter adapter) {
+	protected void onAttachedToAdapter(Adapter adapter) {
 	}
 
 	/**
 	 * <p>
+	 * Returns the adapter to which is this module attached.
 	 * </p>
 	 *
-	 * @return
+	 * @return The attached adapter.
 	 */
 	protected final Adapter getAdapter() {
 		return mAdapter;
@@ -202,7 +231,13 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 
 	/**
 	 * <p>
+	 * Notifies the adapter to which is this module attached. This should be fired
+	 * whenever the data set of this module adapter on which is the attached adapter ?
+	 * ???, was changed.
 	 * </p>
+	 *
+	 * @see #isAdapterNotificationEnabled()
+	 * @see #enableAdapterNotification(boolean)
 	 */
 	protected final void notifyAdapter() {
 		if (isAdapterNotificationEnabled()) {

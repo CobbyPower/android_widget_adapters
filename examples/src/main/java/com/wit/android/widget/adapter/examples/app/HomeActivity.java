@@ -18,7 +18,7 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.examples;
+package com.wit.android.widget.adapter.examples.app;
 
 import android.os.Bundle;
 
@@ -26,7 +26,8 @@ import com.wit.android.examples.app.ExHomeActivity;
 import com.wit.android.examples.model.navigation.INavigationItem;
 import com.wit.android.examples.model.navigation.NavigationHeader;
 import com.wit.android.examples.model.navigation.NavigationItem;
-import com.wit.android.widget.adapter.examples.fragment.factory.FragmentsFactory;
+import com.wit.android.widget.adapter.examples.R;
+import com.wit.android.widget.adapter.examples.app.fragment.factory.FragmentsFactory;
 
 import java.util.ArrayList;
 import java.util.List;

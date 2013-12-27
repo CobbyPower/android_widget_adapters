@@ -24,27 +24,22 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.wit.android.widget.adapter.internal.view.IStateView;
-import com.wit.android.widget.adapter.widget.StateRelativeLayout;
+import com.wit.android.widget.adapter.internal.view.ISelectableView;
 
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Updated {@link View} to handle custom management of the states in the adapter
- * view (especially when the ListView or GridView should provide multiple
- * selection mode).
+ * Updated {@link android.view.View} to allow custom management of the
+ * selection state  of this view when is used in the item view for some
+ * of the {@link android.widget.AdapterView} implementations.
  * </p>
- * <p>
- * See also {@link com.wit.android.widget.adapter.widget.StateLinearLayout} and {@link StateRelativeLayout} which
- * provides this functionality too.
- * </p>
- *
- * @see View
- * @see IStateView
  *
  * @author Martin Albedinsky
+ * @see com.wit.android.widget.adapter.widget.StateLinearLayout
+ * @see com.wit.android.widget.adapter.widget.StateRelativeLayout
+ * @see com.wit.android.widget.adapter.widget.StateFrameLayout
  */
-public class StateView extends View implements IStateView {
+public class StateView extends View implements ISelectableView {
 
 	/**
 	 * Constants =============================
@@ -82,11 +77,6 @@ public class StateView extends View implements IStateView {
 	 */
 
 	/**
-	 * Visibility changed callback.
-	 */
-	private OnStateViewVisibilityListener iVisibilityListener;
-
-	/**
 	 * Arrays --------------------------------
 	 */
 
@@ -97,20 +87,16 @@ public class StateView extends View implements IStateView {
 	/**
 	 * Indicates if the view should default handle states.
 	 */
-	private boolean bHandleDefaultStates = true;
+	private boolean bAllowDefaultSelection = true;
 
 	/**
 	 * Constructors ==========================
 	 */
 
 	/**
-	 * <br/>
-	 * <h5><i></i></h5>
 	 * <p>
-	 * Constructor #1.
+	 * Same as {@link android.view.View#View(android.content.Context)}.
 	 * </p>
-	 *
-	 * @param context The actual application context.
 	 */
 	public StateView(Context context) {
 		super(context);
@@ -118,10 +104,8 @@ public class StateView extends View implements IStateView {
 
 	/**
 	 * <p>
+	 * Same as {@link android.view.View#View(android.content.Context, android.util.AttributeSet)}.
 	 * </p>
-	 *
-	 * @param context The actual application context.
-	 * @param attrs
 	 */
 	public StateView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -129,11 +113,8 @@ public class StateView extends View implements IStateView {
 
 	/**
 	 * <p>
+	 * Same as {@link android.view.View#View(android.content.Context, android.util.AttributeSet, int)}.
 	 * </p>
-	 *
-	 * @param context  The actual application context.
-	 * @param attrs
-	 * @param defStyle
 	 */
 	public StateView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -152,7 +133,6 @@ public class StateView extends View implements IStateView {
 	 */
 
 	/**
-	 *
 	 */
 	@Override
 	public void setSelected(boolean selected) {
@@ -163,13 +143,12 @@ public class StateView extends View implements IStateView {
 		 * method implemented below is override for this to handle custom
 		 * selecting of the view.
 		 */
-		if (handleDefaultStates()) {
+		if (allowsDefaultSelection()) {
 			super.setSelected(selected);
 		}
 	}
 
 	/**
-	 *
 	 */
 	@Override
 	public void setSelectionState(boolean selected) {
@@ -177,45 +156,22 @@ public class StateView extends View implements IStateView {
 	}
 
 	/**
-	 *
 	 */
 	@Override
-	public void setHandleDefaultStates(boolean handle) {
-		this.bHandleDefaultStates = handle;
+	public void setAllowDefaultSelection(boolean allow) {
+		this.bAllowDefaultSelection = allow;
 	}
 
 	/**
-	 *
 	 */
 	@Override
-	public boolean handleDefaultStates() {
-		return bHandleDefaultStates;
-	}
-
-	/**
-	 *
-	 */
-	@Override
-	public void setOnVisibilityListener(OnStateViewVisibilityListener listener) {
-		iVisibilityListener = listener;
+	public boolean allowsDefaultSelection() {
+		return bAllowDefaultSelection;
 	}
 
 	/**
 	 * Protected -----------------------------
 	 */
-
-	/**
-	 *
-	 */
-	@Override
-	protected void onVisibilityChanged(View changedView, int visibility) {
-		super.onVisibilityChanged(changedView, visibility);
-
-		if (iVisibilityListener != null) {
-			// Fire visibility changed callback.
-			iVisibilityListener.onVisibilityChanged(changedView, visibility);
-		}
-	}
 
 	/**
 	 * Private -------------------------------
@@ -232,34 +188,4 @@ public class StateView extends View implements IStateView {
 	/**
 	 * Interface =============================
 	 */
-
-	/**
-	 * <h4>Interface Overview</h4>
-	 * <p>
-	 * Interface to handle callback when the state view visibility was changed.
-	 * </p>
-	 *
-	 * @author Martin Albedinsky
-	 */
-	public static interface OnStateViewVisibilityListener {
-
-		/**
-		 * Methods ===============================
-		 */
-
-		/**
-		 * <br/>
-		 * <h5><i>public void onVisibilityChanged(View stateView, int
-		 * visibility)</i></h5>
-		 * <p>
-		 * Invoked from the state view when its (see {@link View} .
-		 * <code>onVisibilityChanged()</code> description) visibility was
-		 * changed.
-		 * </p>
-		 *
-		 * @param stateView  This isn't necessary the <code>IStateView</code> child.
-		 * @param visibility Actual visibility of the passed view.
-		 */
-		public void onVisibilityChanged(View stateView, int visibility);
-	}
 }

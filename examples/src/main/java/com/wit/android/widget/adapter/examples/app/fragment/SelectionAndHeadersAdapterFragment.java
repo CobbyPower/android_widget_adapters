@@ -18,20 +18,22 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.examples.fragment;
+package com.wit.android.widget.adapter.examples.app.fragment;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.wit.android.examples.app.fragment.ExListFragment;
 import com.wit.android.widget.adapter.examples.R;
-import com.wit.android.widget.adapter.examples.adapter.SelectionMultiAdapter;
+import com.wit.android.widget.adapter.examples.adapter.SelectionAndHeadersAdapter;
 
 /**
  * <p>
@@ -40,32 +42,49 @@ import com.wit.android.widget.adapter.examples.adapter.SelectionMultiAdapter;
  *
  * @author Martin Albedinsky
  */
-public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMultiAdapter> {
+public class SelectionAndHeadersAdapterFragment extends ExListFragment<SelectionAndHeadersAdapter> {
 
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = SelectionMultiAdapterFragment.class.getSimpleName();
+	private static final String TAG = SelectionAndHeadersAdapterFragment.class.getSimpleName();
+
+	private SelectionAndHeadersAdapter mAdapter;
 
 	private ActionMode mActionMode;
 
 	private String mSelectedItemsFormat;
 
-	private SelectionMultiAdapter mAdapter;
-
-	public static SelectionMultiAdapterFragment newInstance() {
-		return new SelectionMultiAdapterFragment();
+	public static SelectionAndHeadersAdapterFragment newInstance() {
+		return new SelectionAndHeadersAdapterFragment();
 	}
 
+	/**
+	 */
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.listview, null);
+	}
+
+	/**
+	 */
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
 		this.mSelectedItemsFormat = getString(R.string.Format_SelectedItems);
-		setAdapter(mAdapter = new SelectionMultiAdapter(getActivity()));
+		// Do not show divider.
+		getListView().setDividerHeight(0);
+		setAdapter(mAdapter = new SelectionAndHeadersAdapter(getActivity()));
 	}
 
+	/**
+	 */
 	@Override
 	protected void onListItemClick(ListView listView, View itemView, int position, long id) {
+		if (!mAdapter.isItemAt(position)) {
+			return;
+		}
+
 		// Update selected items only when in action mode.
 		if (mActionMode != null) {
 			mAdapter.toggleItemSelectionState(position);
@@ -76,10 +95,12 @@ public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMulti
 		}
 	}
 
+	/**
+	 */
 	@Override
 	protected boolean onListItemLongClick(ListView listView, View itemView, int position, long id) {
-		if (mActionMode != null) {
-			// Already in the action mode.
+		if (!mAdapter.isItemAt(position) || mActionMode != null) {
+			// Already in the action mode or no item long pressed.
 			return false;
 		}
 
@@ -90,14 +111,18 @@ public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMulti
 		return true;
 	}
 
+	/**
+	 */
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		if (hasAdapter()) {
-			mAdapter.dispatchSaveInstanceState(outState);
+			getAdapter().dispatchSaveInstanceState(outState);
 		}
 	}
 
+	/**
+	 */
 	@Override
 	public void onViewStateRestored(Bundle savedInstanceState) {
 		super.onViewStateRestored(savedInstanceState);

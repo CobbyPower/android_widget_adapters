@@ -20,18 +20,18 @@
  */
 package com.wit.android.widget.adapter.internal.view;
 
-import com.wit.android.widget.adapter.view.StateView;
-
 /**
  * <h4>Interface Overview</h4>
  * <p>
- * Simple interface for state views. This is used for the state views which
- * should handle the custom handling of its states.
+ * Base interface for selectable views. Allows to enable/disable default
+ * management of the selection state of a selectable view implementation
+ * and provides replaced method ({@link #setSelectionState(boolean)})
+ * for custom selection state management.
  * </p>
- * 
+ *
  * @author Martin Albedinsky
  */
-public interface IStateView {
+public interface ISelectableView {
 
 	/**
 	 * Methods ===============================
@@ -39,43 +39,35 @@ public interface IStateView {
 
 	/**
 	 * <p>
-	 * Sets the boolean flag to indicate if the view should handle default
-	 * states.
+	 * Sets flag indicating whether this view should allow default selection state
+	 * management or not.
 	 * </p>
-	 * 
-	 * @param handle
-	 *            If set to true the view will handle default setting of the
-	 *            states otherwise states of this view can be handled only using
-	 *            by overriding methods.
+	 *
+	 * @param allow <code>True</code> to allow default selection in this view,
+	 *              <code>false</code> otherwise.
+	 * @see #allowsDefaultSelection()
+	 * @see #setSelectionState(boolean)
 	 */
-	public void setHandleDefaultStates(boolean handle);
+	public void setAllowDefaultSelection(boolean allow);
 
 	/**
 	 * <p>
-	 * Checks if the view handle default states.
+	 * Returns flag indicating whether this view allows default selection or not.
 	 * </p>
-	 * 
-	 * @return True if the view handle default states otherwise false.
+	 *
+	 * @return <code>True</code> if default selection is allowed,
+	 * <code>false</code> otherwise.
+	 * @see #setAllowDefaultSelection(boolean)
+	 * @see #setSelectionState(boolean)
 	 */
-	public boolean handleDefaultStates();
+	public boolean allowsDefaultSelection();
 
 	/**
 	 * <p>
-	 * Sets the selection state of this state view.
+	 * Sets the selection state of this selectable view.
 	 * </p>
-	 * 
-	 * @param selected
-	 *            <code>True</code> for selected, <code>false</code> for unselected.
+	 *
+	 * @param selected <code>True</code> for selected, <code>false</code> for unselected state.
 	 */
 	public void setSelectionState(boolean selected);
-
-	/**
-	 * <p>
-	 * Registers the callback to be invoked when the state view visibility was
-	 * changed.
-	 * </p>
-	 * 
-	 * @param listener
-	 */
-	public void setOnVisibilityListener(StateView.OnStateViewVisibilityListener listener);
 }

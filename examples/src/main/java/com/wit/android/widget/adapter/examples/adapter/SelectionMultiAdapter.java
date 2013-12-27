@@ -96,7 +96,7 @@ public class SelectionMultiAdapter extends SelectionSingleAdapter implements Vie
 			/**
 			 * This is very important. Without this false flag the selection will not be working.
 			 */
-			mLayout.setHandleDefaultStates(false);
+			mLayout.setAllowDefaultSelection(false);
 			this.mTextView = (TextView) mLayout.findViewById(R.id.ListItem_Simple_Check_TextView);
 			this.mCheckBox = (CheckBox) mLayout.findViewById(R.id.ListItem_Simple_Check_CheckBox);
 			// Handle click on the check box.

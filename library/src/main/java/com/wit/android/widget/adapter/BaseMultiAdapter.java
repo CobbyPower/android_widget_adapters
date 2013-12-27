@@ -69,7 +69,7 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	 */
 
 	/**
-	 * Modules manager.
+	 * Manager for adapter's modules.
 	 */
 	private final ModuleManager<Adapter> MODULES_MANAGER = new ModuleManager<Adapter>();
 
@@ -112,7 +112,7 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public void addModule(AdapterModule<Adapter> module, int moduleID) {
+	public void assignModule(AdapterModule<Adapter> module, int moduleID) {
 		module.dispatchAttachToAdapter((Adapter) this);
 		MODULES_MANAGER.addModule(module, moduleID);
 	}
@@ -121,7 +121,7 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <M> M getModule(int moduleID) {
+	public <M> M obtainModule(int moduleID) {
 		return (M) MODULES_MANAGER.getModule(moduleID);
 	}
 

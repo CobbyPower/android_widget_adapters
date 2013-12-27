@@ -114,7 +114,7 @@ public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public void addModule(AdapterModule<Adapter> module, int moduleID) {
+	public void assignModule(AdapterModule<Adapter> module, int moduleID) {
 		module.dispatchAttachToAdapter((Adapter) this);
 		MODULES_MANAGER.addModule(module, moduleID);
 	}
@@ -123,7 +123,7 @@ public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends
 	 */
 	@Override
 	@SuppressWarnings("unchecked")
-	public <M> M getModule(int moduleID) {
+	public <M> M obtainModule(int moduleID) {
 		return (M) MODULES_MANAGER.getModule(moduleID);
 	}
 

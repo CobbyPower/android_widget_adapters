@@ -18,16 +18,14 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.examples.fragment;
+package com.wit.android.widget.adapter.examples.app.fragment;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.wit.android.examples.app.fragment.ExListFragment;
-import com.wit.android.widget.adapter.examples.R;
-import com.wit.android.widget.adapter.examples.adapter.HeadersAlphabeticAdapter;
+import com.wit.android.widget.adapter.examples.adapter.SelectionSingleAdapter;
 
 /**
  * <p>
@@ -36,27 +34,41 @@ import com.wit.android.widget.adapter.examples.adapter.HeadersAlphabeticAdapter;
  *
  * @author Martin Albedinsky
  */
-public class HeadersAlphabeticAdapterFragment extends ExListFragment<HeadersAlphabeticAdapter> {
+public class SelectionSingleAdapterFragment extends ExListFragment<SelectionSingleAdapter> {
 
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = HeadersAlphabeticAdapterFragment.class.getSimpleName();
+	private static final String TAG = SelectionSingleAdapterFragment.class.getSimpleName();
 
-	public static HeadersAlphabeticAdapterFragment newInstance() {
-		return new HeadersAlphabeticAdapterFragment();
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.listview, null);
+	public static SelectionSingleAdapterFragment newInstance() {
+		return new SelectionSingleAdapterFragment();
 	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		// Do not show divider.
-		getListView().setDividerHeight(0);
-		setAdapter(new HeadersAlphabeticAdapter(getActivity()));
+		setAdapter(new SelectionSingleAdapter(getActivity()));
+	}
+
+	@Override
+	protected void onListItemClick(ListView listView, View itemView, int position, long id) {
+		getAdapter().toggleItemSelectionState(position);
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		if (hasAdapter()) {
+			getAdapter().dispatchSaveInstanceState(outState);
+		}
+	}
+
+	@Override
+	public void onViewStateRestored(Bundle savedInstanceState) {
+		super.onViewStateRestored(savedInstanceState);
+		if (hasAdapter()) {
+			getAdapter().dispatchRestoreInstanceState(savedInstanceState);
+		}
 	}
 }

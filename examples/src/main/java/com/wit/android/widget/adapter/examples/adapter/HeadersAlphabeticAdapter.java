@@ -71,7 +71,7 @@ public class HeadersAlphabeticAdapter extends BaseMultiAdapter<HeadersAlphabetic
 
 		// Adding module, attaches this adapter to it and also saving/restoring state can be handled
 		// when invoking onSaveInstanceState() onRestoreInstanceState() on this adapter form its context.
-		addModule(HEADERS, 0);
+		assignModule(HEADERS, 0);
 		// Set attribute which holds the custom style for the header view.
 		// Note, that this attribute must be placed in the main application theme.
 		HEADERS.setHeaderStyleAttr(R.attr.adapterViewHeaderStyle);
@@ -181,7 +181,7 @@ public class HeadersAlphabeticAdapter extends BaseMultiAdapter<HeadersAlphabetic
 
 		ViewHolder(View itemView) {
 			this.mTextView = (StateTextView) itemView;
-			mTextView.setHandleDefaultStates(false);
+			mTextView.setAllowDefaultSelection(false);
 		}
 
 		protected void setText(String text) {

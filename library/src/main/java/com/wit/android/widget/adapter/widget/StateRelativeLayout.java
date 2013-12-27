@@ -22,25 +22,24 @@ package com.wit.android.widget.adapter.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.RelativeLayout;
 
-import com.wit.android.widget.adapter.internal.view.IStateView;
-import com.wit.android.widget.adapter.view.StateView;
+import com.wit.android.widget.adapter.internal.view.ISelectableView;
 
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Updated {@link android.widget.RelativeLayout} to handle custom management of the states in
- * the list view (especially when the ListView or GridView should provide
- * multiple selection mode).
+ * Updated {@link android.widget.RelativeLayout} to allow custom management of
+ * the selection state of this layout when is used in the item view for some
+ * of the {@link android.widget.AdapterView} implementations.
  * </p>
  *
  * @author Martin Albedinsky
- * @see RelativeLayout
- * @see IStateView
+ * @see com.wit.android.widget.adapter.view.StateView
+ * @see com.wit.android.widget.adapter.widget.StateLinearLayout
+ * @see com.wit.android.widget.adapter.widget.StateFrameLayout
  */
-public class StateRelativeLayout extends RelativeLayout implements IStateView {
+public class StateRelativeLayout extends RelativeLayout implements ISelectableView {
 
 	/**
 	 * Constants =============================
@@ -78,11 +77,6 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	 */
 
 	/**
-	 * Visibility changed callback.
-	 */
-	private StateView.OnStateViewVisibilityListener iVisibilityListener;
-
-	/**
 	 * Arrays --------------------------------
 	 */
 
@@ -93,7 +87,7 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	/**
 	 * Indicates if the view should default handle states.
 	 */
-	private boolean bHandleDefaultStates = true;
+	private boolean bAllowDefaultSelection = true;
 
 	/**
 	 * Constructors ==========================
@@ -101,9 +95,8 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 
 	/**
 	 * <p>
+	 * Same as {@link android.widget.RelativeLayout#RelativeLayout(android.content.Context)}.
 	 * </p>
-	 *
-	 * @param context Current context.
 	 */
 	public StateRelativeLayout(Context context) {
 		super(context);
@@ -111,10 +104,8 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 
 	/**
 	 * <p>
+	 * Same as {@link android.widget.RelativeLayout#RelativeLayout(android.content.Context, android.util.AttributeSet)}.
 	 * </p>
-	 *
-	 * @param context Current context.
-	 * @param attrs
 	 */
 	public StateRelativeLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -122,11 +113,8 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 
 	/**
 	 * <p>
+	 * Same as {@link android.widget.RelativeLayout#RelativeLayout(android.content.Context, android.util.AttributeSet, int)}.
 	 * </p>
-	 *
-	 * @param context  Current context.
-	 * @param attrs
-	 * @param defStyle
 	 */
 	public StateRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
@@ -156,7 +144,7 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 		 * method implemented below allows handle selection of this view from
 		 * adapter which doesn't touch other items in the AdapterView
 		 */
-		if (bHandleDefaultStates) {
+		if (bAllowDefaultSelection) {
 			super.setSelected(selected);
 		}
 	}
@@ -173,42 +161,21 @@ public class StateRelativeLayout extends RelativeLayout implements IStateView {
 	 *
 	 */
 	@Override
-	public void setHandleDefaultStates(boolean handle) {
-		this.bHandleDefaultStates = handle;
+	public void setAllowDefaultSelection(boolean allow) {
+		this.bAllowDefaultSelection = allow;
 	}
 
 	/**
 	 *
 	 */
 	@Override
-	public boolean handleDefaultStates() {
-		return bHandleDefaultStates;
-	}
-
-	/**
-	 *
-	 */
-	@Override
-	public void setOnVisibilityListener(StateView.OnStateViewVisibilityListener listener) {
-		iVisibilityListener = listener;
+	public boolean allowsDefaultSelection() {
+		return bAllowDefaultSelection;
 	}
 
 	/**
 	 * Protected -----------------------------
 	 */
-
-	/**
-	 *
-	 */
-	@Override
-	protected void onVisibilityChanged(View changedView, int visibility) {
-		super.onVisibilityChanged(changedView, visibility);
-
-		if (iVisibilityListener != null) {
-			// Fire visibility changed callback.
-			iVisibilityListener.onVisibilityChanged(changedView, visibility);
-		}
-	}
 
 	/**
 	 * Private -------------------------------

@@ -20,7 +20,6 @@
  */
 package com.wit.android.widget.adapter.internal;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -30,10 +29,11 @@ import android.view.View;
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Updated {@link android.widget.BaseAdapter} for better handling and using the widget adapters.
+ * Updated {@link android.widget.BaseAdapter} implementation with accessible an
+ * application's {@link android.content.res.Resources} and also a {@link android.view.LayoutInflater}
+ * for better management when inflating, creating, and binding the views for an items
+ * provided by implementation of this adapter.
  * </p>
- *
- * @see android.widget.BaseAdapter
  *
  * @author Martin Albedinsky
  */
@@ -71,17 +71,17 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 	 */
 
 	/**
-	 * Context in which is this adapter initialized.
+	 * Context in which will be this adapter used.
 	 */
 	private Context mContext = null;
 
 	/**
-	 * Layout inflater from parent activity.
+	 * Layout inflater from the passed context.
 	 */
 	private LayoutInflater mLayoutInflater = null;
 
 	/**
-	 * Resources from parent activity.
+	 * Application resources from the passed context.
 	 */
 	private Resources mResources = null;
 
@@ -103,7 +103,12 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 
 	/**
 	 * <p>
+	 * Creates new instance of BaseWidgetAdapter without context. Note, that
+	 * this adapter will not provide {@link android.content.res.Resources} or
+	 * {@link android.view.LayoutInflater} which can be obtained form a context.
 	 * </p>
+	 *
+	 * @see #BaseWidgetAdapter(android.content.Context)
 	 */
 	public BaseWidgetAdapter() {
 		this(null);
@@ -111,6 +116,10 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 
 	/**
 	 * <p>
+	 * Creates new instance of BaseWidgetAdapter with the given context.
+	 * {@link android.content.res.Resources}, {@link android.view.LayoutInflater}
+	 * and also the given context can be accessed immediately after an instance
+	 * of this adapter is created.
 	 * </p>
 	 *
 	 * @param context Context in which will be this adapter used.
@@ -118,7 +127,7 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 	public BaseWidgetAdapter(Context context) {
 		if (context != null) {
 			this.mContext = context;
-			this.mLayoutInflater = LayoutInflater.from(context);
+			this.mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 			this.mResources = context.getResources();
 		}
 	}
@@ -133,21 +142,32 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 
 	/**
 	 * <p>
+	 * Called to save state of this adapter instance. If the given <var>outState</var>
+	 * is invalid, there will be created a new bundle and the {@link #onSaveInstanceState(android.os.Bundle)}
+	 * will be invoked immediately.
 	 * </p>
 	 *
-	 * @param outState
+	 * @param outState Outgoing state in which should this adapter instance save its
+	 *                 state.
+	 * @see #onSaveInstanceState(android.os.Bundle)
 	 */
 	public void dispatchSaveInstanceState(Bundle outState) {
 		if (outState != null) {
-			onSaveInstanceState(outState);
+			outState = new Bundle();
 		}
+		onSaveInstanceState(outState);
 	}
 
 	/**
 	 * <p>
+	 * Called to restore state of this adapter instance. If the given <var>savedState</var>
+	 * is valid, the {@link #onRestoreInstanceState(android.os.Bundle)} will be invoked
+	 * immediately.
 	 * </p>
 	 *
-	 * @param savedState
+	 * @param savedState Should be the bundle with saved state in
+	 *                   {@link #onSaveInstanceState(android.os.Bundle)}.
+	 * @see #onRestoreInstanceState(android.os.Bundle)
 	 */
 	public void dispatchRestoreInstanceState(Bundle savedState) {
 		if (savedState != null) {
@@ -161,11 +181,10 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 
 	/**
 	 * <p>
-	 * Returns context in which was this adapter initialized.
+	 * Returns the context with which was this adapter created.
 	 * </p>
 	 *
-	 * @return Can be {@link Activity} context or {@link Context} or
-	 * <code>null</code>.
+	 * @return Same context as in initialization.
 	 */
 	public Context getContext() {
 		return mContext;
@@ -173,10 +192,15 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 
 	/**
 	 * <p>
-	 * Returns layout inflater from parent activity.
+	 * Returns layout inflater instance provided by the context passed
+	 * during initialization of this adapter.
+	 * </p>
+	 * <p>
+	 * <b>Note</b>, that LayoutInflater is provided only in case, when this
+	 * adapter was created with a valid context.
 	 * </p>
 	 *
-	 * @return
+	 * @return Layout inflater instance.
 	 */
 	public LayoutInflater getLayoutInflater() {
 		return mLayoutInflater;
@@ -184,10 +208,15 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 
 	/**
 	 * <p>
-	 * Returns application resources.
+	 * Returns an application's resources provided by the context
+	 * passed during initialization of this adapter.
+	 * </p>
+	 * <p>
+	 * <b>Note</b>, that Resources are provided only in case, when this
+	 * adapter was created with a valid context.
 	 * </p>
 	 *
-	 * @return
+	 * @return An application's resources.
 	 */
 	public Resources getResources() {
 		return mResources;
@@ -206,34 +235,37 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 
 	/**
 	 * <p>
-	 * Inflates the layout for the given resource id.
+	 * Inflates a new view hierarchy from the given xml resource.
 	 * </p>
 	 *
-	 * @param resource Resource id of layout to inflate.
-	 * @return Inflated layout if the given resource id exists.
+	 * @param resource Resource id of a view to inflate.
+	 * @return The root view of the inflated view hierarchy.
+	 * @see android.view.LayoutInflater#inflate(int, android.view.ViewGroup)
 	 */
 	protected final View inflate(int resource) {
-		return mLayoutInflater.inflate(resource, null, false);
+		return mLayoutInflater.inflate(resource, null);
 	}
 
 	/**
 	 * <p>
-	 * Invoked from the parent context which being currently destroyed to save actual
-	 * adapter state.
+	 * Invoked to save state of this adapter instance. This is invoked whenever the
+	 * {@link #dispatchSaveInstanceState(android.os.Bundle)} is called.
 	 * </p>
 	 *
 	 * @param outState Outgoing state. Always valid bundle.
+	 * @see #onRestoreInstanceState(android.os.Bundle)
 	 */
 	protected void onSaveInstanceState(Bundle outState) {
 	}
 
 	/**
 	 * <p>
-	 * Invoked from the parent context which was restored with previous saved
-	 * instance state to restore adapter state.
+	 * Invoked to restore state of this adapter instance. Note, that this is invoked
+	 * only in case that the bundle passed to the {@link #dispatchRestoreInstanceState(android.os.Bundle)}
+	 * is valid.
 	 * </p>
 	 *
-	 * @param savedState Bundle from parent context with saved data populated in
+	 * @param savedState Bundle with saved data populated in the
 	 *                   {@link #onSaveInstanceState(Bundle)}. Always valid bundle.
 	 */
 	protected void onRestoreInstanceState(Bundle savedState) {

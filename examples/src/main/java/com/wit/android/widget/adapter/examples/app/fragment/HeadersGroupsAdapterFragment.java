@@ -18,7 +18,7 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.examples.fragment;
+package com.wit.android.widget.adapter.examples.app.fragment;
 
 import android.os.Bundle;
 import android.view.View;

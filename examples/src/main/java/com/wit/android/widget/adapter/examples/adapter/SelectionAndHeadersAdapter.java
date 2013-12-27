@@ -47,7 +47,7 @@ public class SelectionAndHeadersAdapter extends HeadersAlphabeticAdapter {
 	public SelectionAndHeadersAdapter(Context context) {
 		super(context);
 		// Add selector module, but with different id to not overlap headers module.
-		addModule(SELECTOR, 0x01);
+		assignModule(SELECTOR, 0x01);
 	}
 
 	/**

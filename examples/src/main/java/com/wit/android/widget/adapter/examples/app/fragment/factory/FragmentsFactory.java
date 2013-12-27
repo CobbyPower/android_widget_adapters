@@ -18,19 +18,19 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.examples.fragment.factory;
+package com.wit.android.widget.adapter.examples.app.fragment.factory;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.wit.android.examples.internal.app.fragment.ExFragmentController;
 import com.wit.android.examples.internal.app.fragment.ExFragmentFactory;
-import com.wit.android.widget.adapter.examples.fragment.HeadersAlphabeticAdapterFragment;
-import com.wit.android.widget.adapter.examples.fragment.HeadersGroupsAdapterFragment;
-import com.wit.android.widget.adapter.examples.fragment.SelectionAndHeadersAdapterFragment;
-import com.wit.android.widget.adapter.examples.fragment.SelectionMultiAdapterFragment;
-import com.wit.android.widget.adapter.examples.fragment.SelectionSingleAdapterFragment;
-import com.wit.android.widget.adapter.examples.fragment.SimpleAdapterFragment;
+import com.wit.android.widget.adapter.examples.app.fragment.HeadersAlphabeticAdapterFragment;
+import com.wit.android.widget.adapter.examples.app.fragment.HeadersGroupsAdapterFragment;
+import com.wit.android.widget.adapter.examples.app.fragment.SelectionAndHeadersAdapterFragment;
+import com.wit.android.widget.adapter.examples.app.fragment.SelectionMultiAdapterFragment;
+import com.wit.android.widget.adapter.examples.app.fragment.SelectionSingleAdapterFragment;
+import com.wit.android.widget.adapter.examples.app.fragment.SimpleAdapterFragment;
 
 /**
  * <p>

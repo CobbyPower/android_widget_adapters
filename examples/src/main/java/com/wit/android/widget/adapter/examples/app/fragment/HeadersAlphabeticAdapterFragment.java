@@ -18,14 +18,16 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.examples.fragment;
+package com.wit.android.widget.adapter.examples.app.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ListView;
+import android.view.ViewGroup;
 
 import com.wit.android.examples.app.fragment.ExListFragment;
-import com.wit.android.widget.adapter.examples.adapter.SelectionSingleAdapter;
+import com.wit.android.widget.adapter.examples.R;
+import com.wit.android.widget.adapter.examples.adapter.HeadersAlphabeticAdapter;
 
 /**
  * <p>
@@ -34,41 +36,27 @@ import com.wit.android.widget.adapter.examples.adapter.SelectionSingleAdapter;
  *
  * @author Martin Albedinsky
  */
-public class SelectionSingleAdapterFragment extends ExListFragment<SelectionSingleAdapter> {
+public class HeadersAlphabeticAdapterFragment extends ExListFragment<HeadersAlphabeticAdapter> {
 
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = SelectionSingleAdapterFragment.class.getSimpleName();
+	private static final String TAG = HeadersAlphabeticAdapterFragment.class.getSimpleName();
 
-	public static SelectionSingleAdapterFragment newInstance() {
-		return new SelectionSingleAdapterFragment();
+	public static HeadersAlphabeticAdapterFragment newInstance() {
+		return new HeadersAlphabeticAdapterFragment();
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.listview, null);
 	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		setAdapter(new SelectionSingleAdapter(getActivity()));
-	}
-
-	@Override
-	protected void onListItemClick(ListView listView, View itemView, int position, long id) {
-		getAdapter().toggleItemSelectionState(position);
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		if (hasAdapter()) {
-			getAdapter().dispatchSaveInstanceState(outState);
-		}
-	}
-
-	@Override
-	public void onViewStateRestored(Bundle savedInstanceState) {
-		super.onViewStateRestored(savedInstanceState);
-		if (hasAdapter()) {
-			getAdapter().dispatchRestoreInstanceState(savedInstanceState);
-		}
+		// Do not show divider.
+		getListView().setDividerHeight(0);
+		setAdapter(new HeadersAlphabeticAdapter(getActivity()));
 	}
 }

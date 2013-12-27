@@ -27,13 +27,10 @@ import com.wit.android.widget.adapter.module.AdapterModule;
  * <p>
  * Required interface for multi-module adapter.
  * </p>
- * 
- * @param <Adapter>
- *            Type of the multi-module adapter.
  *
- * @see com.wit.android.widget.adapter.BaseMultiAdapter
- *
+ * @param <Adapter> Type of a multi-module adapter.
  * @author Martin Albedinsky
+ * @see com.wit.android.widget.adapter.BaseMultiAdapter
  */
 public interface IMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> {
 
@@ -43,25 +40,21 @@ public interface IMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> {
 
 	/**
 	 * <p>
-	 * Adds the {@link AdapterModule} into this adapter.
+	 * Assigns the given <var>module</var> to this adapter.
 	 * </p>
-	 * 
-	 * @param module
-	 *            Specific module.
-	 * @param moduleID
-	 *            Module id by which can be the module later obtained.
+	 *
+	 * @param module   An adapter module to assign.
+	 * @param moduleID Id by which can be the given module obtained from this adapter.
 	 */
-	public void addModule(AdapterModule<Adapter> module, int moduleID);
+	public void assignModule(AdapterModule<Adapter> module, int moduleID);
 
 	/**
 	 * <p>
-	 * Returns the {@link AdapterModule} of this adapter.
+	 * Returns an adapter module assigned to this adapter.
 	 * </p>
-	 * 
-	 * @param moduleID
-	 *            Id of the module.
-	 * @return Specific adapter module or <code>null</code> if there is no
-	 *         module for the requested id. See {@link 
+	 *
+	 * @param moduleID Id of an adapter module to obtain.
+	 * @return The adapter module to which is the given <var>moduleID</var> attached.
 	 */
-	public <M> M getModule(int moduleID);
+	public <M> M obtainModule(int moduleID);
 }

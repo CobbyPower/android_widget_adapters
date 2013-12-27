@@ -61,7 +61,7 @@ public class SelectionSingleAdapter extends BaseMultiAdapter<SelectionSingleAdap
 		MODELS = new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.Data_Models)));
 		// Adding module, attaches this adapter to it and also saving/restoring state can be handled
 		// when invoking onSaveInstanceState() onRestoreInstanceState() on this adapter form its context.
-		addModule(SELECTOR, 0);
+		assignModule(SELECTOR, 0);
 	}
 
 	/**
@@ -146,7 +146,7 @@ public class SelectionSingleAdapter extends BaseMultiAdapter<SelectionSingleAdap
 			/**
 			 * This is very important. Without this false flag the selection will not be working.
 			 */
-			mTextView.setHandleDefaultStates(false);
+			mTextView.setAllowDefaultSelection(false);
 		}
 
 		/**

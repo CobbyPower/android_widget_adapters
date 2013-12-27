@@ -18,21 +18,35 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.examples;
+package com.wit.android.widget.adapter.examples.app.fragment;
 
-import com.wit.android.examples.annotations.ExDelay;
-import com.wit.android.examples.annotations.ExHomeActivity;
-import com.wit.android.examples.annotations.ExLogo;
-import com.wit.android.examples.app.ExSplashActivity;
+import android.os.Bundle;
+import android.view.View;
+
+import com.wit.android.examples.app.fragment.ExListFragment;
+import com.wit.android.widget.adapter.examples.adapter.SimpleAdapter;
 
 /**
  * <p>
- * Simple splash activity with logo.
+ * Description.
  * </p>
  *
  * @author Martin Albedinsky
  */
-@ExDelay(1000)
-@ExLogo(R.drawable.ic_logo)
-@ExHomeActivity(HomeActivity.class)
-public class SplashActivity extends ExSplashActivity {}
+public class SimpleAdapterFragment extends ExListFragment<SimpleAdapter> {
+
+	/**
+	 * Log TAG.
+	 */
+	private static final String TAG = SimpleAdapterFragment.class.getSimpleName();
+
+	public static SimpleAdapterFragment newInstance() {
+		return new SimpleAdapterFragment();
+	}
+
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		setAdapter(new SimpleAdapter(getActivity()));
+	}
+}
