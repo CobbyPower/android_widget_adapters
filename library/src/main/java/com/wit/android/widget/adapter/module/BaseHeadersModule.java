@@ -31,10 +31,12 @@ import java.util.List;
 /**
  * <h4>Class Overview</h4>
  * <p>
+ * Base implementation for an adapter modules which can provide headers data set for
+ * "header-based" adapters.
  * </p>
  *
- * @param <Header>
- * @param <Adapter>
+ * @param <Header> Type of header item provided by implementation of this headers module.
+ * @param <Adapter> Type of the adapter for which can be this headers module created and used.
  *
  * @author Martin Albedinsky
  */
@@ -47,7 +49,7 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = BaseHeadersModule.class.getSimpleName();
+	// private static final String TAG = BaseHeadersModule.class.getSimpleName();
 
 	/**
 	 * Indicates if debug private output trough log-cat is enabled.
@@ -80,9 +82,9 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 	 */
 
 	/**
-	 *
+	 * Array of headers managed by this module.
 	 */
-	private SparseArray<Header> aHeaders = new SparseArray<Header>();
+	private final SparseArray<Header> HEADERS = new SparseArray<Header>();
 
 	/**
 	 * Booleans ------------------------------
@@ -102,20 +104,25 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 
 	/**
 	 * <p>
+	 * Checks whether there is header at the requested
+	 * <var>position</var> or not.
 	 * </p>
 	 *
-	 * @param position
-	 * @return
+	 * @param position Position in data set to check.
+	 * @return <code>True</code> if there is a header item at the requested position,
+	 * <code>false</code> otherwise.
 	 */
 	public boolean isHeaderAt(int position) {
-		return aHeaders.get(position) != null;
+		return HEADERS.get(position) != null;
 	}
 
 	/**
 	 * <p>
+	 * Checks whether this headers module has some headers or not.
 	 * </p>
 	 *
-	 * @return
+	 * @return <code>True</code> if this module doesn't have any headers,
+	 * <code>false</code> otherwise.
 	 */
 	public boolean isEmpty() {
 		return getHeadersCount() == 0;
@@ -123,18 +130,22 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 
 	/**
 	 * <p>
+	 * Clears current headers data set of this headers module.
 	 * </p>
 	 */
 	public void clearHeaders() {
-		aHeaders.clear();
+		HEADERS.clear();
 	}
 
 	/**
 	 * <p>
+	 * Corrects the given position passed from the related adapter. Position will be
+	 * corrected by count of the headers counted by {@link #getHeadersCountBeforePosition(int)}.
 	 * </p>
 	 *
-	 * @param position
-	 * @return
+	 * @param position Position to correct.
+	 * @return Corrected position which can be used in the related adapter to access
+	 * items from its data set.
 	 */
 	public int correctPosition(int position) {
 		return position - getHeadersCountBeforePosition(position);
@@ -146,15 +157,17 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 
 	/**
 	 * <p>
+	 * Counts headers presented in the current headers
+	 * data set before the requested <var>position</var>.
 	 * </p>
 	 *
-	 * @param position
-	 * @return
+	 * @param position Position, to which should be headers counted.
+	 * @return The count of headers before the requested position.
 	 */
 	public int getHeadersCountBeforePosition(int position) {
 		int count = 0;
-		for (int i = 0; i < aHeaders.size(); i++) {
-			if (aHeaders.keyAt(i) < position) {
+		for (int i = 0; i < HEADERS.size(); i++) {
+			if (HEADERS.keyAt(i) < position) {
 				count++;
 			} else {
 				break;
@@ -165,35 +178,40 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 
 	/**
 	 * <p>
+	 * Returns header associated with the specified position
+	 * from the current headers data set of this module.
 	 * </p>
 	 *
-	 * @param position
-	 * @return
+	 * @param position Position of the header to obtain.
+	 * @return The header at the requested position.
 	 */
 	public Header getHeader(int position) {
-		return aHeaders.get(position);
+		return HEADERS.get(position);
 	}
 
 	/**
 	 * <p>
+	 * Returns count of the headers in the current headers
+	 * data set of this module.
 	 * </p>
 	 *
-	 * @return
+	 * @return Headers count.
 	 */
 	public int getHeadersCount() {
-		return aHeaders.size();
+		return HEADERS.size();
 	}
 
 	/**
 	 * <p>
+	 * Returns headers data set of this module.
 	 * </p>
 	 *
-	 * @return
+	 * @return List of headers.
 	 */
 	public List<Header> getHeaders() {
-		List<Header> headers = new ArrayList<Header>(aHeaders.size());
-		for (int i = 0; i < aHeaders.size(); i++) {
-			headers.add(aHeaders.get(aHeaders.keyAt(i)));
+		List<Header> headers = new ArrayList<Header>(HEADERS.size());
+		for (int i = 0; i < HEADERS.size(); i++) {
+			headers.add(HEADERS.get(HEADERS.keyAt(i)));
 		}
 		return headers;
 	}
@@ -204,23 +222,29 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 
 	/**
 	 * <p>
+	 * Adds the given header at the specified position into
+	 * the current headers data set of this module. If there
+	 * is already header at the specified position, the current
+	 * one will be replaced by the given one.
 	 * </p>
 	 *
-	 * @param header
-	 * @param position
+	 * @param header Header to add.
+	 * @param position Position, at which should be header added.
 	 */
 	protected void addHeader(Header header, int position) {
-		aHeaders.append(position, header);
+		HEADERS.append(position, header);
 	}
 
 	/**
 	 * <p>
+	 * Removes header at the specified position from the current
+	 * headers data set of this module.
 	 * </p>
 	 *
-	 * @param position
+	 * @param position Position, at which should be header removed.
 	 */
 	protected void removeHeader(int position) {
-		aHeaders.remove(position);
+		HEADERS.remove(position);
 	}
 
 	/**
@@ -233,31 +257,35 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 
 	/**
 	 * <p>
+	 * Called to create view holder for header item at the given position.
 	 * </p>
 	 *
-	 * @param position
-	 * @param headerView
-	 * @return
+	 * @param position Position of the header item from the current headers data set.
+	 * @param headerView The header's view, for which should be holder created.
+	 * @return The view holder for header's view at the specified position.
 	 */
 	public abstract Object createHeaderViewHolder(int position, View headerView);
 
 	/**
 	 * <p>
+	 * Called to crate view for header item at the given position.
 	 * </p>
 	 *
-	 * @param position
-	 * @param inflater
-	 * @param root
-	 * @return
+	 * @param position Position of the header item from the current headers data set.
+	 * @param inflater Layout inflater for the current context.
+	 * @param root The parent to that will be this view eventually attached to.
+	 * @return The view corresponding to header item at the specified position.
 	 */
 	public abstract View createHeaderView(int position, LayoutInflater inflater, ViewGroup root);
 
 	/**
 	 * <p>
+	 * Called to bind header's view at the given position.
 	 * </p>
 	 *
-	 * @param position
-	 * @param headerHolder
+	 * @param position Position of the header item from the current headers data set.
+	 * @param headerHolder The header's view holder created by
+	 * {@link #createHeaderViewHolder(int, android.view.View)}.
 	 */
 	public abstract void bindHeaderView(int position, Object headerHolder);
 

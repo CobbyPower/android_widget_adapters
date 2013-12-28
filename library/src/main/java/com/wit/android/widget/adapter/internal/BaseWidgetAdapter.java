@@ -29,8 +29,8 @@ import android.view.View;
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Updated {@link android.widget.BaseAdapter} implementation with accessible an
- * application's {@link android.content.res.Resources} and also a {@link android.view.LayoutInflater}
+ * Updated {@link android.widget.BaseAdapter} implementation with accessible
+ * {@link android.content.res.Resources} and also {@link android.view.LayoutInflater}
  * for better management when inflating, creating, and binding the views for an items
  * provided by implementation of this adapter.
  * </p>
@@ -143,7 +143,7 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 	/**
 	 * <p>
 	 * Called to save state of this adapter instance. If the given <var>outState</var>
-	 * is invalid, there will be created a new bundle and the {@link #onSaveInstanceState(android.os.Bundle)}
+	 * is invalid, there will be created a new bundle and {@link #onSaveInstanceState(android.os.Bundle)}
 	 * will be invoked immediately.
 	 * </p>
 	 *
@@ -161,7 +161,7 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 	/**
 	 * <p>
 	 * Called to restore state of this adapter instance. If the given <var>savedState</var>
-	 * is valid, the {@link #onRestoreInstanceState(android.os.Bundle)} will be invoked
+	 * is valid, {@link #onRestoreInstanceState(android.os.Bundle)} will be invoked
 	 * immediately.
 	 * </p>
 	 *
@@ -248,7 +248,7 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 
 	/**
 	 * <p>
-	 * Invoked to save state of this adapter instance. This is invoked whenever the
+	 * Invoked to save state of this adapter instance. This is invoked whenever
 	 * {@link #dispatchSaveInstanceState(android.os.Bundle)} is called.
 	 * </p>
 	 *
@@ -261,11 +261,11 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 	/**
 	 * <p>
 	 * Invoked to restore state of this adapter instance. Note, that this is invoked
-	 * only in case that the bundle passed to the {@link #dispatchRestoreInstanceState(android.os.Bundle)}
+	 * only in case that the bundle passed to {@link #dispatchRestoreInstanceState(android.os.Bundle)}
 	 * is valid.
 	 * </p>
 	 *
-	 * @param savedState Bundle with saved data populated in the
+	 * @param savedState Bundle with saved data populated in
 	 *                   {@link #onSaveInstanceState(Bundle)}. Always valid bundle.
 	 */
 	protected void onRestoreInstanceState(Bundle savedState) {

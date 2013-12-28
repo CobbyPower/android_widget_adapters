@@ -103,7 +103,7 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	/**
 	 * <p>
 	 * Called to save state of this adapter module instance. If the given <var>outState</var>
-	 * is invalid, there will be created a new bundle and the {@link #onSaveInstanceState(android.os.Bundle)}
+	 * is invalid, there will be created a new bundle and {@link #onSaveInstanceState(android.os.Bundle)}
 	 * will be invoked immediately.
 	 * </p>
 	 *
@@ -121,7 +121,7 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	/**
 	 * <p>
 	 * Called to restore state of this adapter module instance. If the given <var>savedState</var>
-	 * is valid, the {@link #onRestoreInstanceState(android.os.Bundle)} will be invoked
+	 * is valid, {@link #onRestoreInstanceState(android.os.Bundle)} will be invoked
 	 * immediately.
 	 * </p>
 	 *
@@ -184,7 +184,7 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 
 	/**
 	 * <p>
-	 * Invoked to save state of this adapter module instance. This is invoked whenever the
+	 * Invoked to save state of this adapter module instance. This is invoked whenever
 	 * {@link #dispatchSaveInstanceState(android.os.Bundle)} is called.
 	 * </p>
 	 *
@@ -197,7 +197,7 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	/**
 	 * <p>
 	 * Invoked to restore state of this adapter module instance. Note, that this is invoked
-	 * only in case that the bundle passed to the {@link #dispatchRestoreInstanceState(android.os.Bundle)}
+	 * only in case that the bundle passed to {@link #dispatchRestoreInstanceState(android.os.Bundle)}
 	 * is valid.
 	 * </p>
 	 *
@@ -209,8 +209,7 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 
 	/**
 	 * <p>
-	 * Invoked immediately after the
-	 * {@link #dispatchAttachToAdapter(com.wit.android.widget.adapter.module.AdapterModule.ModuleAdapter)}.
+	 * Invoked immediately after {@link #dispatchAttachToAdapter(com.wit.android.widget.adapter.module.AdapterModule.ModuleAdapter)}.
 	 * </p>
 	 *
 	 * @param adapter The adapter to which was this module right now attached.
@@ -232,8 +231,8 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	/**
 	 * <p>
 	 * Notifies the adapter to which is this module attached. This should be fired
-	 * whenever the data set of this module adapter on which is the attached adapter ?
-	 * ???, was changed.
+	 * whenever the data set of this adapter module on which the attached adapter
+	 * depends, was changed.
 	 * </p>
 	 *
 	 * @see #isAdapterNotificationEnabled()

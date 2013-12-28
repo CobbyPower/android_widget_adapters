@@ -36,7 +36,6 @@ import java.util.List;
  * </p>
  *
  * @param <Adapter>
- *
  * @author Martin Albedinsky
  */
 public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> extends BaseHeadersModule<AlphabeticHeaders.AlphabeticHeader, Adapter> {
@@ -73,12 +72,13 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	 */
 
 	/**
-	 *
+	 * Xml attribute which should contain the style for the header view.
 	 */
 	private int mHeaderStyleAttr = android.R.attr.textViewStyle;
 
 	/**
-	 *
+	 * Char which was lastly processed from the current alphabetic data set.
+	 * This is only for internal purpose.
 	 */
 	private String mLastChar = "";
 
@@ -135,7 +135,7 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 		if (headerHolder instanceof HeaderHolder) {
 			AlphabeticHeader header = getHeader(position);
 			if (header != null) {
-				((HeaderHolder) headerHolder).mTextView.setText(header.getAlphabeticChar());
+				((HeaderHolder) headerHolder).setText(header.getAlphabeticChar());
 			} else {
 				Log.e(TAG, "Invalid header at position(" + position + ").");
 			}
@@ -144,21 +144,22 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 
 	/**
 	 * <p>
-	 * </p>
-	 * <p>
-	 * Also adapter will be notified about data set change.
+	 * Like {@link #processAlphabeticList(java.util.List)} in that difference, that
+	 * here will be the given cursor iterated to obtain first characters for headers
+	 * data set.
 	 * </p>
 	 *
-	 * @param cursor
-	 * @param <C>
+	 * @param cursor An alphabetic cursor to process.
+	 * @param <C>    Type of the given alphabetic cursor.
+	 * @see #processAlphabeticList(java.util.List)
 	 */
-	public <C extends Cursor & AlphabeticItem> void processAlphabeticalCursor(C cursor) {
+	public <C extends Cursor & AlphabeticItem> void processAlphabeticCursor(C cursor) {
 		// Clear current headers.
 		clearHeaders();
 		// Process the given cursor.
 		if (cursor.getCount() > 0 && cursor.moveToFirst()) {
 			this.resetLastChar();
-			do  {
+			do {
 				this.processAlphabeticItem(cursor, cursor.getPosition());
 			} while (cursor.moveToNext());
 			this.resetLastChar();
@@ -168,19 +169,29 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 
 	/**
 	 * <p>
+	 * Processes the given alphabetic list. Whole list will be iterated and for each of
+	 * its items will be checked the first char provided by
+	 * {@link com.wit.android.widget.adapter.module.AlphabeticHeaders.AlphabeticItem#getName()},
+	 * so created headers data set will contains all different first characters founded at the
+	 * first positions of obtained names.
 	 * </p>
 	 * <p>
-	 * Also adapter will be notified about data set change.
+	 * Also, the adapter, to which is this module attached, will be notified about data set change.
+	 * </p>
+	 * <p>
+	 * <b>Note</b>, that the given <var>cursor</var> should be already sorted, otherwise the final
+	 * headers data set can contains duplicates.
 	 * </p>
 	 *
-	 * @param itemList
+	 * @param list An alphabetic list to process.
+	 * @see #processAlphabeticCursor(android.database.Cursor)
 	 */
-	public void processAlphabeticalList(List<AlphabeticItem> itemList) {
+	public void processAlphabeticList(List<AlphabeticItem> list) {
 		// Clear current headers.
 		clearHeaders();
 		// Process the given list.
-		for (int i = 0; i < itemList.size(); i++) {
-			this.processAlphabeticItem(itemList.get(i), i);
+		for (int i = 0; i < list.size(); i++) {
+			this.processAlphabeticItem(list.get(i), i);
 		}
 		this.resetLastChar();
 		notifyAdapter();
@@ -192,11 +203,15 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 
 	/**
 	 * <p>
+	 * Sets an xml attribute which should contain style for the header view. See
+	 * {@link com.wit.android.widget.adapter.module.AlphabeticHeaders.HeaderHolder#createView(android.content.Context, int)}
+	 * for more information in which theme should be the given <var>styleAttr</var> placed.
 	 * </p>
 	 *
-	 * @param styleAttr
-	 *
+	 * @param styleAttr An xml attribute to style the view for the header item provided
+	 *                  by this headers module.
 	 * @see #getHeaderStyleAttr()
+	 * @see com.wit.android.widget.adapter.module.AlphabeticHeaders.HeaderHolder
 	 */
 	public void setHeaderStyleAttr(int styleAttr) {
 		this.mHeaderStyleAttr = styleAttr;
@@ -204,10 +219,10 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 
 	/**
 	 * <p>
+	 * Returns the xml attribute set by {@link #setHeaderStyleAttr(int)}.
 	 * </p>
 	 *
-	 * @return
-	 *
+	 * @return Xml attribute.
 	 * @see #setHeaderStyleAttr(int)
 	 */
 	public int getHeaderStyleAttr() {
@@ -220,10 +235,12 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 
 	/**
 	 * <p>
+	 * Process the given alphabetic <var>item</var> and creates header item from it if its
+	 * first character from its name is different from the last processed one.
 	 * </p>
 	 *
-	 * @param item
-	 * @param position
+	 * @param item     An alphabetic item to process.
+	 * @param position Position of the given item form the adapter's data set.
 	 */
 	protected final void processAlphabeticItem(AlphabeticItem item, int position) {
 		final String name = item.getName();
@@ -231,7 +248,7 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 			// Obtain first char from item name.
 			String currentChar = name.substring(0, 1);
 			if (!currentChar.equals(mLastChar)) {
-				addHeader(new BaseAlphabeticHeader(currentChar), getHeadersCount() + position);
+				addHeader(new SimpleAlphabeticHeader(currentChar), getHeadersCount() + position);
 			}
 			// Save current as last.
 			this.mLastChar = currentChar;
@@ -243,7 +260,7 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	 */
 
 	/**
-	 *
+	 * Resets the value of the last char.
 	 */
 	private void resetLastChar() {
 		this.mLastChar = "";
@@ -258,7 +275,11 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	 */
 
 	/**
+	 * <h4>Class Overview</h4>
+	 * <p>
+	 * </p>
 	 *
+	 * @author Martin Albedinsky
 	 */
 	public static class HeaderHolder {
 
@@ -267,7 +288,7 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 		 */
 
 		/**
-		 *
+		 * Root view of this header holder.
 		 */
 		private TextView mTextView;
 
@@ -277,9 +298,10 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 
 		/**
 		 * <p>
+		 * Creates the new HeaderHolder instance with the given TextView.
 		 * </p>
 		 *
-		 * @param textView
+		 * @param textView Root view of this holder.
 		 */
 		public HeaderHolder(TextView textView) {
 			this.mTextView = textView;
@@ -295,11 +317,13 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 
 		/**
 		 * <p>
+		 * Creates the new instance of TextView for this HeaderHolder.
 		 * </p>
 		 *
-		 * @param context
-		 * @param styleAttr
-		 * @return
+		 * @param context   Context for the TextView.
+		 * @param styleAttr An xml attribute for the TextView constructor
+		 *                  {@link android.widget.TextView#TextView(android.content.Context, android.util.AttributeSet, int)}.
+		 * @return New instance of TextView.
 		 */
 		public static TextView createView(Context context, int styleAttr) {
 			return new TextView(context, null, styleAttr);
@@ -311,36 +335,55 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 
 		/**
 		 * <p>
+		 * Returns TextView passed to the constructor {@link #HeaderHolder(android.widget.TextView)}.
 		 * </p>
 		 *
-		 * @return
+		 * @return TextView instance.
 		 */
 		public TextView getTextView() {
 			return mTextView;
 		}
+
+		/**
+		 * <p>
+		 * Sets the given <var>text</var> as text for the current TextView.
+		 * </p>
+		 *
+		 * @param text Header text.
+		 */
+		public void setText(CharSequence text) {
+			if (mTextView != null) {
+				mTextView.setText(text);
+			}
+		}
 	}
 
 	/**
-	 *
+	 * Simple implementation of alphabetic header for internal purpose.
 	 */
-	private static final class BaseAlphabeticHeader implements AlphabeticHeader {
+	private static final class SimpleAlphabeticHeader implements AlphabeticHeader {
 
 		/**
 		 * Members ===============================
 		 */
 
-		private String alphabeticChar;
+		/**
+		 * First alphabetic char for this header.
+		 */
+		private String mAlphabeticChar;
 
 		/**
 		 * Constructors ==========================
 		 */
 
 		/**
+		 * Creates the new instance of the SimpleAlphabeticHeader with
+		 * the given char.
 		 *
-		 * @param alphabeticChar
+		 * @param alphabeticChar Char for this alphabetic header.
 		 */
-		BaseAlphabeticHeader(String alphabeticChar) {
-			this.alphabeticChar = alphabeticChar;
+		SimpleAlphabeticHeader(String alphabeticChar) {
+			this.mAlphabeticChar = alphabeticChar;
 		}
 
 		/**
@@ -351,7 +394,7 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 		 */
 		@Override
 		public String getAlphabeticChar() {
-			return alphabeticChar;
+			return mAlphabeticChar;
 		}
 	}
 
@@ -362,6 +405,8 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	/**
 	 * <h4>Interface Overview</h4>
 	 * <p>
+	 * Required interface for header item used by
+	 * {@link com.wit.android.widget.adapter.module.AlphabeticHeaders} module.
 	 * </p>
 	 *
 	 * @author Martin Albedinsky
@@ -374,17 +419,20 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 
 		/**
 		 * <p>
+		 * Returns character (can be more characters) which represents
+		 * this alphabetic header item.
 		 * </p>
 		 *
-		 * @return
+		 * @return Alphabetic char of this header item.
 		 */
 		public String getAlphabeticChar();
-
 	}
 
 	/**
 	 * <h4>Interface Overview</h4>
 	 * <p>
+	 * Required interface for an items which can be processed by
+	 * {@link com.wit.android.widget.adapter.module.AlphabeticHeaders} module.
 	 * </p>
 	 *
 	 * @author Martin Albedinsky
@@ -397,9 +445,10 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 
 		/**
 		 * <p>
+		 * Returns name of this alphabetic item.
 		 * </p>
 		 *
-		 * @return
+		 * @return Item's name.
 		 */
 		public String getName();
 	}

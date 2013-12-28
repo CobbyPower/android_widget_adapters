@@ -91,10 +91,11 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 
 	/**
 	 * <p>
+	 * Crates new instance of BaseMultiAdapter with the given context.
 	 * </p>
 	 *
-	 * @param context
-	 * @see BaseAdapter#BaseAdapter(Context)
+	 * @param context Context in which will be this adapter used.
+	 * @see com.wit.android.widget.adapter.BaseAdapter#BaseAdapter(android.content.Context)
 	 */
 	public BaseMultiAdapter(Context context) {
 		super(context);
@@ -110,8 +111,8 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 
 	/**
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public void assignModule(AdapterModule<Adapter> module, int moduleID) {
 		module.dispatchAttachToAdapter((Adapter) this);
 		MODULES_MANAGER.addModule(module, moduleID);
@@ -119,8 +120,8 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 
 	/**
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
+	@SuppressWarnings("unchecked")
 	public <M> M obtainModule(int moduleID) {
 		return (M) MODULES_MANAGER.getModule(moduleID);
 	}
@@ -164,7 +165,7 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	/**
 	 * <h4>Class Overview</h4>
 	 * <p>
-	 * Manager to handle {@link BaseMultiAdapter} modules.
+	 * Manages {@link BaseMultiAdapter} modules.
 	 * </p>
 	 *
 	 * @param <Adapter> Type of the adapter in which is this module manager presented.
@@ -183,7 +184,7 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		/**
 		 * Array with adapter modules.
 		 */
-		private SparseArray<AdapterModule<Adapter>> aModules = new SparseArray<AdapterModule<Adapter>>();
+		private final SparseArray<AdapterModule<Adapter>> aModules = new SparseArray<AdapterModule<Adapter>>();
 
 		/**
 		 * Methods ===============================
@@ -195,10 +196,14 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 
 		/**
 		 * <p>
+		 * Adds the given module into the current modules of this manager. If there is
+		 * already some module with the same <var>moduleID</var>l, the old module will
+		 * be replaced by the new one.
 		 * </p>
 		 *
-		 * @param module
-		 * @param moduleID
+		 * @param module Module to add.
+		 * @param moduleID Id by which can be the given module obtained from this manager.
+		 * @see #getModule(int)
 		 */
 		protected void addModule(AdapterModule<Adapter> module, int moduleID) {
 			aModules.append(moduleID, module);
@@ -206,10 +211,12 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 
 		/**
 		 * <p>
+		 * Returns a module added into this manager.
 		 * </p>
 		 *
-		 * @param moduleID
-		 * @return
+		 * @param moduleID Id of a module to obtain.
+		 * @return The module which is represented by the given <var>moduleID</var>.
+		 * @see #addModule(com.wit.android.widget.adapter.module.AdapterModule, int)
 		 */
 		protected AdapterModule<Adapter> getModule(int moduleID) {
 			return aModules.get(moduleID);
@@ -217,9 +224,14 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 
 		/**
 		 * <p>
+		 * Called to save state of this manager instance. If the given <var>outState</var>
+		 * is invalid, there will be created a new bundle and {@link #onSaveInstanceState(android.os.Bundle)}
+		 * will be invoked immediately.
 		 * </p>
 		 *
-		 * @param outState
+		 * @param outState Outgoing state in which should this manager instance save its
+		 *                 state.
+		 * @see #onSaveInstanceState(android.os.Bundle)
 		 */
 		protected void dispatchSaveState(Bundle outState) {
 			for (int i = 0; i < aModules.size(); i++) {
@@ -229,9 +241,14 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 
 		/**
 		 * <p>
+		 * Called to restore state of this manager instance. If the given <var>savedState</var>
+		 * is valid, {@link #onRestoreInstanceState(android.os.Bundle)} will be invoked
+		 * immediately.
 		 * </p>
 		 *
-		 * @param savedState
+		 * @param savedState Should be the bundle with saved state in
+		 *                   {@link #onSaveInstanceState(android.os.Bundle)}.
+		 * @see #onRestoreInstanceState(android.os.Bundle)
 		 */
 		protected void dispatchRestoreState(Bundle savedState) {
 			for (int i = 0; i < aModules.size(); i++) {

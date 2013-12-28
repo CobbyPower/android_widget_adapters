@@ -45,6 +45,7 @@ public interface IMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> {
 	 *
 	 * @param module   An adapter module to assign.
 	 * @param moduleID Id by which can be the given module obtained from this adapter.
+	 * @see #obtainModule(int)
 	 */
 	public void assignModule(AdapterModule<Adapter> module, int moduleID);
 
@@ -54,7 +55,8 @@ public interface IMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> {
 	 * </p>
 	 *
 	 * @param moduleID Id of an adapter module to obtain.
-	 * @return The adapter module to which is the given <var>moduleID</var> attached.
+	 * @return The adapter module which is represented by the given <var>moduleID</var>.
+	 * @see #assignModule(com.wit.android.widget.adapter.module.AdapterModule, int)
 	 */
 	public <M> M obtainModule(int moduleID);
 }

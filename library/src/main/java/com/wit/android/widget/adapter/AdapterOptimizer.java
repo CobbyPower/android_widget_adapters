@@ -27,8 +27,6 @@ import android.view.ViewGroup;
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Optimization manager which handles the optimization of the
- * {@link android.widget.BaseAdapter#getView(int, View, ViewGroup)} method of adapter.
  * </p>
  *
  * @author Martin Albedinsky
@@ -67,14 +65,15 @@ public class AdapterOptimizer {
 	 */
 
 	/**
-	 * Base adapter to optimize.
+	 * Adapter to optimize.
 	 */
 	private OptimizedAdapter mOptimizedAdapter;
 
 	/**
-	 *
+	 * Item view type for the current {@link #performOptimizedGetView(int, android.view.View, android.view.ViewGroup)}
+	 * iteration.
 	 */
-	private int mCurrentItemViewType = 0;
+	private int mCurrentItemViewType = -1;
 
 	/**
 	 * Listeners -----------------------------
@@ -94,10 +93,11 @@ public class AdapterOptimizer {
 
 	/**
 	 * <p>
-	 * Creates new instance of adapter optimizer.
+	 * Creates new instance of AdapterOptimizer.
 	 * </p>
 	 *
-	 * @param optimizedAdapter Base adapter which should be optimized.
+	 * @param optimizedAdapter Adapter, of which {@link android.widget.BaseAdapter#getView(int, android.view.View, android.view.ViewGroup)}
+	 *                         should be optimized.
 	 */
 	public AdapterOptimizer(OptimizedAdapter optimizedAdapter) {
 		if (optimizedAdapter == null)
@@ -117,15 +117,17 @@ public class AdapterOptimizer {
 
 	/**
 	 * <p>
-	 * Runs the optimized algorithm for the
+	 * Performs an optimized algorithm instead of the current optimized adapter's
 	 * {@link android.widget.BaseAdapter#getView(int, View, ViewGroup)}
-	 * method of the current optimized adapter.
+	 * method.
 	 * </p>
 	 *
-	 * @param position    Position of the item in the adapter.
-	 * @param convertView Convert view for the item.
-	 * @param parent      Parent view.
-	 * @return Created item's view.
+	 * @param position    The position of the item from the current optimized adapter's data set.
+	 * @param convertView The old view to reuse if possible. For more information see
+	 *                    documentation of {@link android.widget.BaseAdapter#getView(int, View, ViewGroup)}.
+	 * @param parent      The parent view, to that will be this view eventually assigned to.
+	 * @return A view corresponding to the item at the specified position in the
+	 * current optimized adapter's data set.
 	 */
 	public View performOptimizedGetView(int position, View convertView, ViewGroup parent) {
 		Object viewHolder;
@@ -150,7 +152,7 @@ public class AdapterOptimizer {
 		// Bind item view with data.
 		mOptimizedAdapter.onBindItemView(position, viewHolder);
 
-		// Return new/recreated item view with binded data.
+		// Return new/recreated item view with data.
 		return convertView;
 	}
 
@@ -160,9 +162,14 @@ public class AdapterOptimizer {
 
 	/**
 	 * <p>
+	 * While there is currently running iteration process trough current
+	 * optimized adapter's data set to obtain view for each of its data
+	 * set items, this returns view type for the currently iterated position
+	 * obtained from adapter by {@link android.widget.BaseAdapter#getItemViewType(int)}.
 	 * </p>
 	 *
-	 * @return
+	 * @return View type for the item's view from the current optimized adapter's data set
+	 * at the currently iterated position.
 	 */
 	public int getCurrentItemViewType() {
 		return mCurrentItemViewType;
@@ -203,28 +210,31 @@ public class AdapterOptimizer {
 
 		/**
 		 * <p>
-		 * Invoked to create view for the item from the adapter data set. This is
-		 * invoked only if the convert view is equal to <code>null</code>. To create
-		 * view you can use the given inflater or create it manually.
+		 * Invoked to create a view for the item from this optimized adapter's data set
+		 * at the specified position. This is invoked only if the <var>convertView</var> for
+		 * {@link android.widget.BaseAdapter#getView(int, android.view.View, android.view.ViewGroup)}
+		 * is <code>NULL</code>. To create requested view, you can use the given inflater.
 		 * </p>
 		 *
-		 * @param position Position of view in the adapter view.
+		 * @param position The position of the item from this optimized adapter's data set.
 		 * @param inflater Layout inflater provided by {@link #getLayoutInflater()}.
-		 * @param root     Parent view.
+		 * @param parent   The parent view, to that will be this view eventually assigned to.
 		 * @return Created item view.
 		 */
-		public View onCreateItemView(int position, LayoutInflater inflater, ViewGroup root);
+		public View onCreateItemView(int position, LayoutInflater inflater, ViewGroup parent);
 
 		/**
 		 * <p>
-		 * Invoked to bind item view with data. This is invoked whether the
-		 * <code>getView()</code> method on the adapter is called.
+		 * Invoked to bind a view for the item from this optimized adapter's data set
+		 * at the specified position. This is invoked whether the
+		 * {@link android.widget.BaseAdapter#getView(int, android.view.View, android.view.ViewGroup)}
+		 * on this adapter is called.
 		 * </p>
 		 *
-		 * @param position   Position of view in the adapter view.
-		 * @param viewHolder View holder of the actual item view on the given position.
-		 *                   This is also holder which was set to the view by
-		 *                   <code>onCreateItemViewHolder()</code> method while was view created.
+		 * @param position   The position of the item from this optimized adapter's data set.
+		 * @param viewHolder Same type of holder as provided by
+		 *                   {@link #onCreateItemViewHolder(int, android.view.View)} for the specified
+		 *                   position.
 		 */
 		public void onBindItemView(int position, Object viewHolder);
 
@@ -233,15 +243,17 @@ public class AdapterOptimizer {
 		 * Invoked to obtain view holder for the actually created item view.
 		 * </p>
 		 *
-		 * @param position Position of the <var>itemView</var> in the adapter view.
-		 * @param itemView View returned by <code>onCreateItemView</code> method.
-		 * @return Holder for the requested item's view.
+		 * @param position The position of the item from this optimized adapter's data set.
+		 * @param itemView Same type of view as provided by
+		 *                 {@link #onCreateItemView(int, android.view.LayoutInflater, android.view.ViewGroup)}
+		 *                 at the specified position.
+		 * @return Created holder for the given <var>itemView</var>.
 		 */
 		public Object onCreateItemViewHolder(int position, View itemView);
 
 		/**
 		 * <p>
-		 * Returns layout inflater.
+		 * Returns layout inflater for the current context.
 		 * </p>
 		 *
 		 * @return Layout inflater.

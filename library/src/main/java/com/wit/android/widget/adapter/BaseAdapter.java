@@ -29,8 +29,6 @@ import com.wit.android.widget.adapter.internal.BaseWidgetAdapter;
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Optimized base adapter to handle optimization of creating views for the
- * <code>ListView, GridView, ...</code> items.
  * </p>
  *
  * @author Martin Albedinsky
@@ -93,7 +91,8 @@ public abstract class BaseAdapter extends BaseWidgetAdapter implements AdapterOp
 
     /**
      * <p>
-     * See {@link com.wit.android.widget.adapter.internal.BaseWidgetAdapter#BaseWidgetAdapter(Context)}.
+     * Creates new instance of optimized BaseAdapter with the given
+     * context.
      * </p>
      *
      * @param context Context in which will be this adapter used.
@@ -102,7 +101,7 @@ public abstract class BaseAdapter extends BaseWidgetAdapter implements AdapterOp
         super(context);
     }
 
-    /**
+	/**
      * Methods ===============================
      */
 
@@ -111,6 +110,9 @@ public abstract class BaseAdapter extends BaseWidgetAdapter implements AdapterOp
      */
 
     /**
+     * <p>
+     * Performs optimized algorithm for this method.
+     * </p>
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -127,9 +129,11 @@ public abstract class BaseAdapter extends BaseWidgetAdapter implements AdapterOp
 
 	/**
 	 * <p>
+	 * Returns item's view type for the currently iterated position.
 	 * </p>
 	 *
-	 * @return
+	 * @return View type.
+	 * @see AdapterOptimizer#getCurrentItemViewType()
 	 */
 	protected int currentItemViewType() {
 		return OPTIMIZER.getCurrentItemViewType();
