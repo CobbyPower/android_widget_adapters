@@ -172,7 +172,7 @@ public class HeadersAlphabeticAdapter extends BaseMultiAdapter<HeadersAlphabetic
 		// Note, that at this place we assume that data set is already
 		// sorted alphabetically.
 		// Module also fires data set changed on the attached(this) adapter.
-		HEADERS.processAlphabeticalList(MODELS);
+		HEADERS.processAlphabeticList(MODELS);
 	}
 
 	protected class ViewHolder {

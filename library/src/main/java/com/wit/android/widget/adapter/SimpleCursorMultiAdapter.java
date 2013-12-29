@@ -30,10 +30,11 @@ import com.wit.android.widget.adapter.module.AdapterModule;
 /**
  * <h4>Class Overview</h4>
  * <p>
+ * TODO:
  * </p>
  *
  * @param <Adapter> Type of the adapter which extends this base multi-module adapter.
- * @param <C> Type of the cursor from which will this adapter bind the views.
+ * @param <C> Type of the cursor which will represents data set for this adapter.
  *
  * @author Martin Albedinsky
  */
@@ -93,13 +94,26 @@ public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends
 
 	/**
 	 * <p>
+	 * Creates new instance of SimpleCursorMultiAdapter with the given context.
 	 * </p>
 	 *
 	 * @param context Context in which will be this adapter used.
-	 * @see com.wit.android.widget.adapter.BaseAdapter#BaseAdapter(android.content.Context)
 	 */
 	public SimpleCursorMultiAdapter(Context context) {
 		super(context);
+	}
+
+	/**
+	 * <p>
+	 * Creates new instance of SimpleCursorMultiAdapter with the given context and
+	 * cursor as data set for this adapter.
+	 * </p>
+	 *
+	 * @param context Context in which will be this adapter used.
+	 * @param cursor  Cursor as data set for this adapter.
+	 */
+	public SimpleCursorMultiAdapter(Context context, C cursor) {
+		super(context, cursor);
 	}
 
 	/**
@@ -125,6 +139,13 @@ public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends
 	@SuppressWarnings("unchecked")
 	public <M> M obtainModule(int moduleID) {
 		return (M) MODULES_MANAGER.getModule(moduleID);
+	}
+
+	/**
+	 */
+	@Override
+	public void removeModule(int moduleID) {
+		MODULES_MANAGER.removeModule(moduleID);
 	}
 
 	/**

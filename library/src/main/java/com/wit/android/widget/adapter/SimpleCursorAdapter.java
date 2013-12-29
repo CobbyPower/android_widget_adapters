@@ -26,10 +26,10 @@ import android.database.Cursor;
 /**
  * <h4>Class Overview</h4>
  * <p>
+ * TODO:
  * </p>
  *
- * @param <C> Type of the cursor from which will this adapter bind the views.
- *
+ * @param <C> Type of the cursor which will represents data set for this adapter.
  * @author Martin Albedinsky
  */
 public abstract class SimpleCursorAdapter<C extends Cursor> extends BaseAdapter {
@@ -41,7 +41,7 @@ public abstract class SimpleCursorAdapter<C extends Cursor> extends BaseAdapter 
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = SimpleCursorAdapter.class.getSimpleName();
+	// private static final String TAG = SimpleCursorAdapter.class.getSimpleName();
 
 	/**
 	 * Indicates if debug private output trough log-cat is enabled.
@@ -88,10 +88,11 @@ public abstract class SimpleCursorAdapter<C extends Cursor> extends BaseAdapter 
 
 	/**
 	 * <p>
+	 * Creates new instance of SimpleCursorAdapter with the given
+	 * context.
 	 * </p>
 	 *
-	 * @param context
-	 * @see BaseAdapter#BaseAdapter(Context)
+	 * @param context Context in which will be this adapter used.
 	 */
 	public SimpleCursorAdapter(Context context) {
 		this(context, null);
@@ -99,11 +100,12 @@ public abstract class SimpleCursorAdapter<C extends Cursor> extends BaseAdapter 
 
 	/**
 	 * <p>
+	 * Creates new instance of SimpleCursorAdapter with the given
+	 * context and cursor as data set for this adapter.
 	 * </p>
 	 *
-	 * @param context
-	 * @param cursor
-	 * @see BaseAdapter#BaseAdapter(Context)
+	 * @param context Context in which will be this adapter used.
+	 * @param cursor  Cursor as data set for this adapter.
 	 */
 	public SimpleCursorAdapter(Context context, C cursor) {
 		super(context);
@@ -120,19 +122,29 @@ public abstract class SimpleCursorAdapter<C extends Cursor> extends BaseAdapter 
 
 	/**
 	 * <p>
+	 * Checks whether this adapter has valid cursor or not.
 	 * </p>
 	 *
-	 * @return
+	 * @return <code>True</code> if this adapter's cursor is valid, <code>false</code>
+	 * otherwise.
 	 */
 	public boolean hasCursor() {
 		return mCursor != null;
 	}
 
 	/**
+	 * <p>
+	 * Checks whether this adapter has valid cursor and that cursor
+	 * has some items or not.
+	 * </p>
+	 *
+	 * @return <code>True</code> if this adapter's cursor is valid and has some items,
+	 * <code>false</code> otherwise.
+	 * @see #hasCursor()
 	 */
 	@Override
 	public boolean isEmpty() {
-		return mCursor == null || mCursor.getCount() == 0;
+		return !hasCursor() || mCursor.getCount() == 0;
 	}
 
 	/**
@@ -140,10 +152,11 @@ public abstract class SimpleCursorAdapter<C extends Cursor> extends BaseAdapter 
 	 */
 
 	/**
+	 * @see #hasCursor()
 	 */
 	@Override
 	public int getCount() {
-		return mCursor != null ? mCursor.getCount() : 0;
+		return !hasCursor() ? mCursor.getCount() : 0;
 	}
 
 	/**
@@ -158,10 +171,14 @@ public abstract class SimpleCursorAdapter<C extends Cursor> extends BaseAdapter 
 
 	/**
 	 * <p>
+	 * Returns the current cursor moved to the requested position.
 	 * </p>
 	 *
-	 * @param position
-	 * @return
+	 * @param position The position, to which should be cursor moved.
+	 * @return The current cursor moved to the requested position or <code>null</code> if
+	 * cursor can't be moved to that position because it isn't valid or doesn't have any
+	 * items.
+	 * @see #hasCursor()
 	 */
 	public C getCursorAt(int position) {
 		return moveCursorTo(position) ? mCursor : null;
@@ -169,10 +186,10 @@ public abstract class SimpleCursorAdapter<C extends Cursor> extends BaseAdapter 
 
 	/**
 	 * <p>
-	 * Returns current cursor hold by this adapter.
+	 * Returns the current cursor.
 	 * </p>
 	 *
-	 * @return Current cursor.
+	 * @return The current cursor of this adapter.
 	 */
 	public C getCursor() {
 		return mCursor;
@@ -180,10 +197,13 @@ public abstract class SimpleCursorAdapter<C extends Cursor> extends BaseAdapter 
 
 	/**
 	 * <p>
+	 * Like {@link #changeCursor(android.database.Cursor)}, but this
+	 * will return the current cursor (<b>not closed</b>) of this adapter.
 	 * </p>
 	 *
-	 * @param cursor
-	 * @return
+	 * @param cursor A new cursor for this adapter.
+	 * @return The current cursor of this adapter.
+	 * @see #changeCursor(android.database.Cursor)
 	 */
 	public C swapCursor(C cursor) {
 		C current = mCursor;
@@ -195,9 +215,13 @@ public abstract class SimpleCursorAdapter<C extends Cursor> extends BaseAdapter 
 
 	/**
 	 * <p>
+	 * Changes the current cursor of this adapter by the
+	 * given one. The current cursor will be closed before
+	 * it changes for the new one.
 	 * </p>
 	 *
-	 * @param cursor
+	 * @param cursor A new cursor for this adapter.
+	 * @see #swapCursor(android.database.Cursor)
 	 */
 	public void changeCursor(C cursor) {
 		// Close the previous cursor.
@@ -224,11 +248,12 @@ public abstract class SimpleCursorAdapter<C extends Cursor> extends BaseAdapter 
 
 	/**
 	 * <p>
-	 * Reloads the current cursor with the given one.
+	 * Reloads the current cursor of this adapter as data set.
 	 * </p>
 	 *
-	 * @param cursor Must be valid cursor.
-	 * @return <code>True</code> if cursor was successfully reloaded, <code>false</code> otherwise.
+	 * @param cursor A new cursor for this adapter..
+	 * @return <code>True</code> if cursor was successfully reloaded,
+	 * <code>false</code> otherwise. <b>For now this will always return <code>true</code></b>.
 	 */
 	protected final boolean reloadCursor(C cursor) {
 		this.mCursor = cursor;
@@ -241,15 +266,16 @@ public abstract class SimpleCursorAdapter<C extends Cursor> extends BaseAdapter 
 
 	/**
 	 * <p>
-	 * Moves the current cursor to the requested position.
+	 * Moves the current cursor of this adapter to the requested position.
 	 * </p>
 	 *
 	 * @param position Position to move cursor to.
 	 * @return <code>True</code> if cursor was moved to requested position,
 	 * <code>false</code> otherwise.
+	 * @see #hasCursor()
 	 */
 	protected boolean moveCursorTo(int position) {
-		return (mCursor != null && mCursor.getCount() > position && mCursor.moveToPosition(position));
+		return (hasCursor() && mCursor.getCount() > position && mCursor.moveToPosition(position));
 	}
 
 	/**
@@ -262,11 +288,17 @@ public abstract class SimpleCursorAdapter<C extends Cursor> extends BaseAdapter 
 
 	/**
 	 * <p>
+	 * Invoked to bind a view for the specified position of this adapter's cursor.
+	 * This is invoked always as {@link #onBindItemView(int, Object)} on this adapter
+	 * is called and the current cursor was successfully moved to the specified position
+	 * by {@link #moveCursorTo(int)}.
 	 * </p>
 	 *
-	 * @param position
-	 * @param cursor
-	 * @param viewHolder
+	 * @param position   The position of the item from this adapter's cursor.
+	 * @param cursor     The current cursor of this adapter moved to the specified position.
+	 * @param viewHolder Same type of holder as provided by
+	 *                   {@link #onCreateItemViewHolder(int, android.view.View)} for the specified
+	 *                   position.
 	 */
 	protected abstract void onBindItemView(int position, C cursor, Object viewHolder);
 

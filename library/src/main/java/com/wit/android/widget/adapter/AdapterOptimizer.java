@@ -27,6 +27,7 @@ import android.view.ViewGroup;
 /**
  * <h4>Class Overview</h4>
  * <p>
+ * TODO:
  * </p>
  *
  * @author Martin Albedinsky
@@ -213,7 +214,8 @@ public class AdapterOptimizer {
 		 * Invoked to create a view for the item from this optimized adapter's data set
 		 * at the specified position. This is invoked only if the <var>convertView</var> for
 		 * {@link android.widget.BaseAdapter#getView(int, android.view.View, android.view.ViewGroup)}
-		 * is <code>NULL</code>. To create requested view, you can use the given inflater.
+		 * is <code>NULL</code>. You can use the given inflater to inflate requested view or you can
+		 * create it manually.
 		 * </p>
 		 *
 		 * @param position The position of the item from this optimized adapter's data set.
@@ -226,7 +228,7 @@ public class AdapterOptimizer {
 		/**
 		 * <p>
 		 * Invoked to bind a view for the item from this optimized adapter's data set
-		 * at the specified position. This is invoked whether the
+		 * at the specified position. This is invoked always as
 		 * {@link android.widget.BaseAdapter#getView(int, android.view.View, android.view.ViewGroup)}
 		 * on this adapter is called.
 		 * </p>

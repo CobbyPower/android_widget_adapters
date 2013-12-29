@@ -25,8 +25,8 @@ package com.wit.android.widget.adapter.internal.view;
  * <p>
  * Base interface for selectable views. Allows to enable/disable default
  * management of the selection state of a selectable view implementation
- * and provides replaced method ({@link #setSelectionState(boolean)})
- * for custom selection state management.
+ * and provides custom method ({@link #setSelectionState(boolean)})
+ * for selection state management.
  * </p>
  *
  * @author Martin Albedinsky

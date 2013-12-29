@@ -30,7 +30,7 @@ import com.wit.android.widget.adapter.internal.view.ISelectableView;
  * <h4>Class Overview</h4>
  * <p>
  * Updated {@link android.widget.FrameLayout} to allow custom management of
- * the selection state of this layout when is used in the item view for some
+ * the selection state of this layout when used in the item view for some
  * of the {@link android.widget.AdapterView} implementations.
  * </p>
  *

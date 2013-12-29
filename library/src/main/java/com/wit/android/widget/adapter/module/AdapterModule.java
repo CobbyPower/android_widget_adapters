@@ -25,8 +25,7 @@ import android.os.Bundle;
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Base implementation for adapter module, which can help to clearly manage
- * a data set of an adapter.
+ *  TODO:
  * </p>
  *
  * @param <Adapter> Type of the adapter for which can be this module created and used.

@@ -30,6 +30,7 @@ import com.wit.android.widget.adapter.module.AdapterModule;
 /**
  * <h4>Class Overview</h4>
  * <p>
+ * TODO:
  * </p>
  *
  * @param <Adapter> Type of the adapter which extends this base multi-module adapter.
@@ -127,6 +128,13 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	}
 
 	/**
+	 */
+	@Override
+	public void removeModule(int moduleID) {
+		MODULES_MANAGER.removeModule(moduleID);
+	}
+
+	/**
 	 * Getters + Setters ---------------------
 	 */
 
@@ -220,6 +228,17 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		 */
 		protected AdapterModule<Adapter> getModule(int moduleID) {
 			return aModules.get(moduleID);
+		}
+
+		/**
+		 * <p>
+		 * Removes a module from the current modules set of this manager.
+		 * </p>
+		 *
+		 * @param moduleID Id of a module to remove.
+		 */
+		protected void removeModule(int moduleID) {
+			aModules.remove(moduleID);
 		}
 
 		/**

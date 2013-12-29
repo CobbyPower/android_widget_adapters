@@ -59,4 +59,13 @@ public interface IMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> {
 	 * @see #assignModule(com.wit.android.widget.adapter.module.AdapterModule, int)
 	 */
 	public <M> M obtainModule(int moduleID);
+
+	/**
+	 * <p>
+	 * Removes an adapter module assigned to this adapter.
+	 * </p>
+	 *
+	 * @param moduleID Id of an adapter module to remove.
+	 */
+	public void removeModule(int moduleID);
 }
