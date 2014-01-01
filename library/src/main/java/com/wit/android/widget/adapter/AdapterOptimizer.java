@@ -44,12 +44,12 @@ public class AdapterOptimizer {
 	//private static final String TAG = AdapterOptimizer.class.getSimpleName();
 
 	/**
-	 * Indicates if debug private output trough log-cat is enabled.
+	 * Flag indicating whether the debug output trough log-cat is enabled or not.
 	 */
 	// private static final boolean DEBUG = true;
 
 	/**
-	 * Indicates if logging for user output trough log-cat is enabled.
+	 * Flag indicating whether the output for user trough log-cat is enabled or not.
 	 */
 	// private static final boolean USER_LOG = true;
 
