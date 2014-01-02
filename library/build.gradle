@@ -57,28 +57,34 @@ android.libraryVariants.all { variant ->
  * Task to update all(library, javadoc, sources) artifacts.
  */
 task updateArtifacts {
-    // TODO: clean artifacts
-    // TODO: clean build/libs
-    updateArtifact('library')
-    updateArtifact('library-javadoc')
-    updateArtifact('library-sources')
+    updateArtifact('library', '')
+    updateArtifact('library-javadoc', 'javadoc')
+    updateArtifact('library-sources', 'sources')
 }
 
 /**
  * Additional gradle methods =================================================
  */
 /**
- * Copies artifact file with the given name into artifacts directory
- * and rename it to library name and current library version.
+ * Copies artifact file with the given name into the library artifacts directory
+ * and renames it to contain library name with the current library version.
  *
- * @param artifactName
+ * @param artifactName Name of the artifact to update.
  */
-def updateArtifact(artifactName) {
+def updateArtifact(artifactName, classifier) {
+    // Delete the old artifact file.
+    if (classifier.isEmpty()) {
+        delete '../artifacts/' + rootProject.libraryName + '-' + rootProject.libraryVersion + '.jar'
+    } else {
+        delete '../artifacts/' + rootProject.libraryName + "-" + rootProject.libraryVersion + '-' + classifier + '.jar'
+    }
+
+    // Copy the updated artifact from the build/libs directory to the library artifacts directory.
     copy {
         from 'build/libs/' + artifactName + '.jar'
         into '../artifacts'
 
-        // Rename .jar! file to match library name and current library version.
+        // Rename .jar! file to match library name and the current library version.
         rename { String fileName ->
             fileName.replace(
                     'library',
