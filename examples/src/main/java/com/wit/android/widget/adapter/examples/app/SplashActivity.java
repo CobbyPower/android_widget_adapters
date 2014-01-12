@@ -33,7 +33,7 @@ import com.wit.android.widget.adapter.examples.R;
  *
  * @author Martin Albedinsky
  */
-@ExDelay(-1)
+@ExDelay(1000)
 @ExLogo(R.drawable.ic_logo)
 @ExHomeActivity(HomeActivity.class)
 public class SplashActivity extends ExSplashActivity {}

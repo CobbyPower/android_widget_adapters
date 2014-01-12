@@ -26,7 +26,7 @@
 :: ====================================================================================
 :: Library specific parameters.
 :: ------------------------------------------------------------------------------------
-@SET LIBRARY_NAME=android-widget-adapters
+@SET LIBRARY_NAME=widget-adapters
 @SET LIBRARY_VERSION=1.1
 :: ====================================================================================
 :: Script global parameters.

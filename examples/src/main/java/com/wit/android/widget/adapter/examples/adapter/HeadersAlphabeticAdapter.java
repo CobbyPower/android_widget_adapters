@@ -106,7 +106,7 @@ public class HeadersAlphabeticAdapter extends BaseMultiAdapter<HeadersAlphabetic
 		// you can do this like so: HEADERS.getHeader(position)
 		/**
 		 * It is very important to ask headers module to correct
-		 * current position. The correction is done way, that it will
+		 * current position. The correction is done way, that position will
 		 * be decreased by count of the headers before that position.
 		 */
 		final int corrPos = HEADERS.correctPosition(position);

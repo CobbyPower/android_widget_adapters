@@ -16,7 +16,7 @@ buildscript {
 /**
  * Library options ===========================================================
  */
-ext.libraryName = "android-widget-adapters"
+ext.libraryName = "widget-adapters"
 ext.libraryVersion = "1.1"
 
 /**
