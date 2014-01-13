@@ -111,7 +111,7 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 * @see #onSaveInstanceState(android.os.Bundle)
 	 */
 	public void dispatchSaveInstanceState(Bundle outState) {
-		if (outState != null) {
+		if (outState == null) {
 			outState = new Bundle();
 		}
 		onSaveInstanceState(outState);

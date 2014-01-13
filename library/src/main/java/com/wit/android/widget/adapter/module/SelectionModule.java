@@ -21,7 +21,10 @@
 package com.wit.android.widget.adapter.module;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseIntArray;
+
+import java.util.Arrays;
 
 /**
  * <h4>Class Overview</h4>
@@ -462,6 +465,9 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 		// Save mode.
 		outState.putInt(BUNDLE_MODE, mMode);
 
+		Log.d(TAG, "onSaveInstanceState("+aSelectedItems.size()+")");
+		Log.d(TAG, "onSaveInstanceState("+ Arrays.toString(getSelectedPositions())+")");
+
 		// Change mode to obtain selected positions.
 		mMode = MODE_MULTIPLE;
 		// Save selected item positions.
@@ -477,6 +483,9 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 		// Restore selected item positions.
 		int[] selected = savedState.getIntArray(BUNDLE_SELECTED_ITEMS);
 		if (selected != null && selected.length > 0) {
+
+			Log.d(TAG, "onRestoreInstanceState("+selected.length+")");
+
 			for (int i : selected) {
 				selectItem(i);
 			}
@@ -498,8 +507,9 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	 * @param action       Action for which is this check performed.
 	 */
 	private void checkActualModeFor(int requiredMode, String action) {
-		if (mMode != requiredMode)
+		if (mMode != requiredMode) {
 			throw new IllegalStateException("Can't " + action + ". Not in required(" + getModeName(requiredMode) + ") mode.");
+		}
 	}
 
 	/**

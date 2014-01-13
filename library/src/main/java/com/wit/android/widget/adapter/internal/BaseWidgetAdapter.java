@@ -152,7 +152,7 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 	 * @see #onSaveInstanceState(android.os.Bundle)
 	 */
 	public void dispatchSaveInstanceState(Bundle outState) {
-		if (outState != null) {
+		if (outState == null) {
 			outState = new Bundle();
 		}
 		onSaveInstanceState(outState);
