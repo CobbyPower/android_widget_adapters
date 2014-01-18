@@ -18,28 +18,29 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.widget;
+package com.wit.android.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.wit.android.widget.adapter.internal.view.ISelectableView;
 
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Updated {@link android.widget.RelativeLayout} to allow custom management of
- * the selection state of this layout when used in the item view for some
+ * Updated {@link android.widget.TextView} to allow custom management of
+ * the selection state of this layout when used as an item view for some
  * of the {@link android.widget.AdapterView} implementations.
  * </p>
  *
  * @author Martin Albedinsky
  * @see com.wit.android.widget.adapter.view.StateView
- * @see com.wit.android.widget.adapter.widget.StateLinearLayout
- * @see com.wit.android.widget.adapter.widget.StateFrameLayout
+ * @see SelectableLinearLayout
+ * @see SelectableRelativeLayout
+ * @see SelectableFrameLayout
  */
-public class StateRelativeLayout extends RelativeLayout implements ISelectableView {
+public class SelectableTextView extends TextView implements ISelectableView {
 
 	/**
 	 * Constants =============================
@@ -48,7 +49,7 @@ public class StateRelativeLayout extends RelativeLayout implements ISelectableVi
 	/**
 	 * Log TAG.
 	 */
-	// private static final String TAG = StateRelativeLayout.class.getSimpleName();
+	// private static final String TAG = SelectableTextView.class.getSimpleName();
 
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
@@ -95,28 +96,28 @@ public class StateRelativeLayout extends RelativeLayout implements ISelectableVi
 
 	/**
 	 * <p>
-	 * Same as {@link android.widget.RelativeLayout#RelativeLayout(android.content.Context)}.
+	 * Same as {@link android.widget.TextView#TextView(android.content.Context)}.
 	 * </p>
 	 */
-	public StateRelativeLayout(Context context) {
+	public SelectableTextView(Context context) {
 		super(context);
 	}
 
 	/**
 	 * <p>
-	 * Same as {@link android.widget.RelativeLayout#RelativeLayout(android.content.Context, android.util.AttributeSet)}.
+	 * Same as {@link android.widget.TextView#TextView(android.content.Context, android.util.AttributeSet)}.
 	 * </p>
 	 */
-	public StateRelativeLayout(Context context, AttributeSet attrs) {
+	public SelectableTextView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
 	/**
 	 * <p>
-	 * Same as {@link android.widget.RelativeLayout#RelativeLayout(android.content.Context, android.util.AttributeSet, int)}.
+	 * Same as {@link android.widget.TextView#TextView(android.content.Context, android.util.AttributeSet, int)}.
 	 * </p>
 	 */
-	public StateRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
+	public SelectableTextView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 
@@ -127,6 +128,14 @@ public class StateRelativeLayout extends RelativeLayout implements ISelectableVi
 	/**
 	 * Public --------------------------------
 	 */
+
+	/**
+	 *
+	 */
+	@Override
+	public boolean allowsDefaultSelection() {
+		return bAllowDefaultSelection;
+	}
 
 	/**
 	 * Getters + Setters ---------------------
@@ -150,7 +159,6 @@ public class StateRelativeLayout extends RelativeLayout implements ISelectableVi
 	}
 
 	/**
-	 *
 	 */
 	@Override
 	public void setSelectionState(boolean selected) {
@@ -158,19 +166,10 @@ public class StateRelativeLayout extends RelativeLayout implements ISelectableVi
 	}
 
 	/**
-	 *
 	 */
 	@Override
 	public void setAllowDefaultSelection(boolean allow) {
 		this.bAllowDefaultSelection = allow;
-	}
-
-	/**
-	 *
-	 */
-	@Override
-	public boolean allowsDefaultSelection() {
-		return bAllowDefaultSelection;
 	}
 
 	/**

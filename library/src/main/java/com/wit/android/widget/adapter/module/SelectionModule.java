@@ -21,10 +21,7 @@
 package com.wit.android.widget.adapter.module;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseIntArray;
-
-import java.util.Arrays;
 
 /**
  * <h4>Class Overview</h4>
@@ -436,8 +433,11 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	 * @param position The position of an item from the current adapter's data set.
 	 */
 	protected final void deselectItem(int position) {
-		// Remove from selected items.
-		aSelectedItems.removeAt(aSelectedItems.indexOfKey(position));
+		final int index = aSelectedItems.indexOfKey(position);
+		if (index >= 0) {
+			// Remove from selected items.
+			aSelectedItems.removeAt(index);
+		}
 	}
 
 	/**
@@ -465,9 +465,6 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 		// Save mode.
 		outState.putInt(BUNDLE_MODE, mMode);
 
-		Log.d(TAG, "onSaveInstanceState("+aSelectedItems.size()+")");
-		Log.d(TAG, "onSaveInstanceState("+ Arrays.toString(getSelectedPositions())+")");
-
 		// Change mode to obtain selected positions.
 		mMode = MODE_MULTIPLE;
 		// Save selected item positions.
@@ -483,9 +480,6 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 		// Restore selected item positions.
 		int[] selected = savedState.getIntArray(BUNDLE_SELECTED_ITEMS);
 		if (selected != null && selected.length > 0) {
-
-			Log.d(TAG, "onRestoreInstanceState("+selected.length+")");
-
 			for (int i : selected) {
 				selectItem(i);
 			}

@@ -35,9 +35,9 @@ import com.wit.android.widget.adapter.internal.view.ISelectableView;
  * </p>
  *
  * @author Martin Albedinsky
- * @see com.wit.android.widget.adapter.widget.StateLinearLayout
- * @see com.wit.android.widget.adapter.widget.StateRelativeLayout
- * @see com.wit.android.widget.adapter.widget.StateFrameLayout
+ * @see com.wit.android.widget.SelectableLinearLayout
+ * @see com.wit.android.widget.SelectableRelativeLayout
+ * @see com.wit.android.widget.SelectableFrameLayout
  */
 public class StateView extends View implements ISelectableView {
 

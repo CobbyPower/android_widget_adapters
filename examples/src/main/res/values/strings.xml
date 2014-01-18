@@ -32,7 +32,7 @@
 
     <!-- ## Navigation strings ## -->
     <eat-comment/>
-    <string name="Navigation.Header.Examples">Examples</string>
+    <string name="Navigation.Header.Examples">EXAMPLES</string>
     <string name="Navigation.Label.SimpleAdapter">Simple Adapter</string>
     <string name="Navigation.Label.SimpleAdapter.Description">Description</string>
     <string name="Navigation.Label.SelectionAdapter.Single">Selection Adapter (single)</string>

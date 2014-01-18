@@ -18,7 +18,7 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.widget;
+package com.wit.android.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -36,10 +36,10 @@ import com.wit.android.widget.adapter.internal.view.ISelectableView;
  *
  * @author Martin Albedinsky
  * @see com.wit.android.widget.adapter.view.StateView
- * @see com.wit.android.widget.adapter.widget.StateLinearLayout
- * @see com.wit.android.widget.adapter.widget.StateRelativeLayout
+ * @see SelectableLinearLayout
+ * @see SelectableRelativeLayout
  */
-public class StateFrameLayout extends FrameLayout implements ISelectableView {
+public class SelectableFrameLayout extends FrameLayout implements ISelectableView {
 
 	/**
 	 * Constants =============================
@@ -48,7 +48,7 @@ public class StateFrameLayout extends FrameLayout implements ISelectableView {
 	/**
 	 * Log TAG.
 	 */
-	// private static final String TAG = StateFrameLayout.class.getSimpleName();
+	// private static final String TAG = SelectableFrameLayout.class.getSimpleName();
 
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
@@ -98,7 +98,7 @@ public class StateFrameLayout extends FrameLayout implements ISelectableView {
 	 * Same as {@link android.widget.FrameLayout#FrameLayout(android.content.Context)}.
 	 * </p>
 	 */
-	public StateFrameLayout(Context context) {
+	public SelectableFrameLayout(Context context) {
 		super(context);
 	}
 
@@ -107,7 +107,7 @@ public class StateFrameLayout extends FrameLayout implements ISelectableView {
 	 * Same as {@link android.widget.FrameLayout#FrameLayout(android.content.Context, android.util.AttributeSet)}.
 	 * </p>
 	 */
-	public StateFrameLayout(Context context, AttributeSet attrs) {
+	public SelectableFrameLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
@@ -116,7 +116,7 @@ public class StateFrameLayout extends FrameLayout implements ISelectableView {
 	 * Same as {@link android.widget.FrameLayout#FrameLayout(android.content.Context, android.util.AttributeSet, int)}.
 	 * </p>
 	 */
-	public StateFrameLayout(Context context, AttributeSet attrs, int defStyle) {
+	public SelectableFrameLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 

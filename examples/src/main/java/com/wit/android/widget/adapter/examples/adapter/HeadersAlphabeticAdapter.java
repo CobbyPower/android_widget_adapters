@@ -28,7 +28,7 @@ import android.view.ViewGroup;
 import com.wit.android.widget.adapter.BaseMultiAdapter;
 import com.wit.android.widget.adapter.examples.R;
 import com.wit.android.widget.adapter.module.AlphabeticHeaders;
-import com.wit.android.widget.adapter.widget.StateTextView;
+import com.wit.android.widget.SelectableTextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -177,10 +177,10 @@ public class HeadersAlphabeticAdapter extends BaseMultiAdapter<HeadersAlphabetic
 
 	protected class ViewHolder {
 
-		StateTextView mTextView;
+		SelectableTextView mTextView;
 
 		ViewHolder(View itemView) {
-			this.mTextView = (StateTextView) itemView;
+			this.mTextView = (SelectableTextView) itemView;
 			mTextView.setAllowDefaultSelection(false);
 		}
 

@@ -23,8 +23,8 @@
  Note, that this layout must have set as background the list selector which will
  handle all states of this item in the list view.
 -->
-<com.wit.android.widget.adapter.widget.StateTextView xmlns:android="http://schemas.android.com/apk/res/android"
-                                                     style="@style/Ex.App.ListItem.Widget.Label.Single"
-                                                     android:layout_width="match_parent"
-                                                     android:layout_height="wrap_content"
-                                                     android:background="@drawable/ex_app_selector_list"/>
+<com.wit.android.widget.SelectableTextView xmlns:android="http://schemas.android.com/apk/res/android"
+                                           style="@style/Ex.App.ListItem.Widget.Label.Single"
+                                           android:layout_width="match_parent"
+                                           android:layout_height="wrap_content"
+                                           android:background="@drawable/ex_app_selector_list"/>

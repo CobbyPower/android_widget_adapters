@@ -18,57 +18,55 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.widget;
+package com.wit.android.widget;
 
-import android.annotation.TargetApi;
 import android.content.Context;
-import android.os.Build;
 import android.util.AttributeSet;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.wit.android.widget.adapter.internal.view.ISelectableView;
 
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Updated {@link android.widget.LinearLayout} to allow custom management of
+ * Updated {@link android.widget.RelativeLayout} to allow custom management of
  * the selection state of this layout when used in the item view for some
  * of the {@link android.widget.AdapterView} implementations.
  * </p>
  *
  * @author Martin Albedinsky
  * @see com.wit.android.widget.adapter.view.StateView
- * @see com.wit.android.widget.adapter.widget.StateRelativeLayout
- * @see com.wit.android.widget.adapter.widget.StateFrameLayout
+ * @see SelectableLinearLayout
+ * @see SelectableFrameLayout
  */
-public class StateLinearLayout extends LinearLayout implements ISelectableView {
+public class SelectableRelativeLayout extends RelativeLayout implements ISelectableView {
 
 	/**
 	 * Constants =============================
 	 */
 
-    /**
-     * Log TAG.
-     */
-    // private static final String TAG = StateLinearLayout.class.getSimpleName();
+	/**
+	 * Log TAG.
+	 */
+	// private static final String TAG = SelectableRelativeLayout.class.getSimpleName();
 
-    /**
-     * Flag indicating whether the debug output trough log-cat is enabled or not.
-     */
-    // private static final boolean DEBUG = true;
+	/**
+	 * Flag indicating whether the debug output trough log-cat is enabled or not.
+	 */
+	// private static final boolean DEBUG = true;
 
-    /**
-     * Flag indicating whether the output for user trough log-cat is enabled or not.
-     */
-    // private static final boolean USER_LOG = true;
+	/**
+	 * Flag indicating whether the output for user trough log-cat is enabled or not.
+	 */
+	// private static final boolean USER_LOG = true;
 
 	/**
 	 * Enums =================================
 	 */
 
-    /**
-     * Static members ========================
-     */
+	/**
+	 * Static members ========================
+	 */
 
 	/**
 	 * Members ===============================
@@ -97,29 +95,28 @@ public class StateLinearLayout extends LinearLayout implements ISelectableView {
 
 	/**
 	 * <p>
-	 * Same as {@link android.widget.LinearLayout#LinearLayout(android.content.Context)}.
+	 * Same as {@link android.widget.RelativeLayout#RelativeLayout(android.content.Context)}.
 	 * </p>
 	 */
-	public StateLinearLayout(Context context) {
+	public SelectableRelativeLayout(Context context) {
 		super(context);
 	}
 
 	/**
 	 * <p>
-	 * Same as {@link android.widget.LinearLayout#LinearLayout(android.content.Context, android.util.AttributeSet)}.
+	 * Same as {@link android.widget.RelativeLayout#RelativeLayout(android.content.Context, android.util.AttributeSet)}.
 	 * </p>
 	 */
-	public StateLinearLayout(Context context, AttributeSet attrs) {
+	public SelectableRelativeLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
 	/**
 	 * <p>
-	 * Same as {@link android.widget.LinearLayout#LinearLayout(android.content.Context, android.util.AttributeSet, int)}.
+	 * Same as {@link android.widget.RelativeLayout#RelativeLayout(android.content.Context, android.util.AttributeSet, int)}.
 	 * </p>
 	 */
-	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
-	public StateLinearLayout(Context context, AttributeSet attrs, int defStyle) {
+	public SelectableRelativeLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 
@@ -136,7 +133,7 @@ public class StateLinearLayout extends LinearLayout implements ISelectableView {
 	 */
 
 	/**
-	 * 
+	 *
 	 */
 	@Override
 	public void setSelected(boolean selected) {
@@ -153,6 +150,7 @@ public class StateLinearLayout extends LinearLayout implements ISelectableView {
 	}
 
 	/**
+	 *
 	 */
 	@Override
 	public void setSelectionState(boolean selected) {
@@ -160,6 +158,7 @@ public class StateLinearLayout extends LinearLayout implements ISelectableView {
 	}
 
 	/**
+	 *
 	 */
 	@Override
 	public void setAllowDefaultSelection(boolean allow) {
@@ -167,6 +166,7 @@ public class StateLinearLayout extends LinearLayout implements ISelectableView {
 	}
 
 	/**
+	 *
 	 */
 	@Override
 	public boolean allowsDefaultSelection() {

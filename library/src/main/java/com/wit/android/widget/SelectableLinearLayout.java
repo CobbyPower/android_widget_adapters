@@ -18,56 +18,57 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.widget;
+package com.wit.android.widget;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.util.AttributeSet;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import com.wit.android.widget.adapter.internal.view.ISelectableView;
 
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Updated {@link android.widget.TextView} to allow custom management of
- * the selection state of this layout when used as an item view for some
+ * Updated {@link android.widget.LinearLayout} to allow custom management of
+ * the selection state of this layout when used in the item view for some
  * of the {@link android.widget.AdapterView} implementations.
  * </p>
  *
  * @author Martin Albedinsky
  * @see com.wit.android.widget.adapter.view.StateView
- * @see com.wit.android.widget.adapter.widget.StateLinearLayout
- * @see com.wit.android.widget.adapter.widget.StateRelativeLayout
- * @see com.wit.android.widget.adapter.widget.StateFrameLayout
+ * @see SelectableRelativeLayout
+ * @see SelectableFrameLayout
  */
-public class StateTextView extends TextView implements ISelectableView {
+public class SelectableLinearLayout extends LinearLayout implements ISelectableView {
 
 	/**
 	 * Constants =============================
 	 */
 
-	/**
-	 * Log TAG.
-	 */
-	// private static final String TAG = StateTextView.class.getSimpleName();
+    /**
+     * Log TAG.
+     */
+    // private static final String TAG = SelectableLinearLayout.class.getSimpleName();
 
-	/**
-	 * Flag indicating whether the debug output trough log-cat is enabled or not.
-	 */
-	// private static final boolean DEBUG = true;
+    /**
+     * Flag indicating whether the debug output trough log-cat is enabled or not.
+     */
+    // private static final boolean DEBUG = true;
 
-	/**
-	 * Flag indicating whether the output for user trough log-cat is enabled or not.
-	 */
-	// private static final boolean USER_LOG = true;
+    /**
+     * Flag indicating whether the output for user trough log-cat is enabled or not.
+     */
+    // private static final boolean USER_LOG = true;
 
 	/**
 	 * Enums =================================
 	 */
 
-	/**
-	 * Static members ========================
-	 */
+    /**
+     * Static members ========================
+     */
 
 	/**
 	 * Members ===============================
@@ -96,28 +97,29 @@ public class StateTextView extends TextView implements ISelectableView {
 
 	/**
 	 * <p>
-	 * Same as {@link android.widget.TextView#TextView(android.content.Context)}.
+	 * Same as {@link android.widget.LinearLayout#LinearLayout(android.content.Context)}.
 	 * </p>
 	 */
-	public StateTextView(Context context) {
+	public SelectableLinearLayout(Context context) {
 		super(context);
 	}
 
 	/**
 	 * <p>
-	 * Same as {@link android.widget.TextView#TextView(android.content.Context, android.util.AttributeSet)}.
+	 * Same as {@link android.widget.LinearLayout#LinearLayout(android.content.Context, android.util.AttributeSet)}.
 	 * </p>
 	 */
-	public StateTextView(Context context, AttributeSet attrs) {
+	public SelectableLinearLayout(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
 	/**
 	 * <p>
-	 * Same as {@link android.widget.TextView#TextView(android.content.Context, android.util.AttributeSet, int)}.
+	 * Same as {@link android.widget.LinearLayout#LinearLayout(android.content.Context, android.util.AttributeSet, int)}.
 	 * </p>
 	 */
-	public StateTextView(Context context, AttributeSet attrs, int defStyle) {
+	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+	public SelectableLinearLayout(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 
@@ -130,19 +132,11 @@ public class StateTextView extends TextView implements ISelectableView {
 	 */
 
 	/**
-	 *
-	 */
-	@Override
-	public boolean allowsDefaultSelection() {
-		return bAllowDefaultSelection;
-	}
-
-	/**
 	 * Getters + Setters ---------------------
 	 */
 
 	/**
-	 *
+	 * 
 	 */
 	@Override
 	public void setSelected(boolean selected) {
@@ -170,6 +164,13 @@ public class StateTextView extends TextView implements ISelectableView {
 	@Override
 	public void setAllowDefaultSelection(boolean allow) {
 		this.bAllowDefaultSelection = allow;
+	}
+
+	/**
+	 */
+	@Override
+	public boolean allowsDefaultSelection() {
+		return bAllowDefaultSelection;
 	}
 
 	/**

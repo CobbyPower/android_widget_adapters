@@ -28,7 +28,7 @@ import android.view.ViewGroup;
 import com.wit.android.widget.adapter.BaseMultiAdapter;
 import com.wit.android.widget.adapter.examples.R;
 import com.wit.android.widget.adapter.module.SelectionModule;
-import com.wit.android.widget.adapter.widget.StateTextView;
+import com.wit.android.widget.SelectableTextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,6 +50,8 @@ public class SelectionSingleAdapter extends BaseMultiAdapter<SelectionSingleAdap
 
 	final List<String> MODELS;
 
+	OnSelectionListener iListener;
+
 	protected final SelectionModule<SelectionSingleAdapter> SELECTOR = new SelectionModule<SelectionSingleAdapter>();
 	{
 		// Set up single selection mode.
@@ -64,6 +66,14 @@ public class SelectionSingleAdapter extends BaseMultiAdapter<SelectionSingleAdap
 		assignModule(SELECTOR, 0);
 	}
 
+	public void setOnSelectionListener(OnSelectionListener listener) {
+		this.iListener = listener;
+	}
+
+	public void removeSelectionListener() {
+		this.iListener = null;
+	}
+
 	/**
 	 * Toggles selection state of the item at the requested position.
 	 *
@@ -71,6 +81,9 @@ public class SelectionSingleAdapter extends BaseMultiAdapter<SelectionSingleAdap
 	 */
 	public void toggleItemSelectionState(int position) {
 		SELECTOR.toggleItemSelectionState(position);
+		if (iListener != null) {
+			iListener.onSelectionChanged();
+		}
 	}
 
 	/**
@@ -88,6 +101,9 @@ public class SelectionSingleAdapter extends BaseMultiAdapter<SelectionSingleAdap
 	public void clearSelectedItems() {
 		// Selector will also fire notify data set change on the attached(this) adapter.
 		SELECTOR.clearSelection();
+		if (iListener != null) {
+			iListener.onSelectionChanged();
+		}
 	}
 
 	/**
@@ -139,10 +155,10 @@ public class SelectionSingleAdapter extends BaseMultiAdapter<SelectionSingleAdap
 		/**
 		 * Sate text view which can handle custom selection state.
 		 */
-		StateTextView mTextView;
+		SelectableTextView mTextView;
 
 		ViewHolder(View itemView) {
-			mTextView = (StateTextView) itemView;
+			mTextView = (SelectableTextView) itemView;
 			/**
 			 * This is very important. Without this false flag the selection will not be working.
 			 */
@@ -166,5 +182,10 @@ public class SelectionSingleAdapter extends BaseMultiAdapter<SelectionSingleAdap
 		void setSelected(boolean selected) {
 			mTextView.setSelectionState(selected);
 		}
+	}
+
+	public static interface OnSelectionListener {
+		public void onSelectionStarted();
+		public void onSelectionChanged();
 	}
 }

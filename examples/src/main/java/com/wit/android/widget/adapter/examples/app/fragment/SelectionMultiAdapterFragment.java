@@ -32,6 +32,7 @@ import android.widget.Toast;
 import com.wit.android.examples.app.fragment.ExListFragment;
 import com.wit.android.widget.adapter.examples.R;
 import com.wit.android.widget.adapter.examples.adapter.SelectionMultiAdapter;
+import com.wit.android.widget.adapter.examples.adapter.SelectionSingleAdapter;
 
 /**
  * <p>
@@ -40,7 +41,7 @@ import com.wit.android.widget.adapter.examples.adapter.SelectionMultiAdapter;
  *
  * @author Martin Albedinsky
  */
-public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMultiAdapter> {
+public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMultiAdapter> implements SelectionSingleAdapter.OnSelectionListener {
 
 	/**
 	 * Log TAG.
@@ -62,6 +63,21 @@ public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMulti
 		super.onViewCreated(view, savedInstanceState);
 		this.mSelectedItemsFormat = getString(R.string.Format_SelectedItems);
 		setAdapter(mAdapter = new SelectionMultiAdapter(getActivity()));
+		mAdapter.setOnSelectionListener(this);
+	}
+
+	@Override
+	public void onSelectionStarted() {
+		if (mActionMode == null) {
+			// Start the action mode.
+			this.mActionMode = ((ActionBarActivity) getActivity()).startSupportActionMode(new ActionModeCallback());
+		}
+	}
+
+	@Override
+	public void onSelectionChanged() {
+		// Update number of selected items in the contextual action bar.
+		updateSelectedItemsText(mAdapter.getSelectedItemsCount());
 	}
 
 	@Override
@@ -69,8 +85,6 @@ public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMulti
 		// Update selected items only when in action mode.
 		if (mActionMode != null) {
 			mAdapter.toggleItemSelectionState(position);
-			// Update number of selected items in the contextual action bar.
-			this.updateSelectedItemsText(mAdapter.getSelectedItemsCount());
 		} else {
 			Toast.makeText(getActivity(), R.string.Toast_LongPressToEnableActionMode, Toast.LENGTH_SHORT).show();
 		}
@@ -83,10 +97,8 @@ public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMulti
 			return false;
 		}
 
-		// Start the action mode.
-		this.mActionMode = ((ActionBarActivity) getActivity()).startSupportActionMode(new ActionModeCallback());
+		onSelectionStarted();
 		mAdapter.toggleItemSelectionState(position);
-		updateSelectedItemsText(mAdapter.getSelectedItemsCount());
 		return true;
 	}
 
@@ -107,8 +119,10 @@ public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMulti
 	}
 
 	private void updateSelectedItemsText(int selectedCount) {
-		// Update number of selected items in the contextual action bar.
-		mActionMode.setTitle(String.format(mSelectedItemsFormat, selectedCount));
+		if (mActionMode != null) {
+			// Update number of selected items in the contextual action bar.
+			mActionMode.setTitle(String.format(mSelectedItemsFormat, selectedCount));
+		}
 	}
 
 	/**

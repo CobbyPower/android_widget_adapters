@@ -29,7 +29,7 @@ import android.widget.TextView;
 
 import com.wit.android.widget.adapter.examples.R;
 import com.wit.android.widget.adapter.module.SelectionModule;
-import com.wit.android.widget.adapter.widget.StateLinearLayout;
+import com.wit.android.widget.SelectableLinearLayout;
 
 /**
  * <p>
@@ -76,6 +76,9 @@ public class SelectionMultiAdapter extends SelectionSingleAdapter implements Vie
 		switch (v.getId()) {
 			case R.id.ListItem_Simple_Check_CheckBox:
 				// Clicked check box in the list item.
+				if (iListener != null) {
+					iListener.onSelectionStarted();
+				}
 				// Toggle item selection state.
 				toggleItemSelectionState((Integer) v.getTag());
 				break;
@@ -87,12 +90,12 @@ public class SelectionMultiAdapter extends SelectionSingleAdapter implements Vie
 	 */
 	private class ViewHolder {
 
-		private StateLinearLayout mLayout;
+		private SelectableLinearLayout mLayout;
 		private TextView mTextView;
 		private CheckBox mCheckBox;
 
 		ViewHolder(View itemView) {
-			this.mLayout = (StateLinearLayout) itemView;
+			this.mLayout = (SelectableLinearLayout) itemView;
 			/**
 			 * This is very important. Without this false flag the selection will not be working.
 			 */
