@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * =================================================================================
+ * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
+ * =================================================================================
+ * Licensed under the Apache License, Version 2.0 or later (further "License" only);
+ * *********************************************************************************
+ * You may use this file only in compliance with the License. More details and copy
+ * of this License you may obtain at
+ *
+ * 		http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * You can redistribute, modify or publish any part of the code written in this
+ * file but as it is described in the License, the software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES or CONDITIONS OF
+ * ANY KIND.
+ *
+ * See the License for the specific language governing permissions and limitations
+ * under the License.
+ * =================================================================================
+ */
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ###### EXAMPLES COLORS ###### -->
+    <eat-comment/>
+
+    <!-- ## Navigation colors ## -->
+    <eat-comment/>
+    <color name="Ex.Navigation.Background">#88138cd9</color>
+    <color name="Ex.Navigation.Scrim">#aa111111</color>
+    <color name="Ex.Navigation.Header">#76bdea</color>
+    <color name="Ex.Navigation.Label">#fff</color>
+    <color name="Ex.Navigation.Selector.pressed">#4476bdea</color>
+    <color name="Ex.Navigation.Copy.Background">#aa138cd9</color>
+
+    <!-- TODO: -->
+    <color name="Ex.Bgr.Activity">#222222</color>
+    <color name="Ex.Bgr.Activity.Splash">#111111</color>
+
+</resources>

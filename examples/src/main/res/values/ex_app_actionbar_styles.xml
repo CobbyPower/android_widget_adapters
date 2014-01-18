@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * =================================================================================
+ * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
+ * =================================================================================
+ * Licensed under the Apache License, Version 2.0 or later (further "License" only);
+ * *********************************************************************************
+ * You may use this file only in compliance with the License. More details and copy
+ * of this License you may obtain at
+ *
+ * 		http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * You can redistribute, modify or publish any part of the code written in this
+ * file but as it is described in the License, the software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES or CONDITIONS OF
+ * ANY KIND.
+ *
+ * See the License for the specific language governing permissions and limitations
+ * under the License.
+ * =================================================================================
+ */
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ###### EXAMPLES APPLICATION ACTIONBAR STYLES ###### -->
+    <eat-comment/>
+
+    <!-- Actionbar parent theme -->
+    <style name="Ex.App.Theme.ActionBar" parent="Theme.AppCompat">
+        <!-- Home as up icon (back button icon) -->
+        <!--<item name="homeAsUpIndicator">@drawable/ic_action_back</item>--> <!-- TODO -->
+        <!-- More overflow menu button style -->
+        <item name="actionOverflowButtonStyle">@style/Ex.App.ActionBar.Widget.ActionButton.Overflow</item>
+        <!-- Widget style -->
+        <item name="actionBarStyle">@style/Ex.App.Actionbar.Widget</item>
+        <!-- Action button's background -->
+        <!--<item name="actionBarItemBackground">@drawable/app_actionbar_btn_action_bgr</item>--> <!-- TODO -->
+        <!-- Action button's text color -->
+        <item name="actionMenuTextColor">@color/Ex.App.Actionbar.Label.Text</item>
+        <!-- Action buttons divider -->
+        <!--<item name="actionBarDivider">@drawable/app_actionbar_divider</item>--> <!-- TODO -->
+        <!-- Popup menu style (like actionbar overflow menu) -->
+        <item name="popupMenuStyle">@style/Ex.App.Actionbar.Widget.PopupMenu</item>
+        <!-- PopUp menu item text appearance (large) -->
+        <item name="textAppearanceLargePopupMenu">@style/Ex.App.Actionbar.TextAppearance.PopupMenu.Large</item>
+        <!-- PopUp menu item text appearance (small) -->
+        <item name="textAppearanceSmallPopupMenu">@style/Ex.App.Actionbar.TextAppearance.PopupMenu.Small</item>
+    </style>
+
+    <!-- Actionbar text appearance -->
+    <style name="Ex.App.Actionbar.TextAppearance" parent="Ex.App.TextAppearance.Medium">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Actionbar label text appearance -->
+    <style name="Ex.App.Actionbar.TextAppearance.Label">
+        <item name="android:textColor">@color/Ex.App.Actionbar.Label.Text</item>
+    </style>
+
+    <!-- Actionbar PopUp menu item text appearance -->
+    <style name="Ex.App.Actionbar.TextAppearance.PopupMenu">
+        <item name="android:textColor">@color/Ex.App.Actionbar.Label.PopupMenu.Text</item>
+    </style>
+
+    <!-- Actionbar PopUp menu item text appearance (small) -->
+    <style name="Ex.App.Actionbar.TextAppearance.PopupMenu.Small">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- Actionbar PopUp menu item text appearance (large) -->
+    <style name="Ex.App.Actionbar.TextAppearance.PopupMenu.Large">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- Actionbar widget style -->
+    <style name="Ex.App.Actionbar.Widget" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <!-- Background for the top actionbar view -->
+        <item name="background">@drawable/ex_app_actionbar_bgr</item>
+        <!--<item name="backgroundStacked">@drawable/ab_stacked_solid_example</item>-->
+        <!--<item name="backgroundSplit">@drawable/ab_bottom_solid_example</item>-->
+        <!--<item name="progressBarStyle">@style/ProgressBar.Example</item>-->
+        <!-- Actionbar label text style -->
+        <item name="titleTextStyle">@style/Ex.App.Actionbar.TextAppearance.Label</item>
+    </style>
+
+    <!-- Actionbar PopUp menu style -->
+    <style name="Ex.App.Actionbar.Widget.PopupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:dropDownSelector">@drawable/abc_list_selector_holo_light</item>
+        <!--<item name="android:popupBackground">@drawable/app_menu_dropdown_panel</item>--> <!-- TODO -->
+    </style>
+
+    <!-- Actionbar more overflow menu button style -->
+    <style name="Ex.App.ActionBar.Widget.ActionButton.Overflow" parent="Widget.AppCompat.Base.ActionButton.Overflow">
+        <!--<item name="android:src">@drawable/ic_menu_moreoverflow</item>--> <!-- TODO -->
+    </style>
+
+</resources>

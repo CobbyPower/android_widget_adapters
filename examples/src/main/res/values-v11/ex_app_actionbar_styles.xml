@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * =================================================================================
+ * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
+ * =================================================================================
+ * Licensed under the Apache License, Version 2.0 or later (further "License" only);
+ * *********************************************************************************
+ * You may use this file only in compliance with the License. More details and copy
+ * of this License you may obtain at
+ *
+ * 		http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * You can redistribute, modify or publish any part of the code written in this
+ * file but as it is described in the License, the software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES or CONDITIONS OF
+ * ANY KIND.
+ *
+ * See the License for the specific language governing permissions and limitations
+ * under the License.
+ * =================================================================================
+ */
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ###### EXAMPLES APPLICATION ACTIONBAR STYLES (v11) ###### -->
+    <eat-comment/>
+
+    <!-- Actionbar parent theme specific for API version 11 and higher -->
+    <style name="Ex.App.Theme.ActionBar.v11" parent="Theme.AppCompat">
+        <!-- Action button's background -->
+        <!--<item name="actionBarItemBackground">@drawable/app_actionbar_btn_action_bgr</item>--><!-- TODO -->
+        <!-- Action buttons divider -->
+        <!--<item name="actionBarDivider">@drawable/app_actionbar_divider</item>--><!-- TODO -->
+    </style>
+
+    <!-- Actionbar parent theme -->
+    <style name="Ex.App.Theme.ActionBar" parent="Ex.App.Theme.ActionBar.v11">
+        <!-- Home as up icon (back button icon) -->
+        <!--<item name="android:homeAsUpIndicator">@drawable/ic_action_back</item>--> <!-- TODO -->
+        <!-- More overflow menu button style -->
+        <item name="android:actionOverflowButtonStyle">@style/Ex.App.ActionBar.Widget.ActionButton.Overflow</item>
+        <!-- Widget style -->
+        <item name="android:actionBarStyle">@style/Ex.App.Actionbar.Widget</item>
+        <!-- Action button's text color -->
+        <item name="android:actionMenuTextColor">@color/Ex.App.Actionbar.Label.Text</item>
+        <!-- Popup menu style (like actionbar overflow menu) -->
+        <item name="android:popupMenuStyle">@style/Ex.App.Actionbar.Widget.PopupMenu</item>
+        <!-- PopUp menu item text appearance (large) -->
+        <item name="android:textAppearanceLargePopupMenu">@style/Ex.App.Actionbar.TextAppearance.PopupMenu.Large</item>
+        <!-- PopUp menu item text appearance (small) -->
+        <item name="android:textAppearanceSmallPopupMenu">@style/Ex.App.Actionbar.TextAppearance.PopupMenu.Small</item>
+    </style>
+
+    <!-- Actionbar widget parent style specific for API version 11 and higher -->
+    <style name="Ex.App.ActionBar.Widget.v11" parent="android:Widget.ActionBar">
+    </style>
+
+    <!-- Actionbar widget style -->
+    <style name="Ex.App.Actionbar.Widget" parent="Ex.App.ActionBar.Widget.v11">
+        <!-- Background for the top action bar view -->
+        <item name="android:background">@drawable/ex_app_actionbar_bgr</item>
+        <!-- Style for actionbar label text -->
+        <item name="android:titleTextStyle">@style/Ex.App.Actionbar.TextAppearance.Label</item>
+    </style>
+</resources>

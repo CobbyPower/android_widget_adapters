@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+ * =================================================================================
+ * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
+ * =================================================================================
+ * Licensed under the Apache License, Version 2.0 or later (further "License" only);
+ * *********************************************************************************
+ * You may use this file only in compliance with the License. More details and copy
+ * of this License you may obtain at
+ *
+ * 		http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * You can redistribute, modify or publish any part of the code written in this
+ * file but as it is described in the License, the software distributed under the
+ * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES or CONDITIONS OF
+ * ANY KIND.
+ *
+ * See the License for the specific language governing permissions and limitations
+ * under the License.
+ * =================================================================================
+ */
+-->
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ###### EXAMPLES APPLICATION STYLES ###### -->
+    <eat-comment/>
+
+    <!-- ## Text appearances ## -->
+    <eat-comment/>
+    <style name="Ex.App.TextAppearance" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/Ex.App.Text.Normal.size</item>
+    </style>
+
+    <style name="Ex.App.TextAppearance.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Ex.App.TextAppearance.Micro">
+        <item name="android:textSize">@dimen/Ex.App.Text.Micro.size</item>
+    </style>
+
+    <style name="Ex.App.TextAppearance.Micro.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Ex.App.TextAppearance.Small">
+        <item name="android:textSize">@dimen/Ex.App.Text.Small.size</item>
+    </style>
+
+    <style name="Ex.App.TextAppearance.Small.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Ex.App.TextAppearance.Medium">
+        <item name="android:textSize">@dimen/Ex.App.Text.Medium.size</item>
+    </style>
+
+    <style name="Ex.App.TextAppearance.Medium.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Ex.App.TextAppearance.Large">
+        <item name="android:textSize">@dimen/Ex.App.Text.Large.size</item>
+    </style>
+
+    <style name="Ex.App.TextAppearance.Large.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- ## Widget Text appearances ## -->
+
+    <style name="Ex.App.TextAppearance.Widget.TextView.Empty" parent="Ex.App.TextAppearance.Medium">
+        <item name="android:textColor">#fff</item> <!-- TODO: set up -->
+    </style>
+
+    <style name="Ex.App.TextAppearance.Widget.EditText" parent="Ex.App.TextAppearance.Medium">
+        <item name="android:textColor">#fff</item> <!-- TODO: set up -->
+        <item name="android:textColorHint">#fff</item> <!-- TODO: set up -->
+    </style>
+
+    <style name="Ex.App.TextAppearance.Widget.Button" parent="Ex.App.TextAppearance.Medium">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#fff</item> <!-- TODO: set up -->
+    </style>
+
+    <style name="Ex.App.TextAppearance.Widget.RadioButton" parent="Ex.App.TextAppearance.Small.Bold" />
+
+    <style name="Ex.App.TextAppearance.Widget.CheckBox" parent="Ex.App.TextAppearance.Small.Bold" />
+
+    <!-- ## Widget styles ## -->
+
+    <style name="Ex.App.Widget.TextView" parent="android:Widget.TextView">
+        <item name="android:textAppearance">@style/Ex.App.TextAppearance.Small</item>
+    </style>
+
+    <style name="Ex.App.Widget.EditText" parent="android:Widget.EditText">
+        <item name="android:background">@null</item> <!-- TODO: set up -->
+        <item name="android:paddingLeft">10dip</item>
+        <item name="android:paddingTop">10dip</item>
+        <item name="android:paddingRight">10dip</item>
+        <item name="android:paddingBottom">5dip</item>
+        <!-- Override default text color and text color hint,
+        so there will be applied colors from the textAppearance below. -->
+        <item name="android:textColor">@null</item>
+        <item name="android:textColorHint">@null</item>
+        <item name="android:textAppearance">@style/Ex.App.TextAppearance.Widget.EditText</item>
+    </style>
+
+    <style name="Ex.App.Widget.Button" parent="android:Widget.Button">
+        <item name="android:paddingLeft">15dip</item>
+        <item name="android:paddingTop">10dip</item>
+        <item name="android:paddingRight">15dip</item>
+        <item name="android:paddingBottom">10dip</item>
+        <item name="android:background">@null</item> <!-- TODO: set up -->
+        <!-- Override (disable) default text color,
+        so there will be applied color from the textAppearance below. -->
+        <item name="android:textColor">@null</item>
+        <item name="android:textAppearance">@style/Ex.App.TextAppearance.Widget.Button</item>
+    </style>
+
+    <style name="Ex.App.Widget.Button.Toggle" parent="android:Widget.Button.Toggle">
+
+    </style>
+
+    <style name="Ex.App.Widget.ImageButton" parent="android:Widget.ImageButton">
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="Ex.App.Widget.RadioButton" parent="android:Widget.CompoundButton.RadioButton">
+        <item name="android:button">@null</item> <!-- TODO: set up -->
+        <!-- Override (disable) default text color,
+        so there will be applied color from the textAppearance below. -->
+        <item name="android:textColor">@null</item>
+        <item name="android:textAppearance">@style/Ex.App.TextAppearance.Widget.RadioButton</item>
+    </style>
+
+    <style name="Ex.App.Widget.CheckBox" parent="android:Widget.CompoundButton.CheckBox">
+        <item name="android:button">@null</item> <!-- TODO: set up -->
+        <!-- Override (disable) default text color,
+        so there will be applied color from the textAppearance below. -->
+        <item name="android:textColor">@null</item>
+        <item name="android:textAppearance">@style/Ex.App.TextAppearance.Widget.CheckBox</item>
+    </style>
+
+    <style name="Ex.App.Widget.ProgressBar" parent="android:Widget.ProgressBar">
+    </style>
+
+    <style name="Ex.App.Widget.ProgressBar.Small" parent="android:Widget.ProgressBar.Small">
+    </style>
+
+    <style name="Ex.App.Widget.ProgressBar.Horizontal" parent="android:Widget.ProgressBar.Horizontal">
+        <item name="android:minHeight">16dip</item>
+        <item name="android:maxHeight">16dip</item>
+    </style>
+
+    <style name="Ex.App.Widget.ScrollView" parent="android:Widget.ScrollView">
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollbarSize">@dimen/Ex.App.Widget.Scrollable.ScrollBar.size</item>
+    </style>
+
+    <style name="Ex.App.Widget.WebView" parent="android:Widget.WebView">
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollbarSize">@dimen/Ex.App.Widget.Scrollable.ScrollBar.size</item>
+    </style>
+
+    <style name="Ex.App.Widget.ListView" parent="android:Widget.ListView">
+        <item name="android:cacheColorHint">@android:color/transparent</item>
+        <item name="android:divider">@null</item>
+        <item name="android:dividerHeight">0dip</item>
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollbarSize">@dimen/Ex.App.Widget.Scrollable.ScrollBar.size</item>
+        <item name="android:listSelector">@drawable/ex_app_selector_transparent</item>
+    </style>
+
+    <style name="Ex.App.Widget.GridView" parent="android:Widget.GridView">
+        <item name="android:scrollbarStyle">outsideOverlay</item>
+        <item name="android:scrollbarSize">@dimen/Ex.App.Widget.Scrollable.ScrollBar.size</item>
+        <item name="android:listSelector">@drawable/ex_app_selector_transparent</item>
+    </style>
+
+
+
+</resources>
