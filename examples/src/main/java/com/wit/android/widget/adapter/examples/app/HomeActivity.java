@@ -27,6 +27,7 @@ import com.wit.android.examples.model.navigation.INavigationItem;
 import com.wit.android.examples.model.navigation.NavigationHeader;
 import com.wit.android.examples.model.navigation.NavigationItem;
 import com.wit.android.widget.adapter.examples.R;
+import com.wit.android.widget.adapter.examples.app.fragment.SimpleAdapterFragment;
 import com.wit.android.widget.adapter.examples.app.fragment.factory.FragmentsFactory;
 
 import java.util.ArrayList;
@@ -46,12 +47,16 @@ public class HomeActivity extends ExHomeActivity {
 	 */
 	private static final String TAG = HomeActivity.class.getSimpleName();
 
+	/**
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getFragmentController().setFragmentFactory(new FragmentsFactory());
 	}
 
+	/**
+	 */
 	@Override
 	protected List<INavigationItem> onCreateNavigationItems() {
 		final List<INavigationItem> items = new ArrayList<INavigationItem>();
@@ -77,6 +82,18 @@ public class HomeActivity extends ExHomeActivity {
 		return items;
 	}
 
+	/**
+	 */
+	@Override
+	protected int onShowInitialFragment() {
+		getFragmentController().showFragment(
+				SimpleAdapterFragment.newInstance()
+		);
+		return 1;
+	}
+
+	/**
+	 */
 	@Override
 	protected boolean onNavigationItemClick(int position, final long id) {
 		registerAction(new Runnable() {
