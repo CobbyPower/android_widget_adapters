@@ -71,6 +71,8 @@ public class SelectionAndHeadersAdapterFragment extends ExListFragment<Selection
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		setActionBarTitle(R.string.Navigation_Label_SelectionAndHeadersAdapter);
+
 		this.mSelectedItemsFormat = getString(R.string.Format_SelectedItems);
 		// Do not show divider.
 		getListView().setDividerHeight(0);

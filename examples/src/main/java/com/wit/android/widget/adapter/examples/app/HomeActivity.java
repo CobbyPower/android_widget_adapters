@@ -20,6 +20,7 @@
  */
 package com.wit.android.widget.adapter.examples.app;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 
 import com.wit.android.examples.app.ExHomeActivity;
@@ -45,7 +46,7 @@ public class HomeActivity extends ExHomeActivity {
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = HomeActivity.class.getSimpleName();
+	// private static final String TAG = HomeActivity.class.getSimpleName();
 
 	/**
 	 */
@@ -58,27 +59,39 @@ public class HomeActivity extends ExHomeActivity {
 	/**
 	 */
 	@Override
-	protected List<INavigationItem> onCreateNavigationItems() {
+	protected List<INavigationItem> onCreateNavigationItems(Resources res) {
 		final List<INavigationItem> items = new ArrayList<INavigationItem>();
 		items.add(new NavigationHeader(getString(R.string.Navigation_Header_Examples)));
-		items.add(this.createItem(
+		items.add(NavigationItem.create(
+				FragmentsFactory.FRAGMENT_SIMPLE_ADAPTER,
 				R.string.Navigation_Label_SimpleAdapter,
-				FragmentsFactory.FRAGMENT_SIMPLE_ADAPTER));
-		items.add(this.createItem(
+				res
+		));
+		items.add(NavigationItem.create(
+				FragmentsFactory.FRAGMENT_SELECTION_SIMPLE_ADAPTER,
 				R.string.Navigation_Label_SelectionAdapter_Single,
-				FragmentsFactory.FRAGMENT_SELECTION_SIMPLE_ADAPTER));
-		items.add(this.createItem(
+				res
+		));
+		items.add(NavigationItem.create(
+				FragmentsFactory.FRAGMENT_SELECTION_MULTI_ADAPTER,
 				R.string.Navigation_Label_SelectionAdapter_Multi,
-				FragmentsFactory.FRAGMENT_SELECTION_CHECK_ADAPTER));
-		items.add(this.createItem(
+				res
+		));
+		items.add(NavigationItem.create(
+				FragmentsFactory.FRAGMENT_HEADERS_ALPHABETIC_ADAPTER,
 				R.string.Navigation_Label_HeadersAdapter_Alphabetic,
-				FragmentsFactory.FRAGMENT_HEADERS_ALPHABETIC_ADAPTER));
-		items.add(this.createItem(
+				res
+		));
+		items.add(NavigationItem.create(
+				FragmentsFactory.FRAGMENT_HEADERS_GROUPS_ADAPTER,
 				R.string.Navigation_Label_HeadersAdapter_Groups,
-				FragmentsFactory.FRAGMENT_HEADERS_GROUPS_ADAPTER));
-		items.add(this.createItem(
+				res
+		));
+		items.add(NavigationItem.create(
+				FragmentsFactory.FRAGMENT_SELECTION_AND_HEADERS_ADAPTER,
 				R.string.Navigation_Label_SelectionAndHeadersAdapter,
-				FragmentsFactory.FRAGMENT_SELECTION_AND_HEADERS_ADAPTER));
+				res
+		));
 		return items;
 	}
 
@@ -86,46 +99,7 @@ public class HomeActivity extends ExHomeActivity {
 	 */
 	@Override
 	protected int onShowInitialFragment() {
-		getFragmentController().showFragment(
-				SimpleAdapterFragment.newInstance()
-		);
+		getFragmentController().showFragment(SimpleAdapterFragment.newInstance());
 		return 1;
-	}
-
-	/**
-	 */
-	@Override
-	protected boolean onNavigationItemClick(int position, final long id) {
-		registerAction(new Runnable() {
-			@Override
-			public void run() {
-				getFragmentController().showFragment((int) id);
-			}
-		});
-		return true;
-	}
-
-	/**
-	 * Creates navigation item with the given text resource and id.
-	 *
-	 * @param textRes
-	 * @param itemID
-	 * @return
-	 */
-	private NavigationItem createItem(int textRes, int itemID) {
-		return createItem(textRes, 0, itemID);
-	}
-
-	/**
-	 * Creates navigation item with the given text, description resource and id.
-	 *
-	 * @param textRes
-	 * @param descRes
-	 * @param itemID
-	 * @return
-	 */
-	private NavigationItem createItem(int textRes, int descRes, int itemID) {
-		final NavigationItem item = new NavigationItem(getString(textRes), itemID);
-		return (descRes == 0) ? item : item.setDescription(getString(descRes));
 	}
 }

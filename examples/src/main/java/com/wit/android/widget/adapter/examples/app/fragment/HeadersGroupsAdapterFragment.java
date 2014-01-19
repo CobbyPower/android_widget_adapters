@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.wit.android.examples.app.fragment.ExListFragment;
+import com.wit.android.widget.adapter.examples.R;
 import com.wit.android.widget.adapter.examples.adapter.HeadersGroupsAdapter;
 
 /**
@@ -47,6 +48,7 @@ public class HeadersGroupsAdapterFragment extends ExListFragment<HeadersGroupsAd
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		setActionBarTitle(R.string.Navigation_Label_HeadersAdapter_Groups);
 		setAdapter(new HeadersGroupsAdapter(getActivity()));
 	}
 }

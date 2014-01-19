@@ -55,6 +55,7 @@ public class HeadersAlphabeticAdapterFragment extends ExListFragment<HeadersAlph
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		setActionBarTitle(R.string.Navigation_Label_HeadersAdapter_Alphabetic);
 		// Do not show divider.
 		getListView().setDividerHeight(0);
 		setAdapter(new HeadersAlphabeticAdapter(getActivity()));

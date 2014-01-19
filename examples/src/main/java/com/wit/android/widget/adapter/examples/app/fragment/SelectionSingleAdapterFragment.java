@@ -25,6 +25,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import com.wit.android.examples.app.fragment.ExListFragment;
+import com.wit.android.widget.adapter.examples.R;
 import com.wit.android.widget.adapter.examples.adapter.SelectionSingleAdapter;
 
 /**
@@ -48,6 +49,7 @@ public class SelectionSingleAdapterFragment extends ExListFragment<SelectionSing
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		setActionBarTitle(R.string.Navigation_Label_SelectionAdapter_Single);
 		setAdapter(new SelectionSingleAdapter(getActivity()));
 	}
 

@@ -43,7 +43,7 @@ public class FragmentsFactory extends ExFragmentFactory {
 
 	public static final int FRAGMENT_SIMPLE_ADAPTER = 0x01;
 	public static final int FRAGMENT_SELECTION_SIMPLE_ADAPTER = 0x02;
-	public static final int FRAGMENT_SELECTION_CHECK_ADAPTER = 0x03;
+	public static final int FRAGMENT_SELECTION_MULTI_ADAPTER = 0x03;
 	public static final int FRAGMENT_HEADERS_ALPHABETIC_ADAPTER = 0x04;
 	public static final int FRAGMENT_HEADERS_GROUPS_ADAPTER = 0x05;
 	public static final int FRAGMENT_SELECTION_AND_HEADERS_ADAPTER = 0x06;
@@ -63,7 +63,7 @@ public class FragmentsFactory extends ExFragmentFactory {
 			case FRAGMENT_SELECTION_SIMPLE_ADAPTER:
 				fragment = SelectionSingleAdapterFragment.newInstance();
 				break;
-			case FRAGMENT_SELECTION_CHECK_ADAPTER:
+			case FRAGMENT_SELECTION_MULTI_ADAPTER:
 				fragment = SelectionMultiAdapterFragment.newInstance();
 				break;
 			case FRAGMENT_HEADERS_ALPHABETIC_ADAPTER:

@@ -61,6 +61,8 @@ public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMulti
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
+		setActionBarTitle(R.string.Navigation_Label_SelectionAdapter_Multi);
+
 		this.mSelectedItemsFormat = getString(R.string.Format_SelectedItems);
 		setAdapter(mAdapter = new SelectionMultiAdapter(getActivity()));
 		mAdapter.setOnSelectionListener(this);
