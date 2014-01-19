@@ -18,19 +18,13 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.examples.app.fragment.factory;
+package com.wit.android.widget.adapter.examples.app.fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.wit.android.examples.internal.app.fragment.ExFragmentController;
 import com.wit.android.examples.internal.app.fragment.ExFragmentFactory;
-import com.wit.android.widget.adapter.examples.app.fragment.HeadersAlphabeticAdapterFragment;
-import com.wit.android.widget.adapter.examples.app.fragment.HeadersGroupsAdapterFragment;
-import com.wit.android.widget.adapter.examples.app.fragment.SelectionAndHeadersAdapterFragment;
-import com.wit.android.widget.adapter.examples.app.fragment.SelectionMultiAdapterFragment;
-import com.wit.android.widget.adapter.examples.app.fragment.SelectionSingleAdapterFragment;
-import com.wit.android.widget.adapter.examples.app.fragment.SimpleAdapterFragment;
 
 /**
  * <p>
@@ -81,9 +75,7 @@ public class FragmentsFactory extends ExFragmentFactory {
 
 	@Override
 	public ExFragmentController.ShowOptions getFragmentShowOptions(int fragmentID) {
-		return new ExFragmentController.ShowOptions()
-				.showDirection(ExFragmentController.ShowDirection.FROM_RIGHT)
-				.addToBackStack(false);
+		return new ExFragmentController.ShowOptions();
 	}
 
 	@Override

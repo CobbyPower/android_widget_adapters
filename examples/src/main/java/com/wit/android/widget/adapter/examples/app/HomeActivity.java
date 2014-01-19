@@ -29,7 +29,7 @@ import com.wit.android.examples.model.navigation.NavigationHeader;
 import com.wit.android.examples.model.navigation.NavigationItem;
 import com.wit.android.widget.adapter.examples.R;
 import com.wit.android.widget.adapter.examples.app.fragment.SimpleAdapterFragment;
-import com.wit.android.widget.adapter.examples.app.fragment.factory.FragmentsFactory;
+import com.wit.android.widget.adapter.examples.app.fragment.FragmentsFactory;
 
 import java.util.ArrayList;
 import java.util.List;
