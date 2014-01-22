@@ -1,6 +1,6 @@
 /*
  * =================================================================================
- * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
+ * Copyright (C) 2014 Martin Albedinsky [Wolf-ITechnologies]
  * =================================================================================
  * Licensed under the Apache License, Version 2.0 or later (further "License" only);
  * ---------------------------------------------------------------------------------
@@ -18,22 +18,34 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.examples.app;
+package com.wit.android.widget.adapter.examples.model;
 
-import com.wit.android.examples.annotations.ExDelay;
-import com.wit.android.examples.annotations.ExHomeActivity;
-import com.wit.android.examples.annotations.ExLogo;
-import com.wit.android.examples.app.ExSplashActivity;
-import com.wit.android.widget.adapter.examples.R;
+import com.wit.android.widget.adapter.module.AlphabeticHeaders;
 
 /**
+ * <h4>Class Overview</h4>
  * <p>
- * Simple splash activity with logo.
+ * Description.
  * </p>
  *
  * @author Martin Albedinsky
  */
-@ExDelay(2000)
-@ExLogo(R.drawable.ic_logo)
-@ExHomeActivity(HomeActivity.class)
-public class SplashActivity extends ExSplashActivity {}
+public class Model implements AlphabeticHeaders.AlphabeticItem {
+
+	/**
+	 * Log TAG.
+	 */
+	// private static final String TAG = Model.class.getSimpleName();
+
+	private String mName;
+
+	public Model(String name) {
+		this.mName = name;
+	}
+
+	@Override
+	public String getName() {
+		return mName;
+	}
+
+}

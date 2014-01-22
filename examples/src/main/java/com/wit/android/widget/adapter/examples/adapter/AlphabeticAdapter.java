@@ -28,6 +28,7 @@ import android.view.ViewGroup;
 import com.wit.android.widget.SelectableTextView;
 import com.wit.android.widget.adapter.BaseMultiAdapter;
 import com.wit.android.widget.adapter.examples.R;
+import com.wit.android.widget.adapter.examples.model.Model;
 import com.wit.android.widget.adapter.module.AlphabeticHeaders;
 
 import java.util.ArrayList;
@@ -204,20 +205,6 @@ public class AlphabeticAdapter extends BaseMultiAdapter<AlphabeticAdapter> {
 
 		protected void setSelected(boolean selected) {
 			mTextView.setSelectionState(selected);
-		}
-	}
-
-	public static class Model implements AlphabeticHeaders.AlphabeticItem {
-
-		String mName;
-
-		Model(String name) {
-			this.mName = name;
-		}
-
-		@Override
-		public String getName() {
-			return mName;
 		}
 	}
 }

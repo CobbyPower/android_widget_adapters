@@ -45,7 +45,7 @@ public class FragmentsFactory extends ExFragmentFactory {
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = FragmentsFactory.class.getSimpleName();
+	// private static final String TAG = FragmentsFactory.class.getSimpleName();
 
 	@Override
 	public Fragment createFragmentInstance(int fragmentID, Bundle bundle) {

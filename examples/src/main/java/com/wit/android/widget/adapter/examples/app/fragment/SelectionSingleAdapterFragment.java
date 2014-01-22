@@ -40,7 +40,7 @@ public class SelectionSingleAdapterFragment extends ExListFragment<SelectionSing
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = SelectionSingleAdapterFragment.class.getSimpleName();
+	// private static final String TAG = SelectionSingleAdapterFragment.class.getSimpleName();
 
 	public static SelectionSingleAdapterFragment newInstance() {
 		return new SelectionSingleAdapterFragment();

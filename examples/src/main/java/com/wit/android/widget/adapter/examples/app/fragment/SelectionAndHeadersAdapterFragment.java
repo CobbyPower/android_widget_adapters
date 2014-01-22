@@ -47,7 +47,7 @@ public class SelectionAndHeadersAdapterFragment extends ExListFragment<Selection
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = SelectionAndHeadersAdapterFragment.class.getSimpleName();
+	// private static final String TAG = SelectionAndHeadersAdapterFragment.class.getSimpleName();
 
 	private SelectionAndHeadersAdapter mAdapter;
 
@@ -146,7 +146,7 @@ public class SelectionAndHeadersAdapterFragment extends ExListFragment<Selection
 
 		@Override
 		public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-			actionMode.getMenuInflater().inflate(R.menu.selection_check_adapter, menu);
+			actionMode.getMenuInflater().inflate(R.menu.selection_adapter, menu);
 			return true;
 		}
 

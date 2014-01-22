@@ -39,7 +39,7 @@ public class SimpleAdapterFragment extends ExListFragment<SimpleAdapter> {
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = SimpleAdapterFragment.class.getSimpleName();
+	// private static final String TAG = SimpleAdapterFragment.class.getSimpleName();
 
 	public static SimpleAdapterFragment newInstance() {
 		return new SimpleAdapterFragment();

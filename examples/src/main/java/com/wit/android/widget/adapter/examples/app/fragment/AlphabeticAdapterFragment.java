@@ -41,7 +41,7 @@ public class AlphabeticAdapterFragment extends ExListFragment<AlphabeticAdapter>
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = AlphabeticAdapterFragment.class.getSimpleName();
+	// private static final String TAG = AlphabeticAdapterFragment.class.getSimpleName();
 
 	public static AlphabeticAdapterFragment newInstance() {
 		return new AlphabeticAdapterFragment();

@@ -21,7 +21,9 @@
 package com.wit.android.widget.adapter.examples.app.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.wit.android.examples.app.fragment.ExListFragment;
 import com.wit.android.widget.adapter.examples.R;
@@ -44,12 +46,25 @@ public class GroupsAdapterFragment extends ExListFragment<GroupsAdapter> {
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = GroupsAdapterFragment.class.getSimpleName();
+	// private static final String TAG = GroupsAdapterFragment.class.getSimpleName();
 
+	/**
+	 *
+	 * @return
+	 */
 	public static GroupsAdapterFragment newInstance() {
 		return new GroupsAdapterFragment();
 	}
 
+	/**
+	 */
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.listview, null);
+	}
+
+	/**
+	 */
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
@@ -61,6 +76,10 @@ public class GroupsAdapterFragment extends ExListFragment<GroupsAdapter> {
 		setAdapter(adapter);
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	private List<Connection> getConnections() {
 		final List<Connection> connections = new ArrayList<Connection>();
 

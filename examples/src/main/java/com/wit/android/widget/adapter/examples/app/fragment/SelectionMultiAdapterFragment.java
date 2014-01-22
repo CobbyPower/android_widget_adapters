@@ -46,7 +46,7 @@ public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMulti
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = SelectionMultiAdapterFragment.class.getSimpleName();
+	// private static final String TAG = SelectionMultiAdapterFragment.class.getSimpleName();
 
 	private ActionMode mActionMode;
 
@@ -135,7 +135,7 @@ public class SelectionMultiAdapterFragment extends ExListFragment<SelectionMulti
 
 		@Override
 		public boolean onCreateActionMode(ActionMode actionMode, Menu menu) {
-			actionMode.getMenuInflater().inflate(R.menu.selection_check_adapter, menu);
+			actionMode.getMenuInflater().inflate(R.menu.selection_adapter, menu);
 			return true;
 		}
 
