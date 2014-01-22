@@ -1,6 +1,6 @@
 /*
  * =================================================================================
- * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
+ * Copyright (C) 2014 Martin Albedinsky [Wolf-ITechnologies]
  * =================================================================================
  * Licensed under the Apache License, Version 2.0 or later (further "License" only);
  * ---------------------------------------------------------------------------------
@@ -18,14 +18,7 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.examples.adapter;
-
-import android.content.Context;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.wit.android.widget.adapter.BaseMultiAdapter;
+package com.wit.android.widget.adapter.examples.model;
 
 /**
  * <p>
@@ -34,39 +27,46 @@ import com.wit.android.widget.adapter.BaseMultiAdapter;
  *
  * @author Martin Albedinsky
  */
-public class HeadersGroupsAdapter extends BaseMultiAdapter<HeadersGroupsAdapter> {
+public class Connection {
 
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = HeadersGroupsAdapter.class.getSimpleName();
+	// private static final String TAG = Connection.class.getSimpleName();
 
-	public HeadersGroupsAdapter(Context context) {
-		super(context);
+	/**
+	 *
+	 */
+	private String mName;
+
+	/**
+	 *
+	 */
+	private Group mGroup;
+
+	/**
+	 *
+	 * @param name
+	 * @param group
+	 */
+	public Connection(String name, Group group) {
+		this.mName = name;
+		this.mGroup = group;
 	}
 
-	@Override
-	public int getCount() {
-		return 0;
+	/**
+	 *
+	 * @return
+	 */
+	public Group getGroup() {
+		return mGroup;
 	}
 
-	@Override
-	public Object getItem(int position) {
-		return null;
-	}
-
-	@Override
-	public View onCreateItemView(int position, LayoutInflater inflater, ViewGroup root) {
-		return null;
-	}
-
-	@Override
-	public void onBindItemView(int position, Object viewHolder) {
-
-	}
-
-	@Override
-	public Object onCreateItemViewHolder(int position, View itemView) {
-		return null;
+	/**
+	 *
+	 * @return
+	 */
+	public String getName() {
+		return mName;
 	}
 }

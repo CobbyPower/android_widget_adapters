@@ -61,10 +61,10 @@ public class FragmentsFactory extends ExFragmentFactory {
 				fragment = SelectionMultiAdapterFragment.newInstance();
 				break;
 			case FRAGMENT_HEADERS_ALPHABETIC_ADAPTER:
-				fragment = HeadersAlphabeticAdapterFragment.newInstance();
+				fragment = AlphabeticAdapterFragment.newInstance();
 				break;
 			case FRAGMENT_HEADERS_GROUPS_ADAPTER:
-				fragment = HeadersGroupsAdapterFragment.newInstance();
+				fragment = GroupsAdapterFragment.newInstance();
 				break;
 			case FRAGMENT_SELECTION_AND_HEADERS_ADAPTER:
 				fragment = SelectionAndHeadersAdapterFragment.newInstance();

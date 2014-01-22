@@ -31,14 +31,14 @@ import com.wit.android.widget.adapter.module.SelectionModule;
  *
  * @author Martin Albedinsky
  */
-public class SelectionAndHeadersAdapter extends HeadersAlphabeticAdapter {
+public class SelectionAndHeadersAdapter extends AlphabeticAdapter {
 
 	/**
 	 * Log TAG.
 	 */
 	private static final String TAG = SelectionAndHeadersAdapter.class.getSimpleName();
 
-	protected final SelectionModule<HeadersAlphabeticAdapter> SELECTOR = new SelectionModule<HeadersAlphabeticAdapter>();
+	protected final SelectionModule<AlphabeticAdapter> SELECTOR = new SelectionModule<AlphabeticAdapter>();
 	{
 		// Set up multiple selection mode.
 		SELECTOR.setMode(SelectionModule.MODE_MULTIPLE);

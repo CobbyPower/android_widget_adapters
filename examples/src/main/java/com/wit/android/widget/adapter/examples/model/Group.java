@@ -1,6 +1,6 @@
 /*
  * =================================================================================
- * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
+ * Copyright (C) 2014 Martin Albedinsky [Wolf-ITechnologies]
  * =================================================================================
  * Licensed under the Apache License, Version 2.0 or later (further "License" only);
  * ---------------------------------------------------------------------------------
@@ -18,37 +18,65 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.examples.app.fragment;
+package com.wit.android.widget.adapter.examples.model;
 
-import android.os.Bundle;
-import android.view.View;
+import com.wit.android.widget.adapter.module.BaseHeadersModule;
 
-import com.wit.android.examples.app.fragment.ExListFragment;
-import com.wit.android.widget.adapter.examples.R;
-import com.wit.android.widget.adapter.examples.adapter.HeadersGroupsAdapter;
+import java.util.Random;
 
 /**
+ * <h4>Enum Overview</h4>
  * <p>
  * Description.
  * </p>
  *
  * @author Martin Albedinsky
  */
-public class HeadersGroupsAdapterFragment extends ExListFragment<HeadersGroupsAdapter> {
+public enum Group implements BaseHeadersModule.Header {
+	/**
+	 *
+	 */
+	FAMILY("FAMILY"),
+	/**
+	 *
+	 */
+	FRIENDS("FRIENDS"),
+	/**
+	 *
+	 */
+	OTHERS("OTHERS");
 
 	/**
-	 * Log TAG.
+	 *
 	 */
-	private static final String TAG = HeadersGroupsAdapterFragment.class.getSimpleName();
+	private final String NAME;
 
-	public static HeadersGroupsAdapterFragment newInstance() {
-		return new HeadersGroupsAdapterFragment();
+	/**
+	 *
+	 */
+	private static final Random RAND = new Random();
+
+	/**
+	 *
+	 * @param name
+	 */
+	private Group(String name) {
+		this.NAME = name;
 	}
 
+	/**
+	 */
 	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		super.onViewCreated(view, savedInstanceState);
-		setActionBarTitle(R.string.Navigation_Label_HeadersAdapter_Groups);
-		setAdapter(new HeadersGroupsAdapter(getActivity()));
+	public String getText() {
+		return NAME;
 	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public static Group random() {
+		return values()[RAND.nextInt(values().length)];
+	}
+
 }

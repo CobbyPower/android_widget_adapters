@@ -20,26 +20,19 @@
  */
 package com.wit.android.widget.adapter.module;
 
-import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.List;
 
 /**
  * <h4>Class Overview</h4>
  * <p>
- * TODO:
  * </p>
  *
  * @param <Adapter>
  * @author Martin Albedinsky
  */
-public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> extends BaseHeadersModule<AlphabeticHeaders.AlphabeticHeader, Adapter> {
+public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> extends BaseHeadersModule<BaseHeadersModule.SimpleHeader, Adapter> {
 
 	/**
 	 * Constants =============================
@@ -48,7 +41,7 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = AlphabeticHeaders.class.getSimpleName();
+	// private static final String TAG = AlphabeticHeaders.class.getSimpleName();
 
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
@@ -71,11 +64,6 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	/**
 	 * Members ===============================
 	 */
-
-	/**
-	 * Xml attribute which should contain the style for the header view.
-	 */
-	private int mHeaderStyleAttr = android.R.attr.textViewStyle;
 
 	/**
 	 * Char which was lastly processed from the current alphabetic data set.
@@ -116,34 +104,6 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	}
 
 	/**
-	 */
-	@Override
-	public Object createHeaderViewHolder(int position, View headerView) {
-		return (headerView instanceof TextView) ? new HeaderHolder((TextView) headerView) : new Object();
-	}
-
-	/**
-	 */
-	@Override
-	public View createHeaderView(int position, LayoutInflater inflater, ViewGroup root) {
-		return HeaderHolder.createView(inflater.getContext(), mHeaderStyleAttr);
-	}
-
-	/**
-	 */
-	@Override
-	public void bindHeaderView(int position, Object headerHolder) {
-		if (headerHolder instanceof HeaderHolder) {
-			AlphabeticHeader header = getHeader(position);
-			if (header != null) {
-				((HeaderHolder) headerHolder).setText(header.getAlphabeticChar());
-			} else {
-				Log.e(TAG, "Invalid header at position(" + position + ").");
-			}
-		}
-	}
-
-	/**
 	 * <p>
 	 * Like {@link #processAlphabeticList(java.util.List)} in that difference, that
 	 * here will be the given cursor iterated to obtain first characters for headers
@@ -152,18 +112,15 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	 *
 	 * @param cursor An alphabetic cursor to process.
 	 * @param <C>    Type of the given alphabetic cursor.
-	 * @see #processAlphabeticList(java.util.List)
 	 */
 	public <C extends Cursor & AlphabeticItem> void processAlphabeticCursor(C cursor) {
 		// Clear current headers.
 		clearHeaders();
 		// Process the given cursor.
 		if (cursor.getCount() > 0 && cursor.moveToFirst()) {
-			this.resetLastChar();
 			do {
 				this.processAlphabeticItem(cursor, cursor.getPosition());
 			} while (cursor.moveToNext());
-			this.resetLastChar();
 		}
 		notifyAdapter();
 	}
@@ -194,41 +151,12 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 		for (int i = 0; i < list.size(); i++) {
 			this.processAlphabeticItem(list.get(i), i);
 		}
-		this.resetLastChar();
 		notifyAdapter();
 	}
 
 	/**
 	 * Getters + Setters ---------------------
 	 */
-
-	/**
-	 * <p>
-	 * Sets an xml attribute which should contain style for the header view. See
-	 * {@link com.wit.android.widget.adapter.module.AlphabeticHeaders.HeaderHolder#createView(android.content.Context, int)}
-	 * for more information in which theme should be the given <var>styleAttr</var> placed.
-	 * </p>
-	 *
-	 * @param styleAttr An xml attribute to style the view for the header item provided
-	 *                  by this headers module.
-	 * @see #getHeaderStyleAttr()
-	 * @see com.wit.android.widget.adapter.module.AlphabeticHeaders.HeaderHolder
-	 */
-	public void setHeaderStyleAttr(int styleAttr) {
-		this.mHeaderStyleAttr = styleAttr;
-	}
-
-	/**
-	 * <p>
-	 * Returns the xml attribute set by {@link #setHeaderStyleAttr(int)}.
-	 * </p>
-	 *
-	 * @return Xml attribute.
-	 * @see #setHeaderStyleAttr(int)
-	 */
-	public int getHeaderStyleAttr() {
-		return mHeaderStyleAttr;
-	}
 
 	/**
 	 * Protected -----------------------------
@@ -249,7 +177,7 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 			// Obtain first char from item name.
 			String currentChar = name.substring(0, 1);
 			if (!currentChar.equals(mLastChar)) {
-				addHeader(new SimpleAlphabeticHeader(currentChar), getHeadersCount() + position);
+				addHeader(new SimpleHeader(currentChar), getHeadersCount() + position);
 			}
 			// Save current as last.
 			this.mLastChar = currentChar;
@@ -261,7 +189,7 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	 */
 
 	/**
-	 * Resets the value of the last char.
+	 * Resets the value of the current last char.
 	 */
 	private void resetLastChar() {
 		this.mLastChar = "";
@@ -276,158 +204,8 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	 */
 
 	/**
-	 * <h4>Class Overview</h4>
-	 * <p>
-	 * </p>
-	 *
-	 * @author Martin Albedinsky
-	 */
-	public static class HeaderHolder {
-
-		/**
-		 * Members ===============================
-		 */
-
-		/**
-		 * Root view of this header holder.
-		 */
-		private TextView mTextView;
-
-		/**
-		 * Constructors ==========================
-		 */
-
-		/**
-		 * <p>
-		 * Creates the new HeaderHolder instance with the given TextView.
-		 * </p>
-		 *
-		 * @param textView Root view of this holder.
-		 */
-		public HeaderHolder(TextView textView) {
-			this.mTextView = textView;
-		}
-
-		/**
-		 * Methods ===============================
-		 */
-
-		/**
-		 * Public --------------------------------
-		 */
-
-		/**
-		 * <p>
-		 * Creates the new instance of TextView for this HeaderHolder.
-		 * </p>
-		 *
-		 * @param context   Context for the TextView.
-		 * @param styleAttr An xml attribute for the TextView constructor
-		 *                  {@link android.widget.TextView#TextView(android.content.Context, android.util.AttributeSet, int)}.
-		 * @return New instance of TextView.
-		 */
-		public static TextView createView(Context context, int styleAttr) {
-			return new TextView(context, null, styleAttr);
-		}
-
-		/**
-		 * Getters + Setters ---------------------
-		 */
-
-		/**
-		 * <p>
-		 * Returns TextView passed to the constructor {@link #HeaderHolder(android.widget.TextView)}.
-		 * </p>
-		 *
-		 * @return TextView instance.
-		 */
-		public TextView getTextView() {
-			return mTextView;
-		}
-
-		/**
-		 * <p>
-		 * Sets the given <var>text</var> as text for the current TextView.
-		 * </p>
-		 *
-		 * @param text Header text.
-		 */
-		public void setText(CharSequence text) {
-			if (mTextView != null) {
-				mTextView.setText(text);
-			}
-		}
-	}
-
-	/**
-	 * Simple implementation of alphabetic header for internal purpose.
-	 */
-	private static final class SimpleAlphabeticHeader implements AlphabeticHeader {
-
-		/**
-		 * Members ===============================
-		 */
-
-		/**
-		 * First alphabetic char for this header.
-		 */
-		private String mAlphabeticChar;
-
-		/**
-		 * Constructors ==========================
-		 */
-
-		/**
-		 * Creates the new instance of the SimpleAlphabeticHeader with
-		 * the given char.
-		 *
-		 * @param alphabeticChar Char for this alphabetic header.
-		 */
-		SimpleAlphabeticHeader(String alphabeticChar) {
-			this.mAlphabeticChar = alphabeticChar;
-		}
-
-		/**
-		 * Methods ===============================
-		 */
-
-		/**
-		 */
-		@Override
-		public String getAlphabeticChar() {
-			return mAlphabeticChar;
-		}
-	}
-
-	/**
 	 * Interface =============================
 	 */
-
-	/**
-	 * <h4>Interface Overview</h4>
-	 * <p>
-	 * Required interface for header item used by
-	 * {@link com.wit.android.widget.adapter.module.AlphabeticHeaders} module.
-	 * </p>
-	 *
-	 * @author Martin Albedinsky
-	 */
-	public static interface AlphabeticHeader {
-
-		/**
-		 * Methods ===============================
-		 */
-
-		/**
-		 * <p>
-		 * Returns character (can be more characters) which represents
-		 * this alphabetic header item.
-		 * </p>
-		 *
-		 * @return Alphabetic char of this header item.
-		 */
-		public String getAlphabeticChar();
-	}
 
 	/**
 	 * <h4>Interface Overview</h4>

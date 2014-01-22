@@ -21,15 +21,15 @@
 package com.wit.android.widget.adapter.examples.app;
 
 import android.content.res.Resources;
-import android.os.Bundle;
 
 import com.wit.android.examples.app.ExHomeActivity;
+import com.wit.android.examples.internal.app.fragment.ExFragmentController;
 import com.wit.android.examples.model.navigation.INavigationItem;
 import com.wit.android.examples.model.navigation.NavigationHeader;
 import com.wit.android.examples.model.navigation.NavigationItem;
 import com.wit.android.widget.adapter.examples.R;
-import com.wit.android.widget.adapter.examples.app.fragment.SimpleAdapterFragment;
 import com.wit.android.widget.adapter.examples.app.fragment.FragmentsFactory;
+import com.wit.android.widget.adapter.examples.app.fragment.SimpleAdapterFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,14 +47,6 @@ public class HomeActivity extends ExHomeActivity {
 	 * Log TAG.
 	 */
 	// private static final String TAG = HomeActivity.class.getSimpleName();
-
-	/**
-	 */
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		getFragmentController().setFragmentFactory(new FragmentsFactory());
-	}
 
 	/**
 	 */
@@ -93,6 +85,14 @@ public class HomeActivity extends ExHomeActivity {
 				res
 		));
 		return items;
+	}
+
+	/**
+	 */
+	@Override
+	protected void onSetUpFragmentController(ExFragmentController controller) {
+		super.onSetUpFragmentController(controller);
+		controller.setFragmentFactory(new FragmentsFactory());
 	}
 
 	/**

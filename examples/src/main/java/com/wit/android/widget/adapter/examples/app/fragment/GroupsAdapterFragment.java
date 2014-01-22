@@ -21,13 +21,16 @@
 package com.wit.android.widget.adapter.examples.app.fragment;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.wit.android.examples.app.fragment.ExListFragment;
 import com.wit.android.widget.adapter.examples.R;
-import com.wit.android.widget.adapter.examples.adapter.HeadersAlphabeticAdapter;
+import com.wit.android.widget.adapter.examples.adapter.GroupsAdapter;
+import com.wit.android.widget.adapter.examples.model.Connection;
+import com.wit.android.widget.adapter.examples.model.Group;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <p>
@@ -36,28 +39,36 @@ import com.wit.android.widget.adapter.examples.adapter.HeadersAlphabeticAdapter;
  *
  * @author Martin Albedinsky
  */
-public class HeadersAlphabeticAdapterFragment extends ExListFragment<HeadersAlphabeticAdapter> {
+public class GroupsAdapterFragment extends ExListFragment<GroupsAdapter> {
 
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = HeadersAlphabeticAdapterFragment.class.getSimpleName();
+	private static final String TAG = GroupsAdapterFragment.class.getSimpleName();
 
-	public static HeadersAlphabeticAdapterFragment newInstance() {
-		return new HeadersAlphabeticAdapterFragment();
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.listview, null);
+	public static GroupsAdapterFragment newInstance() {
+		return new GroupsAdapterFragment();
 	}
 
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
 		super.onViewCreated(view, savedInstanceState);
-		setActionBarTitle(R.string.Navigation_Label_HeadersAdapter_Alphabetic);
-		// Do not show divider.
-		getListView().setDividerHeight(0);
-		setAdapter(new HeadersAlphabeticAdapter(getActivity()));
+		setActionBarTitle(R.string.Navigation_Label_HeadersAdapter_Groups);
+
+		// Set up adapter.
+		final GroupsAdapter adapter = new GroupsAdapter(getActivity());
+		adapter.loadConnections(getConnections());
+		setAdapter(adapter);
+	}
+
+	private List<Connection> getConnections() {
+		final List<Connection> connections = new ArrayList<Connection>();
+
+		// Process array from resources.
+		final String[] models = getResources().getStringArray(R.array.Data_Models);
+		for (String name : models) {
+			connections.add(new Connection(name, Group.random()));
+		}
+		return connections;
 	}
 }

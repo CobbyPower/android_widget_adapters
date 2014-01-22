@@ -18,22 +18,46 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.examples.app;
+package com.wit.android.widget.adapter.examples.app.fragment;
 
-import com.wit.android.examples.annotations.ExDelay;
-import com.wit.android.examples.annotations.ExHomeActivity;
-import com.wit.android.examples.annotations.ExLogo;
-import com.wit.android.examples.app.ExSplashActivity;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.wit.android.examples.app.fragment.ExListFragment;
 import com.wit.android.widget.adapter.examples.R;
+import com.wit.android.widget.adapter.examples.adapter.AlphabeticAdapter;
 
 /**
  * <p>
- * Simple splash activity with logo.
+ * Description.
  * </p>
  *
  * @author Martin Albedinsky
  */
-@ExDelay(200)
-@ExLogo(R.drawable.ic_logo)
-@ExHomeActivity(HomeActivity.class)
-public class SplashActivity extends ExSplashActivity {}
+public class AlphabeticAdapterFragment extends ExListFragment<AlphabeticAdapter> {
+
+	/**
+	 * Log TAG.
+	 */
+	private static final String TAG = AlphabeticAdapterFragment.class.getSimpleName();
+
+	public static AlphabeticAdapterFragment newInstance() {
+		return new AlphabeticAdapterFragment();
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		return inflater.inflate(R.layout.listview, null);
+	}
+
+	@Override
+	public void onViewCreated(View view, Bundle savedInstanceState) {
+		super.onViewCreated(view, savedInstanceState);
+		setActionBarTitle(R.string.Navigation_Label_HeadersAdapter_Alphabetic);
+		// Do not show divider.
+		getListView().setDividerHeight(0);
+		setAdapter(new AlphabeticAdapter(getActivity()));
+	}
+}

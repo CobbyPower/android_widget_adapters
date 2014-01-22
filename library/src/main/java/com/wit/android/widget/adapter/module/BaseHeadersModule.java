@@ -20,10 +20,13 @@
  */
 package com.wit.android.widget.adapter.module;
 
+import android.content.Context;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,12 +38,12 @@ import java.util.List;
  * "header-based" adapters.
  * </p>
  *
- * @param <Header> Type of header item provided by implementation of this headers module.
+ * @param <H> Type of header item provided by implementation of this headers module.
  * @param <Adapter> Type of the adapter for which can be this headers module created and used.
  *
  * @author Martin Albedinsky
  */
-public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.ModuleAdapter> extends AdapterModule<Adapter> {
+public abstract class BaseHeadersModule<H extends BaseHeadersModule.Header, Adapter extends AdapterModule.ModuleAdapter> extends AdapterModule<Adapter> {
 
 	/**
 	 * Constants =============================
@@ -49,7 +52,7 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 	/**
 	 * Log TAG.
 	 */
-	// private static final String TAG = BaseHeadersModule.class.getSimpleName();
+	private static final String TAG = BaseHeadersModule.class.getSimpleName();
 
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
@@ -74,6 +77,11 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 	 */
 
 	/**
+	 * Xml attribute which should contain the style for the header view.
+	 */
+	private int mHeaderStyleAttr = android.R.attr.textViewStyle;
+
+	/**
 	 * Listeners -----------------------------
 	 */
 
@@ -84,7 +92,7 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 	/**
 	 * Array of headers managed by this module.
 	 */
-	private final SparseArray<Header> HEADERS = new SparseArray<Header>();
+	private final SparseArray<H> HEADERS = new SparseArray<H>();
 
 	/**
 	 * Booleans ------------------------------
@@ -152,8 +160,83 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 	}
 
 	/**
+	 * <p>
+	 * Called to create view holder for header item at the given position.
+	 * </p>
+	 *
+	 * @param position Position of the header item from the current headers data set.
+	 * @param headerView The header's view, for which should be holder created.
+	 * @return The view holder for header's view at the specified position.
+	 */
+	public Object createHeaderViewHolder(int position, View headerView) {
+		return (headerView instanceof TextView) ? new HeaderHolder((TextView) headerView) : new Object();
+	}
+
+	/**
+	 * <p>
+	 * Called to crate view for header item at the given position.
+	 * </p>
+	 *
+	 * @param position Position of the header item from the current headers data set.
+	 * @param inflater Layout inflater for the current context.
+	 * @param root The parent to that will be this view eventually attached to.
+	 * @return The view corresponding to header item at the specified position.
+	 */
+	public View createHeaderView(int position, LayoutInflater inflater, ViewGroup root) {
+		return HeaderHolder.createView(inflater.getContext(), mHeaderStyleAttr);
+	}
+
+	/**
+	 * <p>
+	 * Called to bind header's view at the given position.
+	 * </p>
+	 *
+	 * @param position Position of the header item from the current headers data set.
+	 * @param headerHolder The header's view holder created by
+	 * {@link #createHeaderViewHolder(int, android.view.View)}.
+	 */
+	public void bindHeaderView(int position, Object headerHolder) {
+		if (headerHolder instanceof HeaderHolder) {
+			BaseHeadersModule.Header header = getHeader(position);
+			if (header != null) {
+				((HeaderHolder) headerHolder).setText(header.getText());
+			} else {
+				Log.e(TAG, "Invalid header at position(" + position + ").");
+			}
+		}
+	}
+
+	/**
 	 * Getters + Setters ---------------------
 	 */
+
+	/**
+	 * <p>
+	 * Sets an xml attribute which should contain style for the header view. See
+	 * {@link com.wit.android.widget.adapter.module.AlphabeticHeaders.HeaderHolder#createView(android.content.Context, int)}
+	 * for more information in which theme should be the given <var>styleAttr</var> placed.
+	 * </p>
+	 *
+	 * @param styleAttr An xml attribute to style the view for the header item provided
+	 *                  by this headers module.
+	 * @see #getHeaderStyleAttr()
+	 * @see com.wit.android.widget.adapter.module.AlphabeticHeaders.HeaderHolder
+	 */
+	public void setHeaderStyleAttr(int styleAttr) {
+		this.mHeaderStyleAttr = styleAttr;
+	}
+
+	/**
+	 * <p>
+	 * Returns the xml attribute set by {@link #setHeaderStyleAttr(int)}.
+	 * </p>
+	 *
+	 * @return Xml attribute.
+	 * @see #setHeaderStyleAttr(int)
+	 */
+	public int getHeaderStyleAttr() {
+		return mHeaderStyleAttr;
+	}
 
 	/**
 	 * <p>
@@ -185,7 +268,7 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 	 * @param position Position of the header to obtain.
 	 * @return The header at the requested position.
 	 */
-	public Header getHeader(int position) {
+	public H getHeader(int position) {
 		return HEADERS.get(position);
 	}
 
@@ -208,8 +291,8 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 	 *
 	 * @return List of headers.
 	 */
-	public List<Header> getHeaders() {
-		List<Header> headers = new ArrayList<Header>(HEADERS.size());
+	public List<H> getHeaders() {
+		List<H> headers = new ArrayList<H>(HEADERS.size());
 		for (int i = 0; i < HEADERS.size(); i++) {
 			headers.add(HEADERS.get(HEADERS.keyAt(i)));
 		}
@@ -228,10 +311,10 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 	 * one will be replaced by the given one.
 	 * </p>
 	 *
-	 * @param header Header to add.
+	 * @param header H to add.
 	 * @param position Position, at which should be header added.
 	 */
-	protected void addHeader(Header header, int position) {
+	protected void addHeader(H header, int position) {
 		HEADERS.append(position, header);
 	}
 
@@ -256,44 +339,165 @@ public abstract class BaseHeadersModule<Header, Adapter extends AdapterModule.Mo
 	 */
 
 	/**
-	 * <p>
-	 * Called to create view holder for header item at the given position.
-	 * </p>
-	 *
-	 * @param position Position of the header item from the current headers data set.
-	 * @param headerView The header's view, for which should be holder created.
-	 * @return The view holder for header's view at the specified position.
-	 */
-	public abstract Object createHeaderViewHolder(int position, View headerView);
-
-	/**
-	 * <p>
-	 * Called to crate view for header item at the given position.
-	 * </p>
-	 *
-	 * @param position Position of the header item from the current headers data set.
-	 * @param inflater Layout inflater for the current context.
-	 * @param root The parent to that will be this view eventually attached to.
-	 * @return The view corresponding to header item at the specified position.
-	 */
-	public abstract View createHeaderView(int position, LayoutInflater inflater, ViewGroup root);
-
-	/**
-	 * <p>
-	 * Called to bind header's view at the given position.
-	 * </p>
-	 *
-	 * @param position Position of the header item from the current headers data set.
-	 * @param headerHolder The header's view holder created by
-	 * {@link #createHeaderViewHolder(int, android.view.View)}.
-	 */
-	public abstract void bindHeaderView(int position, Object headerHolder);
-
-	/**
 	 * Inner classes =========================
 	 */
 
 	/**
+	 * <h4>Class Overview</h4>
+	 * <p>
+	 * </p>
+	 *
+	 * @author Martin Albedinsky
+	 */
+	public static class HeaderHolder {
+
+		/**
+		 * Members ===============================
+		 */
+
+		/**
+		 * Root view of this header holder.
+		 */
+		private TextView mTextView;
+
+		/**
+		 * Constructors ==========================
+		 */
+
+		/**
+		 * <p>
+		 * Creates the new HeaderHolder instance with the given TextView.
+		 * </p>
+		 *
+		 * @param textView Root view of this holder.
+		 */
+		public HeaderHolder(TextView textView) {
+			this.mTextView = textView;
+		}
+
+		/**
+		 * Methods ===============================
+		 */
+
+		/**
+		 * Public --------------------------------
+		 */
+
+		/**
+		 * <p>
+		 * Creates the new instance of TextView for this HeaderHolder.
+		 * </p>
+		 *
+		 * @param context   Context for the TextView.
+		 * @param styleAttr An xml attribute for the TextView constructor
+		 *                  {@link android.widget.TextView#TextView(android.content.Context, android.util.AttributeSet, int)}.
+		 * @return New instance of TextView.
+		 */
+		public static TextView createView(Context context, int styleAttr) {
+			return new TextView(context, null, styleAttr);
+		}
+
+		/**
+		 * Getters + Setters ---------------------
+		 */
+
+		/**
+		 * <p>
+		 * Returns TextView passed to the constructor {@link #HeaderHolder(android.widget.TextView)}.
+		 * </p>
+		 *
+		 * @return TextView instance.
+		 */
+		public TextView getTextView() {
+			return mTextView;
+		}
+
+		/**
+		 * <p>
+		 * Sets the given <var>text</var> as text for the current TextView.
+		 * </p>
+		 *
+		 * @param text H text.
+		 */
+		public void setText(CharSequence text) {
+			if (mTextView != null) {
+				mTextView.setText(text);
+			}
+		}
+	}
+
+	/**
+	 * <h4>Interface Overview</h4>
+	 * <p>
+	 * Simple implementation of {@link com.wit.android.widget.adapter.module.BaseHeadersModule.Header header}
+	 * item.
+	 * </p>
+	 *
+	 * @author Martin Albedinsky
+	 */
+	public static class SimpleHeader implements Header {
+
+		/**
+		 * Members ===============================
+		 */
+
+		/**
+		 * Header text value.
+		 */
+		private String mText;
+
+		/**
+		 * Constructors ==========================
+		 */
+
+		/**
+		 * <p>
+		 * Creates a new instance of SimpleHeader with the given text value.
+		 * </p>
+		 *
+		 * @param text Text value for header.
+		 */
+		public SimpleHeader(String text) {
+			this.mText = text;
+		}
+
+		/**
+		 * Methods ===============================
+		 */
+
+		/**
+		 */
+		@Override
+		public String getText() {
+			return mText;
+		}
+	}
+
+	/**
 	 * Interface =============================
 	 */
+
+	/**
+	 * <h4>Interface Overview</h4>
+	 * <p>
+	 * Required interface for header item used by {@link com.wit.android.widget.adapter.module.BaseHeadersModule} module.
+	 * </p>
+	 *
+	 * @author Martin Albedinsky
+	 */
+	public static interface Header {
+
+		/**
+		 * Methods ===============================
+		 */
+
+		/**
+		 * <p>
+		 * Returns text value of this header instance.
+		 * </p>
+		 *
+		 * @return The text value of this header.
+		 */
+		public String getText();
+	}
 }
