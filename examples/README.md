@@ -7,6 +7,8 @@ Widget Adapters (Examples)
 
 This simple examples project shows how to use the source code provided within this repository.
 
+**COMING SOON**
+
 ## Download ##
 > **NOT AVAILABLE YET**
 <!--<a href="https://play.google.com/store/apps/details?id=com.wit.android.PACKAGE_NAME">
@@ -35,16 +37,10 @@ If You decide to **download** source code of this repository to run this example
 
 You need to **have downloaded/installed** the latest version of [**com.wit.android.examples**](https://github.com/Wolf-ITechnologies/maven_android_repository/tree/master/examples "Go to download page") library within Your **Maven local repository**.
 
-You can install above downloaded examples dependency into Your Maven local repository using one of the scripts provided below:
+You can install above downloaded examples dependency into _Your Maven local repository_ using one of the scripts provided below:
 
-* <b>Windows</b>:
-	<code><br/>
-	mvn install:install-file<br/>
-		-DgroupId=com.wit.android<br/>
-	    -DartifactId=LIBRARYNAME<br/>
-	    -Dversion=VERSION<br/>
-	    -Dfile=LIBRARYNAME-VERSION.[jar|aar]<br/>
-	    -Dpackaging=[jar|aar]<br/>
-	    -DgeneratePom=true
-	</code>
-> **should be in single line**
+* <b>Windows</b> (<i>in single line</i>):
+
+	``mvn install:install-file -DgroupId=com.wit.android -DartifactId=LIBRARYNAME -Dversion=VERSION``
+	``-Dfile=LIBRARYNAME-VERSION.[jar|aar] -Dpackaging=[jar|aar] -DgeneratePom=true``
+
