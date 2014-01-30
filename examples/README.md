@@ -40,4 +40,8 @@ You need to **have downloaded/installed** the latest version of [**com.wit.andro
 You can install above downloaded examples dependency into Your Maven local repository using one of the scripts provided below:
 
 * <b>Windows</b>:
-	``mvn install:install-file -DgroupId=com.wit.android -DartifactId=LIBRARYNAME -Dversion=VERSION -Dfile=LIBRARYNAME-VERSION.[jar|aar] -Dpackaging=[jar|aar] -DgeneratePom=true``
+
+	``mvn install:install-file -DgroupId=com.wit.android -DartifactId=LIBRARYNAME -Dversion=VERSION``
+	``-Dfile=LIBRARYNAME-VERSION.[jar|aar] -Dpackaging=[jar|aar] -DgeneratePom=true``
+
+> **should be in single line**
