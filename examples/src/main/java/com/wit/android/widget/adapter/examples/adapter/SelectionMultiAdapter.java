@@ -57,7 +57,7 @@ public class SelectionMultiAdapter extends SelectionSingleAdapter implements Vie
 	}
 
 	@Override
-	public void onBindItemView(int position, Object viewHolder) {
+	public void onSetUpItemView(int position, Object viewHolder) {
 		final ViewHolder holder = (ViewHolder) viewHolder;
 		holder.setText((String) getItem(position));
 		// Update selection state whenever the list view is updated.

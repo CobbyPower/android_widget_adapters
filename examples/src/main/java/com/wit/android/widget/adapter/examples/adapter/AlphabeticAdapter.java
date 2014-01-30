@@ -153,7 +153,7 @@ public class AlphabeticAdapter extends BaseMultiAdapter<AlphabeticAdapter> {
 	/**
 	 */
 	@Override
-	public void onBindItemView(int position, Object viewHolder) {
+	public void onSetUpItemView(int position, Object viewHolder) {
 		switch (currentItemViewType()) {
 			case VIEW_TYPE_ITEM:
 				((ViewHolder) viewHolder).setText(

@@ -240,7 +240,7 @@ public abstract class SimpleCursorAdapter<C extends Cursor> extends BaseAdapter 
 	/**
 	 */
 	@Override
-	public void onBindItemView(int position, Object viewHolder) {
+	public void onSetUpItemView(int position, Object viewHolder) {
 		if (moveCursorTo(position)) {
 			onBindItemView(position, mCursor, viewHolder);
 		}
@@ -288,13 +288,12 @@ public abstract class SimpleCursorAdapter<C extends Cursor> extends BaseAdapter 
 
 	/**
 	 * <p>
-	 * Invoked to bind a view for the specified position of this adapter's cursor.
-	 * This is invoked always as {@link #onBindItemView(int, Object)} on this adapter
-	 * is called and the current cursor was successfully moved to the specified position
-	 * by {@link #moveCursorTo(int)}.
+	 * Invoked to set up and populate a view for an item at the specified <var>position</var> of this
+	 * adapter's cursor. This is invoked whenever {@link #onSetUpItemView(int, Object)} on this adapter
+	 * is called and the current cursor was successfully moved to the specified position by {@link #moveCursorTo(int)}.
 	 * </p>
 	 *
-	 * @param position   The position of the item from this adapter's cursor.
+	 * @param position   The position of item within this optimized adapter's cursor.
 	 * @param cursor     The current cursor of this adapter moved to the specified position.
 	 * @param viewHolder Same type of holder as provided by
 	 *                   {@link #onCreateItemViewHolder(int, android.view.View)} for the specified

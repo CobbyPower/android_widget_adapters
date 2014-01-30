@@ -151,7 +151,7 @@ public class AdapterOptimizer {
 		}
 
 		// Bind item view with data.
-		mOptimizedAdapter.onBindItemView(position, viewHolder);
+		mOptimizedAdapter.onSetUpItemView(position, viewHolder);
 
 		// Return new/recreated item view with data.
 		return convertView;
@@ -227,18 +227,18 @@ public class AdapterOptimizer {
 
 		/**
 		 * <p>
-		 * Invoked to bind a view for the item from this optimized adapter's data set
-		 * at the specified position. This is invoked always as
+		 * Invoked to set up and populate a view for an item from this optimized adapter's data set
+		 * at the specified <var>position</var>. This is invoked whenever
 		 * {@link android.widget.BaseAdapter#getView(int, android.view.View, android.view.ViewGroup)}
 		 * on this adapter is called.
 		 * </p>
 		 *
-		 * @param position   The position of the item from this optimized adapter's data set.
+		 * @param position   The position of item within this optimized adapter's data set.
 		 * @param viewHolder Same type of holder as provided by
 		 *                   {@link #onCreateItemViewHolder(int, android.view.View)} for the specified
 		 *                   position.
 		 */
-		public void onBindItemView(int position, Object viewHolder);
+		public void onSetUpItemView(int position, Object viewHolder);
 
 		/**
 		 * <p>

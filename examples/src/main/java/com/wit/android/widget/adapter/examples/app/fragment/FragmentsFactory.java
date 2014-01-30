@@ -74,7 +74,7 @@ public class FragmentsFactory extends ExFragmentFactory {
 	}
 
 	@Override
-	public ExFragmentController.ShowOptions getFragmentShowOptions(int fragmentID) {
+	public ExFragmentController.ShowOptions getFragmentShowOptions(int fragmentID, Bundle bundle) {
 		return new ExFragmentController.ShowOptions();
 	}
 

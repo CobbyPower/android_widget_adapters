@@ -156,7 +156,7 @@ public class GroupsAdapter extends BaseMultiAdapter<GroupsAdapter> {
 	/**
 	 */
 	@Override
-	public void onBindItemView(int position, Object viewHolder) {
+	public void onSetUpItemView(int position, Object viewHolder) {
 		switch (currentItemViewType()) {
 			case VIEW_TYPE_ITEM:
 				((ViewHolder) viewHolder).setText(

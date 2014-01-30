@@ -66,7 +66,7 @@ public class SimpleAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public void onBindItemView(int position, Object viewHolder) {
+	public void onSetUpItemView(int position, Object viewHolder) {
 		((ViewHolder) viewHolder).setText((String) getItem(position));
 	}
 

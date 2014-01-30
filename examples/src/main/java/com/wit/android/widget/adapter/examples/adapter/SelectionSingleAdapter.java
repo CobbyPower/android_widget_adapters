@@ -136,7 +136,7 @@ public class SelectionSingleAdapter extends BaseMultiAdapter<SelectionSingleAdap
 	}
 
 	@Override
-	public void onBindItemView(int position, Object viewHolder) {
+	public void onSetUpItemView(int position, Object viewHolder) {
 		final ViewHolder holder = (ViewHolder) viewHolder;
 		holder.setText((String) getItem(position));
 		holder.setSelected(SELECTOR.isSelected(position));
