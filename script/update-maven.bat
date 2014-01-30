@@ -7,7 +7,7 @@
 ::  * You may use this file only in compliance with the License. More details and copy
 ::  * of this License you may obtain at
 ::  *
-::  * 		http://www.apache.org/licenses/LICENSE-2.0
+::  *                 http://www.apache.org/licenses/LICENSE-2.0
 ::  *
 ::  * You can redistribute, modify or publish any part of the code written in this
 ::  * file but as it is described in the License, the software distributed under the
@@ -19,32 +19,30 @@
 ::  * =================================================================================
 ::  */
 :: ------------------------------------------------------------------------------------
-::           UPDATE SCRIPT FOR 'AND SERVICES' JAR FILE FOR MAVEN REPOSITORY
+::              UPDATE SCRIPT FOR LIBRARY ARTIFACTS FOR MAVEN REPOSITORY
 :: ------------------------------------------------------------------------------------
 @ECHO OFF
 
 :: ====================================================================================
-:: Library specific parameters
+:: Library specific parameters.
 :: ------------------------------------------------------------------------------------
-@SET LIBRARY_NAME=android-widget-adapters
-@SET LIBRARY_VERSION=1.0
+@SET LIBRARY_NAME=widget-adapters
+@SET LIBRARY_VERSION=1.1
 :: ====================================================================================
-:: Script global parameters
+:: Script global parameters.
 :: ------------------------------------------------------------------------------------
-:: Maven repository parameters
+:: Maven repository parameters.
 @SET MAVEN_LOCAL_PATH=C:\Users\Martin\.m2\repository\
-@SET MAVEN_GROUP_PATH=%MAVEN_LOCAL_PATH%com\wit\android\
-@SET MAVEN_GROUP_ID=com.wit.android
-@SET MAVEN_JAR_SOURCES=%MAVEN_GROUP_PATH%%LIBRARY_NAME%\%LIBRARY_VERSION%\%LIBRARY_NAME%-%LIBRARY_VERSION%-sources.jar
-@SET MAVEN_JAR_JAVADOC=%MAVEN_GROUP_PATH%%LIBRARY_NAME%\%LIBRARY_VERSION%\%LIBRARY_NAME%-%LIBRARY_VERSION%-javadoc.jar
+@SET MAVEN_LIBRARY_GROUP_PATH=%MAVEN_LOCAL_PATH%com\wit\android\
+@SET MAVEN_LIBRARY_GROUP_ID=com.wit.android
+@SET MAVEN_LIBRARY_JAR_SOURCES=%MAVEN_LIBRARY_GROUP_PATH%%LIBRARY_NAME%\%LIBRARY_VERSION%\%LIBRARY_NAME%-%LIBRARY_VERSION%-sources.jar
+@SET MAVEN_LIBRARY_JAR_JAVADOC=%MAVEN_LIBRARY_GROUP_PATH%%LIBRARY_NAME%\%LIBRARY_VERSION%\%LIBRARY_NAME%-%LIBRARY_VERSION%-javadoc.jar
 :: Library parameters
-@SET LIBRARY_DIR=..\
-@SET LIBRARY_LIB_DIR=%LIBRARY_DIR%\lib\
-:: Build the names of jar files
-@SET LIBRARY_JAR=%LIBRARY_LIB_DIR%%LIBRARY_NAME%-%LIBRARY_VERSION%.jar
-@SET LIBRARY_JAR_WITH_JAVADOC=%LIBRARY_LIB_DIR%%LIBRARY_NAME%-%LIBRARY_VERSION%-with-javadoc.jar
-@SET LIBRARY_JAR_SOURCES=%LIBRARY_LIB_DIR%%LIBRARY_NAME%-%LIBRARY_VERSION%-sources.jar
-@SET LIBRARY_JAR_JAVADOC=%LIBRARY_LIB_DIR%%LIBRARY_NAME%-%LIBRARY_VERSION%-javadoc.jar
+@SET LIBRARY_ARTIFACTS_DIR=..\artifacts\
+:: Build the names of artifact files.
+@SET LIBRARY_JAR=%LIBRARY_ARTIFACTS_DIR%%LIBRARY_NAME%-%LIBRARY_VERSION%.jar
+@SET LIBRARY_JAR_SOURCES=%LIBRARY_ARTIFACTS_DIR%%LIBRARY_NAME%-%LIBRARY_VERSION%-sources.jar
+@SET LIBRARY_JAR_JAVADOC=%LIBRARY_ARTIFACTS_DIR%%LIBRARY_NAME%-%LIBRARY_VERSION%-javadoc.jar
 :: ------------------------------------------------------------------------------------
 :: Save input parameter.
 @SET PARAM=%1
@@ -52,24 +50,22 @@
 :: Check action to perform.
 IF [%PARAM%]==[-type] GOTO ListTypes
 IF [%PARAM%]==[jar] GOTO Jar
-IF [%PARAM%]==[jar-doc] GOTO JarDoc
 IF [%PARAM%]==[support] GOTO Support
 GOTO UnknownParameter
 :ListTypes
 ECHO.Use one of the types listed below:
-ECHO.- jar (to load jar file with compiled code)
-ECHO.- jar-doc (to load jar file with compiled code and also documentation)
-ECHO.- support (to load all support jars: sources + documentation)
+ECHO.- aar (to load an aar file with compiled code)
+ECHO.- support (to load all support artifacts: sources + documentation)
 GOTO Finish
 :: ------------------------------------------------------------------------------------
-:: Load requested jar library into local maven repository
+:: Load requested artifact file into the local MAVEN repository.
 :: ------------------------------------------------------------------------------------
 :Jar
-ECHO.Loading jar file with compiled code into maven local repository ...
-:: Jar with compiled source code
+ECHO.Loading the main library artifact file with compiled code into the MAVEN local repository ...
+:: Aar with compiled source code and bundled resources.
 IF EXIST %LIBRARY_JAR% (
     mvn install:install-file^
-    -DgroupId=%MAVEN_GROUP_ID%^
+    -DgroupId=%MAVEN_LIBRARY_GROUP_ID%^
     -DartifactId=%LIBRARY_NAME%^
     -Dversion=%LIBRARY_VERSION%^
     -Dfile=%LIBRARY_JAR%^
@@ -78,37 +74,23 @@ IF EXIST %LIBRARY_JAR% (
 )
 GOTO Finish
 :: ------------------------------------------------------------------------------------
-:JarDoc
-ECHO.Loading jar file with compiled code and documentation into maven local repository ...
-:: Jar with compiled source code and java documentation
-IF EXIST %LIBRARY_JAR_WITH_JAVADOC% (
-    mvn install:install-file^
-    -DgroupId=%MAVEN_GROUP_ID%^
-    -DartifactId=%LIBRARY_NAME%^
-    -Dversion=%LIBRARY_VERSION%^
-    -Dfile=%LIBRARY_JAR_WITH_JAVADOC%^
-    -Dpackaging=jar^
-    -DgeneratePom=true
-)
-GOTO Finish
-:: ------------------------------------------------------------------------------------
 :Support
-ECHO.Loading support jar files (sources + documentation) into maven local repository ...
-:: This actually only copies these jar files into local path
-:: Jar with only java documentation
+ECHO.Loading support artifact files (sources + documentation) into the MAVEN local repository ...
+:: This actually only copies these jar files into the local MAVEN repository's directory.
+:: Jar with documentation.
 IF EXIST %LIBRARY_JAR_JAVADOC% (
-    COPY %LIBRARY_JAR_JAVADOC% %MAVEN_JAR_JAVADOC% /Y
+    COPY %LIBRARY_JAR_JAVADOC% %MAVEN_LIBRARY_JAR_JAVADOC% /Y
 )
-:: Jar with sources
+:: Jar with sources.
 IF EXIST %LIBRARY_JAR_SOURCES% (
-    COPY %LIBRARY_JAR_SOURCES% %MAVEN_JAR_SOURCES% /Y
+    COPY %LIBRARY_JAR_SOURCES% %MAVEN_LIBRARY_JAR_SOURCES% /Y
 )
-ECHO.Loading of support jar files successfully finished.
+ECHO.Loading of support artifact files successfully finished.
 GOTO Finish
 :: ------------------------------------------------------------------------------------
 :UnknownParameter
 ECHO.Unknown parameter type '%PARAM%'
-ECHO.Use "-type" as parameter to list possible types of libraries to load into repository.
+ECHO.Use "-type" as parameter to list possible types of artifacts which can be laoded into the MAVEN local repository.
 GOTO Finish
 :: ------------------------------------------------------------------------------------
 :Finish
