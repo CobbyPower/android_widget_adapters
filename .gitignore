@@ -16,5 +16,3 @@ examples/build/
 # =============== RELEASE ====================
 # exclude instrument tests
 library/src/instrumentTest/
-# exclude all scripts
-script/
