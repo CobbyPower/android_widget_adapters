@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger>
+
+    <dataSet config="main" >
+        <source path="D:\Libraries\Wolf-ITechnologies\workspace\android\commercial\modules\android_widget_adapters\library\src\main\res" />
+        <source path="D:\Libraries\Wolf-ITechnologies\workspace\android\commercial\modules\android_widget_adapters\library\build\res\rs\debug" />
+    </dataSet>
+    <dataSet config="debug" >
+        <source path="D:\Libraries\Wolf-ITechnologies\workspace\android\commercial\modules\android_widget_adapters\library\src\debug\res" />
+    </dataSet>
+
+</merger>
