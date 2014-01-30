@@ -2,7 +2,7 @@
 <img align="left" src="http://www.wolf-itechnologies.com/images/wit/android/wit_ic_android_100.png" />
 </a>
 
-Widget Adapters (1.1)
+Android Widget Adapters (1.1)
 ===============
 
 Effective and optimized adapters for Android widgets as [ListView](http://developer.android.com/reference/android/widget/ListView.html) and [GridView](http://developer.android.com/reference/android/widget/GridView.html).
