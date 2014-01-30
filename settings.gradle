@@ -1,4 +1,7 @@
-// Release:
-//include ':android_widget_adapters'
-// Examples:
-include ':android_widget_adapters', ':examples'
+/**
+ * Gradle project settings ===================================================
+ */
+// Release version:
+include ':library'
+// Examples version:
+//include ':examples', ':library'

@@ -1,3 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+/*
+* =================================================================================
+* Copyright (C) 2012 - 2013 Martin Albedinsky [Wolf-ITechnologies]
+* =================================================================================
+* Licensed under the Apache License, Version 2.0 or later (further "License" only);
+* *********************************************************************************
+* You may use this file only in compliance with the License. More details and copy
+* of this License you may obtain at
+*
+*                 http://www.apache.org/licenses/LICENSE-2.0
+*
+* You can redistribute, modify or publish any part of the code written in this
+* file but as it is described in the License, the software distributed under the
+* License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES or CONDITIONS OF
+* ANY KIND.
+*
+* See the License for the specific language governing permissions and limitations
+* under the License.
+* =================================================================================
+*/
+-->
 <resources>
+
+    <!-- ###### EXAMPLES STRINGS ###### -->
+    <eat-comment/>
+
+    <!-- ## Base strings ## -->
+    <eat-comment/>
+    <string name="App.name">Adapters</string>
+
+    <!-- ## Navigation strings ## -->
+    <eat-comment/>
+    <string name="Navigation.Header.Examples">EXAMPLES</string>
+    <string name="Navigation.Label.SimpleAdapter">Simple Adapter</string>
+    <string name="Navigation.Label.SimpleAdapter.Description">Description</string>
+    <string name="Navigation.Label.SelectionAdapter.Single">Selection Adapter (single)</string>
+    <string name="Navigation.Label.SelectionAdapter.Single.Description">Description</string>
+    <string name="Navigation.Label.SelectionAdapter.Multi">Selection Adapter (multiple)</string>
+    <string name="Navigation.Label.SelectionAdapter.Multi.Description">Description</string>
+    <string name="Navigation.Label.HeadersAdapter.Alphabetic">Headers Adapter (alphabetic)</string>
+    <string name="Navigation.Label.HeadersAdapter.Alphabetic.Description">Description</string>
+    <string name="Navigation.Label.HeadersAdapter.Groups">Headers Adapter (groups)</string>
+    <string name="Navigation.Label.HeadersAdapter.Groups.Description">Description</string>
+    <string name="Navigation.Label.SelectionAndHeadersAdapter">Selection &amp; Headers Adapter</string>
+    <string name="Navigation.Label.SelectionAndHeadersAdapter.Description">Description</string>
+    
+    <!-- ## String formats ## -->
+    <eat-comment/>
+    <string name="Format.SelectedItems">%d selected</string>
+
+    <!-- ## Toast strings ## -->
+    <eat-comment/>
+    <string name="Toast.LongPressToEnableActionMode">Long press on some item to enable action mode</string>
+
+    <!-- ## Adapters data ## -->
+    <string-array name="Data.Models" parent="">
+        <item>Lily Aldridge</item>
+        <item>Alessandra Ambrosio</item>
+        <item>Lindsay Ellingson</item>
+        <item>Karlie Kloss</item>
+        <item>Doutzen Kroes</item>
+        <item>Adriana Lima</item>
+        <item>Behati Prinsloo</item>
+        <item>Candice Swanepoel</item>
+        <item>Tyra Banks</item>
+        <item>Gisele Bündchen</item>
+        <item>Laetitia Casta</item>
+        <item>Helena Christensen</item>
+        <item>Selita Ebanks</item>
+        <item>Izabel Goulart</item>
+        <item>Erin Heatherton</item>
+        <item>Rosie Huntington-Whiteley</item>
+        <item>Chanel Iman</item>
+        <item>Miranda Kerr</item>
+        <item>Heidi Klum</item>
+        <item>Karolína Kurková</item>
+        <item>Marisa Miller</item>
+        <item>Karen Mulder</item>
+        <item>Daniela Peštová</item>
+        <item>Inés Rivero</item>
+        <item>Stephanie Seymour</item>
+    </string-array>
+
 </resources>
