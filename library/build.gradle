@@ -3,9 +3,6 @@ apply plugin: 'android-library'
 /**
  * Library dependencies ======================================================
  */
-dependencies {
-    compile 'com.android.support:support-v4:+'
-}
 
 /**
  * Android Library options ===================================================
