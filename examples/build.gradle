@@ -12,7 +12,7 @@ repositories {
  */
 dependencies {
     compile project(':library')
-    compile rootProject.appCompatLibrary
+    compile 'com.android.support:appcompat-v7:+'
     compile 'com.wit.android:examples:+@aar'
 }
 
@@ -26,6 +26,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
+        versionCode rootProject.libraryVersionCode
+        versionName rootProject.libraryVersionName
     }
 
     // Release.

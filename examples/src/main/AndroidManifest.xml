@@ -2,7 +2,7 @@
 <!--
 /*
  * =================================================================================
- * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
+ * Copyright (C) 2013 - 2014 Martin Albedinsky [Wolf-ITechnologies]
  * =================================================================================
  * Licensed under the Apache License, Version 2.0 or later (further "License" only);
  * *********************************************************************************
@@ -22,9 +22,7 @@
  */
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.wit.android.widget.adapter.examples"
-          android:versionCode="1"
-          android:versionName="1.0">
+          package="com.wit.android.widget.adapter.examples">
 
     <uses-sdk android:maxSdkVersion="19"/>
 

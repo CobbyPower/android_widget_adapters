@@ -9,7 +9,16 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.7.+'
+        classpath 'com.android.tools.build:gradle:0.8.+'
+    }
+}
+
+/**
+ * All projects global configuration =========================================
+ */
+allprojects {
+    repositories {
+        mavenCentral()
     }
 }
 
@@ -17,7 +26,8 @@ buildscript {
  * Library options ===========================================================
  */
 ext.libraryName = "widget-adapters"
-ext.libraryVersion = "1.1"
+ext.libraryVersionCode = 110
+ext.libraryVersionName = "1.1"
 
 /**
  * Android SDK options =======================================================
@@ -30,7 +40,3 @@ ext.targetSdkVersion = 19
 /**
  * Global dependencies =======================================================
  */
-// Support library.
-ext.supportLibrary = 'com.android.support:support-v4:+'
-// Support Application compatibility library.
-ext.appCompatLibrary = 'com.android.support:appcompat-v7:+'
