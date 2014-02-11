@@ -61,17 +61,17 @@ public class SimpleAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View onCreateItemView(int position, LayoutInflater inflater, ViewGroup root) {
+	public View onCreateView(int position, LayoutInflater inflater, ViewGroup root) {
 		return inflate(R.layout.listitem_simple);
 	}
 
 	@Override
-	public void onSetUpItemView(int position, Object viewHolder) {
+	public void onBindView(int position, Object viewHolder) {
 		((ViewHolder) viewHolder).setText((String) getItem(position));
 	}
 
 	@Override
-	public Object onCreateItemViewHolder(int position, View itemView) {
+	public Object onCreateViewHolder(int position, View itemView) {
 		return new ViewHolder(itemView);
 	}
 

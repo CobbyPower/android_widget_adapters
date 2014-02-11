@@ -52,12 +52,12 @@ public class SelectionMultiAdapter extends SelectionSingleAdapter implements Vie
 	}
 
 	@Override
-	public View onCreateItemView(int position, LayoutInflater inflater, ViewGroup root) {
+	public View onCreateView(int position, LayoutInflater inflater, ViewGroup root) {
 		return inflate(R.layout.listitem_simple_check);
 	}
 
 	@Override
-	public void onSetUpItemView(int position, Object viewHolder) {
+	public void onBindView(int position, Object viewHolder) {
 		final ViewHolder holder = (ViewHolder) viewHolder;
 		holder.setText((String) getItem(position));
 		// Update selection state whenever the list view is updated.
@@ -67,7 +67,7 @@ public class SelectionMultiAdapter extends SelectionSingleAdapter implements Vie
 	}
 
 	@Override
-	public Object onCreateItemViewHolder(int position, View itemView) {
+	public Object onCreateViewHolder(int position, View itemView) {
 		return new ViewHolder(itemView);
 	}
 

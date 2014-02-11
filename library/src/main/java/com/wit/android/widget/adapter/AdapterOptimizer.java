@@ -101,10 +101,9 @@ public class AdapterOptimizer {
 	 *                         should be optimized.
 	 */
 	public AdapterOptimizer(OptimizedAdapter optimizedAdapter) {
-		if (optimizedAdapter == null)
+		if (optimizedAdapter == null) {
 			throw new IllegalArgumentException("Invalid optimized adapter.");
-
-		// Assign.
+		}
 		this.mOptimizedAdapter = optimizedAdapter;
 	}
 
@@ -138,20 +137,20 @@ public class AdapterOptimizer {
 
 		// Check if we have converted view.
 		if (convertView == null) {
-			convertView = mOptimizedAdapter.onCreateItemView(position, mOptimizedAdapter.getLayoutInflater(), parent);
+			convertView = mOptimizedAdapter.onCreateView(position, mOptimizedAdapter.getLayoutInflater(), parent);
 
 			if (convertView == null) {
 				throw new NullPointerException("Convert view at position(" + position + ") can't be NULL.");
 			}
 
 			// Set holder to the new view.
-			convertView.setTag(viewHolder = mOptimizedAdapter.onCreateItemViewHolder(position, convertView));
+			convertView.setTag(viewHolder = mOptimizedAdapter.onCreateViewHolder(position, convertView));
 		} else {
 			viewHolder = convertView.getTag();
 		}
 
 		// Bind item view with data.
-		mOptimizedAdapter.onSetUpItemView(position, viewHolder);
+		mOptimizedAdapter.onBindView(position, viewHolder);
 
 		// Return new/recreated item view with data.
 		return convertView;
@@ -223,7 +222,7 @@ public class AdapterOptimizer {
 		 * @param parent   The parent view, to that will be this view eventually assigned to.
 		 * @return Created item view.
 		 */
-		public View onCreateItemView(int position, LayoutInflater inflater, ViewGroup parent);
+		public View onCreateView(int position, LayoutInflater inflater, ViewGroup parent);
 
 		/**
 		 * <p>
@@ -235,10 +234,10 @@ public class AdapterOptimizer {
 		 *
 		 * @param position   The position of item within this optimized adapter's data set.
 		 * @param viewHolder Same type of holder as provided by
-		 *                   {@link #onCreateItemViewHolder(int, android.view.View)} for the specified
+		 *                   {@link #onCreateViewHolder(int, android.view.View)} for the specified
 		 *                   position.
 		 */
-		public void onSetUpItemView(int position, Object viewHolder);
+		public void onBindView(int position, Object viewHolder);
 
 		/**
 		 * <p>
@@ -247,11 +246,11 @@ public class AdapterOptimizer {
 		 *
 		 * @param position The position of the item from this optimized adapter's data set.
 		 * @param itemView Same type of view as provided by
-		 *                 {@link #onCreateItemView(int, android.view.LayoutInflater, android.view.ViewGroup)}
+		 *                 {@link #onCreateView(int, android.view.LayoutInflater, android.view.ViewGroup)}
 		 *                 at the specified position.
 		 * @return Created holder for the given <var>itemView</var>.
 		 */
-		public Object onCreateItemViewHolder(int position, View itemView);
+		public Object onCreateViewHolder(int position, View itemView);
 
 		/**
 		 * <p>

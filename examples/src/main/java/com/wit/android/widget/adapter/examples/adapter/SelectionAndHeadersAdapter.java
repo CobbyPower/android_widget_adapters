@@ -104,14 +104,14 @@ public class SelectionAndHeadersAdapter extends AlphabeticAdapter {
 	/**
 	 */
 	@Override
-	public void onSetUpItemView(int position, Object viewHolder) {
+	public void onBindView(int position, Object viewHolder) {
 		switch (currentItemViewType()) {
 			case VIEW_TYPE_ITEM:
 				// Handle here only selection and let other stuffs to parent.
 				final ViewHolder holder = (ViewHolder) viewHolder;
 				holder.setSelected(SELECTOR.isSelected(position));
 			default:
-				super.onSetUpItemView(position, viewHolder);
+				super.onBindView(position, viewHolder);
 		}
 	}
 }

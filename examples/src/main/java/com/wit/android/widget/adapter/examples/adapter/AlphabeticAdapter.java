@@ -137,7 +137,7 @@ public class AlphabeticAdapter extends BaseMultiAdapter<AlphabeticAdapter> {
 	/**
 	 */
 	@Override
-	public View onCreateItemView(int position, LayoutInflater inflater, ViewGroup root) {
+	public View onCreateView(int position, LayoutInflater inflater, ViewGroup root) {
 		View view = null;
 		switch (currentItemViewType()) {
 			case VIEW_TYPE_ITEM:
@@ -153,7 +153,7 @@ public class AlphabeticAdapter extends BaseMultiAdapter<AlphabeticAdapter> {
 	/**
 	 */
 	@Override
-	public void onSetUpItemView(int position, Object viewHolder) {
+	public void onBindView(int position, Object viewHolder) {
 		switch (currentItemViewType()) {
 			case VIEW_TYPE_ITEM:
 				((ViewHolder) viewHolder).setText(
@@ -169,7 +169,7 @@ public class AlphabeticAdapter extends BaseMultiAdapter<AlphabeticAdapter> {
 	/**
 	 */
 	@Override
-	public Object onCreateItemViewHolder(int position, View itemView) {
+	public Object onCreateViewHolder(int position, View itemView) {
 		switch (currentItemViewType()) {
 			case VIEW_TYPE_ITEM:
 				return new ViewHolder(itemView);

@@ -89,7 +89,7 @@ public class SelectableLinearLayout extends LinearLayout implements ISelectableV
 	/**
 	 * Indicates if the view should default handle states.
 	 */
-	private boolean bAllowDefaultSelection = true;
+	private boolean bAllowDefaultSelection = false;
 
 	/**
 	 * Constructors ==========================
