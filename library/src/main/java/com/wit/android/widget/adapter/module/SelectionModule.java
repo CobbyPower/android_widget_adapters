@@ -26,7 +26,7 @@ import android.util.SparseIntArray;
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Selection module for {@link com.wit.android.widget.adapter.internal.IMultiAdapter}.
+ * Selection module for {@link com.wit.android.widget.adapter.MultiAdapter}.
  * </p>
  *
  * @param <Adapter> Type of the adapter for which can be this selection module created and used.

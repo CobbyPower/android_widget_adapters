@@ -18,7 +18,7 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.internal;
+package com.wit.android.widget.adapter;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -88,6 +88,11 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 	/**
 	 * Listeners -----------------------------
 	 */
+
+	/**
+	 *
+	 */
+	private OnDataSetChangeListener lDataSetChangeListener = null;
 
 	/**
 	 * Arrays --------------------------------
@@ -176,8 +181,36 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 	}
 
 	/**
+	 */
+	@Override
+	public void notifyDataSetChanged() {
+		super.notifyDataSetChanged();
+		if (lDataSetChangeListener != null) {
+			lDataSetChangeListener.onDataSetChanged(this);
+		}
+	}
+
+	/**
 	 * Getters + Setters ---------------------
 	 */
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param listener
+	 */
+	public void setOnDataSetChangeListener(OnDataSetChangeListener listener) {
+		this.lDataSetChangeListener = listener;
+	}
+
+	/**
+	 * <p>
+	 * </p>
+	 */
+	public void removeOnDataSetChangeListener() {
+		this.lDataSetChangeListener = null;
+	}
 
 	/**
 	 * <p>
@@ -286,4 +319,22 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 	/**
 	 * Interface =============================
 	 */
+
+	/**
+	 * <h4>Interface Overview</h4>
+	 * <p>
+	 * </p>
+	 *
+	 * @author Martin Albedinsky
+	 */
+	public static interface OnDataSetChangeListener {
+
+		/**
+		 * <p>
+		 * </p>
+		 *
+		 * @param adapter
+		 */
+		public void onDataSetChanged(BaseWidgetAdapter adapter);
+	}
 }

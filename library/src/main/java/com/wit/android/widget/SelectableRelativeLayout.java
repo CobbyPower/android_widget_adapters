@@ -24,7 +24,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.RelativeLayout;
 
-import com.wit.android.widget.adapter.internal.view.ISelectableView;
+import com.wit.android.widget.adapter.view.ISelectableView;
 
 /**
  * <h4>Class Overview</h4>

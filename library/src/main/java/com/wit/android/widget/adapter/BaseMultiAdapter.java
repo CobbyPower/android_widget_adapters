@@ -24,7 +24,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.SparseArray;
 
-import com.wit.android.widget.adapter.internal.IMultiAdapter;
 import com.wit.android.widget.adapter.module.AdapterModule;
 
 /**
@@ -37,7 +36,7 @@ import com.wit.android.widget.adapter.module.AdapterModule;
  *
  * @author Martin Albedinsky
  */
-public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> extends BaseAdapter implements IMultiAdapter<Adapter>, AdapterModule.ModuleAdapter {
+public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> extends BaseAdapter implements MultiAdapter<Adapter>, AdapterModule.ModuleAdapter {
 	/**
 	 * Constants =============================
 	 */

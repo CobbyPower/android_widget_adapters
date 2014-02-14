@@ -24,8 +24,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wit.android.widget.adapter.internal.BaseWidgetAdapter;
-
 /**
  * <h4>Class Overview</h4>
  * <p>
@@ -33,7 +31,7 @@ import com.wit.android.widget.adapter.internal.BaseWidgetAdapter;
  * </p>
  *
  * @author Martin Albedinsky
- * @see com.wit.android.widget.adapter.internal.BaseWidgetAdapter
+ * @see BaseWidgetAdapter
  * @see com.wit.android.widget.adapter.AdapterOptimizer
  */
 public abstract class BaseAdapter extends BaseWidgetAdapter implements AdapterOptimizer.OptimizedAdapter {

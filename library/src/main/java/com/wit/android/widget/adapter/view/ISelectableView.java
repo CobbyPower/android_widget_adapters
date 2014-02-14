@@ -18,21 +18,20 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.internal;
-
-import com.wit.android.widget.adapter.module.AdapterModule;
+package com.wit.android.widget.adapter.view;
 
 /**
  * <h4>Interface Overview</h4>
  * <p>
- * Required interface for multi-module adapter.
+ * Base interface for selectable views. Allows to enable/disable default
+ * management of the selection state of a selectable view implementation
+ * and provides custom method ({@link #setSelectionState(boolean)})
+ * for selection state management.
  * </p>
  *
- * @param <Adapter> Type of a multi-module adapter.
  * @author Martin Albedinsky
- * @see com.wit.android.widget.adapter.BaseMultiAdapter
  */
-public interface IMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> {
+public interface ISelectableView {
 
 	/**
 	 * Methods ===============================
@@ -40,32 +39,35 @@ public interface IMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> {
 
 	/**
 	 * <p>
-	 * Assigns the given <var>module</var> to this adapter.
+	 * Sets flag indicating whether this view should allow default selection state
+	 * management or not.
 	 * </p>
 	 *
-	 * @param module   An adapter module to assign.
-	 * @param moduleID Id by which can be the given module obtained from this adapter.
-	 * @see #obtainModule(int)
+	 * @param allow <code>True</code> to allow default selection in this view,
+	 *              <code>false</code> otherwise.
+	 * @see #allowsDefaultSelection()
+	 * @see #setSelectionState(boolean)
 	 */
-	public void assignModule(AdapterModule<Adapter> module, int moduleID);
+	public void setAllowDefaultSelection(boolean allow);
 
 	/**
 	 * <p>
-	 * Returns an adapter module assigned to this adapter.
+	 * Returns flag indicating whether this view allows default selection or not.
 	 * </p>
 	 *
-	 * @param moduleID Id of an adapter module to obtain.
-	 * @return The adapter module which is represented by the given <var>moduleID</var>.
-	 * @see #assignModule(com.wit.android.widget.adapter.module.AdapterModule, int)
+	 * @return <code>True</code> if default selection is allowed,
+	 * <code>false</code> otherwise.
+	 * @see #setAllowDefaultSelection(boolean)
+	 * @see #setSelectionState(boolean)
 	 */
-	public <M> M obtainModule(int moduleID);
+	public boolean allowsDefaultSelection();
 
 	/**
 	 * <p>
-	 * Removes an adapter module assigned to this adapter.
+	 * Sets the selection state of this selectable view.
 	 * </p>
 	 *
-	 * @param moduleID Id of an adapter module to remove.
+	 * @param selected <code>True</code> for selected, <code>false</code> for unselected state.
 	 */
-	public void removeModule(int moduleID);
+	public void setSelectionState(boolean selected);
 }

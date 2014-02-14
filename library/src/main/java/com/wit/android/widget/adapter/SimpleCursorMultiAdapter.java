@@ -24,7 +24,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
 
-import com.wit.android.widget.adapter.internal.IMultiAdapter;
 import com.wit.android.widget.adapter.module.AdapterModule;
 
 /**
@@ -38,7 +37,7 @@ import com.wit.android.widget.adapter.module.AdapterModule;
  *
  * @author Martin Albedinsky
  */
-public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends AdapterModule.ModuleAdapter> extends SimpleCursorAdapter<C> implements IMultiAdapter<Adapter> {
+public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends AdapterModule.ModuleAdapter> extends SimpleCursorAdapter<C> implements MultiAdapter<Adapter> {
 
 	/**
 	 * Constants =============================

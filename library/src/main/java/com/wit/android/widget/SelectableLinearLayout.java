@@ -26,7 +26,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
-import com.wit.android.widget.adapter.internal.view.ISelectableView;
+import com.wit.android.widget.adapter.view.ISelectableView;
 
 /**
  * <h4>Class Overview</h4>

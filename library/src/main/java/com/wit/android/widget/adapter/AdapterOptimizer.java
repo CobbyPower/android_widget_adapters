@@ -131,28 +131,21 @@ public class AdapterOptimizer {
 	 */
 	public View performOptimizedGetView(int position, View convertView, ViewGroup parent) {
 		Object viewHolder;
-
 		// Obtain current item view type.
 		this.mCurrentItemViewType = mOptimizedAdapter.getItemViewType(position);
-
-		// Check if we have converted view.
 		if (convertView == null) {
+			// Dispatch to create new view.
 			convertView = mOptimizedAdapter.onCreateView(position, mOptimizedAdapter.getLayoutInflater(), parent);
-
 			if (convertView == null) {
 				throw new NullPointerException("Convert view at position(" + position + ") can't be NULL.");
 			}
-
 			// Set holder to the new view.
 			convertView.setTag(viewHolder = mOptimizedAdapter.onCreateViewHolder(position, convertView));
 		} else {
 			viewHolder = convertView.getTag();
 		}
-
-		// Bind item view with data.
+		// Dispatch to bind view with data.
 		mOptimizedAdapter.onBindView(position, viewHolder);
-
-		// Return new/recreated item view with data.
 		return convertView;
 	}
 
