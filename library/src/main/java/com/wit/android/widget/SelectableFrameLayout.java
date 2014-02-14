@@ -24,7 +24,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
-import com.wit.android.widget.adapter.view.ISelectableView;
+import com.wit.android.view.ISelectableView;
 
 /**
  * <h4>Class Overview</h4>
@@ -35,7 +35,7 @@ import com.wit.android.widget.adapter.view.ISelectableView;
  * </p>
  *
  * @author Martin Albedinsky
- * @see com.wit.android.widget.adapter.view.StateView
+ * @see com.wit.android.view.SelectableView
  * @see SelectableLinearLayout
  * @see SelectableRelativeLayout
  */

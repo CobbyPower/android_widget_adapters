@@ -18,7 +18,7 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.view;
+package com.wit.android.view;
 
 /**
  * <h4>Interface Overview</h4>

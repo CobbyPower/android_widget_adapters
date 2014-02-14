@@ -18,7 +18,7 @@
  * under the License.
  * =================================================================================
  */
-package com.wit.android.widget.adapter.view;
+package com.wit.android.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -37,7 +37,7 @@ import android.view.View;
  * @see com.wit.android.widget.SelectableRelativeLayout
  * @see com.wit.android.widget.SelectableFrameLayout
  */
-public class StateView extends View implements ISelectableView {
+public class SelectableView extends View implements ISelectableView {
 
 	/**
 	 * Constants =============================
@@ -46,7 +46,7 @@ public class StateView extends View implements ISelectableView {
 	/**
 	 * Log TAG.
 	 */
-	// private static final String TAG = StateView.class.getSimpleName();
+	// private static final String TAG = SelectableView.class.getSimpleName();
 
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
@@ -96,7 +96,7 @@ public class StateView extends View implements ISelectableView {
 	 * Same as {@link android.view.View#View(android.content.Context)}.
 	 * </p>
 	 */
-	public StateView(Context context) {
+	public SelectableView(Context context) {
 		super(context);
 	}
 
@@ -105,7 +105,7 @@ public class StateView extends View implements ISelectableView {
 	 * Same as {@link android.view.View#View(android.content.Context, android.util.AttributeSet)}.
 	 * </p>
 	 */
-	public StateView(Context context, AttributeSet attrs) {
+	public SelectableView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
 
@@ -114,7 +114,7 @@ public class StateView extends View implements ISelectableView {
 	 * Same as {@link android.view.View#View(android.content.Context, android.util.AttributeSet, int)}.
 	 * </p>
 	 */
-	public StateView(Context context, AttributeSet attrs, int defStyle) {
+	public SelectableView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 	}
 
