@@ -1,6 +1,6 @@
 /*
  * =================================================================================
- * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
+ * Copyright (C) 2014 Martin Albedinsky [Wolf-ITechnologies]
  * =================================================================================
  * Licensed under the Apache License, Version 2.0 or later (further "License" only);
  * ---------------------------------------------------------------------------------
@@ -21,23 +21,22 @@
 package com.wit.android.widget.adapter;
 
 import android.content.Context;
-import android.database.Cursor;
-import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import com.wit.android.widget.adapter.module.AdapterModule;
+import com.wit.android.widget.adapter.annotation.AdapterItemHolder;
+import com.wit.android.widget.adapter.annotation.AdapterItemView;
 
 /**
  * <h4>Class Overview</h4>
  * <p>
- * TODO:
+ * Description.
  * </p>
- *
- * @param <Adapter> Type of the adapter which extends this base multi-module adapter.
- * @param <C> Type of the cursor which will represents data set for this adapter.
  *
  * @author Martin Albedinsky
  */
-public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends AdapterModule.ModuleAdapter> extends SimpleCursorAdapter<C> implements MultiAdapter<Adapter> {
+public abstract class SimpleAdapter extends BaseAdapter {
 
 	/**
 	 * Constants =============================
@@ -46,7 +45,7 @@ public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends
 	/**
 	 * Log TAG.
 	 */
-	// private static final String TAG = BaseMultiAdapter.class.getSimpleName();
+	// private static final String TAG = SimpleAdapter.class.getSimpleName();
 
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
@@ -71,9 +70,14 @@ public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends
 	 */
 
 	/**
-	 * Modules manager.
+	 *
 	 */
-	private final BaseMultiAdapter.ModuleManager<Adapter> MODULES_MANAGER = new BaseMultiAdapter.ModuleManager<Adapter>();
+	private int mItemView = 0;
+
+	/**
+	 *
+	 */
+	private Class<? extends AdapterItemHolder.ViewHolder> mClassOfHolder = null;
 
 	/**
 	 * Listeners -----------------------------
@@ -93,26 +97,24 @@ public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends
 
 	/**
 	 * <p>
-	 * Creates new instance of SimpleCursorMultiAdapter with the given context.
 	 * </p>
 	 *
-	 * @param context Context in which will be this adapter used.
+	 * @param context
 	 */
-	public SimpleCursorMultiAdapter(Context context) {
+	public SimpleAdapter(Context context) {
 		super(context);
-	}
-
-	/**
-	 * <p>
-	 * Creates new instance of SimpleCursorMultiAdapter with the given context and
-	 * cursor as data set for this adapter.
-	 * </p>
-	 *
-	 * @param context Context in which will be this adapter used.
-	 * @param cursor  Cursor as data set for this adapter.
-	 */
-	public SimpleCursorMultiAdapter(Context context, C cursor) {
-		super(context, cursor);
+		final Class<? extends SimpleAdapter> classOfAdapter = getClass();
+		/**
+		 * Process class annotations.
+		 */
+		// Retrieve item view.
+		if (classOfAdapter.isAnnotationPresent(AdapterItemView.class)) {
+			this.mItemView = classOfAdapter.getAnnotation(AdapterItemView.class).value();
+		}
+		// Retrieve item view holder.
+		if (classOfAdapter.isAnnotationPresent(AdapterItemHolder.class)) {
+			this.mClassOfHolder = classOfAdapter.getAnnotation(AdapterItemHolder.class).value();
+		}
 	}
 
 	/**
@@ -126,25 +128,30 @@ public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends
 	/**
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
-	public void assignModule(AdapterModule<Adapter> module, int moduleID) {
-		module.dispatchAttachToAdapter((Adapter) this);
-		MODULES_MANAGER.addModule(module, moduleID);
+	public View onCreateView(int position, LayoutInflater inflater, ViewGroup parent) {
+		return (mItemView > 0) ? inflate(mItemView) : null;
 	}
 
 	/**
 	 */
 	@Override
-	@SuppressWarnings("unchecked")
-	public <M> M obtainModule(int moduleID) {
-		return (M) MODULES_MANAGER.getModule(moduleID);
-	}
-
-	/**
-	 */
-	@Override
-	public void removeModule(int moduleID) {
-		MODULES_MANAGER.removeModule(moduleID);
+	public Object onCreateViewHolder(int position, View itemView) {
+		if (mClassOfHolder != null) {
+			AdapterItemHolder.ViewHolder holder = null;
+			try {
+				holder = mClassOfHolder.newInstance();
+			} catch (InstantiationException e) {
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				e.printStackTrace();
+			} finally {
+				if (holder != null) {
+					holder.onCreate(itemView);
+				}
+			}
+			return holder;
+		}
+		return null;
 	}
 
 	/**
@@ -152,24 +159,48 @@ public abstract class SimpleCursorMultiAdapter<C extends Cursor, Adapter extends
 	 */
 
 	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param resource
+	 */
+	public void setItemView(int resource) {
+		this.mItemView = resource;
+	}
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @return
+	 */
+	public int getItemView() {
+		return mItemView;
+	}
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param classOfHolder
+	 */
+	public void setClassOfItemViewHolder(Class<? extends AdapterItemHolder.ViewHolder> classOfHolder) {
+		this.mClassOfHolder = classOfHolder;
+	}
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @return
+	 */
+	public Class<? extends AdapterItemHolder.ViewHolder> getClassOfOfItemViewHolder() {
+		return mClassOfHolder;
+	}
+
+	/**
 	 * Protected -----------------------------
 	 */
-
-	/**
-	 */
-	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		MODULES_MANAGER.dispatchSaveState(outState);
-	}
-
-	/**
-	 */
-	@Override
-	protected void onRestoreInstanceState(Bundle savedState) {
-		super.onRestoreInstanceState(savedState);
-		MODULES_MANAGER.dispatchRestoreState(savedState);
-	}
 
 	/**
 	 * Private -------------------------------

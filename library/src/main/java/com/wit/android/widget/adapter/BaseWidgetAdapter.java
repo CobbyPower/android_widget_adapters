@@ -92,7 +92,7 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 	/**
 	 *
 	 */
-	private OnDataSetChangeListener lDataSetChangeListener = null;
+	private OnDataSetListener lDataSetListener = null;
 
 	/**
 	 * Arrays --------------------------------
@@ -183,10 +183,22 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 	/**
 	 */
 	@Override
+	@SuppressWarnings("unchecked")
 	public void notifyDataSetChanged() {
 		super.notifyDataSetChanged();
-		if (lDataSetChangeListener != null) {
-			lDataSetChangeListener.onDataSetChanged(this);
+		if (lDataSetListener != null) {
+			lDataSetListener.onDataSetChanged(this);
+		}
+	}
+
+	/**
+	 */
+	@Override
+	@SuppressWarnings("unchecked")
+	public void notifyDataSetInvalidated() {
+		super.notifyDataSetChanged();
+		if (lDataSetListener != null) {
+			lDataSetListener.onDataSetInvalidated(this);
 		}
 	}
 
@@ -200,16 +212,16 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 	 *
 	 * @param listener
 	 */
-	public void setOnDataSetChangeListener(OnDataSetChangeListener listener) {
-		this.lDataSetChangeListener = listener;
+	public void setOnDataSetListener(OnDataSetListener listener) {
+		this.lDataSetListener = listener;
 	}
 
 	/**
 	 * <p>
 	 * </p>
 	 */
-	public void removeOnDataSetChangeListener() {
-		this.lDataSetChangeListener = null;
+	public void removeOnDataSetListener() {
+		this.lDataSetListener = null;
 	}
 
 	/**
@@ -327,7 +339,7 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 	 *
 	 * @author Martin Albedinsky
 	 */
-	public static interface OnDataSetChangeListener {
+	public static interface OnDataSetListener<Adapter extends BaseWidgetAdapter> {
 
 		/**
 		 * <p>
@@ -335,6 +347,15 @@ public abstract class BaseWidgetAdapter extends android.widget.BaseAdapter {
 		 *
 		 * @param adapter
 		 */
-		public void onDataSetChanged(BaseWidgetAdapter adapter);
+		public void onDataSetChanged(Adapter adapter);
+
+
+		/**
+		 * <p>
+		 * </p>
+		 *
+		 * @param adapter
+		 */
+		public void onDataSetInvalidated(Adapter adapter);
 	}
 }

@@ -21,12 +21,11 @@
 package com.wit.android.widget.adapter.examples.adapter;
 
 import android.content.Context;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.wit.android.widget.adapter.BaseAdapter;
+import com.wit.android.widget.adapter.annotation.AdapterItemHolder;
+import com.wit.android.widget.adapter.annotation.AdapterItemView;
 import com.wit.android.widget.adapter.examples.R;
 
 /**
@@ -36,12 +35,14 @@ import com.wit.android.widget.adapter.examples.R;
  *
  * @author Martin Albedinsky
  */
-public class SimpleAdapter extends BaseAdapter {
+@AdapterItemView(R.layout.listitem_simple)
+@AdapterItemHolder(SimpleAdapter.Holder.class)
+public class SimpleAdapter extends com.wit.android.widget.adapter.SimpleAdapter {
 
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = SimpleAdapter.class.getSimpleName();
+	// private static final String TAG = SimpleAdapter.class.getSimpleName();
 
 	final String[] MODELS;
 
@@ -61,28 +62,28 @@ public class SimpleAdapter extends BaseAdapter {
 	}
 
 	@Override
-	public View onCreateView(int position, LayoutInflater inflater, ViewGroup root) {
-		return inflate(R.layout.listitem_simple);
-	}
-
-	@Override
 	public void onBindView(int position, Object viewHolder) {
-		((ViewHolder) viewHolder).setText((String) getItem(position));
+		((Holder) viewHolder).setText((String) getItem(position));
 	}
 
-	@Override
-	public Object onCreateViewHolder(int position, View itemView) {
-		return new ViewHolder(itemView);
-	}
-
-	private class ViewHolder {
+	/**
+	 *
+	 */
+	public static class Holder implements AdapterItemHolder.ViewHolder {
 
 		TextView mTextView;
 
-		ViewHolder(View itemView) {
+		/**
+		 */
+		@Override
+		public void onCreate(View itemView) {
 			mTextView = (TextView) itemView;
 		}
 
+		/**
+		 *
+		 * @param text
+		 */
 		void setText(CharSequence text) {
 			mTextView.setText(text);
 		}
