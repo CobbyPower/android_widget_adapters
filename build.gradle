@@ -23,7 +23,7 @@ allprojects {
 }
 
 /**
- * Library options ===========================================================
+ * Project options ===========================================================
  */
 ext.versionCode = 110
 ext.versionName = "1.1"

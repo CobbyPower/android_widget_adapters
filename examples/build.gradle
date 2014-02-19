@@ -8,7 +8,7 @@ repositories {
 }
 
 /**
- * Examples dependencies =====================================================
+ * Project dependencies ======================================================
  */
 dependencies {
     compile project(':library')
