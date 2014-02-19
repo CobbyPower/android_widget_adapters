@@ -9,6 +9,7 @@
     <groupId>com.wit.android</groupId>
     <artifactId>widget-adapters</artifactId>
     <version>1.1</version>
+    <packaging>jar</packaging>
 
     <!-- Project dependencies -->
     <dependencies>
@@ -57,9 +58,9 @@
     <!-- Project information -->
     <name>Android Widget Adapters</name>
     <description>
-        Simple android library which simplifies widget adapters implementation.
+        Effective and optimized adapters for Android widgets as ListView and GridView.
     </description>
-    <url>http://android.wolf-itechnologies.com/modules/widget-adapters</url>
+    <url>https://github.com/Wolf-ITechnologies/android_widget_adapters</url>
     <inceptionYear>2013 - 2014</inceptionYear>
     <licenses>
         <license>
@@ -70,13 +71,22 @@
     </licenses>
     <organization>
         <name>Wolf-ITechnologies</name>
-        <url>http://www.wolf-itechnologies.com</url>
+        <url>https://github.com/Wolf-ITechnologies</url>
     </organization>
     <developers>
         <developer>
             <name>Martin Albedinsky</name>
             <email>martin.albedinsky@gmail.com</email>
+            <organization>Wolf-ITechnologies</organization>
+            <roles>
+                <role>Android Developer</role>
+            </roles>
         </developer>
     </developers>
+
+    <!-- Project properties -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 
 </project>
