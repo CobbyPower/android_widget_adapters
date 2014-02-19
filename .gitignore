@@ -2,9 +2,12 @@
 # Local configuration file (sdk path, etc)
 local.properties
 
-# Modules build directories
+# Project build directories
 library/build/
 examples/build/
+
+# Maven generated files
+library/target
 
 # Gradle files
 .gradle
