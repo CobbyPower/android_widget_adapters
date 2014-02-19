@@ -14,7 +14,6 @@ dependencies {
     compile project(':library')
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.wit.android:examples:+@aar'
-    compile fileTree(dir: '../artifacts', include: ['*.jar', '*.aar'])
 }
 
 /**
@@ -27,8 +26,8 @@ android {
     defaultConfig {
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-        versionCode rootProject.libraryVersionCode
-        versionName rootProject.libraryVersionName
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
     }
 
     // Release.

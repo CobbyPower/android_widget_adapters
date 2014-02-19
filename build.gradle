@@ -25,9 +25,8 @@ allprojects {
 /**
  * Library options ===========================================================
  */
-ext.libraryName = "widget-adapters"
-ext.libraryVersionCode = 110
-ext.libraryVersionName = "1.1"
+ext.versionCode = 110
+ext.versionName = "1.1"
 
 /**
  * Android SDK options =======================================================
