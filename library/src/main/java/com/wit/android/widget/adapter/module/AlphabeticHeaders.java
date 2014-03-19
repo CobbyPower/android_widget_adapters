@@ -1,6 +1,6 @@
 /*
  * =================================================================================
- * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
+ * Copyright (C) 2013 -2014 Martin Albedinsky [Wolf-ITechnologies]
  * =================================================================================
  * Licensed under the Apache License, Version 2.0 or later (further "License" only);
  * ---------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ import java.util.List;
  * @param <Adapter>
  * @author Martin Albedinsky
  */
-public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> extends BaseHeadersModule<BaseHeadersModule.SimpleHeader, Adapter> {
+public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> extends HeadersModule<HeadersModule.SimpleHeader, Adapter> {
 
 	/**
 	 * Constants =============================

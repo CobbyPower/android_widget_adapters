@@ -1,6 +1,6 @@
 /*
  * =================================================================================
- * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
+ * Copyright (C) 2013 - 2014 Martin Albedinsky [Wolf-ITechnologies]
  * =================================================================================
  * Licensed under the Apache License, Version 2.0 or later (further "License" only);
  * ---------------------------------------------------------------------------------
@@ -27,7 +27,6 @@ import android.view.ViewGroup;
 /**
  * <h4>Class Overview</h4>
  * <p>
- * TODO:
  * </p>
  *
  * @author Martin Albedinsky
@@ -118,13 +117,13 @@ public class AdapterOptimizer {
 	/**
 	 * <p>
 	 * Performs an optimized algorithm instead of the current optimized adapter's
-	 * {@link android.widget.BaseAdapter#getView(int, View, ViewGroup)}
+	 * {@link android.widget.BaseAdapter#getView(int, android.view.View, android.view.ViewGroup)}
 	 * method.
 	 * </p>
 	 *
 	 * @param position    The position of the item from the current optimized adapter's data set.
 	 * @param convertView The old view to reuse if possible. For more information see
-	 *                    documentation of {@link android.widget.BaseAdapter#getView(int, View, ViewGroup)}.
+	 *                    documentation of {@link android.widget.BaseAdapter#getView(int, android.view.View, android.view.ViewGroup)}.
 	 * @param parent      The parent view, to that will be this view eventually assigned to.
 	 * @return A view corresponding to the item at the specified position in the
 	 * current optimized adapter's data set.

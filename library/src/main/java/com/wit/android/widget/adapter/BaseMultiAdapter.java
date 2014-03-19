@@ -1,6 +1,6 @@
 /*
  * =================================================================================
- * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
+ * Copyright (C) 2013 - 2014 Martin Albedinsky [Wolf-ITechnologies]
  * =================================================================================
  * Licensed under the Apache License, Version 2.0 or later (further "License" only);
  * ---------------------------------------------------------------------------------
@@ -22,6 +22,8 @@ package com.wit.android.widget.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.SparseArray;
 
 import com.wit.android.widget.adapter.module.AdapterModule;
@@ -29,7 +31,6 @@ import com.wit.android.widget.adapter.module.AdapterModule;
 /**
  * <h4>Class Overview</h4>
  * <p>
- * TODO:
  * </p>
  *
  * @param <Adapter> Type of the adapter which extends this base multi-module adapter.
@@ -71,7 +72,7 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	/**
 	 * Manager for adapter's modules.
 	 */
-	private final ModuleManager<Adapter> MODULES_MANAGER = new ModuleManager<Adapter>();
+	private final ModuleManager<Adapter> MODULES_MANAGER = new ModuleManager<>();
 
 	/**
 	 * Listeners -----------------------------
@@ -144,17 +145,30 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	/**
 	 */
 	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		MODULES_MANAGER.dispatchSaveState(outState);
+	protected Parcelable onSaveInstanceState() {
+		final Bundle modulesState = MODULES_MANAGER.dispatchSaveState();
+		// If some of the modules save its state we need to save state of this adapter.
+		if (modulesState != null) {
+			final SavedState savedState = new SavedState(super.onSaveInstanceState());
+			savedState.modulesState = modulesState;
+			return savedState;
+		}
+		return super.onSaveInstanceState();
 	}
 
 	/**
 	 */
 	@Override
-	protected void onRestoreInstanceState(Bundle savedState) {
-		super.onRestoreInstanceState(savedState);
-		MODULES_MANAGER.dispatchRestoreState(savedState);
+	protected void onRestoreInstanceState(Parcelable savedState) {
+		if (!(savedState instanceof SavedState)) {
+			super.onRestoreInstanceState(savedState);
+			return;
+		}
+
+		final SavedState state = (SavedState) savedState;
+		super.onRestoreInstanceState(state.getParentState());
+		// Dispatch to restore modules state.
+		MODULES_MANAGER.dispatchRestoreState(state.modulesState);
 	}
 
 	/**
@@ -172,7 +186,7 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	/**
 	 * <h4>Class Overview</h4>
 	 * <p>
-	 * Manages {@link BaseMultiAdapter} modules.
+	 * Manages {@link com.wit.android.widget.adapter.BaseMultiAdapter} modules.
 	 * </p>
 	 *
 	 * @param <Adapter> Type of the adapter in which is this module manager presented.
@@ -185,20 +199,17 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		 */
 
 		/**
-		 * Arrays --------------------------------
+		 *
 		 */
+		private static final String BUNDLE_MODULE_STATE_KEY_FORMAT = "com.wit.android.widget.adapter.BaseMultiAdapter.BUNDLE.ModuleState.%d";
 
 		/**
 		 * Array with adapter modules.
 		 */
-		private final SparseArray<AdapterModule<Adapter>> aModules = new SparseArray<AdapterModule<Adapter>>();
+		private final SparseArray<AdapterModule<Adapter>> modules = new SparseArray<>();
 
 		/**
 		 * Methods ===============================
-		 */
-
-		/**
-		 * Protected -----------------------------
 		 */
 
 		/**
@@ -213,7 +224,7 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		 * @see #getModule(int)
 		 */
 		protected void addModule(AdapterModule<Adapter> module, int moduleID) {
-			aModules.append(moduleID, module);
+			modules.append(moduleID, module);
 		}
 
 		/**
@@ -226,7 +237,7 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		 * @see #addModule(com.wit.android.widget.adapter.module.AdapterModule, int)
 		 */
 		protected AdapterModule<Adapter> getModule(int moduleID) {
-			return aModules.get(moduleID);
+			return modules.get(moduleID);
 		}
 
 		/**
@@ -237,41 +248,139 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		 * @param moduleID Id of a module to remove.
 		 */
 		protected void removeModule(int moduleID) {
-			aModules.remove(moduleID);
+			modules.remove(moduleID);
 		}
 
 		/**
-		 * <p>
-		 * Called to save state of this manager instance. If the given <var>outState</var>
-		 * is invalid, there will be created a new bundle and {@link #onSaveInstanceState(android.os.Bundle)}
-		 * will be invoked immediately.
-		 * </p>
 		 *
-		 * @param outState Outgoing state in which should this manager instance save its
-		 *                 state.
-		 * @see #onSaveInstanceState(android.os.Bundle)
+		 *
+		 * @return
 		 */
-		protected void dispatchSaveState(Bundle outState) {
-			for (int i = 0; i < aModules.size(); i++) {
-				aModules.get(aModules.keyAt(i)).dispatchSaveInstanceState(outState);
+		Bundle dispatchSaveState() {
+			final int n = modules.size();
+			if (n > 0) {
+				final Bundle states = new Bundle();
+				boolean save = false;
+
+				for (int i = 0; i < n; i++) {
+					int moduleID = modules.keyAt(i);
+					AdapterModule module = modules.get(moduleID);
+					if (module.requiresStateSaving()) {
+						save = true;
+						states.putParcelable(
+								createModuleStateKey(moduleID),
+								module.dispatchSaveInstanceState()
+						);
+					}
+				}
+				return save ? states : null;
+			}
+			return null;
+		}
+
+		/**
+		 *
+		 * @param savedState
+		 */
+		void dispatchRestoreState(Bundle savedState) {
+			if (savedState != null) {
+				final int n = modules.size();
+				if (n > 0) {
+					for (int i = 0; i < n; i++) {
+						int moduleID = modules.keyAt(i);
+						String key = createModuleStateKey(moduleID);
+						if (savedState.containsKey(key)) {
+							AdapterModule module = modules.get(moduleID);
+							module.dispatchRestoreInstanceState(
+									savedState.getParcelable(key)
+							);
+						}
+					}
+				}
 			}
 		}
 
 		/**
-		 * <p>
-		 * Called to restore state of this manager instance. If the given <var>savedState</var>
-		 * is valid, {@link #onRestoreInstanceState(android.os.Bundle)} will be invoked
-		 * immediately.
-		 * </p>
 		 *
-		 * @param savedState Should be the bundle with saved state in
-		 *                   {@link #onSaveInstanceState(android.os.Bundle)}.
-		 * @see #onRestoreInstanceState(android.os.Bundle)
+		 * @param moduleID
+		 * @return
 		 */
-		protected void dispatchRestoreState(Bundle savedState) {
-			for (int i = 0; i < aModules.size(); i++) {
-				aModules.get(aModules.keyAt(i)).dispatchRestoreInstanceState(savedState);
+		String createModuleStateKey(int moduleID) {
+			return String.format(BUNDLE_MODULE_STATE_KEY_FORMAT, moduleID);
+		}
+	}
+
+	/**
+	 * <h4>Class Overview</h4>
+	 * <p>
+	 * </p>
+	 *
+	 * @author Martin Albedinsky
+	 */
+	public static class SavedState extends BaseSavedState {
+
+		/**
+		 * Members ===============================
+		 */
+
+		/**
+		 * <p>
+		 * </p>
+		 */
+		@SuppressWarnings("hiding")
+		public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {
+
+			/**
+			 */
+			@Override
+			public SavedState createFromParcel(Parcel source) {
+				return new SavedState(source);
 			}
+
+			/**
+			 */
+			@Override
+			public SavedState[] newArray(int size) {
+				return new SavedState[size];
+			}
+		};
+
+		/**
+		 *
+		 */
+		private Bundle modulesState = null;
+
+		/**
+		 * Constructors ==========================
+		 */
+
+		/**
+		 * <p>
+		 * </p>
+		 */
+		public SavedState(Parcelable superState) {
+			super(superState);
+		}
+
+		/**
+		 *
+		 * @param source
+		 */
+		private SavedState(Parcel source) {
+			super(source);
+			this.modulesState = source.readBundle();
+		}
+
+		/**
+		 * Methods ===============================
+		 */
+
+		/**
+		 */
+		@Override
+		public void writeToParcel(Parcel dest, int flags) {
+			super.writeToParcel(dest, flags);
+			dest.writeBundle(modulesState);
 		}
 	}
 

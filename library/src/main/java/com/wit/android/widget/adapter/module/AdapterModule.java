@@ -1,6 +1,6 @@
 /*
  * =================================================================================
- * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
+ * Copyright (C) 2013 -2014 Martin Albedinsky [Wolf-ITechnologies]
  * =================================================================================
  * Licensed under the Apache License, Version 2.0 or later (further "License" only);
  * ---------------------------------------------------------------------------------
@@ -20,12 +20,12 @@
  */
 package com.wit.android.widget.adapter.module;
 
-import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * <h4>Class Overview</h4>
  * <p>
- *  TODO:
  * </p>
  *
  * @param <Adapter> Type of the adapter for which can be this module created and used.
@@ -101,34 +101,21 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 
 	/**
 	 * <p>
-	 * Called to save state of this adapter module instance. If the given <var>outState</var>
-	 * is invalid, there will be created a new bundle and {@link #onSaveInstanceState(android.os.Bundle)}
-	 * will be invoked immediately.
 	 * </p>
 	 *
-	 * @param outState Outgoing state in which should this adapter module instance save its
-	 *                 state.
-	 * @see #onSaveInstanceState(android.os.Bundle)
+	 * @return
 	 */
-	public void dispatchSaveInstanceState(Bundle outState) {
-		if (outState == null) {
-			outState = new Bundle();
-		}
-		onSaveInstanceState(outState);
+	public Parcelable dispatchSaveInstanceState() {
+		return onSaveInstanceState();
 	}
 
 	/**
 	 * <p>
-	 * Called to restore state of this adapter module instance. If the given <var>savedState</var>
-	 * is valid, {@link #onRestoreInstanceState(android.os.Bundle)} will be invoked
-	 * immediately.
 	 * </p>
 	 *
-	 * @param savedState Should be the bundle with saved state in
-	 *                   {@link #onSaveInstanceState(android.os.Bundle)}.
-	 * @see #onRestoreInstanceState(android.os.Bundle)
+	 * @param savedState
 	 */
-	public void dispatchRestoreInstanceState(Bundle savedState) {
+	public void dispatchRestoreInstanceState(Parcelable savedState) {
 		if (savedState != null) {
 			onRestoreInstanceState(savedState);
 		}
@@ -143,6 +130,16 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 */
 	public final void dispatchAttachToAdapter(Adapter adapter) {
 		onAttachedToAdapter(mAdapter = adapter);
+	}
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @return
+	 */
+	public boolean requiresStateSaving() {
+		return false;
 	}
 
 	/**
@@ -183,27 +180,22 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 
 	/**
 	 * <p>
-	 * Invoked to save state of this adapter module instance. This is invoked whenever
-	 * {@link #dispatchSaveInstanceState(android.os.Bundle)} is called.
 	 * </p>
 	 *
-	 * @param outState Outgoing state. Always valid bundle.
-	 * @see #onRestoreInstanceState(android.os.Bundle)
+	 * @return
 	 */
-	protected void onSaveInstanceState(Bundle outState) {
+	protected Parcelable onSaveInstanceState() {
+		// TODO: return empty state
+		return null;
 	}
 
 	/**
 	 * <p>
-	 * Invoked to restore state of this adapter module instance. Note, that this is invoked
-	 * only in case that the bundle passed to {@link #dispatchRestoreInstanceState(android.os.Bundle)}
-	 * is valid.
 	 * </p>
 	 *
-	 * @param savedState Bundle with saved data populated in the
-	 *                   {@link #onSaveInstanceState(Bundle)}. Always valid bundle.
+	 * @param savedState
 	 */
-	protected void onRestoreInstanceState(Bundle savedState) {
+	protected void onRestoreInstanceState(Parcelable savedState) {
 	}
 
 	/**
@@ -254,6 +246,107 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	/**
 	 * Inner classes =========================
 	 */
+
+	/**
+	 * <h4>Class Overview</h4>
+	 * <p>
+	 * </p>
+	 *
+	 * @author Martin Albedinsky
+	 */
+	public static class BaseSavedState implements Parcelable {
+
+		/**
+		 * Members ===============================
+		 */
+
+		/**
+		 * <p>
+		 * </p>
+		 */
+		public static final Creator<BaseSavedState> CREATOR = new Creator<BaseSavedState>() {
+
+			/**
+			 */
+			@Override
+			public BaseSavedState createFromParcel(Parcel source) {
+				return new BaseSavedState(source);
+			}
+
+			/**
+			 */
+			@Override
+			public BaseSavedState[] newArray(int size) {
+				return new BaseSavedState[size];
+			}
+		};
+
+		/**
+		 *
+		 */
+		private Parcelable parentState;
+
+		/**
+		 * Constructors ==========================
+		 */
+
+		/**
+		 * <p>
+		 * </p>
+		 */
+		protected BaseSavedState() {
+			this((Parcelable) null);
+		}
+
+		/**
+		 * <p>
+		 * </p>
+		 *
+		 * @param source
+		 */
+		protected BaseSavedState(Parcel source) {
+			// FIXME: use correct class loader
+			this.parentState = source.readParcelable(null);
+		}
+
+		/**
+		 * <p>
+		 * </p>
+		 *
+		 * @param parentState
+		 */
+		protected BaseSavedState(Parcelable parentState) {
+			this.parentState = parentState;
+		}
+
+		/**
+		 * Methods ===============================
+		 */
+
+		/**
+		 */
+		@Override
+		public int describeContents() {
+			return 0;
+		}
+
+		/**
+		 */
+		@Override
+		public void writeToParcel(Parcel dest, int flags) {
+			dest.writeParcelable(parentState, flags);
+		}
+
+		/**
+		 * <p>
+		 * </p>
+		 *
+		 * @return
+		 */
+		public Parcelable getParentState() {
+			return parentState;
+		}
+	}
 
 	/**
 	 * Interface =============================

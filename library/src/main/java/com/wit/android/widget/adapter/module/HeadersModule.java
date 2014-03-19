@@ -1,6 +1,6 @@
 /*
  * =================================================================================
- * Copyright (C) 2013 Martin Albedinsky [Wolf-ITechnologies]
+ * Copyright (C) 2013 -2014 Martin Albedinsky [Wolf-ITechnologies]
  * =================================================================================
  * Licensed under the Apache License, Version 2.0 or later (further "License" only);
  * ---------------------------------------------------------------------------------
@@ -43,7 +43,7 @@ import java.util.List;
  *
  * @author Martin Albedinsky
  */
-public abstract class BaseHeadersModule<H extends BaseHeadersModule.Header, Adapter extends AdapterModule.ModuleAdapter> extends AdapterModule<Adapter> {
+public abstract class HeadersModule<H extends HeadersModule.Header, Adapter extends AdapterModule.ModuleAdapter> extends AdapterModule<Adapter> {
 
 	/**
 	 * Constants =============================
@@ -52,7 +52,7 @@ public abstract class BaseHeadersModule<H extends BaseHeadersModule.Header, Adap
 	/**
 	 * Log TAG.
 	 */
-	private static final String TAG = BaseHeadersModule.class.getSimpleName();
+	private static final String TAG = HeadersModule.class.getSimpleName();
 
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
@@ -92,7 +92,7 @@ public abstract class BaseHeadersModule<H extends BaseHeadersModule.Header, Adap
 	/**
 	 * Array of headers managed by this module.
 	 */
-	private final SparseArray<H> HEADERS = new SparseArray<H>();
+	private final SparseArray<H> HEADERS = new SparseArray<>();
 
 	/**
 	 * Booleans ------------------------------
@@ -197,7 +197,7 @@ public abstract class BaseHeadersModule<H extends BaseHeadersModule.Header, Adap
 	 */
 	public void bindHeaderView(int position, Object headerHolder) {
 		if (headerHolder instanceof HeaderHolder) {
-			BaseHeadersModule.Header header = getHeader(position);
+			Header header = getHeader(position);
 			if (header != null) {
 				((HeaderHolder) headerHolder).setText(header.getText());
 			} else {
@@ -429,7 +429,7 @@ public abstract class BaseHeadersModule<H extends BaseHeadersModule.Header, Adap
 	/**
 	 * <h4>Interface Overview</h4>
 	 * <p>
-	 * Simple implementation of {@link com.wit.android.widget.adapter.module.BaseHeadersModule.Header header}
+	 * Simple implementation of {@link HeadersModule.Header header}
 	 * item.
 	 * </p>
 	 *
@@ -480,7 +480,7 @@ public abstract class BaseHeadersModule<H extends BaseHeadersModule.Header, Adap
 	/**
 	 * <h4>Interface Overview</h4>
 	 * <p>
-	 * Required interface for header item used by {@link com.wit.android.widget.adapter.module.BaseHeadersModule} module.
+	 * Required interface for header item used by {@link HeadersModule} module.
 	 * </p>
 	 *
 	 * @author Martin Albedinsky

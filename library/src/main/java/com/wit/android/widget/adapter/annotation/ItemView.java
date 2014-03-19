@@ -20,8 +20,6 @@
  */
 package com.wit.android.widget.adapter.annotation;
 
-import android.view.View;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -37,7 +35,7 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AdapterItemHolder {
+public @interface ItemView {
 
 	/**
 	 * Constants =============================
@@ -52,32 +50,5 @@ public @interface AdapterItemHolder {
 	 *
 	 * @return
 	 */
-	Class<? extends ViewHolder> value();
-
-	/**
-	 * Interface =============================
-	 */
-
-	/**
-	 * <h4>Interface Overview</h4>
-	 * <p>
-	 * Description.
-	 * </p>
-	 *
-	 * @author Martin Albedinsky
-	 */
-	public static interface ViewHolder {
-
-		/**
-		 * Methods ===============================
-		 */
-
-		/**
-		 * <p>
-		 * </p>
-		 *
-		 * @param itemView
-		 */
-		public void onCreate(View itemView);
-	}
+	int value();
 }
