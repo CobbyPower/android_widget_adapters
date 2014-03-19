@@ -4,7 +4,6 @@ local.properties
 
 # Project build directories
 library/build/
-examples/build/
 
 # Maven generated files
 library/target

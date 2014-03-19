@@ -1,11 +1,11 @@
 apply plugin: 'android-library'
 
 /**
- * Library dependencies ======================================================
+ * Library dependencies ============================================================================
  */
 
 /**
- * Android Library options ===================================================
+ * Android Library options =========================================================================
  */
 android {
     compileSdkVersion rootProject.compileSdkVersion
@@ -15,5 +15,10 @@ android {
         minSdkVersion rootProject.minSdkVersion
         versionCode rootProject.versionCode
         versionName rootProject.versionName
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
     }
 }
