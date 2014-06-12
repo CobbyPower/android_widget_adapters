@@ -264,7 +264,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter {
 	 */
 	protected View onCreateDropDownView(int position, LayoutInflater inflater, ViewGroup parent) {
 		if (mDropDownView >= 0) {
-			return inflate(mDropDownView);
+			return inflate(mDropDownView, parent);
 		}
 		return onCreateView(position, inflater, parent);
 	}

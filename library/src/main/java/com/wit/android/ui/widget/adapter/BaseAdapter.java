@@ -56,10 +56,10 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 	 */
 	// private static final boolean DEBUG_ENABLED = true;
 
-    /**
-     * Flag indicating whether the output for user trough log-cat is enabled or not.
-     */
-    // private static final boolean USER_LOG = true;
+	/**
+	 * Flag indicating whether the output for user trough log-cat is enabled or not.
+	 */
+	// private static final boolean USER_LOG = true;
 
 	/**
 	 * Flag indicating whether the output for user trough log-cat is enabled or not.
@@ -407,7 +407,7 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 	 */
 	protected View onCreateView(int position, LayoutInflater inflater, ViewGroup parent) {
 		if (mItemView >= 0) {
-			return inflate(mItemView);
+			return inflate(mItemView, parent);
 		}
 		throw new IllegalStateException("Can't create view without resource id. Don't you forget to specify it?");
 	}
@@ -457,11 +457,12 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 	 * </p>
 	 *
 	 * @param resource Resource id of a view to inflate.
+	 * @param parent
 	 * @return The root view of the inflated view hierarchy.
 	 * @see android.view.LayoutInflater#inflate(int, android.view.ViewGroup)
 	 */
-	protected final View inflate(int resource) {
-		return mLayoutInflater.inflate(resource, null);
+	protected final View inflate(int resource, ViewGroup parent) {
+		return mLayoutInflater.inflate(resource, parent, false);
 	}
 
 	/**
