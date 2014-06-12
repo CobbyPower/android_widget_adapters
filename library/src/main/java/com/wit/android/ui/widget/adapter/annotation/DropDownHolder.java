@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  * =================================================================================================
  */
-package com.wit.android.widget.adapter.annotation;
+package com.wit.android.ui.widget.adapter.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -36,11 +36,11 @@ import java.lang.annotation.Target;
 public @interface DropDownHolder {
 
 	/**
-	 * Constants =============================
+	 * Constants ===================================================================================
 	 */
 
 	/**
-	 * Methods ===============================
+	 * Methods =====================================================================================
 	 */
 
 	/**
@@ -49,8 +49,4 @@ public @interface DropDownHolder {
 	 * @return
 	 */
 	Class<? extends ItemHolder.ViewHolder> value();
-
-	/**
-	 * Interface =============================
-	 */
 }

@@ -16,18 +16,19 @@
  * See the License for the specific language governing permissions and limitations under the License.
  * =================================================================================================
  */
-package com.wit.android.widget.adapter;
+package com.wit.android.ui.widget.adapter;
 
 import android.content.Context;
 import android.content.res.Resources;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.view.AbsSavedState;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wit.android.widget.adapter.annotation.ItemHolder;
-import com.wit.android.widget.adapter.annotation.ItemView;
+import com.wit.android.ui.widget.adapter.annotation.ItemHolder;
+import com.wit.android.ui.widget.adapter.annotation.ItemView;
 
 /**
  * <h4>Class Overview</h4>
@@ -35,14 +36,14 @@ import com.wit.android.widget.adapter.annotation.ItemView;
  * </p>
  *
  * @author Martin Albedinsky
- * @see com.wit.android.widget.adapter.annotation.ItemHolder
- * @see com.wit.android.widget.adapter.annotation.ItemView
- * @see BaseSpinnerAdapter
+ * @see com.wit.android.ui.widget.adapter.annotation.ItemHolder
+ * @see com.wit.android.ui.widget.adapter.annotation.ItemView
+ * @see com.wit.android.ui.widget.adapter.BaseSpinnerAdapter
  */
-public abstract class BaseAdapter extends android.widget.BaseAdapter implements AdapterOptimizer.OptimizedAdapter {
+public abstract class BaseAdapter extends android.widget.BaseAdapter implements StateAdapter {
 
 	/**
-	 * Constants =============================
+	 * Constants ===================================================================================
 	 */
 
 	/**
@@ -53,7 +54,12 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
 	 */
-	// private static final boolean DEBUG = true;
+	// private static final boolean DEBUG_ENABLED = true;
+
+    /**
+     * Flag indicating whether the output for user trough log-cat is enabled or not.
+     */
+    // private static final boolean USER_LOG = true;
 
 	/**
 	 * Flag indicating whether the output for user trough log-cat is enabled or not.
@@ -61,21 +67,16 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 	// private static final boolean USER_LOG = true;
 
 	/**
-	 * Enums =================================
+	 * Enums =======================================================================================
 	 */
 
 	/**
-	 * Static members ========================
+	 * Static members ==============================================================================
 	 */
 
 	/**
-	 * Members ===============================
+	 * Members =====================================================================================
 	 */
-
-	/**
-	 * Optimization manager for getView() method.
-	 */
-	private final AdapterOptimizer OPTIMIZER = new AdapterOptimizer(this);
 
 	/**
 	 * Context in which will be this adapter used.
@@ -83,14 +84,20 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 	protected final Context mContext;
 
 	/**
-	 * Layout inflater from the passed context.
+	 * Layout inflater from the passed mContext.
 	 */
 	protected final LayoutInflater mLayoutInflater;
 
 	/**
-	 * Application resources from the passed context.
+	 * Application resources from the passed mContext.
 	 */
 	protected final Resources mResources;
+
+	/**
+	 * Item view type for the current {@link #getView(int, android.view.View, android.view.ViewGroup)}
+	 * iteration.
+	 */
+	private int mCurrentItemViewType = -1;
 
 	/**
 	 *
@@ -103,44 +110,34 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 	private Class<? extends ItemHolder.ViewHolder> mClassOfHolder = null;
 
 	/**
-	 * Listeners -----------------------------
-	 */
-
-	/**
 	 *
 	 */
 	private OnDataSetListener lDataSetListener = null;
 
 	/**
-	 * Arrays --------------------------------
+	 * Arrays --------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Booleans ------------------------------
+	 * Booleans ------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Constructors ==========================
+	 * Constructors ================================================================================
 	 */
 
 	/**
 	 * <p>
-	 * Creates new instance of optimized simple BaseAdapter.
-	 * </p>
-	 */
-	public BaseAdapter() {
-		this(null);
-	}
-
-	/**
-	 * <p>
-	 * Creates new instance of optimized BaseAdapter with the given
-	 * context.
+	 * Creates new instance of optimized BaseAdapter with the given mContext.
 	 * </p>
 	 *
 	 * @param context Context in which will be this adapter used.
 	 */
 	public BaseAdapter(Context context) {
+		if (context == null) {
+			throw new NullPointerException("Invalid mContext.");
+		}
+
 		final Class<?> classOfAdapter = ((Object) this).getClass();
 		/**
 		 * Process class annotations.
@@ -155,39 +152,29 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 		}
 
 		// Set up.
-		if (context != null) {
-			this.mContext = context;
-			this.mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-			this.mResources = context.getResources();
-		} else {
-			this.mContext = null;
-			this.mLayoutInflater = null;
-			this.mResources = null;
-		}
+		this.mContext = context;
+		this.mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		this.mResources = context.getResources();
 	}
 
 	/**
-	 * Methods ===============================
+	 * Methods =====================================================================================
 	 */
 
 	/**
-	 * Public --------------------------------
+	 * Public --------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 *
-	 * @return
 	 */
+	@Override
 	public Parcelable dispatchSaveInstanceState() {
 		return onSaveInstanceState();
 	}
 
 	/**
-	 * <p>
-	 * </p>
-	 *
-	 * @param savedState
 	 */
+	@Override
 	public void dispatchRestoreInstanceState(Parcelable savedState) {
 		if (savedState != null) {
 			onRestoreInstanceState(savedState);
@@ -223,49 +210,35 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		return OPTIMIZER.performOptimizedGetView(position, convertView, parent);
-	}
-
-	/**
-	 */
-	@Override
-	public View onCreateView(int position, LayoutInflater inflater, ViewGroup parent) {
-		if (mItemView >= 0) {
-			return inflate(mItemView);
-		}
-		throw new IllegalStateException("Can't create view without resource id. Don't you forget to specify it?");
-	}
-
-	/**
-	 */
-	@Override
-	public Object onCreateViewHolder(int position, View itemView) {
-		if (mClassOfHolder != null) {
-			ItemHolder.ViewHolder holder = null;
-			try {
-				holder = mClassOfHolder.newInstance();
-			} catch (InstantiationException | IllegalAccessException e) {
-				throw new IllegalStateException("Failed to create holder from class '" + mClassOfHolder + "'. Check if this holder class is public and has public empty constructor.");
-			} finally {
-				if (holder != null) {
-					holder.onCreate(itemView);
-				}
+		Object viewHolder;
+		// Obtain current item view type.
+		this.mCurrentItemViewType = getItemViewType(position);
+		if (convertView == null) {
+			// Dispatch to create new view.
+			convertView = onCreateView(position, mLayoutInflater, parent);
+			if (convertView == null) {
+				throw new NullPointerException("Convert view at position(" + position + ") can't be NULL.");
 			}
-			return holder;
+			// Set holder to the new view.
+			convertView.setTag(viewHolder = onCreateViewHolder(position, convertView));
+		} else {
+			viewHolder = convertView.getTag();
 		}
-		throw new IllegalStateException("Can't create view holder without class of holder. Don't you forget to specify it?");
+		// Dispatch to bind view with data.
+		onBindView(position, viewHolder);
+		return convertView;
 	}
 
 	/**
-	 * Getters + Setters ---------------------
+	 * Getters + Setters ---------------------------------------------------------------------------
 	 */
 
 	/**
 	 * <p>
-	 * Returns the context with which was this adapter created.
+	 * Returns the mContext with which was this adapter created.
 	 * </p>
 	 *
-	 * @return Same context as in initialization.
+	 * @return Same mContext as in initialization.
 	 */
 	public Context getContext() {
 		return mContext;
@@ -273,12 +246,12 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 
 	/**
 	 * <p>
-	 * Returns layout inflater instance provided by the context passed
+	 * Returns layout inflater instance provided by the mContext passed
 	 * during initialization of this adapter.
 	 * </p>
 	 * <p>
 	 * <b>Note</b>, that LayoutInflater is provided only in case, when this
-	 * adapter was created with a valid context.
+	 * adapter was created with a valid mContext.
 	 * </p>
 	 *
 	 * @return Layout inflater instance.
@@ -289,12 +262,12 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 
 	/**
 	 * <p>
-	 * Returns an application's resources provided by the context
+	 * Returns an application's resources provided by the mContext
 	 * passed during initialization of this adapter.
 	 * </p>
 	 * <p>
 	 * <b>Note</b>, that Resources are provided only in case, when this
-	 * adapter was created with a valid context.
+	 * adapter was created with a valid mContext.
 	 * </p>
 	 *
 	 * @return An application's resources.
@@ -415,8 +388,57 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 	}
 
 	/**
-	 * Protected -----------------------------
+	 * Protected -----------------------------------------------------------------------------------
 	 */
+
+	/**
+	 * <p>
+	 * Invoked to create a view for the item from this optimized adapter's data set
+	 * at the specified position. This is invoked only if the <var>convertView</var> for
+	 * {@link android.widget.BaseAdapter#getView(int, android.view.View, android.view.ViewGroup)}
+	 * is <code>NULL</code>. You can use the given inflater to inflate requested view or you can
+	 * create it manually.
+	 * </p>
+	 *
+	 * @param position The position of the item from this optimized adapter's data set.
+	 * @param inflater Layout inflater provided by {@link #getLayoutInflater()}.
+	 * @param parent   The parent view, to that will be this view eventually assigned to.
+	 * @return Created item view.
+	 */
+	protected View onCreateView(int position, LayoutInflater inflater, ViewGroup parent) {
+		if (mItemView >= 0) {
+			return inflate(mItemView);
+		}
+		throw new IllegalStateException("Can't create view without resource id. Don't you forget to specify it?");
+	}
+
+	/**
+	 * <p>
+	 * Invoked to create view holder for the actually created item view.
+	 * </p>
+	 *
+	 * @param position The position of the item from this optimized adapter's data set.
+	 * @param itemView Same type of view as provided by
+	 *                 {@link #onCreateView(int, android.view.LayoutInflater, android.view.ViewGroup)}
+	 *                 at the specified position.
+	 * @return Created holder for the given <var>itemView</var>.
+	 */
+	public Object onCreateViewHolder(int position, View itemView) {
+		if (mClassOfHolder != null) {
+			ItemHolder.ViewHolder holder = null;
+			try {
+				holder = mClassOfHolder.newInstance();
+			} catch (InstantiationException | IllegalAccessException e) {
+				throw new IllegalStateException("Failed to create holder from class '" + mClassOfHolder + "'. Check if this holder class is public and has public empty constructor.");
+			} finally {
+				if (holder != null) {
+					holder.onCreate(itemView);
+				}
+			}
+			return holder;
+		}
+		throw new IllegalStateException("Can't create view holder without class of holder. Don't you forget to specify it?");
+	}
 
 	/**
 	 * <p>
@@ -424,10 +446,9 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 	 * </p>
 	 *
 	 * @return View type.
-	 * @see AdapterOptimizer#getCurrentItemViewType()
 	 */
 	protected int currentItemViewType() {
-		return OPTIMIZER.getCurrentItemViewType();
+		return mCurrentItemViewType;
 	}
 
 	/**
@@ -463,15 +484,30 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 	}
 
 	/**
-	 * Private -------------------------------
+	 * Private -------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Abstract methods ----------------------
+	 * Abstract methods ----------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Inner classes =========================
+	 * <p>
+	 * Invoked to set up and populate a view for an item from this optimized adapter's data set
+	 * at the specified <var>position</var>. This is invoked whenever
+	 * {@link android.widget.BaseAdapter#getView(int, android.view.View, android.view.ViewGroup)}
+	 * on this adapter is called.
+	 * </p>
+	 *
+	 * @param position   The position of item within this optimized adapter's data set.
+	 * @param viewHolder Same type of holder as provided by
+	 *                   {@link #onCreateViewHolder(int, android.view.View)} for the specified
+	 *                   position.
+	 */
+	protected abstract void onBindView(int position, Object viewHolder);
+
+	/**
+	 * Inner classes ===============================================================================
 	 */
 
 	/**
@@ -481,10 +517,10 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 	 *
 	 * @author Martin Albedinsky
 	 */
-	public static class BaseSavedState implements Parcelable {
+	public static class BaseSavedState extends AbsSavedState {
 
 		/**
-		 * Members ===============================
+		 * Members =================================================================================
 		 */
 
 		/**
@@ -509,26 +545,8 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 		};
 
 		/**
-		 *
+		 * Constructors ============================================================================
 		 */
-		private static final BaseSavedState EMPTY_STATE = new BaseSavedState();
-
-		/**
-		 *
-		 */
-		private Parcelable parentState;
-
-		/**
-		 * Constructors ==========================
-		 */
-
-		/**
-		 * <p>
-		 * </p>
-		 */
-		protected BaseSavedState() {
-			this((Parcelable) null);
-		}
 
 		/**
 		 * <p>
@@ -537,8 +555,7 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 		 * @param source
 		 */
 		protected BaseSavedState(Parcel source) {
-			// FIXME: use correct class loader
-			this.parentState = source.readParcelable(null);
+			super(source);
 		}
 
 		/**
@@ -548,40 +565,12 @@ public abstract class BaseAdapter extends android.widget.BaseAdapter implements 
 		 * @param parentState
 		 */
 		protected BaseSavedState(Parcelable parentState) {
-			this.parentState = parentState;
-		}
-
-		/**
-		 * Methods ===============================
-		 */
-
-		/**
-		 */
-		@Override
-		public int describeContents() {
-			return 0;
-		}
-
-		/**
-		 */
-		@Override
-		public void writeToParcel(Parcel dest, int flags) {
-			dest.writeParcelable(parentState, flags);
-		}
-
-		/**
-		 * <p>
-		 * </p>
-		 *
-		 * @return
-		 */
-		public Parcelable getParentState() {
-			return parentState;
+			super(parentState);
 		}
 	}
 
 	/**
-	 * Interface =============================
+	 * Interface ===================================================================================
 	 */
 
 	/**

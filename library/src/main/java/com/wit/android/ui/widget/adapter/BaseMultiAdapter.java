@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  * =================================================================================================
  */
-package com.wit.android.widget.adapter;
+package com.wit.android.ui.widget.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -24,20 +24,19 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.SparseArray;
 
-import com.wit.android.widget.adapter.module.AdapterModule;
+import com.wit.android.ui.widget.adapter.module.AdapterModule;
 
 /**
  * <h4>Class Overview</h4>
  * <p>
  * </p>
  *
- * @param <Adapter> Type of the adapter which extends this base multi-module adapter.
- *
  * @author Martin Albedinsky
  */
-public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapter> extends BaseAdapter implements MultiAdapter<Adapter>, AdapterModule.ModuleAdapter {
+public abstract class BaseMultiAdapter extends BaseAdapter implements AdapterModule.ModuleAdapter {
+
 	/**
-	 * Constants =============================
+	 * Constants ===================================================================================
 	 */
 
 	/**
@@ -48,96 +47,105 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
 	 */
-	// private static final boolean DEBUG = true;
+	// private static final boolean DEBUG_ENABLED = true;
 
 	/**
-	 * Flag indicating whether the output for user trough log-cat is enabled or not.
+	 * Flag indicating whether the output trough log-cat is enabled or not.
 	 */
-	// private static final boolean USER_LOG = true;
+	// private static final boolean LOG_ENABLED = true;
 
 	/**
-	 * Enums =================================
-	 */
-
-	/**
-	 * Static members ========================
+	 * Enums =======================================================================================
 	 */
 
 	/**
-	 * Members ===============================
+	 * Static members ==============================================================================
+	 */
+
+	/**
+	 * Members =====================================================================================
 	 */
 
 	/**
 	 * Manager for adapter's modules.
 	 */
-	private final ModuleManager<Adapter> MODULES_MANAGER = new ModuleManager<>();
+	private final ModuleManager MODULES_MANAGER = new ModuleManager();
 
 	/**
-	 * Listeners -----------------------------
+	 * Arrays --------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Arrays --------------------------------
+	 * Booleans ------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Booleans ------------------------------
-	 */
-
-	/**
-	 * Constructors ==========================
+	 * Constructors ================================================================================
 	 */
 
 	/**
 	 * <p>
-	 * Crates new instance of BaseMultiAdapter with the given context.
+	 * Crates a new instance of BaseMultiAdapter with the given context.
 	 * </p>
 	 *
 	 * @param context Context in which will be this adapter used.
-	 * @see com.wit.android.widget.adapter.BaseAdapter#BaseAdapter(android.content.Context)
 	 */
 	public BaseMultiAdapter(Context context) {
 		super(context);
 	}
 
 	/**
-	 * Methods ===============================
+	 * Methods =====================================================================================
 	 */
 
 	/**
-	 * Public --------------------------------
+	 * Public --------------------------------------------------------------------------------------
 	 */
 
 	/**
+	 * <p>
+	 * Assigns the given <var>module</var> to this adapter.
+	 * </p>
+	 *
+	 * @param module   An adapter module to assign.
+	 * @param moduleId Id by which can be the given module obtained from this adapter.
+	 * @see #obtainModule(int)
 	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public void assignModule(AdapterModule<Adapter> module, int moduleID) {
-		module.dispatchAttachToAdapter((Adapter) this);
-		MODULES_MANAGER.addModule(module, moduleID);
+	public void assignModule(AdapterModule module, int moduleId) {
+		module.dispatchAttachToAdapter(this);
+		MODULES_MANAGER.addModule(module, moduleId);
 	}
 
 	/**
+	 * <p>
+	 * Returns an adapter module assigned to this adapter.
+	 * </p>
+	 *
+	 * @param moduleId Id of an adapter module to obtain.
+	 * @return The adapter module which is represented by the given <var>moduleID</var>.
+	 * @see #assignModule(com.wit.android.ui.widget.adapter.module.AdapterModule, int)
 	 */
-	@Override
-	@SuppressWarnings("unchecked")
-	public <M> M obtainModule(int moduleID) {
-		return (M) MODULES_MANAGER.getModule(moduleID);
+	public AdapterModule obtainModule(int moduleId) {
+		return MODULES_MANAGER.getModule(moduleId);
 	}
 
 	/**
+	 * <p>
+	 * Removes an adapter module assigned to this adapter.
+	 * </p>
+	 *
+	 * @param moduleID Id of an adapter module to remove.
 	 */
-	@Override
 	public void removeModule(int moduleID) {
 		MODULES_MANAGER.removeModule(moduleID);
 	}
 
 	/**
-	 * Getters + Setters ---------------------
+	 * Getters + Setters ---------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Protected -----------------------------
+	 * Protected -----------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -164,50 +172,49 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		}
 
 		final SavedState state = (SavedState) savedState;
-		super.onRestoreInstanceState(state.getParentState());
+		super.onRestoreInstanceState(state.getSuperState());
 		// Dispatch to restore modules state.
 		MODULES_MANAGER.dispatchRestoreState(state.modulesState);
 	}
 
 	/**
-	 * Private -------------------------------
+	 * Private -------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Abstract methods ----------------------
+	 * Abstract methods ----------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Inner classes =========================
+	 * Inner classes ===============================================================================
 	 */
 
 	/**
 	 * <h4>Class Overview</h4>
 	 * <p>
-	 * Manages {@link com.wit.android.widget.adapter.BaseMultiAdapter} modules.
+	 * Manages {@link com.wit.android.ui.widget.adapter.BaseMultiAdapter} modules.
 	 * </p>
 	 *
-	 * @param <Adapter> Type of the adapter in which is this module manager presented.
 	 * @author Martin Albedinsky
 	 */
-	protected static class ModuleManager<Adapter extends AdapterModule.ModuleAdapter> {
+	protected static class ModuleManager {
 
 		/**
-		 * Members ===============================
+		 * Members =================================================================================
 		 */
 
 		/**
 		 *
 		 */
-		private static final String BUNDLE_MODULE_STATE_KEY_FORMAT = "com.wit.android.widget.adapter.BaseMultiAdapter.BUNDLE.ModuleState.%d";
+		private static final String BUNDLE_MODULE_STATE_KEY_FORMAT = "com.wit.android.ui.widget.adapter.BaseMultiAdapter.BUNDLE.ModuleState.%d";
 
 		/**
 		 * Array with adapter modules.
 		 */
-		private final SparseArray<AdapterModule<Adapter>> modules = new SparseArray<>();
+		private final SparseArray<AdapterModule> modules = new SparseArray<>();
 
 		/**
-		 * Methods ===============================
+		 * Methods =================================================================================
 		 */
 
 		/**
@@ -221,7 +228,7 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		 * @param moduleID Id by which can be the given module obtained from this manager.
 		 * @see #getModule(int)
 		 */
-		protected void addModule(AdapterModule<Adapter> module, int moduleID) {
+		protected void addModule(AdapterModule module, int moduleID) {
 			modules.append(moduleID, module);
 		}
 
@@ -232,9 +239,9 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		 *
 		 * @param moduleID Id of a module to obtain.
 		 * @return The module which is represented by the given <var>moduleID</var>.
-		 * @see #addModule(com.wit.android.widget.adapter.module.AdapterModule, int)
+		 * @see #addModule(com.wit.android.ui.widget.adapter.module.AdapterModule, int)
 		 */
-		protected AdapterModule<Adapter> getModule(int moduleID) {
+		protected AdapterModule getModule(int moduleID) {
 			return modules.get(moduleID);
 		}
 
@@ -243,10 +250,10 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		 * Removes a module from the current modules set of this manager.
 		 * </p>
 		 *
-		 * @param moduleID Id of a module to remove.
+		 * @param moduleId Id of a module to remove.
 		 */
-		protected void removeModule(int moduleID) {
-			modules.remove(moduleID);
+		protected void removeModule(int moduleId) {
+			modules.remove(moduleId);
 		}
 
 		/**
@@ -261,12 +268,12 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 				boolean save = false;
 
 				for (int i = 0; i < n; i++) {
-					int moduleID = modules.keyAt(i);
-					AdapterModule module = modules.get(moduleID);
+					int moduleId = modules.keyAt(i);
+					AdapterModule module = modules.get(moduleId);
 					if (module.requiresStateSaving()) {
 						save = true;
 						states.putParcelable(
-								createModuleStateKey(moduleID),
+								createModuleStateKey(moduleId),
 								module.dispatchSaveInstanceState()
 						);
 					}
@@ -285,10 +292,10 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 				final int n = modules.size();
 				if (n > 0) {
 					for (int i = 0; i < n; i++) {
-						int moduleID = modules.keyAt(i);
-						String key = createModuleStateKey(moduleID);
+						int moduleId = modules.keyAt(i);
+						String key = createModuleStateKey(moduleId);
 						if (savedState.containsKey(key)) {
-							AdapterModule module = modules.get(moduleID);
+							AdapterModule module = modules.get(moduleId);
 							module.dispatchRestoreInstanceState(
 									savedState.getParcelable(key)
 							);
@@ -300,11 +307,11 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 
 		/**
 		 *
-		 * @param moduleID
+		 * @param moduleId
 		 * @return
 		 */
-		String createModuleStateKey(int moduleID) {
-			return String.format(BUNDLE_MODULE_STATE_KEY_FORMAT, moduleID);
+		String createModuleStateKey(int moduleId) {
+			return String.format(BUNDLE_MODULE_STATE_KEY_FORMAT, moduleId);
 		}
 	}
 
@@ -318,14 +325,13 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	public static class SavedState extends BaseSavedState {
 
 		/**
-		 * Members ===============================
+		 * Members =================================================================================
 		 */
 
 		/**
 		 * <p>
 		 * </p>
 		 */
-		@SuppressWarnings("hiding")
 		public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {
 
 			/**
@@ -349,14 +355,14 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		private Bundle modulesState = null;
 
 		/**
-		 * Constructors ==========================
+		 * Constructors ============================================================================
 		 */
 
 		/**
 		 * <p>
 		 * </p>
 		 */
-		public SavedState(Parcelable superState) {
+		protected SavedState(Parcelable superState) {
 			super(superState);
 		}
 
@@ -364,13 +370,13 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 		 *
 		 * @param source
 		 */
-		private SavedState(Parcel source) {
+		protected SavedState(Parcel source) {
 			super(source);
 			this.modulesState = source.readBundle();
 		}
 
 		/**
-		 * Methods ===============================
+		 * Methods =================================================================================
 		 */
 
 		/**
@@ -383,6 +389,6 @@ public abstract class BaseMultiAdapter<Adapter extends AdapterModule.ModuleAdapt
 	}
 
 	/**
-	 * Interface =============================
+	 * Interface ===================================================================================
 	 */
 }

@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  * =================================================================================================
  */
-package com.wit.android.widget.adapter.module;
+package com.wit.android.ui.widget.adapter.module;
 
 import android.content.Context;
 import android.util.Log;
@@ -37,14 +37,13 @@ import java.util.List;
  * </p>
  *
  * @param <H> Type of header item provided by implementation of this headers module.
- * @param <Adapter> Type of the adapter for which can be this headers module created and used.
  *
  * @author Martin Albedinsky
  */
-public abstract class HeadersModule<H extends HeadersModule.Header, Adapter extends AdapterModule.ModuleAdapter> extends AdapterModule<Adapter> {
+public abstract class HeadersModule<H extends HeadersModule.Header> extends AdapterModule {
 
 	/**
-	 * Constants =============================
+	 * Constants ===================================================================================
 	 */
 
 	/**
@@ -55,23 +54,23 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
 	 */
-	// private static final boolean DEBUG = false;
+	// private static final boolean DEBUG_ENABLED = false;
 
 	/**
-	 * Flag indicating whether the output for user trough log-cat is enabled or not.
+	 * Flag indicating whether the output trough log-cat is enabled or not.
 	 */
-	// private static final boolean USER_LOG = true;
+	// private static final boolean LOG_ENABLED = true;
 
 	/**
-	 * Enums =================================
-	 */
-
-	/**
-	 * Static members ========================
+	 * Enums =======================================================================================
 	 */
 
 	/**
-	 * Members ===============================
+	 * Static members ==============================================================================
+	 */
+
+	/**
+	 * Members =====================================================================================
 	 */
 
 	/**
@@ -80,11 +79,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 	private int mHeaderStyleAttr = android.R.attr.textViewStyle;
 
 	/**
-	 * Listeners -----------------------------
-	 */
-
-	/**
-	 * Arrays --------------------------------
+	 * Arrays --------------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -93,19 +88,19 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 	private final SparseArray<H> HEADERS = new SparseArray<>();
 
 	/**
-	 * Booleans ------------------------------
+	 * Booleans ------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Constructors ==========================
+	 * Constructors ================================================================================
 	 */
 
 	/**
-	 * Methods ===============================
+	 * Methods =====================================================================================
 	 */
 
 	/**
-	 * Public --------------------------------
+	 * Public --------------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -176,7 +171,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 	 * </p>
 	 *
 	 * @param position Position of the header item from the current headers data set.
-	 * @param inflater Layout inflater for the current context.
+	 * @param inflater Layout inflater for the current mContext.
 	 * @param root The parent to that will be this view eventually attached to.
 	 * @return The view corresponding to header item at the specified position.
 	 */
@@ -205,20 +200,20 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 	}
 
 	/**
-	 * Getters + Setters ---------------------
+	 * Getters + Setters ---------------------------------------------------------------------------
 	 */
 
 	/**
 	 * <p>
 	 * Sets an xml attribute which should contain style for the header view. See
-	 * {@link com.wit.android.widget.adapter.module.AlphabeticHeaders.HeaderHolder#createView(android.content.Context, int)}
+	 * {@link AlphabeticHeaders.HeaderHolder#createView(android.content.Context, int)}
 	 * for more information in which theme should be the given <var>styleAttr</var> placed.
 	 * </p>
 	 *
 	 * @param styleAttr An xml attribute to style the view for the header item provided
 	 *                  by this headers module.
 	 * @see #getHeaderStyleAttr()
-	 * @see com.wit.android.widget.adapter.module.AlphabeticHeaders.HeaderHolder
+	 * @see AlphabeticHeaders.HeaderHolder
 	 */
 	public void setHeaderStyleAttr(int styleAttr) {
 		this.mHeaderStyleAttr = styleAttr;
@@ -290,7 +285,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 	 * @return List of headers.
 	 */
 	public List<H> getHeaders() {
-		List<H> headers = new ArrayList<H>(HEADERS.size());
+		List<H> headers = new ArrayList<>(HEADERS.size());
 		for (int i = 0; i < HEADERS.size(); i++) {
 			headers.add(HEADERS.get(HEADERS.keyAt(i)));
 		}
@@ -298,7 +293,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 	}
 
 	/**
-	 * Protected -----------------------------
+	 * Protected -----------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -329,15 +324,15 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 	}
 
 	/**
-	 * Private -------------------------------
+	 * Private -------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Abstract methods ----------------------
+	 * Abstract methods ----------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Inner classes =========================
+	 * Inner classes ===============================================================================
 	 */
 
 	/**
@@ -350,7 +345,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 	public static class HeaderHolder {
 
 		/**
-		 * Members ===============================
+		 * Members =================================================================================
 		 */
 
 		/**
@@ -359,7 +354,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 		private TextView mTextView;
 
 		/**
-		 * Constructors ==========================
+		 * Constructors ============================================================================
 		 */
 
 		/**
@@ -374,11 +369,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 		}
 
 		/**
-		 * Methods ===============================
-		 */
-
-		/**
-		 * Public --------------------------------
+		 * Methods =================================================================================
 		 */
 
 		/**
@@ -395,11 +386,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 			return new TextView(context, null, styleAttr);
 		}
 
-		/**
-		 * Getters + Setters ---------------------
-		 */
-
-		/**
+		 /**
 		 * <p>
 		 * Returns TextView passed to the constructor {@link #HeaderHolder(android.widget.TextView)}.
 		 * </p>
@@ -436,7 +423,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 	public static class SimpleHeader implements Header {
 
 		/**
-		 * Members ===============================
+		 * Members =================================================================================
 		 */
 
 		/**
@@ -445,7 +432,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 		private String mText;
 
 		/**
-		 * Constructors ==========================
+		 * Constructors ============================================================================
 		 */
 
 		/**
@@ -460,7 +447,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 		}
 
 		/**
-		 * Methods ===============================
+		 * Methods =================================================================================
 		 */
 
 		/**
@@ -472,7 +459,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 	}
 
 	/**
-	 * Interface =============================
+	 * Interface ===================================================================================
 	 */
 
 	/**
@@ -484,10 +471,6 @@ public abstract class HeadersModule<H extends HeadersModule.Header, Adapter exte
 	 * @author Martin Albedinsky
 	 */
 	public static interface Header {
-
-		/**
-		 * Methods ===============================
-		 */
 
 		/**
 		 * <p>

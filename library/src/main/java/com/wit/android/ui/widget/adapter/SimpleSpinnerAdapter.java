@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  * =================================================================================================
  */
-package com.wit.android.widget.adapter;
+package com.wit.android.ui.widget.adapter;
 
 import android.content.Context;
 
@@ -30,7 +30,7 @@ import java.util.List;
  *
  * @author Martin Albedinsky
  */
-public abstract class SimpleAdapter<I> extends BaseAdapter {
+public abstract class SimpleSpinnerAdapter<I> extends BaseSpinnerAdapter<I> {
 
 	/**
 	 * Constants ===================================================================================
@@ -44,12 +44,12 @@ public abstract class SimpleAdapter<I> extends BaseAdapter {
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
 	 */
-	// private static final boolean DEBUG = true;
+	// private static final boolean DEBUG_ENABLED = true;
 
 	/**
-	 * Flag indicating whether the output for user trough log-cat is enabled or not.
+	 * Flag indicating whether the output trough log-cat is enabled or not.
 	 */
-	// private static final boolean USER_LOG = true;
+	// private static final boolean LOG_ENABLED = true;
 
 	/**
 	 * Enums =======================================================================================
@@ -61,10 +61,6 @@ public abstract class SimpleAdapter<I> extends BaseAdapter {
 
 	/**
 	 * Members =====================================================================================
-	 */
-
-	/**
-	 * Listeners -----------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -87,18 +83,10 @@ public abstract class SimpleAdapter<I> extends BaseAdapter {
 	/**
 	 * <p>
 	 * </p>
-	 */
-	public SimpleAdapter() {
-		super();
-	}
-
-	/**
-	 * <p>
-	 * </p>
 	 *
 	 * @param context
 	 */
-	public SimpleAdapter(Context context) {
+	public SimpleSpinnerAdapter(Context context) {
 		super(context);
 	}
 
@@ -109,6 +97,16 @@ public abstract class SimpleAdapter<I> extends BaseAdapter {
 	/**
 	 * Public --------------------------------------------------------------------------------------
 	 */
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @return
+	 */
+	public List<I> getItems() {
+		return aItems;
+	}
 
 	/**
 	 * <p>

@@ -16,9 +16,9 @@
  * See the License for the specific language governing permissions and limitations under the License.
  * =================================================================================================
  */
-package com.wit.android.widget.adapter;
+package com.wit.android.ui.widget.adapter;
 
-import com.wit.android.widget.adapter.module.AdapterModule;
+import com.wit.android.ui.widget.adapter.module.AdapterModule;
 
 /**
  * <h4>Interface Overview</h4>
@@ -26,14 +26,13 @@ import com.wit.android.widget.adapter.module.AdapterModule;
  * Required interface for multi-module adapter.
  * </p>
  *
- * @param <Adapter> Type of a multi-module adapter.
  * @author Martin Albedinsky
- * @see com.wit.android.widget.adapter.BaseMultiAdapter
+ * @see com.wit.android.ui.widget.adapter.BaseMultiAdapter
  */
-public interface MultiAdapter<Adapter extends AdapterModule.ModuleAdapter> {
+public interface MultiAdapter {
 
 	/**
-	 * Methods ===============================
+	 * Methods =====================================================================================
 	 */
 
 	/**
@@ -45,7 +44,7 @@ public interface MultiAdapter<Adapter extends AdapterModule.ModuleAdapter> {
 	 * @param moduleID Id by which can be the given module obtained from this adapter.
 	 * @see #obtainModule(int)
 	 */
-	public void assignModule(AdapterModule<Adapter> module, int moduleID);
+	public void assignModule(AdapterModule module, int moduleID);
 
 	/**
 	 * <p>
@@ -54,7 +53,7 @@ public interface MultiAdapter<Adapter extends AdapterModule.ModuleAdapter> {
 	 *
 	 * @param moduleID Id of an adapter module to obtain.
 	 * @return The adapter module which is represented by the given <var>moduleID</var>.
-	 * @see #assignModule(com.wit.android.widget.adapter.module.AdapterModule, int)
+	 * @see #assignModule(com.wit.android.ui.widget.adapter.module.AdapterModule, int)
 	 */
 	public <M> M obtainModule(int moduleID);
 

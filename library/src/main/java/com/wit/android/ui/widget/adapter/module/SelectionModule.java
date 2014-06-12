@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  * =================================================================================================
  */
-package com.wit.android.widget.adapter.module;
+package com.wit.android.ui.widget.adapter.module;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -25,16 +25,15 @@ import android.util.SparseIntArray;
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Selection module for {@link com.wit.android.widget.adapter.MultiAdapter}.
+ * Selection module for {@link com.wit.android.ui.widget.adapter.MultiAdapter}.
  * </p>
  *
- * @param <Adapter> Type of the adapter for which can be this selection module created and used.
  * @author Martin Albedinsky
  */
-public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extends AdapterModule<Adapter> {
+public class SelectionModule extends AdapterModule {
 
 	/**
-	 * Constants =============================
+	 * Constants ===================================================================================
 	 */
 
 	/**
@@ -58,26 +57,26 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
 	 */
-	// private static final boolean DEBUG = true;
+	// private static final boolean DEBUG_ENABLED = true;
 
 	/**
-	 * Flag indicating whether the output for user trough log-cat is enabled or not.
+	 * Flag indicating whether the output trough log-cat is enabled or not.
 	 */
-	// private static final boolean USER_LOG = true;
+	// private static final boolean LOG_ENABLED = true;
 
 	/**
 	 * <p>
 	 * Bundle key for set of the currently selected items.
 	 * </p>
 	 */
-	protected static final String BUNDLE_SELECTED_ITEMS = "com.wit.android.widget.adapter.module.SelectionModule.Bundle.SelectedItems";
+	protected static final String BUNDLE_SELECTED_ITEMS = "com.wit.android.ui.widget.adapter.module.SelectionModule.BUNDLE.SelectedItems";
 
 	/**
 	 * <p>
 	 * Bundle key for the current selection mode.
 	 * </p>
 	 */
-	protected static final String BUNDLE_MODE = "com.wit.android.widget.adapter.module.SelectionModule.Bundle.Mode";
+	protected static final String BUNDLE_MODE = "com.wit.android.ui.widget.adapter.module.SelectionModule.BUNDLE.Mode";
 
 	/**
 	 * Bundle identifiers.
@@ -89,15 +88,15 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	// private static final String TAG = SelectionModule.class.getSimpleName();
 
 	/**
-	 * Enums =================================
+	 * Enums =======================================================================================
 	 */
 
 	/**
-	 * Static members ========================
+	 * Static members ==============================================================================
 	 */
 
 	/**
-	 * Members ===============================
+	 * Members =====================================================================================
 	 */
 
 	/**
@@ -106,11 +105,7 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	private int mMode = MODE_SINGLE;
 
 	/**
-	 * Listeners -----------------------------
-	 */
-
-	/**
-	 * Arrays --------------------------------
+	 * Arrays --------------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -119,19 +114,19 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	private SparseIntArray aSelectedPositions = new SparseIntArray();
 
 	/**
-	 * Booleans ------------------------------
+	 * Booleans ------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Constructors ==========================
+	 * Constructors ================================================================================
 	 */
 
 	/**
-	 * Methods ===============================
+	 * Methods =====================================================================================
 	 */
 
 	/**
-	 * Public --------------------------------
+	 * Public --------------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -198,7 +193,7 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	/**
 	 * <p>
 	 * Same as {@link #selectRange(int, int)} with parameters
-	 * <code>(0, getAdapter().getCount())</code>.
+	 * <code>(0, getWrappedAdapter().getCount())</code>.
 	 * </p>
 	 *
 	 * @see #selectRange(int, int)
@@ -206,7 +201,7 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	 */
 	public void selectAll() {
 		this.checkActualModeFor(MODE_MULTIPLE, "select all items");
-		selectRange(0, getAdapter().getCount());
+		selectRange(0, mAdapter.getCount());
 	}
 
 	/**
@@ -228,7 +223,7 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 		this.checkActualModeFor(MODE_MULTIPLE, "select all items");
 
 		// Check correct index.
-		final int n = getAdapter().getCount();
+		final int n = mAdapter.getCount();
 		if (startPosition + count > n) {
 			throw new IndexOutOfBoundsException("Incorrect count(" + count + ") for start position at(" + startPosition + "). Adapter has only " + n + " items.");
 		}
@@ -276,7 +271,7 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 		this.checkActualModeFor(MODE_MULTIPLE, "clear all selected items");
 
 		// Check correct index.
-		final int n = getAdapter().getCount();
+		final int n = mAdapter.getCount();
 		if (startPosition + count > n) {
 			throw new IndexOutOfBoundsException("Incorrect count(" + count + ") for start offset at(" + startPosition + "). Adapter has only " + n + " items.");
 		}
@@ -305,7 +300,7 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	}
 
 	/**
-	 * Getters + Setters ---------------------
+	 * Getters + Setters ---------------------------------------------------------------------------
 	 */
 
 	/**
@@ -403,7 +398,7 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	}
 
 	/**
-	 * Protected -----------------------------
+	 * Protected -----------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -487,7 +482,7 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 		}
 
 		final SavedState state = (SavedState) savedState;
-		super.onRestoreInstanceState(state.getParentState());
+		super.onRestoreInstanceState(state.getSuperState());
 
 		// Restore selected item positions.
 		int[] selected = state.selectedItems;
@@ -502,7 +497,7 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	}
 
 	/**
-	 * Private -------------------------------
+	 * Private -------------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -549,11 +544,11 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	}
 
 	/**
-	 * Abstract methods ----------------------
+	 * Abstract methods ----------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Inner classes =========================
+	 * Inner classes ===============================================================================
 	 */
 
 	/**
@@ -566,14 +561,13 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	public static class SavedState extends BaseSavedState {
 
 		/**
-		 * Members ===============================
+		 * Members =================================================================================
 		 */
 
 		/**
 		 * <p>
 		 * </p>
 		 */
-		@SuppressWarnings("hiding")
 		public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {
 
 			/**
@@ -602,29 +596,31 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 		private int[] selectedItems = {};
 
 		/**
-		 * Constructors ==========================
+		 * Constructors ============================================================================
 		 */
 
 		/**
 		 * <p>
 		 * </p>
 		 */
-		public SavedState(Parcelable superState) {
+		protected SavedState(Parcelable superState) {
 			super(superState);
 		}
 
 		/**
+		 * <p>
+		 * </p>
 		 *
 		 * @param source
 		 */
-		private SavedState(Parcel source) {
+		protected SavedState(Parcel source) {
 			super(source);
 			this.mode = source.readInt();
 			this.selectedItems = source.createIntArray();
 		}
 
 		/**
-		 * Methods ===============================
+		 * Methods =================================================================================
 		 */
 
 		/**
@@ -638,6 +634,6 @@ public class SelectionModule<Adapter extends AdapterModule.ModuleAdapter> extend
 	}
 
 	/**
-	 * Interface =============================
+	 * Interface ===================================================================================
 	 */
 }

@@ -1,16 +1,13 @@
-# =============== GLOBAL =====================
-# Local configuration file (sdk path, etc)
+### GLOBAL =========================================================================================
 local.properties
 
-# Project build directories
-library/build/
-
-# Maven generated files
-library/target
-
-# Gradle files
+### GRADLE FILES ===================================================================================
 .gradle
 
-# Intellij files
+### INTELLIJ FILES =================================================================================
 .idea/libraries
+.idea/dictionaries
 .idea/workspace.xml
+
+### BUILD DIRECTORY ================================================================================
+build/

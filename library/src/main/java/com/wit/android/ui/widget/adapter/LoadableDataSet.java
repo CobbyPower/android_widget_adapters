@@ -16,26 +16,47 @@
  * See the License for the specific language governing permissions and limitations under the License.
  * =================================================================================================
  */
-package com.wit.android.widget.adapter.config;
+package com.wit.android.ui.widget.adapter;
 
 /**
- * <h4>Class Overview</h4>
+ * <h4>Interface Overview</h4>
  * <p>
- * Configuration options for this library.
+ * Description.
  * </p>
  *
  * @author Martin Albedinsky
  */
-public class AdaptersConfig {
+public interface LoadableDataSet {
 
 	/**
-	 * Flag indicating whether the output for this library trough log-cat is enabled or not.
+	 * Constants ===================================================================================
 	 */
-	public static final boolean LIBRARY_LOG_ENABLED = true;
 
 	/**
-	 * Flag indicating whether the debug output for this library trough log-cat is enabled or not.
+	 * <p>
+	 * </p>
 	 */
-	public static final boolean LIBRARY_DEBUG_LOG_ENABLED = false;
+	public static final int STATUS_LOADING_STARTED = 0x01;
 
+	/**
+	 * <p>
+	 * </p>
+	 */
+	public static final int STATUS_LOADING_FINISHED = 0x02;
+
+	/**
+	 * Methods =====================================================================================
+	 */
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @param status
+	 */
+	public void dispatchLoadingStatus(int status);
+
+	/**
+	 * Inner classes ===============================================================================
+	 */
 }

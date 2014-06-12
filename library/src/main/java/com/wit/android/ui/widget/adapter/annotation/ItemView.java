@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
 /*
  * =================================================================================================
- *                Copyright (C) 2013 - 2014 Martin Albedinsky [Wolf-ITechnologies]
+ *                    Copyright (C) 2014 Martin Albedinsky [Wolf-ITechnologies]
  * =================================================================================================
  *         Licensed under the Apache License, Version 2.0 or later (further "License" only).
- * *************************************************************************************************
+ * -------------------------------------------------------------------------------------------------
  * You may use this file only in compliance with the License. More details and copy of this License
  * you may obtain at
  *
@@ -18,7 +16,37 @@
  * See the License for the specific language governing permissions and limitations under the License.
  * =================================================================================================
  */
--->
-<manifest package="com.wit.android.ui.widget.adapter">
-    <application/>
-</manifest>
+package com.wit.android.ui.widget.adapter.annotation;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
+/**
+ * <h4>Annotation Overview</h4>
+ * <p>
+ * Description.
+ * </p>
+ *
+ * @author Martin Albedinsky
+ */
+@Target(ElementType.TYPE)
+@Retention(RetentionPolicy.RUNTIME)
+public @interface ItemView {
+
+	/**
+	 * Constants ===================================================================================
+	 */
+
+	/**
+	 * Methods =====================================================================================
+	 */
+
+	/**
+	 *
+	 *
+	 * @return
+	 */
+	int value();
+}

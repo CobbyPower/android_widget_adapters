@@ -16,23 +16,23 @@
  * See the License for the specific language governing permissions and limitations under the License.
  * =================================================================================================
  */
-package com.wit.android.widget.adapter.module;
+package com.wit.android.ui.widget.adapter.module;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.view.AbsSavedState;
 
 /**
  * <h4>Class Overview</h4>
  * <p>
  * </p>
  *
- * @param <Adapter> Type of the adapter for which can be this module created and used.
  * @author Martin Albedinsky
  */
-public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter> {
+public abstract class AdapterModule {
 
 	/**
-	 * Constants =============================
+	 * Constants ===================================================================================
 	 */
 
 	/**
@@ -43,40 +43,36 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
 	 */
-	// private static final boolean DEBUG = true;
+	// private static final boolean DEBUG_ENABLED = true;
 
 	/**
-	 * Flag indicating whether the output for user trough log-cat is enabled or not.
+	 * Flag indicating whether the output trough log-cat is enabled or not.
 	 */
-	// private static final boolean USER_LOG = true;
+	// private static final boolean LOG_ENABLED = true;
 
 	/**
-	 * Enums =================================
-	 */
-
-	/**
-	 * Static members ========================
+	 * Enums =======================================================================================
 	 */
 
 	/**
-	 * Members ===============================
+	 * Static members ==============================================================================
+	 */
+
+	/**
+	 * Members =====================================================================================
 	 */
 
 	/**
 	 * The adapter to which is this module attached.
 	 */
-	private Adapter mAdapter;
+	ModuleAdapter mAdapter;
 
 	/**
-	 * Listeners -----------------------------
+	 * Arrays --------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Arrays --------------------------------
-	 */
-
-	/**
-	 * Booleans ------------------------------
+	 * Booleans ------------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -86,15 +82,15 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	private boolean bAdapterNotificationEnabled = true;
 
 	/**
-	 * Constructors ==========================
+	 * Constructors ================================================================================
 	 */
 
 	/**
-	 * Methods ===============================
+	 * Methods =====================================================================================
 	 */
 
 	/**
-	 * Public --------------------------------
+	 * Public --------------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -126,7 +122,7 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 *
 	 * @param adapter The adapter to which will be this adapter module attached.
 	 */
-	public final void dispatchAttachToAdapter(Adapter adapter) {
+	public final void dispatchAttachToAdapter(ModuleAdapter adapter) {
 		onAttachedToAdapter(mAdapter = adapter);
 	}
 
@@ -141,7 +137,7 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	}
 
 	/**
-	 * Getters + Setters ---------------------
+	 * Getters + Setters ---------------------------------------------------------------------------
 	 */
 
 	/**
@@ -173,7 +169,7 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	}
 
 	/**
-	 * Protected -----------------------------
+	 * Protected -----------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -183,8 +179,7 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 * @return
 	 */
 	protected Parcelable onSaveInstanceState() {
-		// TODO: return empty state
-		return null;
+		return BaseSavedState.EMPTY_STATE;
 	}
 
 	/**
@@ -198,23 +193,12 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 
 	/**
 	 * <p>
-	 * Invoked immediately after {@link #dispatchAttachToAdapter(com.wit.android.widget.adapter.module.AdapterModule.ModuleAdapter)}.
+	 * Invoked immediately after {@link #dispatchAttachToAdapter(com.wit.android.ui.widget.adapter.module.AdapterModule.ModuleAdapter)}.
 	 * </p>
 	 *
 	 * @param adapter The adapter to which was this module right now attached.
 	 */
-	protected void onAttachedToAdapter(Adapter adapter) {
-	}
-
-	/**
-	 * <p>
-	 * Returns the adapter to which is this module attached.
-	 * </p>
-	 *
-	 * @return The attached adapter.
-	 */
-	protected final Adapter getAdapter() {
-		return mAdapter;
+	protected void onAttachedToAdapter(ModuleAdapter adapter) {
 	}
 
 	/**
@@ -234,15 +218,15 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	}
 
 	/**
-	 * Private -------------------------------
+	 * Private -------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Abstract methods ----------------------
+	 * Abstract methods ----------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Inner classes =========================
+	 * Inner classes ===============================================================================
 	 */
 
 	/**
@@ -252,10 +236,10 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 *
 	 * @author Martin Albedinsky
 	 */
-	public static class BaseSavedState implements Parcelable {
+	public static class BaseSavedState extends AbsSavedState {
 
 		/**
-		 * Members ===============================
+		 * Members =================================================================================
 		 */
 
 		/**
@@ -280,21 +264,8 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 		};
 
 		/**
-		 *
+		 * Constructors ============================================================================
 		 */
-		private Parcelable parentState;
-
-		/**
-		 * Constructors ==========================
-		 */
-
-		/**
-		 * <p>
-		 * </p>
-		 */
-		protected BaseSavedState() {
-			this((Parcelable) null);
-		}
 
 		/**
 		 * <p>
@@ -303,8 +274,7 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 		 * @param source
 		 */
 		protected BaseSavedState(Parcel source) {
-			// FIXME: use correct class loader
-			this.parentState = source.readParcelable(null);
+			super(source);
 		}
 
 		/**
@@ -314,40 +284,12 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 		 * @param parentState
 		 */
 		protected BaseSavedState(Parcelable parentState) {
-			this.parentState = parentState;
-		}
-
-		/**
-		 * Methods ===============================
-		 */
-
-		/**
-		 */
-		@Override
-		public int describeContents() {
-			return 0;
-		}
-
-		/**
-		 */
-		@Override
-		public void writeToParcel(Parcel dest, int flags) {
-			dest.writeParcelable(parentState, flags);
-		}
-
-		/**
-		 * <p>
-		 * </p>
-		 *
-		 * @return
-		 */
-		public Parcelable getParentState() {
-			return parentState;
+			super(parentState);
 		}
 	}
 
 	/**
-	 * Interface =============================
+	 * Interface ===================================================================================
 	 */
 
 	/**
@@ -359,9 +301,6 @@ public abstract class AdapterModule<Adapter extends AdapterModule.ModuleAdapter>
 	 * @author Martin Albedinsky
 	 */
 	public static interface ModuleAdapter {
-		/**
-		 * Methods ===============================
-		 */
 
 		/**
 		 * <p>

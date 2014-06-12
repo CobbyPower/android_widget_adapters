@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  * =================================================================================================
  */
-package com.wit.android.widget.adapter.module;
+package com.wit.android.ui.widget.adapter.module;
 
 import android.database.Cursor;
 
@@ -27,13 +27,12 @@ import java.util.List;
  * <p>
  * </p>
  *
- * @param <Adapter>
  * @author Martin Albedinsky
  */
-public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> extends HeadersModule<HeadersModule.SimpleHeader, Adapter> {
+public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader> {
 
 	/**
-	 * Constants =============================
+	 * Constants ===================================================================================
 	 */
 
 	/**
@@ -44,23 +43,23 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
 	 */
-	// private static final boolean DEBUG = false;
+	// private static final boolean DEBUG_ENABLED = false;
 
 	/**
-	 * Flag indicating whether the output for user trough log-cat is enabled or not.
+	 * Flag indicating whether the output trough log-cat is enabled or not.
 	 */
-	// private static final boolean USER_LOG = true;
+	// private static final boolean LOG_ENABLED = true;
 
 	/**
-	 * Enums =================================
-	 */
-
-	/**
-	 * Static members ========================
+	 * Enums =======================================================================================
 	 */
 
 	/**
-	 * Members ===============================
+	 * Static members ==============================================================================
+	 */
+
+	/**
+	 * Members =====================================================================================
 	 */
 
 	/**
@@ -70,27 +69,23 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	private String mLastChar = "";
 
 	/**
-	 * Listeners -----------------------------
+	 * Arrays --------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Arrays --------------------------------
+	 * Booleans ------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Booleans ------------------------------
+	 * Constructors ================================================================================
 	 */
 
 	/**
-	 * Constructors ==========================
+	 * Methods =====================================================================================
 	 */
 
 	/**
-	 * Methods ===============================
-	 */
-
-	/**
-	 * Public --------------------------------
+	 * Public --------------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -127,7 +122,7 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	 * <p>
 	 * Processes the given alphabetic list. Whole list will be iterated and for each of
 	 * its items will be checked the first char provided by
-	 * {@link com.wit.android.widget.adapter.module.AlphabeticHeaders.AlphabeticItem#getName()},
+	 * {@link com.wit.android.ui.widget.adapter.module.AlphabeticHeaders.AlphabeticItem#getName()},
 	 * so created headers data set will contains all different first characters founded at the
 	 * first positions of obtained names.
 	 * </p>
@@ -153,11 +148,11 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	}
 
 	/**
-	 * Getters + Setters ---------------------
+	 * Getters + Setters ---------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Protected -----------------------------
+	 * Protected -----------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -183,7 +178,7 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	}
 
 	/**
-	 * Private -------------------------------
+	 * Private -------------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -194,31 +189,27 @@ public class AlphabeticHeaders<Adapter extends AdapterModule.ModuleAdapter> exte
 	}
 
 	/**
-	 * Abstract methods ----------------------
+	 * Abstract methods ----------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Inner classes =========================
+	 * Inner classes ===============================================================================
 	 */
 
 	/**
-	 * Interface =============================
+	 * Interface ===================================================================================
 	 */
 
 	/**
 	 * <h4>Interface Overview</h4>
 	 * <p>
 	 * Required interface for an items which can be processed by
-	 * {@link com.wit.android.widget.adapter.module.AlphabeticHeaders} module.
+	 * {@link com.wit.android.ui.widget.adapter.module.AlphabeticHeaders} module.
 	 * </p>
 	 *
 	 * @author Martin Albedinsky
 	 */
 	public static interface AlphabeticItem {
-
-		/**
-		 * Methods ===============================
-		 */
 
 		/**
 		 * <p>

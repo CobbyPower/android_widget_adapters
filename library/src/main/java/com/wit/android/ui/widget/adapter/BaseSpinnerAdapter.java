@@ -1,6 +1,6 @@
 /*
  * =================================================================================================
- *                 Copyright (C) 2013 - 2014 Martin Albedinsky [Wolf-ITechnologies]
+ *                    Copyright (C) 2014 Martin Albedinsky [Wolf-ITechnologies]
  * =================================================================================================
  *         Licensed under the Apache License, Version 2.0 or later (further "License" only).
  * -------------------------------------------------------------------------------------------------
@@ -16,16 +16,17 @@
  * See the License for the specific language governing permissions and limitations under the License.
  * =================================================================================================
  */
-package com.wit.android.widget.adapter;
+package com.wit.android.ui.widget.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wit.android.widget.adapter.annotation.DropDownHolder;
-import com.wit.android.widget.adapter.annotation.DropDownView;
-import com.wit.android.widget.adapter.annotation.ItemHolder;
+import com.wit.android.ui.widget.adapter.annotation.DropDownHolder;
+import com.wit.android.ui.widget.adapter.annotation.DropDownView;
+import com.wit.android.ui.widget.adapter.annotation.ItemHolder;
+
 
 /**
  * <h4>Class Overview</h4>
@@ -34,15 +35,15 @@ import com.wit.android.widget.adapter.annotation.ItemHolder;
  * </p>
  *
  * @author Martin Albedinsky
- * @see com.wit.android.widget.adapter.annotation.ItemHolder
- * @see com.wit.android.widget.adapter.annotation.ItemView
- * @see com.wit.android.widget.adapter.annotation.DropDownView
- * @see com.wit.android.widget.adapter.annotation.DropDownHolder
+ * @see com.wit.android.ui.widget.adapter.annotation.ItemHolder
+ * @see com.wit.android.ui.widget.adapter.annotation.ItemView
+ * @see com.wit.android.ui.widget.adapter.annotation.DropDownView
+ * @see com.wit.android.ui.widget.adapter.annotation.DropDownHolder
  */
 public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter {
 
 	/**
-	 * Constants =============================
+	 * Constants ===================================================================================
 	 */
 
 	/**
@@ -53,29 +54,29 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter {
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
 	 */
-	// private static final boolean DEBUG = true;
+	// private static final boolean DEBUG_ENABLED = true;
 
 	/**
-	 * Flag indicating whether the output for user trough log-cat is enabled or not.
+	 * Flag indicating whether the output trough log-cat is enabled or not.
 	 */
-	// private static final boolean USER_LOG = true;
+	// private static final boolean LOG_ENABLED = true;
 
 	/**
-	 * Enums =================================
-	 */
-
-	/**
-	 * Static members ========================
+	 * Enums =======================================================================================
 	 */
 
 	/**
-	 * Members ===============================
+	 * Static members ==============================================================================
+	 */
+
+	/**
+	 * Members =====================================================================================
 	 */
 
 	/**
 	 *
 	 */
-	private Item mSelectedItem = null;
+	private int mSelectedPosition = -1;
 
 	/**
 	 *
@@ -88,19 +89,15 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter {
 	private Class<? extends ItemHolder.ViewHolder> mClassOfDropDownHolder = null;
 
 	/**
-	 * Listeners -----------------------------
+	 * Arrays --------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Arrays --------------------------------
+	 * Booleans ------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Booleans ------------------------------
-	 */
-
-	/**
-	 * Constructors ==========================
+	 * Constructors ================================================================================
 	 */
 
 	/**
@@ -134,11 +131,11 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter {
 	}
 
 	/**
-	 * Methods ===============================
+	 * Methods =====================================================================================
 	 */
 
 	/**
-	 * Public --------------------------------
+	 * Public --------------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -146,17 +143,25 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter {
 	 * </p>
 	 *
 	 * @param position
+	 * @return
 	 */
-	public void dispatchItemSelected(int position) {
-		this.mSelectedItem = getItem(position);
-		notifyDataSetChanged();
+	public boolean dispatchItemSelected(int position) {
+		if (mSelectedPosition != position) {
+			this.mSelectedPosition = position;
+			notifyDataSetChanged();
+			return true;
+		}
+		return false;
 	}
 
 	/**
 	 */
 	@Override
 	public void onBindView(int position, Object viewHolder) {
-		onUpdateView(getSelectedItem(), viewHolder);
+		final Item selectedItem = getSelectedItem();
+		if (selectedItem != null) {
+			onUpdateView(selectedItem, viewHolder);
+		}
 	}
 
 	/**
@@ -181,7 +186,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter {
 	}
 
 	/**
-	 * Getters + Setters ---------------------
+	 * Getters + Setters ---------------------------------------------------------------------------
 	 */
 
 	/**
@@ -191,7 +196,17 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter {
 	 * @return
 	 */
 	public Item getSelectedItem() {
-		return mSelectedItem;
+		return getItem(mSelectedPosition);
+	}
+
+	/**
+	 * <p>
+	 * </p>
+	 *
+	 * @return
+	 */
+	public int getSelectedPosition() {
+		return mSelectedPosition;
 	}
 
 	/**
@@ -234,9 +249,8 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter {
 		return mClassOfDropDownHolder;
 	}
 
-
 	/**
-	 * Protected -----------------------------
+	 * Protected -----------------------------------------------------------------------------------
 	 */
 
 	/**
@@ -288,15 +302,18 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter {
 	 * @param viewHolder
 	 */
 	protected void onBindDropDownView(int position, Object viewHolder) {
-		onBindView(position, viewHolder);
+		final Item item = getItem(position);
+		if (item != null) {
+			onUpdateView(item, viewHolder);
+		}
 	}
 
 	/**
-	 * Private -------------------------------
+	 * Private -------------------------------------------------------------------------------------
 	 */
 
 	/**
-	 * Abstract methods ----------------------
+	 * Abstract methods ----------------------------------------------------------------------------
 	 */
 
 	/**
@@ -308,16 +325,16 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter {
 	 * <p>
 	 * </p>
 	 *
-	 * @param selectedItem
+	 * @param item
 	 * @param viewHolder
 	 */
-	protected abstract void onUpdateView(Item selectedItem, Object viewHolder);
+	protected abstract void onUpdateView(Item item, Object viewHolder);
 
 	/**
-	 * Inner classes =========================
+	 * Inner classes ===============================================================================
 	 */
 
 	/**
-	 * Interface =============================
+	 * Interface ===================================================================================
 	 */
 }
