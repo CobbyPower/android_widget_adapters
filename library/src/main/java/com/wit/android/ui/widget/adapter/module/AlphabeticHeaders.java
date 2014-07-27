@@ -25,6 +25,7 @@ import java.util.List;
 /**
  * <h4>Class Overview</h4>
  * <p>
+ * todo: description
  * </p>
  *
  * @author Martin Albedinsky
@@ -64,6 +65,7 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 
 	/**
 	 * Char which was lastly processed from the current alphabetic data set.
+	 * <p/>
 	 * This is only for internal purpose.
 	 */
 	private String mLastChar = "";
@@ -98,18 +100,15 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 
 	/**
 	 * <p>
-	 * Like {@link #processAlphabeticList(java.util.List)} in that difference, that
-	 * here will be the given cursor iterated to obtain first characters for headers
-	 * data set.
+	 * Like {@link #processAlphabeticList(java.util.List)} in that difference, that here will be the
+	 * given cursor iterated to obtain first characters for headers data set.
 	 * </p>
 	 *
 	 * @param cursor An alphabetic cursor to process.
-	 * @param <C>    Type of the given alphabetic cursor.
+	 * @param <C>    A type of the given alphabetic cursor.
 	 */
 	public <C extends Cursor & AlphabeticItem> void processAlphabeticCursor(C cursor) {
-		// Clear current headers.
 		clearHeaders();
-		// Process the given cursor.
 		if (cursor.getCount() > 0 && cursor.moveToFirst()) {
 			do {
 				this.processAlphabeticItem(cursor, cursor.getPosition());
@@ -120,8 +119,8 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 
 	/**
 	 * <p>
-	 * Processes the given alphabetic list. Whole list will be iterated and for each of
-	 * its items will be checked the first char provided by
+	 * Processes the given list of alphabetic items. Whole list will be iterated and for each of its
+	 * items will be checked the first char of name provided by
 	 * {@link com.wit.android.ui.widget.adapter.module.AlphabeticHeaders.AlphabeticItem#getName()},
 	 * so created headers data set will contains all different first characters founded at the
 	 * first positions of obtained names.
@@ -131,10 +130,10 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 	 * </p>
 	 * <p>
 	 * <b>Note</b>, that the given <var>cursor</var> should be already sorted, otherwise the final
-	 * headers data set can contains duplicates.
+	 * headers data set can contain duplicates.
 	 * </p>
 	 *
-	 * @param list An alphabetic list to process.
+	 * @param list Alphabetic list to process.
 	 * @see #processAlphabeticCursor(android.database.Cursor)
 	 */
 	public void processAlphabeticList(List<AlphabeticItem> list) {
@@ -157,12 +156,14 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 
 	/**
 	 * <p>
-	 * Process the given alphabetic <var>item</var> and creates header item from it if its
-	 * first character from its name is different from the last processed one.
+	 * Process the given alphabetic <var>item</var> and creates header item from it.
+	 * </p>
+	 * <p>
+	 * <b>Note</b>, that there is no check for the same headers within the current set of headers.
 	 * </p>
 	 *
 	 * @param item     An alphabetic item to process.
-	 * @param position Position of the given item form the adapter's data set.
+	 * @param position The position at which should be header presented within the headers data set.
 	 */
 	protected final void processAlphabeticItem(AlphabeticItem item, int position) {
 		final String name = item.getName();
@@ -170,9 +171,8 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 			// Obtain first char from item name.
 			String currentChar = name.substring(0, 1);
 			if (!currentChar.equals(mLastChar)) {
-				addHeader(new SimpleHeader(currentChar), getHeadersCount() + position);
+				addHeader(new SimpleHeader(currentChar), size() + position);
 			}
-			// Save current as last.
 			this.mLastChar = currentChar;
 		}
 	}
@@ -182,7 +182,7 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 	 */
 
 	/**
-	 * Resets the value of the current last char.
+	 * Resets value of the current last char.
 	 */
 	private void resetLastChar() {
 		this.mLastChar = "";
@@ -203,8 +203,8 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 	/**
 	 * <h4>Interface Overview</h4>
 	 * <p>
-	 * Required interface for an items which can be processed by
-	 * {@link com.wit.android.ui.widget.adapter.module.AlphabeticHeaders} module.
+	 * Required interface for item which can be processed by {@link com.wit.android.ui.widget.adapter.module.AlphabeticHeaders}
+	 * module.
 	 * </p>
 	 *
 	 * @author Martin Albedinsky
@@ -216,7 +216,7 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 		 * Returns name of this alphabetic item.
 		 * </p>
 		 *
-		 * @return Item's name.
+		 * @return This item's name.
 		 */
 		public String getName();
 	}

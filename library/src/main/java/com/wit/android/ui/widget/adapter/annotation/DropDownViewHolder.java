@@ -18,6 +18,8 @@
  */
 package com.wit.android.ui.widget.adapter.annotation;
 
+import com.wit.android.ui.widget.adapter.ViewHolder;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -26,27 +28,25 @@ import java.lang.annotation.Target;
 /**
  * <h4>Annotation Overview</h4>
  * <p>
- * Description.
+ * Defines an annotation for determining which class should be used to instantiate a holder for drop
+ * down view.
  * </p>
+ * <h6>Usage</h6>
+ * <ul>
+ * <li>{@link com.wit.android.ui.widget.adapter.BaseAdapter BaseAdapter}</li>
+ * </ul>
  *
  * @author Martin Albedinsky
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface DropDownHolder {
+public @interface DropDownViewHolder {
 
 	/**
-	 * Constants ===================================================================================
+	 * A class to be used to instantiate the <b>holder</b> for drop down view.
+	 * <p/>
+	 * <b>Note</b>, that such a class must have public access and empty public constructor without
+	 * parameters.
 	 */
-
-	/**
-	 * Methods =====================================================================================
-	 */
-
-	/**
-	 *
-	 *
-	 * @return
-	 */
-	Class<? extends ItemHolder.ViewHolder> value();
+	Class<? extends ViewHolder> value();
 }

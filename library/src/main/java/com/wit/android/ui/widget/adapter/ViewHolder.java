@@ -18,39 +18,43 @@
  */
 package com.wit.android.ui.widget.adapter;
 
-import android.os.Parcelable;
+import android.view.View;
 
 /**
  * <h4>Interface Overview</h4>
  * <p>
+ * todo: description
  * </p>
  *
+ * @param <Item>    A type of the item of which data will be presented within views hold by implementation
+ *                  of this holder.
+ * @param <Adapter> A type of the adapter where will be implementation of this holder used.
  * @author Martin Albedinsky
  */
-public interface StateAdapter {
-
-	/**
-	 * Methods =====================================================================================
-	 */
+public interface ViewHolder<Item, Adapter extends BaseAdapter> {
 
 	/**
 	 * <p>
-	 * Called to save the current state of this adapter.
+	 * Called to perform all necessary operations to create a valid instance of this holder, like
+	 * to obtain all views which need to be hold by this holder.
 	 * </p>
 	 *
-	 * @return Saved state of this adapter or an <b>empty</b> state if this adapter does not need to
-	 * save its state.
+	 * @param position The position for which is this holder being created.
+	 * @param itemView The view of an item for which is this holder being created. This view can be
+	 *                 used to access all views to be hold by this holder for later easy access.
+	 * @see #bind(int, Object, BaseAdapter)
 	 */
-	public Parcelable dispatchSaveInstanceState();
+	public void create(int position, View itemView);
 
 	/**
 	 * <p>
-	 * Called to restore a previous state, saved by {@link #dispatchSaveInstanceState()}, of this
-	 * adapter.
+	 * Called to set up and populate all views hold by this holder with data of the given <var>item</var>.
 	 * </p>
 	 *
-	 * @param savedState Should be the same state as obtained by {@link #dispatchSaveInstanceState()}
-	 *                   before.
+	 * @param position The position of the given item.
+	 * @param item     Item obtained from the given <var>adapter</var> for the specified position.
+	 * @param adapter  An instance of the adapter which requests to bind views of this holder.
+	 * @see #create(int, android.view.View)
 	 */
-	public void dispatchRestoreInstanceState(Parcelable savedState);
+	public void bind(int position, Item item, Adapter adapter);
 }

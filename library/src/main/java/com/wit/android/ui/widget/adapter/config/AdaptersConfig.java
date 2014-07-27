@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  * =================================================================================================
  */
-package com.wit.android.ui.widget.adapter.adapter.config;
+package com.wit.android.ui.widget.adapter.config;
 
 /**
  * <h4>Class Overview</h4>

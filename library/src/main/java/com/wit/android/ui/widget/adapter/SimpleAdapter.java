@@ -25,12 +25,13 @@ import java.util.List;
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Description.
+ * todo: description
  * </p>
  *
+ * @param <Item> A type of the item presented within a data set of a subclass of this SimpleAdapter.
  * @author Martin Albedinsky
  */
-public abstract class SimpleAdapter<I> extends BaseAdapter {
+public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 
 	/**
 	 * Constants ===================================================================================
@@ -68,9 +69,9 @@ public abstract class SimpleAdapter<I> extends BaseAdapter {
 	 */
 
 	/**
-	 *
+	 * Data set of this adapter.
 	 */
-	private List<I> aItems;
+	private List<Item> aItems;
 
 	/**
 	 * Booleans ------------------------------------------------------------------------------------
@@ -82,9 +83,10 @@ public abstract class SimpleAdapter<I> extends BaseAdapter {
 
 	/**
 	 * <p>
+	 * Creates a new instance of SimpleAdapter.
 	 * </p>
 	 *
-	 * @param context
+	 * @param context Context in which will be this adapter used.
 	 */
 	public SimpleAdapter(Context context) {
 		super(context);
@@ -100,53 +102,71 @@ public abstract class SimpleAdapter<I> extends BaseAdapter {
 
 	/**
 	 * <p>
+	 * Returns the current data set of this adapter.
 	 * </p>
 	 *
-	 * @return
+	 * @return Data set of this adapter or <code>null</code> if there is no data set presented within
+	 * this adapter.
 	 */
-	public List<I> getItems() {
+	public List<Item> getItems() {
 		return aItems;
 	}
 
 	/**
 	 * <p>
+	 * Like {@link #changeItems(java.util.List)}, but this will also return the old data set.
 	 * </p>
 	 */
-	public List<I> swapItems(List<I> items) {
-		final List<I> oldItems = aItems;
+	public List<Item> swapItems(List<Item> items) {
+		final List<Item> oldItems = aItems;
 		changeItems(items);
 		return oldItems;
 	}
 
 	/**
 	 * <p>
+	 * Changes the current data set of this adapter.
+	 * </p>
+	 * <p>
+	 * This will also notify data set change if the given <var>items</var> are valid, otherwise will
+	 * notify data set invalidation.
 	 * </p>
 	 *
-	 * @param items
+	 * @param items A set of items to set as the current data set for this adapter.
 	 * @see #swapItems(java.util.List)
+	 * @see #clearItems()
 	 */
-	public void changeItems(List<I> items) {
+	public void changeItems(List<Item> items) {
+		this.aItems = items;
 		if (items != null) {
-			this.aItems = items;
+			notifyDataSetChanged();
+		} else {
+			notifyDataSetInvalidated();
+		}
+	}
+
+	/**
+	 * <p>
+	 * Clears the current data set of this adapter.
+	 * </p>
+	 * <p>
+	 * This will also notify data set change.
+	 * </p>
+	 */
+	public void clearItems() {
+		if (hasItems()) {
+			aItems.clear();
 			notifyDataSetChanged();
 		}
 	}
 
 	/**
 	 * <p>
-	 * </p>
-	 */
-	public void clearItems() {
-		if (hasItems()) {
-			aItems.clear();
-		}
-	}
-
-	/**
-	 * <p>
+	 * Returns flag indicating whether there are some items within the current data set of this adapter
+	 * or not.
 	 * </p>
 	 *
-	 * @return
+	 * @return <code>True</code> if this adapter has some items, <code>false</code> otherwise.
 	 */
 	public boolean hasItems() {
 		return aItems != null && aItems.size() > 0;
@@ -166,7 +186,7 @@ public abstract class SimpleAdapter<I> extends BaseAdapter {
 	/**
 	 */
 	@Override
-	public I getItem(int position) {
+	public Item getItem(int position) {
 		return (hasItems() && (position >= 0 && position < aItems.size())) ? aItems.get(position) : null;
 	}
 

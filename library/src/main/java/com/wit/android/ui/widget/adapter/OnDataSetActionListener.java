@@ -21,28 +21,12 @@ package com.wit.android.ui.widget.adapter;
 /**
  * <h4>Interface Overview</h4>
  * <p>
- * Description.
+ * todo: description
  * </p>
  *
  * @author Martin Albedinsky
  */
-public interface LoadableDataSet {
-
-	/**
-	 * Constants ===================================================================================
-	 */
-
-	/**
-	 * <p>
-	 * </p>
-	 */
-	public static final int STATUS_LOADING_STARTED = 0x01;
-
-	/**
-	 * <p>
-	 * </p>
-	 */
-	public static final int STATUS_LOADING_FINISHED = 0x02;
+public interface OnDataSetActionListener<Adapter extends BaseAdapter> {
 
 	/**
 	 * Methods =====================================================================================
@@ -50,11 +34,17 @@ public interface LoadableDataSet {
 
 	/**
 	 * <p>
+	 * Invoked whenever the specified <var>action</var> was selected for the specified <var>position</var>
+	 * within the passed <var>adapter</var> in which is this callback registered.
 	 * </p>
 	 *
-	 * @param status
+	 * @param adapter  An instance of the adapter in which was the specified action selected.
+	 * @param action   The action which was currently selected.
+	 * @param position The position for which was the specified action selected.
+	 * @param id       An id of an item at the specified position within the current data set of the
+	 *                 passed adapter.
 	 */
-	public void dispatchLoadingStatus(int status);
+	public void onDataSetActionSelected(Adapter adapter, int action, int position, long id);
 
 	/**
 	 * Inner classes ===============================================================================

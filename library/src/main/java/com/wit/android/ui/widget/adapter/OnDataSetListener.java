@@ -21,16 +21,34 @@ package com.wit.android.ui.widget.adapter;
 /**
  * <h4>Interface Overview</h4>
  * <p>
- * Description.
+ * todo: description
  * </p>
  *
  * @author Martin Albedinsky
  */
-public interface SelectableDataSet {
+public interface OnDataSetListener<Adapter extends BaseAdapter> {
 
 	/**
 	 * Methods =====================================================================================
 	 */
+
+	/**
+	 * <p>
+	 * Invoked whenever the current data set within the passed <var>adapter</var> was changed.
+	 * </p>
+	 *
+	 * @param adapter An instance of the adapter of which current data set was just changed.
+	 */
+	public void onDataSetChanged(Adapter adapter);
+
+	/**
+	 * <p>
+	 * Invoked whenever the current data set within the passed <var>adapter</var> was invalidated.
+	 * </p>
+	 *
+	 * @param adapter An instance of the adapter of which current data set was just invalidated.
+	 */
+	public void onDataSetInvalidated(Adapter adapter);
 
 	/**
 	 * Inner classes ===============================================================================

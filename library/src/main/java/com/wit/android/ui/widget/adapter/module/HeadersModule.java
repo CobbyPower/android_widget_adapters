@@ -32,12 +32,10 @@ import java.util.List;
 /**
  * <h4>Class Overview</h4>
  * <p>
- * Base implementation for an adapter modules which can provide headers data set for
- * "header-based" adapters.
+ * todo: description
  * </p>
  *
- * @param <H> Type of header item provided by implementation of this headers module.
- *
+ * @param <H>
  * @author Martin Albedinsky
  */
 public abstract class HeadersModule<H extends HeadersModule.Header> extends AdapterModule {
@@ -74,7 +72,8 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	 */
 
 	/**
-	 * Xml attribute which should contain the style for the header view.
+	 * An attribute from the current theme, which should contain a resource of the style for the
+	 * header view.
 	 */
 	private int mHeaderStyleAttr = android.R.attr.textViewStyle;
 
@@ -83,7 +82,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	 */
 
 	/**
-	 * Array of headers managed by this module.
+	 * Set of headers managed by this module mapped to theirs positions.
 	 */
 	private final SparseArray<H> HEADERS = new SparseArray<>();
 
@@ -105,13 +104,12 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 
 	/**
 	 * <p>
-	 * Checks whether there is header at the requested
-	 * <var>position</var> or not.
+	 * Checks whether there is a header at the specified <var>position</var> or not.
 	 * </p>
 	 *
-	 * @param position Position in data set to check.
-	 * @return <code>True</code> if there is a header item at the requested position,
-	 * <code>false</code> otherwise.
+	 * @param position The position to check.
+	 * @return <code>True</code> if there is a header item at the specified position, <code>false</code>
+	 * otherwise.
 	 */
 	public boolean isHeaderAt(int position) {
 		return HEADERS.get(position) != null;
@@ -119,19 +117,18 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 
 	/**
 	 * <p>
-	 * Checks whether this headers module has some headers or not.
+	 * Checks whether this module has some headers or not.
 	 * </p>
 	 *
-	 * @return <code>True</code> if this module doesn't have any headers,
-	 * <code>false</code> otherwise.
+	 * @return <code>True</code> if this module does not have any headers, <code>false</code> otherwise.
 	 */
 	public boolean isEmpty() {
-		return getHeadersCount() == 0;
+		return HEADERS.size() == 0;
 	}
 
 	/**
 	 * <p>
-	 * Clears current headers data set of this headers module.
+	 * Clears the current headers data set of this module.
 	 * </p>
 	 */
 	public void clearHeaders() {
@@ -140,13 +137,16 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 
 	/**
 	 * <p>
-	 * Corrects the given position passed from the related adapter. Position will be
-	 * corrected by count of the headers counted by {@link #getHeadersCountBeforePosition(int)}.
+	 * Corrects the given <var>position</var> passed from the related adapter. Position will be
+	 * corrected (decreased) by count of the headers counted by {@link #getHeadersCountBeforePosition(int)}.
+	 * </p>
+	 * <p>
+	 * This should be used within the related adapter's {@link android.widget.Adapter#getItem(int) Adapter#getItem(int)}.
 	 * </p>
 	 *
-	 * @param position Position to correct.
-	 * @return Corrected position which can be used in the related adapter to access
-	 * items from its data set.
+	 * @param position The position to correct.
+	 * @return Corrected position which can be used in the related adapter to access items from its
+	 * data set.
 	 */
 	public int correctPosition(int position) {
 		return position - getHeadersCountBeforePosition(position);
@@ -154,26 +154,17 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 
 	/**
 	 * <p>
-	 * Called to create view holder for header item at the given position.
+	 * Called to crate a view for header item at the specified <var>position</var>.
 	 * </p>
-	 *
-	 * @param position Position of the header item from the current headers data set.
-	 * @param headerView The header's view, for which should be holder created.
-	 * @return The view holder for header's view at the specified position.
-	 */
-	public Object createHeaderViewHolder(int position, View headerView) {
-		return (headerView instanceof TextView) ? new HeaderHolder((TextView) headerView) : new Object();
-	}
-
-	/**
 	 * <p>
-	 * Called to crate view for header item at the given position.
+	 * <b>Note</b>, that a position passed here need to be the same position as passed to
+	 * {@link android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup) Adapter#getView(int, android.view.View, android.view.ViewGroup)}.
 	 * </p>
 	 *
-	 * @param position Position of the header item from the current headers data set.
-	 * @param inflater Layout inflater for the current mContext.
-	 * @param root The parent to that will be this view eventually attached to.
-	 * @return The view corresponding to header item at the specified position.
+	 * @param position The position for which should be view created.
+	 * @param inflater Valid layout inflater to create the requested view.
+	 * @param root     The parent to that should be header's view eventually attached to.
+	 * @return A view corresponding to the header item at the specified position.
 	 */
 	public View createHeaderView(int position, LayoutInflater inflater, ViewGroup root) {
 		return HeaderHolder.createView(inflater.getContext(), mHeaderStyleAttr);
@@ -181,16 +172,37 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 
 	/**
 	 * <p>
-	 * Called to bind header's view at the given position.
+	 * Called to create a view holder for header item at the specified <var>position</var>.
+	 * </p>
+	 * <p>
+	 * <b>Note</b>, that a position passed here need to be the same position as passed to
+	 * {@link android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup) Adapter#getView(int, android.view.View, android.view.ViewGroup)}.
 	 * </p>
 	 *
-	 * @param position Position of the header item from the current headers data set.
-	 * @param headerHolder The header's view holder created by
-	 * {@link #createHeaderViewHolder(int, android.view.View)}.
+	 * @param position   The position for which should be holder created.
+	 * @param headerView The header's view, for which should be holder created.
+	 * @return An instance of HeaderHolder for header's view at the specified position.
+	 */
+	public Object createHeaderViewHolder(int position, View headerView) {
+		return (headerView instanceof TextView) ? new HeaderHolder((TextView) headerView) : new Object();
+	}
+
+	/**
+	 * <p>
+	 * Called to bind header's view at the specified <var>position</var>.
+	 * </p>
+	 * <p>
+	 * <b>Note</b>, that a position passed here need to be the same position as passed to
+	 * {@link android.widget.Adapter#getView(int, android.view.View, android.view.ViewGroup) Adapter#getView(int, android.view.View, android.view.ViewGroup)}.
+	 * </p>
+	 *
+	 * @param position     The position for which should be holder's view populated with data.
+	 * @param headerHolder An instance of holder created by {@link #createHeaderViewHolder(int, android.view.View)}
+	 *                     for the specified position.
 	 */
 	public void bindHeaderView(int position, Object headerHolder) {
 		if (headerHolder instanceof HeaderHolder) {
-			Header header = getHeader(position);
+			final Header header = getHeader(position);
 			if (header != null) {
 				((HeaderHolder) headerHolder).setText(header.getText());
 			} else {
@@ -205,15 +217,14 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 
 	/**
 	 * <p>
-	 * Sets an xml attribute which should contain style for the header view. See
-	 * {@link AlphabeticHeaders.HeaderHolder#createView(android.content.Context, int)}
+	 * Sets an xml attribute from the current theme, which contains a resource of style with attributes
+	 * for header view. See {@link com.wit.android.ui.widget.adapter.module.AlphabeticHeaders.HeaderHolder#createView(android.content.Context, int)}
 	 * for more information in which theme should be the given <var>styleAttr</var> placed.
 	 * </p>
 	 *
-	 * @param styleAttr An xml attribute to style the view for the header item provided
-	 *                  by this headers module.
+	 * @param styleAttr An xml attribute.
 	 * @see #getHeaderStyleAttr()
-	 * @see AlphabeticHeaders.HeaderHolder
+	 * @see com.wit.android.ui.widget.adapter.module.AlphabeticHeaders.HeaderHolder
 	 */
 	public void setHeaderStyleAttr(int styleAttr) {
 		this.mHeaderStyleAttr = styleAttr;
@@ -233,11 +244,10 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 
 	/**
 	 * <p>
-	 * Counts headers presented in the current headers
-	 * data set before the requested <var>position</var>.
+	 * Counts headers presented in the current headers data set before the requested <var>position</var>.
 	 * </p>
 	 *
-	 * @param position Position, to which should be headers counted.
+	 * @param position The position, to which should be headers counted.
 	 * @return The count of headers before the requested position.
 	 */
 	public int getHeadersCountBeforePosition(int position) {
@@ -254,12 +264,24 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 
 	/**
 	 * <p>
-	 * Returns header associated with the specified position
-	 * from the current headers data set of this module.
+	 * Returns count of headers in the current headers data set of this module.
 	 * </p>
 	 *
-	 * @param position Position of the header to obtain.
-	 * @return The header at the requested position.
+	 * @return Headers count.
+	 */
+	public int size() {
+		return HEADERS.size();
+	}
+
+	/**
+	 * <p>
+	 * Returns a header associated with the specified position from the current headers data set of
+	 * this module.
+	 * </p>
+	 *
+	 * @param position Position of the desired header to obtain.
+	 * @return An instance of header at the requested position or <code>null</code> if there is no
+	 * header item at the requested position.
 	 */
 	public H getHeader(int position) {
 		return HEADERS.get(position);
@@ -267,25 +289,24 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 
 	/**
 	 * <p>
-	 * Returns count of the headers in the current headers
-	 * data set of this module.
+	 * Returns the current headers data set of this module.
 	 * </p>
 	 *
-	 * @return Headers count.
+	 * @return Set of headers mapped to theirs positions.
 	 */
-	public int getHeadersCount() {
-		return HEADERS.size();
+	public SparseArray<H> getHeaders() {
+		return HEADERS;
 	}
 
 	/**
 	 * <p>
-	 * Returns headers data set of this module.
+	 * Returns the current headers data set of this module.
 	 * </p>
 	 *
-	 * @return List of headers.
+	 * @return List of the current headers.
 	 */
-	public List<H> getHeaders() {
-		List<H> headers = new ArrayList<>(HEADERS.size());
+	public List<H> getHeadersList() {
+		final List<H> headers = new ArrayList<>(HEADERS.size());
 		for (int i = 0; i < HEADERS.size(); i++) {
 			headers.add(HEADERS.get(HEADERS.keyAt(i)));
 		}
@@ -298,14 +319,13 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 
 	/**
 	 * <p>
-	 * Adds the given header at the specified position into
-	 * the current headers data set of this module. If there
-	 * is already header at the specified position, the current
-	 * one will be replaced by the given one.
+	 * Adds the given header at the specified position into the current headers data set of this module.
+	 * If there is already header at the specified position, the current one will be replaced by the
+	 * given one.
 	 * </p>
 	 *
-	 * @param header H to add.
-	 * @param position Position, at which should be header added.
+	 * @param header   Header to add.
+	 * @param position The position, at which should be header added.
 	 */
 	protected void addHeader(H header, int position) {
 		HEADERS.append(position, header);
@@ -313,11 +333,10 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 
 	/**
 	 * <p>
-	 * Removes header at the specified position from the current
-	 * headers data set of this module.
+	 * Removes a header at the specified position from the current headers data set of this module.
 	 * </p>
 	 *
-	 * @param position Position, at which should be header removed.
+	 * @param position The position, at which should be header removed.
 	 */
 	protected void removeHeader(int position) {
 		HEADERS.remove(position);
@@ -338,6 +357,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	/**
 	 * <h4>Class Overview</h4>
 	 * <p>
+	 * todo: description
 	 * </p>
 	 *
 	 * @author Martin Albedinsky
@@ -359,7 +379,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 
 		/**
 		 * <p>
-		 * Creates the new HeaderHolder instance with the given TextView.
+		 * Creates a new instance of HeaderHolder with the given TextView.
 		 * </p>
 		 *
 		 * @param textView Root view of this holder.
@@ -374,11 +394,11 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 
 		/**
 		 * <p>
-		 * Creates the new instance of TextView for this HeaderHolder.
+		 * Creates a new instance of TextView with the given default style attribute.
 		 * </p>
 		 *
-		 * @param context   Context for the TextView.
-		 * @param styleAttr An xml attribute for the TextView constructor
+		 * @param context   Valid context with which will be TextView created.
+		 * @param styleAttr An xml attribute for the TextView's constructor
 		 *                  {@link android.widget.TextView#TextView(android.content.Context, android.util.AttributeSet, int)}.
 		 * @return New instance of TextView.
 		 */
@@ -386,12 +406,12 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 			return new TextView(context, null, styleAttr);
 		}
 
-		 /**
+		/**
 		 * <p>
-		 * Returns TextView passed to the constructor {@link #HeaderHolder(android.widget.TextView)}.
+		 * Returns an instance of TextView passed to constructor {@link #HeaderHolder(android.widget.TextView)}.
 		 * </p>
 		 *
-		 * @return TextView instance.
+		 * @return Instance of TextView of this holder.
 		 */
 		public TextView getTextView() {
 			return mTextView;
@@ -399,10 +419,23 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 
 		/**
 		 * <p>
-		 * Sets the given <var>text</var> as text for the current TextView.
+		 * Sets the string value for the current TextView.
 		 * </p>
 		 *
-		 * @param text H text.
+		 * @param resId A resource id of the desired text.
+		 */
+		public void setText(int resId) {
+			if (mTextView != null) {
+				mTextView.setText(resId);
+			}
+		}
+
+		/**
+		 * <p>
+		 * Sets the string value for the current TextView.
+		 * </p>
+		 *
+		 * @param text The desired text.
 		 */
 		public void setText(CharSequence text) {
 			if (mTextView != null) {
@@ -414,8 +447,8 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	/**
 	 * <h4>Interface Overview</h4>
 	 * <p>
-	 * Simple implementation of {@link HeadersModule.Header header}
-	 * item.
+	 * Simple implementation of {@link com.wit.android.ui.widget.adapter.module.HeadersModule.Header Header}
+	 * item for {@link HeadersModule}.
 	 * </p>
 	 *
 	 * @author Martin Albedinsky
@@ -465,7 +498,8 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	/**
 	 * <h4>Interface Overview</h4>
 	 * <p>
-	 * Required interface for header item used by {@link HeadersModule} module.
+	 * Required interface for header item used by {@link com.wit.android.ui.widget.adapter.module.HeadersModule}
+	 * module.
 	 * </p>
 	 *
 	 * @author Martin Albedinsky
@@ -474,10 +508,10 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 
 		/**
 		 * <p>
-		 * Returns text value of this header instance.
+		 * Returns a text value of this header instance.
 		 * </p>
 		 *
-		 * @return The text value of this header.
+		 * @return The text value of this header item.
 		 */
 		public String getText();
 	}

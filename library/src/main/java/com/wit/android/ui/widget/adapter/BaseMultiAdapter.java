@@ -22,8 +22,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.SparseArray;
 
+import com.wit.android.ui.widget.adapter.config.AdaptersConfig;
 import com.wit.android.ui.widget.adapter.module.AdapterModule;
 
 /**
@@ -31,9 +31,10 @@ import com.wit.android.ui.widget.adapter.module.AdapterModule;
  * <p>
  * </p>
  *
+ * @param <Item> A type of the item presented within a data set of a subclass of this BaseMultiAdapter.
  * @author Martin Albedinsky
  */
-public abstract class BaseMultiAdapter extends BaseAdapter implements AdapterModule.ModuleAdapter {
+public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implements AdapterModule.ModuleAdapter {
 
 	/**
 	 * Constants ===================================================================================
@@ -67,7 +68,7 @@ public abstract class BaseMultiAdapter extends BaseAdapter implements AdapterMod
 	 */
 
 	/**
-	 * Manager for adapter's modules.
+	 * Manager modules presented within this adapter.
 	 */
 	private final ModuleManager MODULES_MANAGER = new ModuleManager();
 
@@ -85,7 +86,7 @@ public abstract class BaseMultiAdapter extends BaseAdapter implements AdapterMod
 
 	/**
 	 * <p>
-	 * Crates a new instance of BaseMultiAdapter with the given context.
+	 * Crates a new instance of BaseMultiAdapter within the given context.
 	 * </p>
 	 *
 	 * @param context Context in which will be this adapter used.
@@ -104,37 +105,31 @@ public abstract class BaseMultiAdapter extends BaseAdapter implements AdapterMod
 
 	/**
 	 * <p>
-	 * Assigns the given <var>module</var> to this adapter.
+	 * Wrapped {@link ModuleManager#addModule(AdapterModule, int)} for this adapter.
 	 * </p>
 	 *
-	 * @param module   An adapter module to assign.
-	 * @param moduleId Id by which can be the given module obtained from this adapter.
 	 * @see #obtainModule(int)
 	 */
-	public void assignModule(AdapterModule module, int moduleId) {
+	public void assignModule(AdapterModule module, int moduleID) {
 		module.dispatchAttachToAdapter(this);
-		MODULES_MANAGER.addModule(module, moduleId);
+		MODULES_MANAGER.addModule(module, moduleID);
 	}
 
 	/**
 	 * <p>
-	 * Returns an adapter module assigned to this adapter.
+	 * Wrapped {@link ModuleManager#getModule(int)} for this adapter.
 	 * </p>
 	 *
-	 * @param moduleId Id of an adapter module to obtain.
-	 * @return The adapter module which is represented by the given <var>moduleID</var>.
 	 * @see #assignModule(com.wit.android.ui.widget.adapter.module.AdapterModule, int)
 	 */
-	public AdapterModule obtainModule(int moduleId) {
-		return MODULES_MANAGER.getModule(moduleId);
+	public AdapterModule obtainModule(int moduleID) {
+		return MODULES_MANAGER.getModule(moduleID);
 	}
 
 	/**
 	 * <p>
-	 * Removes an adapter module assigned to this adapter.
+	 * Wrapped {@link ModuleManager#removeModule(int)} for this adapter.
 	 * </p>
-	 *
-	 * @param moduleID Id of an adapter module to remove.
 	 */
 	public void removeModule(int moduleID) {
 		MODULES_MANAGER.removeModule(moduleID);
@@ -149,10 +144,13 @@ public abstract class BaseMultiAdapter extends BaseAdapter implements AdapterMod
 	 */
 
 	/**
+	 * <p>
+	 * This will also save the state of all currently assigned modules.
+	 * </p>
 	 */
 	@Override
 	protected Parcelable onSaveInstanceState() {
-		final Bundle modulesState = MODULES_MANAGER.dispatchSaveState();
+		final Bundle modulesState = MODULES_MANAGER.dispatchSaveModulesState();
 		// If some of the modules save its state we need to save state of this adapter.
 		if (modulesState != null) {
 			final SavedState savedState = new SavedState(super.onSaveInstanceState());
@@ -162,7 +160,9 @@ public abstract class BaseMultiAdapter extends BaseAdapter implements AdapterMod
 		return super.onSaveInstanceState();
 	}
 
-	/**
+	/**<p>
+	 * This will also restore the state of all currently assigned modules.
+	 * </p>
 	 */
 	@Override
 	protected void onRestoreInstanceState(Parcelable savedState) {
@@ -174,7 +174,7 @@ public abstract class BaseMultiAdapter extends BaseAdapter implements AdapterMod
 		final SavedState state = (SavedState) savedState;
 		super.onRestoreInstanceState(state.getSuperState());
 		// Dispatch to restore modules state.
-		MODULES_MANAGER.dispatchRestoreState(state.modulesState);
+		MODULES_MANAGER.dispatchRestoreModulesState(state.modulesState);
 	}
 
 	/**
@@ -192,132 +192,8 @@ public abstract class BaseMultiAdapter extends BaseAdapter implements AdapterMod
 	/**
 	 * <h4>Class Overview</h4>
 	 * <p>
-	 * Manages {@link com.wit.android.ui.widget.adapter.BaseMultiAdapter} modules.
-	 * </p>
-	 *
-	 * @author Martin Albedinsky
-	 */
-	protected static class ModuleManager {
-
-		/**
-		 * Members =================================================================================
-		 */
-
-		/**
-		 *
-		 */
-		private static final String BUNDLE_MODULE_STATE_KEY_FORMAT = "com.wit.android.ui.widget.adapter.BaseMultiAdapter.BUNDLE.ModuleState.%d";
-
-		/**
-		 * Array with adapter modules.
-		 */
-		private final SparseArray<AdapterModule> modules = new SparseArray<>();
-
-		/**
-		 * Methods =================================================================================
-		 */
-
-		/**
-		 * <p>
-		 * Adds the given module into the current modules of this manager. If there is
-		 * already some module with the same <var>moduleID</var>l, the old module will
-		 * be replaced by the new one.
-		 * </p>
-		 *
-		 * @param module Module to add.
-		 * @param moduleID Id by which can be the given module obtained from this manager.
-		 * @see #getModule(int)
-		 */
-		protected void addModule(AdapterModule module, int moduleID) {
-			modules.append(moduleID, module);
-		}
-
-		/**
-		 * <p>
-		 * Returns a module added into this manager.
-		 * </p>
-		 *
-		 * @param moduleID Id of a module to obtain.
-		 * @return The module which is represented by the given <var>moduleID</var>.
-		 * @see #addModule(com.wit.android.ui.widget.adapter.module.AdapterModule, int)
-		 */
-		protected AdapterModule getModule(int moduleID) {
-			return modules.get(moduleID);
-		}
-
-		/**
-		 * <p>
-		 * Removes a module from the current modules set of this manager.
-		 * </p>
-		 *
-		 * @param moduleId Id of a module to remove.
-		 */
-		protected void removeModule(int moduleId) {
-			modules.remove(moduleId);
-		}
-
-		/**
-		 *
-		 *
-		 * @return
-		 */
-		Bundle dispatchSaveState() {
-			final int n = modules.size();
-			if (n > 0) {
-				final Bundle states = new Bundle();
-				boolean save = false;
-
-				for (int i = 0; i < n; i++) {
-					int moduleId = modules.keyAt(i);
-					AdapterModule module = modules.get(moduleId);
-					if (module.requiresStateSaving()) {
-						save = true;
-						states.putParcelable(
-								createModuleStateKey(moduleId),
-								module.dispatchSaveInstanceState()
-						);
-					}
-				}
-				return save ? states : null;
-			}
-			return null;
-		}
-
-		/**
-		 *
-		 * @param savedState
-		 */
-		void dispatchRestoreState(Bundle savedState) {
-			if (savedState != null) {
-				final int n = modules.size();
-				if (n > 0) {
-					for (int i = 0; i < n; i++) {
-						int moduleId = modules.keyAt(i);
-						String key = createModuleStateKey(moduleId);
-						if (savedState.containsKey(key)) {
-							AdapterModule module = modules.get(moduleId);
-							module.dispatchRestoreInstanceState(
-									savedState.getParcelable(key)
-							);
-						}
-					}
-				}
-			}
-		}
-
-		/**
-		 *
-		 * @param moduleId
-		 * @return
-		 */
-		String createModuleStateKey(int moduleId) {
-			return String.format(BUNDLE_MODULE_STATE_KEY_FORMAT, moduleId);
-		}
-	}
-
-	/**
-	 * <h4>Class Overview</h4>
-	 * <p>
+	 * A {@link BaseSavedState} implementation that should be used by inheritance hierarchies of
+	 * {@link BaseMultiAdapter} to ensure the state of all classes along the chain is saved.
 	 * </p>
 	 *
 	 * @author Martin Albedinsky
@@ -330,10 +206,10 @@ public abstract class BaseMultiAdapter extends BaseAdapter implements AdapterMod
 
 		/**
 		 * <p>
+		 * Creator used to create an instance or array of instances of SavedState from {@link android.os.Parcel}.
 		 * </p>
 		 */
 		public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {
-
 			/**
 			 */
 			@Override
@@ -350,9 +226,10 @@ public abstract class BaseMultiAdapter extends BaseAdapter implements AdapterMod
 		};
 
 		/**
-		 *
+		 * State of all modules holding by ModuleManager obtained by {@link ModuleManager#dispatchSaveModulesState()}
+		 * when saving current state of {@link BaseMultiAdapter}.
 		 */
-		private Bundle modulesState = null;
+		private Bundle modulesState;
 
 		/**
 		 * Constructors ============================================================================
@@ -360,19 +237,31 @@ public abstract class BaseMultiAdapter extends BaseAdapter implements AdapterMod
 
 		/**
 		 * <p>
+		 * Creates a new instance SavedState with the given <var>superState</var> to allow
+		 * chaining of saved states in {@link #onSaveInstanceState()} and also in
+		 * {@link #onRestoreInstanceState(android.os.Parcelable)}.
 		 * </p>
+		 *
+		 * @param superState A super state obtained from <code>super.onSaveInstanceState()</code>
+		 *                   within <code>onSaveInstanceState()</code> of a specific {@link BaseMultiAdapter}
+		 *                   implementation.
 		 */
 		protected SavedState(Parcelable superState) {
 			super(superState);
 		}
 
 		/**
+		 * <p>
+		 * Called form {@link #CREATOR} to create an instance of SavedState form the given parcel
+		 * <var>source</var>.
+		 * </p>
 		 *
-		 * @param source
+		 * @param source Parcel with data for a new instance.
 		 */
 		protected SavedState(Parcel source) {
 			super(source);
-			this.modulesState = source.readBundle();
+			// Use class loader for classes out of the Android SDK.
+			this.modulesState = source.readBundle(AdaptersConfig.class.getClassLoader());
 		}
 
 		/**

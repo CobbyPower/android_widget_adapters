@@ -18,7 +18,7 @@
  */
 package com.wit.android.ui.widget.adapter.annotation;
 
-import android.view.View;
+import com.wit.android.ui.widget.adapter.ViewHolder;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -28,54 +28,25 @@ import java.lang.annotation.Target;
 /**
  * <h4>Annotation Overview</h4>
  * <p>
- * Description.
+ * Defines an annotation for determining which class should be used to instantiate a holder for item
+ * view.
  * </p>
+ * <h6>Usage</h6>
+ * <ul>
+ * <li>{@link com.wit.android.ui.widget.adapter.BaseAdapter BaseAdapter}</li>
+ * </ul>
  *
  * @author Martin Albedinsky
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ItemHolder {
+public @interface ItemViewHolder {
 
 	/**
-	 * Constants ===================================================================================
-	 */
-
-	/**
-	 * Methods =====================================================================================
-	 */
-
-	/**
-	 *
-	 *
-	 * @return
+	 * A class to be used to instantiate the <b>holder</b> for item view.
+	 * <p/>
+	 * <b>Note</b>, that such a class must have public access and empty public constructor without
+	 * parameters.
 	 */
 	Class<? extends ViewHolder> value();
-
-	/**
-	 * Interface ===================================================================================
-	 */
-
-	/**
-	 * <h4>Interface Overview</h4>
-	 * <p>
-	 * Description.
-	 * </p>
-	 *
-	 * @author Martin Albedinsky
-	 */
-	public static interface ViewHolder {
-
-		/**
-		 * Methods ===============================
-		 */
-
-		/**
-		 * <p>
-		 * </p>
-		 *
-		 * @param itemView
-		 */
-		public void onCreate(View itemView);
-	}
 }

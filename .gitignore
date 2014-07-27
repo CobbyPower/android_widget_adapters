@@ -6,7 +6,6 @@ local.properties
 
 ### INTELLIJ FILES =================================================================================
 .idea/libraries
-.idea/dictionaries
 .idea/workspace.xml
 
 ### BUILD DIRECTORY ================================================================================

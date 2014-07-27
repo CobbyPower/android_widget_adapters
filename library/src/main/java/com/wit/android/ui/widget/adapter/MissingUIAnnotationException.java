@@ -18,39 +18,39 @@
  */
 package com.wit.android.ui.widget.adapter;
 
-import android.os.Parcelable;
+import android.util.AndroidRuntimeException;
 
 /**
- * <h4>Interface Overview</h4>
+ * <h4>Class Overview</h4>
  * <p>
+ * todo: description
  * </p>
  *
  * @author Martin Albedinsky
  */
-public interface StateAdapter {
+public class MissingUIAnnotationException extends AndroidRuntimeException {
 
 	/**
-	 * Methods =====================================================================================
 	 */
+	public MissingUIAnnotationException() {
+		super();
+	}
 
 	/**
-	 * <p>
-	 * Called to save the current state of this adapter.
-	 * </p>
-	 *
-	 * @return Saved state of this adapter or an <b>empty</b> state if this adapter does not need to
-	 * save its state.
 	 */
-	public Parcelable dispatchSaveInstanceState();
+	public MissingUIAnnotationException(String name) {
+		super(name);
+	}
 
 	/**
-	 * <p>
-	 * Called to restore a previous state, saved by {@link #dispatchSaveInstanceState()}, of this
-	 * adapter.
-	 * </p>
-	 *
-	 * @param savedState Should be the same state as obtained by {@link #dispatchSaveInstanceState()}
-	 *                   before.
 	 */
-	public void dispatchRestoreInstanceState(Parcelable savedState);
+	public MissingUIAnnotationException(String name, Throwable cause) {
+		super(name, cause);
+	}
+
+	/**
+	 */
+	public MissingUIAnnotationException(Exception cause) {
+		super(cause);
+	}
 }

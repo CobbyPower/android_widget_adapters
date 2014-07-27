@@ -25,9 +25,13 @@ import java.lang.annotation.Target;
 
 /**
  * <h4>Annotation Overview</h4>
- * <p>
- * Description.
+ * Defines an annotation for determining a resource id of the layout which should be inflated as item
+ * view.
  * </p>
+ * <h6>Usage</h6>
+ * <ul>
+ * <li>{@link com.wit.android.ui.widget.adapter.BaseAdapter BaseAdapter}</li>
+ * </ul>
  *
  * @author Martin Albedinsky
  */
@@ -36,17 +40,7 @@ import java.lang.annotation.Target;
 public @interface ItemView {
 
 	/**
-	 * Constants ===================================================================================
-	 */
-
-	/**
-	 * Methods =====================================================================================
-	 */
-
-	/**
-	 *
-	 *
-	 * @return
+	 * A resource id of the desired layout which should be inflated as item view.
 	 */
 	int value();
 }

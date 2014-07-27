@@ -18,16 +18,33 @@
  */
 package com.wit.android.ui.widget.adapter;
 
-import android.os.Parcelable;
-
 /**
  * <h4>Interface Overview</h4>
  * <p>
+ * todo: description
  * </p>
  *
  * @author Martin Albedinsky
  */
-public interface StateAdapter {
+public interface LoadableAdapter {
+
+	/**
+	 * Constants ===================================================================================
+	 */
+
+	/**
+	 * <p>
+	 * Flag for {@link #dispatchLoadingStatus(int)} to dispatch that loading of data set just started.
+	 * </p>
+	 */
+	public static final int STATUS_LOADING_STARTED = 0x01;
+
+	/**
+	 * <p>
+	 * Flag for {@link #dispatchLoadingStatus(int)} to dispatch that loading of data set just finished.
+	 * </p>
+	 */
+	public static final int STATUS_LOADING_FINISHED = 0x02;
 
 	/**
 	 * Methods =====================================================================================
@@ -35,22 +52,14 @@ public interface StateAdapter {
 
 	/**
 	 * <p>
-	 * Called to save the current state of this adapter.
+	 * Called to dispatch loading status to this loadable adapter implementation.
 	 * </p>
 	 *
-	 * @return Saved state of this adapter or an <b>empty</b> state if this adapter does not need to
-	 * save its state.
+	 * @param status Current loading status. One of {@link #STATUS_LOADING_STARTED} or {@link #STATUS_LOADING_FINISHED}.
 	 */
-	public Parcelable dispatchSaveInstanceState();
+	public void dispatchLoadingStatus(int status);
 
 	/**
-	 * <p>
-	 * Called to restore a previous state, saved by {@link #dispatchSaveInstanceState()}, of this
-	 * adapter.
-	 * </p>
-	 *
-	 * @param savedState Should be the same state as obtained by {@link #dispatchSaveInstanceState()}
-	 *                   before.
+	 * Inner classes ===============================================================================
 	 */
-	public void dispatchRestoreInstanceState(Parcelable savedState);
 }

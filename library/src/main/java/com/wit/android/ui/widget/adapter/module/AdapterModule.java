@@ -25,7 +25,79 @@ import android.view.AbsSavedState;
 /**
  * <h4>Class Overview</h4>
  * <p>
+ * todo: description
  * </p>
+ * <h5>State saving</h5>
+ * <pre>
+ * public class MyModule extends AdapterModule {
+ *
+ *     // ...
+ *
+ *     &#64;Override
+ *     protected Parcelable onSaveInstanceState() {
+ *         final MyModuleState state = new MyModuleState(super.onSaveInstanceState());
+ *
+ *         // ...
+ *         // Pass here all data of this module which need to be saved to the state.
+ *         // ...
+ *
+ *         return state;
+ *     }
+ *
+ *     &#64;Override
+ *     protected void onRestoreInstanceState(Parcelable savedState) {
+ *          if (!(savedState instanceof MyModuleState)) {
+ *              // Passed savedState is not our state, let super to process it.
+ *              super.onRestoreInstanceState(savedState);
+ *              return;
+ *          }
+ *
+ *          final MyModuleState state = (MyModuleState) savedState;
+ *          // Pass superState to super to process it.
+ *          super.onRestoreInstanceState(savedState.getSuperState());
+ *
+ *          // ...
+ *          // Set here all data of this module which need to be restored from the savedState.
+ *          // ...
+ *     }
+ *
+ *     // ...
+ *
+ *     // Implementation of BaseSavedState for this module.
+ *     static class MyModuleState extends BaseSavedState {
+ *
+ *         // Each implementation of saved state need to have its own CREATOR provided.
+ *         public static final Creator&lt;MyModuleState&gt; CREATOR = new Creator&lt;&gt; {
+ *
+ *              &#64;Override
+ *              public MyModuleState createFromParcel(Parcel source) {
+ *                  return new MyModuleState(source);
+ *              }
+ *
+ *              &#64;Override
+ *              public MyModuleState[] newArray(int size) {
+ *                  return new MyModuleState[size];
+ *              }
+ *         }
+ *
+ *         MyModuleState(Parcel source) {
+ *              super(source);
+ *              // Restore here state's data.
+ *         }
+ *
+ *         // Constructor used to chain the state of inheritance hierarchies.
+ *         MyModuleState(Parcelable superState) {
+ *              super(superState);
+ *         }
+ *
+ *         &#64;Override
+ *         public void writeToParcel(Parcel dest, int flags) {
+ *              super.writeToParcel(dest, flags);
+ *              // Save here state's data.
+ *         }
+ *     }
+ * }
+ * </pre>
  *
  * @author Martin Albedinsky
  */
@@ -63,7 +135,7 @@ public abstract class AdapterModule {
 	 */
 
 	/**
-	 * The adapter to which is this module attached.
+	 * An instance of the adapter to which is this module attached.
 	 */
 	ModuleAdapter mAdapter;
 
@@ -76,10 +148,10 @@ public abstract class AdapterModule {
 	 */
 
 	/**
-	 * Flag indicating whether the adapter to which is this module attached, should be
-	 * notified in case, that the data set of this adapter module was changed.
+	 * Flag indicating whether the adapter to which is this module attached, should be notified in case,
+	 * that its data set should be changed due to changes made by this module.
 	 */
-	private boolean bAdapterNotificationEnabled = true;
+	private boolean bNotificationEnabled = true;
 
 	/**
 	 * Constructors ================================================================================
@@ -95,9 +167,11 @@ public abstract class AdapterModule {
 
 	/**
 	 * <p>
+	 * Called to save the current state of this module.
 	 * </p>
 	 *
-	 * @return
+	 * @return Saved state of this module or {@link BaseSavedState#EMPTY_STATE} if this module does
+	 * not need to save its state.
 	 */
 	public Parcelable dispatchSaveInstanceState() {
 		return onSaveInstanceState();
@@ -105,9 +179,12 @@ public abstract class AdapterModule {
 
 	/**
 	 * <p>
+	 * Called to restore a previous state, saved by {@link #dispatchSaveInstanceState()}, of this
+	 * module.
 	 * </p>
 	 *
-	 * @param savedState
+	 * @param savedState Should be the same state as obtained by {@link #dispatchSaveInstanceState()}
+	 *                   before.
 	 */
 	public void dispatchRestoreInstanceState(Parcelable savedState) {
 		if (savedState != null) {
@@ -117,10 +194,10 @@ public abstract class AdapterModule {
 
 	/**
 	 * <p>
-	 * Called to attach this adapter module to the given adapter.
+	 * Called to attach this module to the given <var>adapter</var>.
 	 * </p>
 	 *
-	 * @param adapter The adapter to which will be this adapter module attached.
+	 * @param adapter An instance of the adapter by which will be this module used.
 	 */
 	public final void dispatchAttachToAdapter(ModuleAdapter adapter) {
 		onAttachedToAdapter(mAdapter = adapter);
@@ -128,9 +205,11 @@ public abstract class AdapterModule {
 
 	/**
 	 * <p>
+	 * Returns flag indicating whether this module requires to be its state staved or not.
 	 * </p>
 	 *
-	 * @return
+	 * @return <code>True</code> to call {@link #dispatchSaveInstanceState()} up on this module,
+	 * <code>false</code> otherwise.
 	 */
 	public boolean requiresStateSaving() {
 		return false;
@@ -142,30 +221,29 @@ public abstract class AdapterModule {
 
 	/**
 	 * <p>
-	 * Returns flag indicating whether the adapter to which is this module attached
-	 * should be notified in case, that the data set of this adapter module was changed.
+	 * Returns flag indicating whether the adapter to which is this module attached should be notified
+	 * in case, that its data set should be changed due to changes made by this module.
 	 * </p>
 	 *
-	 * @return <code>True</code> in case, that adapter notification is enabled, <code>false</code>
-	 * otherwise.
-	 * @see #enableAdapterNotification(boolean)
+	 * @return <code>True</code> when adapter auto-notification is enabled, <code>false</code> otherwise.
+	 * @see #setAdapterNotificationEnabled(boolean)
 	 */
 	public boolean isAdapterNotificationEnabled() {
-		return bAdapterNotificationEnabled;
+		return bNotificationEnabled;
 	}
 
 	/**
 	 * <p>
-	 * Sets flag indicating whether the adapter to which is this module attached
-	 * should be notified in case, that the data set of this adapter module was
-	 * changed.
+	 * Sets flag indicating whether the adapter to which is this module attached should be notified in case,
+	 * that its data set should be changed due to changes made by this module.
 	 * </p>
 	 *
-	 * @param enable <code>True</code> to enable, <code>false</code> to disable.
+	 * @param enabled <code>True</code> to enable adapter auto-notification, <code>false</code> to
+	 *                disable it.
 	 * @see #isAdapterNotificationEnabled()
 	 */
-	public void enableAdapterNotification(boolean enable) {
-		this.bAdapterNotificationEnabled = enable;
+	public void setAdapterNotificationEnabled(boolean enabled) {
+		this.bNotificationEnabled = enabled;
 	}
 
 	/**
@@ -174,9 +252,17 @@ public abstract class AdapterModule {
 
 	/**
 	 * <p>
+	 * Invoked immediately after {@link #dispatchSaveInstanceState()} was called, to save the current
+	 * state of this module.
+	 * </p>
+	 * <p>
+	 * If you decide to override this method, do not forget to call <code>super.onSaveInstanceState()</code>
+	 * and pass super state obtained from the super to constructor of your {@link BaseSavedState}
+	 * implementation with such a parameter to ensure the state of all classes along the chain is saved.
 	 * </p>
 	 *
-	 * @return
+	 * @return Return here your implementation of {@link BaseSavedState} if you want to save state of
+	 * your module, otherwise no implementation of this method is necessary.
 	 */
 	protected Parcelable onSaveInstanceState() {
 		return BaseSavedState.EMPTY_STATE;
@@ -184,9 +270,12 @@ public abstract class AdapterModule {
 
 	/**
 	 * <p>
+	 * Called immediately after {@link #dispatchRestoreInstanceState(android.os.Parcelable)} was called
+	 * with the valid (not-null) <var>savedState</var> to restore a previous state, (saved in {@link #onSaveInstanceState()}),
+	 * of this module.
 	 * </p>
 	 *
-	 * @param savedState
+	 * @param savedState Before saved state of this module.
 	 */
 	protected void onRestoreInstanceState(Parcelable savedState) {
 	}
@@ -196,20 +285,21 @@ public abstract class AdapterModule {
 	 * Invoked immediately after {@link #dispatchAttachToAdapter(com.wit.android.ui.widget.adapter.module.AdapterModule.ModuleAdapter)}.
 	 * </p>
 	 *
-	 * @param adapter The adapter to which was this module right now attached.
+	 * @param adapter An instance of the adapter to which was this module right now attached.
 	 */
 	protected void onAttachedToAdapter(ModuleAdapter adapter) {
 	}
 
 	/**
 	 * <p>
-	 * Notifies the adapter to which is this module attached. This should be fired
-	 * whenever the data set of this adapter module on which the attached adapter
-	 * depends, was changed.
+	 * Notifies the adapter to which is this module attached by {@link ModuleAdapter#notifyDataSetChanged()}.
+	 * </p>
+	 * <p>
+	 * This should be called whenever the data set of the attached adapter should be reloaded due
+	 * to changes made by this module.
 	 * </p>
 	 *
 	 * @see #isAdapterNotificationEnabled()
-	 * @see #enableAdapterNotification(boolean)
 	 */
 	protected final void notifyAdapter() {
 		if (isAdapterNotificationEnabled()) {
@@ -232,6 +322,8 @@ public abstract class AdapterModule {
 	/**
 	 * <h4>Class Overview</h4>
 	 * <p>
+	 * A {@link AbsSavedState} implementation that should be used by inheritance hierarchies of
+	 * {@link AdapterModule} to ensure the state of all classes along the chain is saved.
 	 * </p>
 	 *
 	 * @author Martin Albedinsky
@@ -244,10 +336,10 @@ public abstract class AdapterModule {
 
 		/**
 		 * <p>
+		 * Creator used to create an instance or array of instances of BaseSavedState from {@link android.os.Parcel}.
 		 * </p>
 		 */
 		public static final Creator<BaseSavedState> CREATOR = new Creator<BaseSavedState>() {
-
 			/**
 			 */
 			@Override
@@ -269,22 +361,29 @@ public abstract class AdapterModule {
 
 		/**
 		 * <p>
+		 * Creates a new instance BaseSavedState with the given <var>superState</var> to allow
+		 * chaining of saved states in {@link #onSaveInstanceState()} and also in
+		 * {@link #onRestoreInstanceState(android.os.Parcelable)}.
 		 * </p>
 		 *
-		 * @param source
+		 * @param superState A super state obtained from <code>super.onSaveInstanceState()</code>
+		 *                   within <code>onSaveInstanceState()</code> of a specific {@link AdapterModule}
+		 *                   implementation.
 		 */
-		protected BaseSavedState(Parcel source) {
-			super(source);
+		protected BaseSavedState(Parcelable superState) {
+			super(superState);
 		}
 
 		/**
 		 * <p>
+		 * Called form {@link #CREATOR} to create an instance of BaseSavedState form the given parcel
+		 * <var>source</var>.
 		 * </p>
 		 *
-		 * @param parentState
+		 * @param source Parcel with data for a new instance.
 		 */
-		protected BaseSavedState(Parcelable parentState) {
-			super(parentState);
+		protected BaseSavedState(Parcel source) {
+			super(source);
 		}
 	}
 
@@ -295,7 +394,7 @@ public abstract class AdapterModule {
 	/**
 	 * <h4>Interface Overview</h4>
 	 * <p>
-	 * Base interface for "module based" adapter.
+	 * Base interface for "module based" adapter which want to use one of {@link AdapterModule} implementations.
 	 * </p>
 	 *
 	 * @author Martin Albedinsky
