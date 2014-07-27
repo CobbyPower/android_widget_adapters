@@ -44,12 +44,6 @@ public class MissingUIAnnotationException extends AndroidRuntimeException {
 
 	/**
 	 */
-	public MissingUIAnnotationException(String name, Throwable cause) {
-		super(name, cause);
-	}
-
-	/**
-	 */
 	public MissingUIAnnotationException(Exception cause) {
 		super(cause);
 	}
