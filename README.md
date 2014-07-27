@@ -2,7 +2,7 @@
 <img align="left" src="http://www.wolf-itechnologies.com/images/wit/android/wit_ic_android_100.png" />
 </a>
 
-Android Widget Adapters (1.1)
+Android Widget Adapters (2.0)
 ===============
 
 Effective and optimized adapters for Android widgets as [ListView](http://developer.android.com/reference/android/widget/ListView.html) and [GridView](http://developer.android.com/reference/android/widget/GridView.html).
@@ -61,7 +61,7 @@ The **latest version** of this library will be always at the [**release**](https
 
 ## Related Projects ##
 
-* [**Android Widgets**](https://github.com/Wolf-ITechnologies/android_widgets "Go to repository")
+* [**Android UI**](https://github.com/Wolf-ITechnologies/android_ui "Go to repository")
 
 ## Support ##
 
