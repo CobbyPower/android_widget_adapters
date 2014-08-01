@@ -149,7 +149,8 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 
 	/**
 	 * <p>
-	 * Called to dispatch that item at the specified <var>position</var> was selected.
+	 * Called to dispatch that item at the specified <var>position</var> was selected within the
+	 * {@link android.widget.Spinner Spinner} which hosts this adapter.
 	 * </p>
 	 *
 	 * @param position Position of an item which was selected.
@@ -163,16 +164,6 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 */
-	@Override
-	public void onBindView(int position, Object viewHolder) {
-		final Item selectedItem = getSelectedItem();
-		if (selectedItem != null) {
-			onUpdateView(position, selectedItem, viewHolder);
-		}
 	}
 
 	/**
@@ -303,6 +294,16 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 			return holder;
 		}
 		return onCreateViewHolder(position, itemView);
+	}
+
+	/**
+	 */
+	@Override
+	protected void onBindView(int position, Object viewHolder) {
+		final Item selectedItem = getSelectedItem();
+		if (selectedItem != null) {
+			onUpdateView(position, selectedItem, viewHolder);
+		}
 	}
 
 	/**
