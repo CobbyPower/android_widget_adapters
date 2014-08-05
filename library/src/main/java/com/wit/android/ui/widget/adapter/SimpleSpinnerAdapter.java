@@ -40,7 +40,7 @@ public abstract class SimpleSpinnerAdapter<Item> extends BaseSpinnerAdapter<Item
 	/**
 	 * Log TAG.
 	 */
-	// private static final String TAG = SimpleAdapter.class.getSimpleName();
+	// private static final String TAG = SimpleSpinnerAdapter.class.getSimpleName();
 
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.

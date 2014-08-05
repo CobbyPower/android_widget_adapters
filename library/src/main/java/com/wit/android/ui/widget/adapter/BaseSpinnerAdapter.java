@@ -178,12 +178,18 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 			// Dispatch to create new drop down view.
 			convertView = onCreateDropDownView(position, getLayoutInflater(), parent);
 			if (convertView == null) {
-				throw new IllegalStateException("Created drop down view at position(" + position + ") can not be NULL.");
+				throw new NullPointerException("Created drop down view for position(" + position + ") can not be null.");
 			}
-			// Set holder to the new drop down view.
-			convertView.setTag(viewHolder = onCreateDropDownViewHolder(position, convertView));
+			// Resolve holder for the newly created drop down view.
+			final Object holder = onCreateDropDownViewHolder(position, convertView);
+			if (holder != null) {
+				convertView.setTag(viewHolder = holder);
+			} else {
+				viewHolder = convertView;
+			}
 		} else {
-			viewHolder = convertView.getTag();
+			final Object holder = convertView.getTag();
+			viewHolder = holder != null ? holder : convertView;
 		}
 		// Dispatch to bind drop down view with data.
 		onBindDropDownView(position, viewHolder);
@@ -309,11 +315,17 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	/**
 	 * <p>
 	 * Invoked to set up and populate a drop down view of an item from the current data set at the
-	 * specified position.
+	 * specified position. This is invoked whenever {@link #getDropDownView(int, android.view.View, android.view.ViewGroup)}
+	 * is called.
 	 * </p>
 	 * <p>
-	 * This is invoked whenever {@link #getDropDownView(int, android.view.View, android.view.ViewGroup)}
-	 * is called.
+	 * <b>Note</b>, that if {@link #onCreateDropDownViewHolder(int, android.view.View)} returns 
+	 * <code>null</code>  for the specified <var>position</var> here passed <var>viewHolder</var> will
+	 * be the view created by {@link #onCreateDropDownView(int, android.view.LayoutInflater, android.view.ViewGroup)}
+	 * for the specified position or just recycled view for such a position. This approach can be used, 
+	 * when a view hierarchy of the specific spinner drop down item is represented by one custom view, 
+	 * where such a view represents a holder for all its child views.
+	 * </p>
 	 * </p>
 	 * <p>
 	 * By default this will call {@link #onUpdateView(int, Object, Object)} with an item obtained by
@@ -323,7 +335,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 * @param position   Position of the item from the current data set of which drop down view to
 	 *                   set up.
 	 * @param viewHolder An instance of the same holder as provided by {@link #onCreateDropDownViewHolder(int, android.view.View)}
-	 *                   for the specified position.
+	 *                   for the specified position or converted view as holder as described above.
 	 */
 	protected void onBindDropDownView(int position, Object viewHolder) {
 		final Item item = getItem(position);

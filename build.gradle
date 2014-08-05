@@ -33,7 +33,7 @@ ext.versionName = "2.0"
  */
 ext.compileSdkVersion = 20
 ext.buildToolsVersion = "20.0.0"
-ext.minSdkVersion = 7
+ext.minSdkVersion = 3
 ext.targetSdkVersion = 20
 
 /**

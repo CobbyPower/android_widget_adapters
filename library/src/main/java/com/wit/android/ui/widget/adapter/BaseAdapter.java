@@ -305,8 +305,8 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * Performs optimized algorithm for this method using the <b>Holder</b> pattern.
 	 * </p>
 	 *
-	 * @throws java.lang.IllegalStateException If {@link #onCreateView(int, android.view.LayoutInflater, android.view.ViewGroup)}
-	 *                                         returns <code>null</code> for the specified <var>position</var>.
+	 * @throws java.lang.NullPointerException If {@link #onCreateView(int, android.view.LayoutInflater, android.view.ViewGroup)}
+	 *                                        returns <code>null</code> for the specified <var>position</var>.
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
@@ -317,12 +317,18 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 			// Dispatch to create new view.
 			convertView = onCreateView(position, mLayoutInflater, parent);
 			if (convertView == null) {
-				throw new IllegalStateException("Created view at position(" + position + ") can not be NULL.");
+				throw new NullPointerException("Created view for position(" + position + ") can not be null.");
 			}
-			// Set holder to the new view.
-			convertView.setTag(viewHolder = onCreateViewHolder(position, convertView));
+			// Resolve holder for the newly created view.
+			final Object holder = onCreateViewHolder(position, convertView);
+			if (holder != null) {
+				convertView.setTag(viewHolder = holder);
+			} else {
+				viewHolder = convertView;
+			}
 		} else {
-			viewHolder = convertView.getTag();
+			final Object holder = convertView.getTag();
+			viewHolder = holder != null ? holder : convertView;
 		}
 		// Dispatch to bind view with data.
 		onBindView(position, viewHolder);
@@ -536,7 +542,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * @param inflater Layout inflater which can be used to inflate the requested view.
 	 * @param parent   A parent view, to resolve correct layout params for the newly creating view.
 	 * @return New instance of the requested view.
-	 * @throws MissingUIAnnotationException If there is no @ItemView presented.
+	 * @throws com.wit.android.ui.widget.adapter.MissingUIAnnotationException If there is no @ItemView presented.
 	 * @see #inflate(int, android.view.ViewGroup)
 	 */
 	protected View onCreateView(int position, LayoutInflater inflater, ViewGroup parent) {
@@ -572,9 +578,9 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 *                 {@link #onCreateView(int, android.view.LayoutInflater, android.view.ViewGroup)}
 	 *                 for the specified position.
 	 * @return New instance of the requested view holder.
-	 * @throws MissingUIAnnotationException      If there is no @ItemViewHolder annotation presented.
-	 * @throws java.lang.IllegalStateException If the class provided by @ItemViewHolder annotation can not
-	 *                                         be accessed or does not have an empty public constructor.
+	 * @throws com.wit.android.ui.widget.adapter.MissingUIAnnotationException If there is no @ItemViewHolder annotation presented.
+	 * @throws java.lang.IllegalStateException                                If the class provided by @ItemViewHolder annotation can not
+	 *                                                                        be accessed or does not have an empty public constructor.
 	 */
 	public Object onCreateViewHolder(int position, View itemView) {
 		if (mClassOfHolder != null) {
@@ -599,11 +605,16 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	/**
 	 * <p>
 	 * Invoked to set up and populate a view of an item from the current data set at the specified
-	 * position.
+	 * position. This is invoked whenever {@link #getView(int, android.view.View, android.view.ViewGroup)}
+	 * is called.
 	 * </p>
 	 * <p>
-	 * This is invoked whenever {@link #getView(int, android.view.View, android.view.ViewGroup)} is
-	 * called.
+	 * <b>Note</b>, that if {@link #onCreateViewHolder(int, android.view.View)} returns <code>null</code>
+	 * for the specified <var>position</var> here passed <var>viewHolder</var> will be the view created
+	 * by {@link #onCreateView(int, android.view.LayoutInflater, android.view.ViewGroup)} for the
+	 * specified position or just recycled view for such a position. This approach can be used, when
+	 * a view hierarchy of the specific list item is represented by one custom view, where such a view
+	 * represents a holder for all its child views.
 	 * </p>
 	 * <p>
 	 * By default this will try to bind the given <var>viewHolder</var> (if it is instanceof {@link ViewHolder}),
@@ -612,7 +623,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 *
 	 * @param position   Position of the item from the current data set of which view to set up.
 	 * @param viewHolder An instance of the same holder as provided by {@link #onCreateViewHolder(int, android.view.View)}
-	 *                   for the specified position.
+	 *                   for the specified position or converted view as holder as described above.
 	 * @throws java.lang.IllegalStateException If binding process for the specified position fails.
 	 */
 	protected void onBindView(int position, Object viewHolder) {
