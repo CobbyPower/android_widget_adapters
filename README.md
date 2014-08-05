@@ -49,7 +49,7 @@ Efficient and optimized adapters for Android widgets as [ListView](http://develo
 
 ## Compatibility ##
 
-Supported from the **Android API version 8**, so almost **every Android** powered device out there :).
+Supported from the **Android API version 8**.
 
 ## Known Issues ##
 
