@@ -29,10 +29,6 @@ package com.wit.android.ui.widget.adapter;
 public interface OnDataSetActionListener<Adapter extends BaseAdapter> {
 
 	/**
-	 * Methods =====================================================================================
-	 */
-
-	/**
 	 * <p>
 	 * Invoked whenever the specified <var>action</var> was selected for the specified <var>position</var>
 	 * within the passed <var>adapter</var> in which is this callback registered.
@@ -43,10 +39,7 @@ public interface OnDataSetActionListener<Adapter extends BaseAdapter> {
 	 * @param position The position for which was the specified action selected.
 	 * @param id       An id of an item at the specified position within the current data set of the
 	 *                 passed adapter.
+	 * @param data     Additional data for the selected action.
 	 */
-	public void onDataSetActionSelected(Adapter adapter, int action, int position, long id);
-
-	/**
-	 * Inner classes ===============================================================================
-	 */
+	public void onDataSetActionSelected(Adapter adapter, int action, int position, long id, Object data);
 }
