@@ -501,6 +501,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 *
 	 * @param action   Action to be dispatched.
 	 * @param position The position for which was the given action performed.
+	 * @param data     Additional data for the selected action to be dispatched to the listener.
 	 */
 	protected void notifyDataSetActionSelected(int action, int position, Object data) {
 		if (!onDataSetActionSelected(action, position, data)) {
