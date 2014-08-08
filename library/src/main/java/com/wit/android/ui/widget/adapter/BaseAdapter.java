@@ -495,30 +495,28 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * Called to notify, that the given <var>action</var> was performed for the specified <var>position</var>.
 	 * </p>
 	 * <p>
-	 * If {@link #onDataSetActionSelected(int, int)} will not process this call, the current
+	 * If {@link #onDataSetActionSelected(int, int, Object)} will not process this call, the current
 	 * {@link OnDataSetActionListener} will be notified if it is presented.
 	 * </p>
 	 *
 	 * @param action   Action to be dispatched.
 	 * @param position The position for which was the given action performed.
 	 */
-	protected void notifyDataSetActionSelected(int action, int position) {
-		if (!onDataSetActionSelected(action, position)) {
-			notifyDataSetActionSelectedInner(action, position);
+	protected void notifyDataSetActionSelected(int action, int position, Object data) {
+		if (!onDataSetActionSelected(action, position, data)) {
+			notifyDataSetActionSelectedInner(action, position, data);
 		}
 	}
 
 	/**
 	 * <p>
-	 * Invoked immediately after {@link #notifyDataSetActionSelected(int, int)} was called.
+	 * Invoked immediately after {@link #notifyDataSetActionSelected(int, int, Object)} was called.
 	 * </p>
 	 *
-	 * @param action   Dispatched action.
-	 * @param position The position for which was the given action performed.
 	 * @return <code>True</code> to indicate that this event was processed here, otherwise the current
 	 * {@link OnDataSetActionListener} will be notified about this event if it is presented.
 	 */
-	protected boolean onDataSetActionSelected(int action, int position) {
+	protected boolean onDataSetActionSelected(int action, int position, Object data) {
 		return false;
 	}
 
@@ -687,13 +685,13 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	}
 
 	/**
-	 * Inner implementation of {@link #notifyDataSetActionSelected(int, int)} to hide such an
+	 * Inner implementation of {@link #notifyDataSetActionSelected(int, int, Object)} to hide such an
 	 * implementation.
 	 */
 	@SuppressWarnings("unchecked")
-	void notifyDataSetActionSelectedInner(int action, int position) {
+	void notifyDataSetActionSelectedInner(int action, int position, Object data) {
 		if (mDataSetActionListener != null) {
-			mDataSetActionListener.onDataSetActionSelected(this, action, position, getItemId(position));
+			mDataSetActionListener.onDataSetActionSelected(this, action, position, getItemId(position), data);
 		}
 	}
 
