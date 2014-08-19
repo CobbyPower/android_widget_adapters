@@ -6,7 +6,7 @@ Global gradle configuration. This will be applied to all sub-projects.
  */
 buildscript {
     repositories {
-        mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:0.12.2'
