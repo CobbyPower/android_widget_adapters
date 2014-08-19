@@ -1,8 +1,4 @@
-apply plugin: 'android-library'
-
-/**
- * Library dependencies ============================================================================
- */
+apply plugin: 'com.android.library'
 
 /**
  * Android Library options =========================================================================
@@ -13,8 +9,7 @@ android {
 
     defaultConfig {
         minSdkVersion rootProject.minSdkVersion
-        versionCode rootProject.versionCode
-        versionName rootProject.versionName
+        applicationId 'com.wit.android.ui.widget.adapter'
     }
 
     compileOptions {
@@ -22,3 +17,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_7
     }
 }
+
+/**
+ * Library dependencies ============================================================================
+ */
