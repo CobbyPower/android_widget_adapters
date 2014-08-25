@@ -8,8 +8,8 @@ android {
     buildToolsVersion rootProject.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion rootProject.minSdkVersion
         applicationId 'com.wit.android.ui.widget.adapter'
+        minSdkVersion rootProject.minSdkVersion
     }
 
     compileOptions {

@@ -29,10 +29,6 @@ package com.wit.android.ui.widget.adapter;
 public interface OnDataSetListener<Adapter extends BaseAdapter> {
 
 	/**
-	 * Methods =====================================================================================
-	 */
-
-	/**
 	 * <p>
 	 * Invoked whenever the current data set within the passed <var>adapter</var> was changed.
 	 * </p>
@@ -49,8 +45,4 @@ public interface OnDataSetListener<Adapter extends BaseAdapter> {
 	 * @param adapter An instance of the adapter of which current data set was just invalidated.
 	 */
 	public void onDataSetInvalidated(Adapter adapter);
-
-	/**
-	 * Inner classes ===============================================================================
-	 */
 }

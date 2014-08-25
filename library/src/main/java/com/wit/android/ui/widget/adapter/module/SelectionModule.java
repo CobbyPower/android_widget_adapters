@@ -70,10 +70,6 @@ public class SelectionModule extends AdapterModule {
 	// private static final String TAG = SelectionModule.class.getSimpleName();
 
 	/**
-	 * Enums =======================================================================================
-	 */
-
-	/**
 	 * Static members ==============================================================================
 	 */
 
@@ -87,17 +83,9 @@ public class SelectionModule extends AdapterModule {
 	private int mMode = MODE_SINGLE;
 
 	/**
-	 * Arrays --------------------------------------------------------------------------------------
-	 */
-
-	/**
 	 * Set of the currently selected positions.
 	 */
-	private SparseIntArray aSelectedPositions = new SparseIntArray();
-
-	/**
-	 * Booleans ------------------------------------------------------------------------------------
-	 */
+	private SparseIntArray mSelectedPositions = new SparseIntArray();
 
 	/**
 	 * Constructors ================================================================================
@@ -260,7 +248,7 @@ public class SelectionModule extends AdapterModule {
 	 */
 	@Override
 	public boolean requiresStateSaving() {
-		return aSelectedPositions.size() > 0;
+		return mSelectedPositions.size() > 0;
 	}
 
 	/**
@@ -276,7 +264,7 @@ public class SelectionModule extends AdapterModule {
 	 * <b>Note</b> that this array is sorted for optimization (from lowest to highest position).
 	 */
 	public SparseIntArray getSelection() {
-		return aSelectedPositions;
+		return mSelectedPositions;
 	}
 
 	/**
@@ -287,7 +275,7 @@ public class SelectionModule extends AdapterModule {
 	 * @return Count of the currently selected positions.
 	 */
 	public int getSelectionCount() {
-		return aSelectedPositions.size();
+		return mSelectedPositions.size();
 	}
 
 	/**
@@ -302,7 +290,7 @@ public class SelectionModule extends AdapterModule {
 	 */
 	public int getSelectedPosition() {
 		this.checkActualModeFor(MODE_SINGLE, "obtain selected item position");
-		return aSelectedPositions.size() > 0 ? aSelectedPositions.get(aSelectedPositions.keyAt(0)) : -1;
+		return mSelectedPositions.size() > 0 ? mSelectedPositions.get(mSelectedPositions.keyAt(0)) : -1;
 	}
 
 	/**
@@ -331,9 +319,9 @@ public class SelectionModule extends AdapterModule {
 	 */
 	public int[] getSelectedPositions(boolean ascending) {
 		this.checkActualModeFor(MODE_MULTIPLE, "obtain selected items position");
-		final int[] positions = new int[aSelectedPositions.size()];
+		final int[] positions = new int[mSelectedPositions.size()];
 		for (int i = 0; i < positions.length; i++) {
-			positions[i] = aSelectedPositions.keyAt(i);
+			positions[i] = mSelectedPositions.keyAt(i);
 		}
 		return ascending ? positions : reversePositions(positions);
 	}
@@ -381,7 +369,7 @@ public class SelectionModule extends AdapterModule {
 	 * selected positions, <code>false</code> otherwise.
 	 */
 	protected final boolean contains(int position) {
-		return aSelectedPositions.indexOfKey(position) >= 0;
+		return mSelectedPositions.indexOfKey(position) >= 0;
 	}
 
 	/**
@@ -392,7 +380,7 @@ public class SelectionModule extends AdapterModule {
 	 * @param position The position to add into the selected ones.
 	 */
 	protected final void select(int position) {
-		aSelectedPositions.append(position, position);
+		mSelectedPositions.append(position, position);
 	}
 
 	/**
@@ -403,9 +391,9 @@ public class SelectionModule extends AdapterModule {
 	 * @param position The position to remove from the selected ones.
 	 */
 	protected final void deselect(int position) {
-		final int index = aSelectedPositions.indexOfKey(position);
+		final int index = mSelectedPositions.indexOfKey(position);
 		if (index >= 0) {
-			aSelectedPositions.removeAt(index);
+			mSelectedPositions.removeAt(index);
 		}
 	}
 
@@ -418,7 +406,7 @@ public class SelectionModule extends AdapterModule {
 	 *               <code>false</code> otherwise.
 	 */
 	protected final void clearSelection(boolean notify) {
-		aSelectedPositions.clear();
+		mSelectedPositions.clear();
 		if (notify) {
 			notifyAdapter();
 		}

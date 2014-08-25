@@ -58,10 +58,6 @@ public class ModuleManager {
 	private static final String BUNDLE_MODULE_STATE_KEY_FORMAT = "com.wit.android.ui.widget.adapter.ModuleManager.BUNDLE.ModuleState.%d";
 
 	/**
-	 * Enums =======================================================================================
-	 */
-
-	/**
 	 * Static members ==============================================================================
 	 */
 
@@ -70,17 +66,9 @@ public class ModuleManager {
 	 */
 
 	/**
-	 * Arrays --------------------------------------------------------------------------------------
-	 */
-
-	/**
 	 * Array with adapter modules.
 	 */
-	private SparseArray<AdapterModule> aModules;
-
-	/**
-	 * Booleans ------------------------------------------------------------------------------------
-	 */
+	private SparseArray<AdapterModule> mModules;
 
 	/**
 	 * Constructors ================================================================================
@@ -105,10 +93,10 @@ public class ModuleManager {
 	 */
 	public void addModule(AdapterModule module, int moduleId) {
 		if (module != null) {
-			if (aModules == null) {
-				this.aModules = new SparseArray<>();
+			if (mModules == null) {
+				this.mModules = new SparseArray<>();
 			}
-			aModules.append(moduleId, module);
+			mModules.append(moduleId, module);
 		}
 	}
 
@@ -123,7 +111,7 @@ public class ModuleManager {
 	 * such an id.
 	 */
 	public AdapterModule getModule(int moduleId) {
-		return aModules != null ? aModules.get(moduleId) : null;
+		return mModules != null ? mModules.get(moduleId) : null;
 	}
 
 	/**
@@ -134,8 +122,8 @@ public class ModuleManager {
 	 * @param moduleId An id of the desired module to remove.
 	 */
 	public void removeModule(int moduleId) {
-		if (aModules != null) {
-			aModules.remove(moduleId);
+		if (mModules != null) {
+			mModules.remove(moduleId);
 		}
 	}
 
@@ -149,15 +137,15 @@ public class ModuleManager {
 	 * @see AdapterModule#requiresStateSaving()
 	 */
 	public Bundle dispatchSaveModulesState() {
-		final int n = aModules != null ? aModules.size() : 0;
+		final int n = mModules != null ? mModules.size() : 0;
 		if (n > 0) {
 			final Bundle states = new Bundle();
 			boolean save = false;
 
 			AdapterModule module;
 			for (int i = 0; i < n; i++) {
-				int moduleId = aModules.keyAt(i);
-				module = aModules.get(moduleId);
+				int moduleId = mModules.keyAt(i);
+				module = mModules.get(moduleId);
 				if (module.requiresStateSaving()) {
 					save = true;
 					states.putParcelable(
@@ -181,15 +169,15 @@ public class ModuleManager {
 	 *                   before.
 	 */
 	public void dispatchRestoreModulesState(Bundle savedState) {
-		if (savedState != null && aModules != null) {
-			final int n = aModules.size();
+		if (savedState != null && mModules != null) {
+			final int n = mModules.size();
 			if (n > 0) {
 				String key;
 				for (int i = 0; i < n; i++) {
-					int moduleID = aModules.keyAt(i);
+					int moduleID = mModules.keyAt(i);
 					key = createModuleStateKey(moduleID);
 					if (savedState.containsKey(key)) {
-						aModules.get(moduleID).dispatchRestoreInstanceState(
+						mModules.get(moduleID).dispatchRestoreInstanceState(
 								savedState.getParcelable(key)
 						);
 					}

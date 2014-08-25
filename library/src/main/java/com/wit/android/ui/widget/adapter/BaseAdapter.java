@@ -153,10 +153,6 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	// private static final boolean USER_LOG = true;
 
 	/**
-	 * Enums =======================================================================================
-	 */
-
-	/**
 	 * Static members ==============================================================================
 	 */
 
@@ -204,14 +200,6 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * Registered OnDataSetActionListener callback.
 	 */
 	private OnDataSetActionListener mDataSetActionListener;
-
-	/**
-	 * Arrays --------------------------------------------------------------------------------------
-	 */
-
-	/**
-	 * Booleans ------------------------------------------------------------------------------------
-	 */
 
 	/**
 	 * Constructors ================================================================================
@@ -541,7 +529,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * @param inflater Layout inflater which can be used to inflate the requested view.
 	 * @param parent   A parent view, to resolve correct layout params for the newly creating view.
 	 * @return New instance of the requested view.
-	 * @throws com.wit.android.ui.widget.adapter.MissingUIAnnotationException If there is no @ItemView presented.
+	 * @throws com.wit.android.ui.widget.adapter.MissingUIAnnotationException If there is no @ItemView annotation presented.
 	 * @see #inflate(int, android.view.ViewGroup)
 	 */
 	protected View onCreateView(int position, LayoutInflater inflater, ViewGroup parent) {
@@ -567,8 +555,9 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * <p>
 	 * <b>Note</b>, that if {@link com.wit.android.ui.widget.adapter.annotation.ItemViewHolder @ItemViewHolder}
 	 * annotation is presented, a class provided by this annotation will be used to instantiate the
-	 * requested view holder, otherwise implementation of this method is <b>required</b> or exception
-	 * will be thrown.
+	 * requested view holder, otherwise <code>null</code> holder will be returned so the view created
+	 * by {@link #onCreateView(int, android.view.LayoutInflater, android.view.ViewGroup)} for the
+	 * specified position will be passed as holder to {@link #onBindView(int, Object)}.
 	 * </p>
 	 *
 	 * @param position Position of the item from the current data set for which should be a new view
@@ -577,9 +566,8 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 *                 {@link #onCreateView(int, android.view.LayoutInflater, android.view.ViewGroup)}
 	 *                 for the specified position.
 	 * @return New instance of the requested view holder.
-	 * @throws com.wit.android.ui.widget.adapter.MissingUIAnnotationException If there is no @ItemViewHolder annotation presented.
-	 * @throws java.lang.IllegalStateException                                If the class provided by @ItemViewHolder annotation can not
-	 *                                                                        be accessed or does not have an empty public constructor.
+	 * @throws java.lang.IllegalStateException If the class provided by @ItemViewHolder annotation can not
+	 *                                         be accessed or does not have an empty public constructor.
 	 */
 	public Object onCreateViewHolder(int position, View itemView) {
 		if (mClassOfHolder != null) {
@@ -595,10 +583,8 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 			holder.create(position, itemView);
 			return holder;
 		}
-		throw new MissingUIAnnotationException(
-				"Can not to create view holder for position(" + position + ") class of holder. " +
-						"No @ItemViewHolder annotation presented."
-		);
+		// Return null holder, so view created by onCreateView(...) will be passed as holder to onBindView(...).
+		return null;
 	}
 
 	/**

@@ -60,10 +60,6 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	// private static final boolean LOG_ENABLED = true;
 
 	/**
-	 * Enums =======================================================================================
-	 */
-
-	/**
 	 * Static members ==============================================================================
 	 */
 
@@ -72,23 +68,15 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	 */
 
 	/**
-	 * An attribute from the current theme, which should contain a resource of the style for the
-	 * header view.
-	 */
-	private int mHeaderStyleAttr = android.R.attr.textViewStyle;
-
-	/**
-	 * Arrays --------------------------------------------------------------------------------------
-	 */
-
-	/**
 	 * Set of headers managed by this module mapped to theirs positions.
 	 */
 	private final SparseArray<H> HEADERS = new SparseArray<>();
 
 	/**
-	 * Booleans ------------------------------------------------------------------------------------
+	 * An attribute from the current theme, which should contain a resource of the style for the
+	 * header view.
 	 */
+	private int mHeaderStyleAttr = android.R.attr.textViewStyle;
 
 	/**
 	 * Constructors ================================================================================

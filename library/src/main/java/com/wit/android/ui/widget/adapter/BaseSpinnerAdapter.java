@@ -73,10 +73,6 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	// private static final boolean LOG_ENABLED = true;
 
 	/**
-	 * Enums =======================================================================================
-	 */
-
-	/**
 	 * Static members ==============================================================================
 	 */
 
@@ -98,14 +94,6 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 * Class to be used to instantiate an instance of holder for drop down view.
 	 */
 	private Class<? extends ViewHolder> mClassOfDropDownHolder = null;
-
-	/**
-	 * Arrays --------------------------------------------------------------------------------------
-	 */
-
-	/**
-	 * Booleans ------------------------------------------------------------------------------------
-	 */
 
 	/**
 	 * Constructors ================================================================================
@@ -150,7 +138,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	/**
 	 * <p>
 	 * Called to dispatch that item at the specified <var>position</var> was selected within the
-	 * {@link android.widget.Spinner Spinner} which hosts this adapter.
+	 * {@link android.widget.Spinner Spinner} to which is this adapter attached.
 	 * </p>
 	 *
 	 * @param position Position of an item which was selected.
@@ -176,7 +164,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 		Object viewHolder;
 		if (convertView == null) {
 			// Dispatch to create new drop down view.
-			convertView = onCreateDropDownView(position, getLayoutInflater(), parent);
+			convertView = onCreateDropDownView(position, mLayoutInflater, parent);
 			if (convertView == null) {
 				throw new NullPointerException("Created drop down view for position(" + position + ") can not be null.");
 			}

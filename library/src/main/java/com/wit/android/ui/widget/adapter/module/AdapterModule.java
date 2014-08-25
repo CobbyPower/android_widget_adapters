@@ -123,10 +123,6 @@ public abstract class AdapterModule {
 	// private static final boolean LOG_ENABLED = true;
 
 	/**
-	 * Enums =======================================================================================
-	 */
-
-	/**
 	 * Static members ==============================================================================
 	 */
 
@@ -140,18 +136,10 @@ public abstract class AdapterModule {
 	ModuleAdapter mAdapter;
 
 	/**
-	 * Arrays --------------------------------------------------------------------------------------
-	 */
-
-	/**
-	 * Booleans ------------------------------------------------------------------------------------
-	 */
-
-	/**
 	 * Flag indicating whether the adapter to which is this module attached, should be notified in case,
 	 * that its data set should be changed due to changes made by this module.
 	 */
-	private boolean bNotificationEnabled = true;
+	private boolean mNotificationEnabled = true;
 
 	/**
 	 * Constructors ================================================================================
@@ -229,7 +217,7 @@ public abstract class AdapterModule {
 	 * @see #setAdapterNotificationEnabled(boolean)
 	 */
 	public boolean isAdapterNotificationEnabled() {
-		return bNotificationEnabled;
+		return mNotificationEnabled;
 	}
 
 	/**
@@ -243,7 +231,7 @@ public abstract class AdapterModule {
 	 * @see #isAdapterNotificationEnabled()
 	 */
 	public void setAdapterNotificationEnabled(boolean enabled) {
-		this.bNotificationEnabled = enabled;
+		this.mNotificationEnabled = enabled;
 	}
 
 	/**
