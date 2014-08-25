@@ -20,6 +20,7 @@ package com.wit.android.ui.widget.adapter;
 
 import android.content.Context;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -53,10 +54,6 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	// private static final boolean LOG_ENABLED = true;
 
 	/**
-	 * Enums =======================================================================================
-	 */
-
-	/**
 	 * Static members ==============================================================================
 	 */
 
@@ -65,17 +62,9 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 */
 
 	/**
-	 * Arrays --------------------------------------------------------------------------------------
-	 */
-
-	/**
 	 * Data set of this adapter.
 	 */
-	private List<Item> aItems;
-
-	/**
-	 * Booleans ------------------------------------------------------------------------------------
-	 */
+	private List<Item> mItems;
 
 	/**
 	 * Constructors ================================================================================
@@ -90,6 +79,29 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 */
 	public SimpleAdapter(Context context) {
 		super(context);
+	}
+
+	/**
+	 * <p>
+	 * Same as {@link #SimpleAdapter(android.content.Context, java.util.List)} so the given <var>items</var>
+	 * array will be converted to List.
+	 * </p>
+	 */
+	public SimpleAdapter(Context context, Item[] items) {
+		this(context, Arrays.asList(items));
+	}
+
+	/**
+	 * <p>
+	 * Creates a new instance of SimpleAdapter with the given <var>items</var> data set.
+	 * </p>
+	 *
+	 * @param context Context in which will be this adapter used.
+	 * @param items   List of items to be used as initial data set for this adapter.
+	 */
+	public SimpleAdapter(Context context, List<Item> items) {
+		super(context);
+		this.mItems = items;
 	}
 
 	/**
@@ -109,7 +121,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 * this adapter.
 	 */
 	public List<Item> getItems() {
-		return aItems;
+		return mItems;
 	}
 
 	/**
@@ -118,7 +130,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 * </p>
 	 */
 	public List<Item> swapItems(List<Item> items) {
-		final List<Item> oldItems = aItems;
+		final List<Item> oldItems = mItems;
 		changeItems(items);
 		return oldItems;
 	}
@@ -137,12 +149,22 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 * @see #clearItems()
 	 */
 	public void changeItems(List<Item> items) {
-		this.aItems = items;
+		this.mItems = items;
 		if (items != null) {
 			notifyDataSetChanged();
 		} else {
 			notifyDataSetInvalidated();
 		}
+	}
+
+	/**
+	 * <p>
+	 * Same as {@link #changeItems(java.util.List)} so the given <var>items</var> array will be converted
+	 * to List.
+	 * </p>
+	 */
+	public void changeItems(Item[] items) {
+		changeItems(Arrays.asList(items));
 	}
 
 	/**
@@ -155,7 +177,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 */
 	public void clearItems() {
 		if (hasItems()) {
-			aItems.clear();
+			mItems.clear();
 			notifyDataSetChanged();
 		}
 	}
@@ -169,7 +191,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 * @return <code>True</code> if this adapter has some items, <code>false</code> otherwise.
 	 */
 	public boolean hasItems() {
-		return aItems != null && aItems.size() > 0;
+		return mItems != null && mItems.size() > 0;
 	}
 
 	/**
@@ -180,14 +202,14 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 */
 	@Override
 	public int getCount() {
-		return hasItems() ? aItems.size() : 0;
+		return hasItems() ? mItems.size() : 0;
 	}
 
 	/**
 	 */
 	@Override
 	public Item getItem(int position) {
-		return (hasItems() && (position >= 0 && position < aItems.size())) ? aItems.get(position) : null;
+		return (hasItems() && (position >= 0 && position < mItems.size())) ? mItems.get(position) : null;
 	}
 
 	/**

@@ -25,8 +25,8 @@ allprojects {
 /**
  * Project options =================================================================================
  */
-ext.versionCode = 200
-ext.versionName = "2.0"
+ext.versionCode = 210
+ext.versionName = "2.1"
 
 /**
  * Android SDK options =======================================================
@@ -35,7 +35,3 @@ ext.compileSdkVersion = 20
 ext.buildToolsVersion = "20.0.0"
 ext.minSdkVersion = 3
 ext.targetSdkVersion = 20
-
-/**
- * Global dependencies =============================================================================
- */

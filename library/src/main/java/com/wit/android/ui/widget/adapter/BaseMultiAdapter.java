@@ -56,10 +56,6 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 	// private static final boolean LOG_ENABLED = true;
 
 	/**
-	 * Enums =======================================================================================
-	 */
-
-	/**
 	 * Static members ==============================================================================
 	 */
 
@@ -71,14 +67,6 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 	 * Manager modules presented within this adapter.
 	 */
 	private final ModuleManager MODULES_MANAGER = new ModuleManager();
-
-	/**
-	 * Arrays --------------------------------------------------------------------------------------
-	 */
-
-	/**
-	 * Booleans ------------------------------------------------------------------------------------
-	 */
 
 	/**
 	 * Constructors ================================================================================

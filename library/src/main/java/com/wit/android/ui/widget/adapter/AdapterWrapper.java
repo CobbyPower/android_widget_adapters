@@ -54,10 +54,6 @@ public abstract class AdapterWrapper implements WrapperListAdapter {
 	// private static final boolean DEBUG_ENABLED = true;
 
 	/**
-	 * Enums =======================================================================================
-	 */
-
-	/**
 	 * Static members ==============================================================================
 	 */
 
@@ -69,14 +65,6 @@ public abstract class AdapterWrapper implements WrapperListAdapter {
 	 * An instance of wrapped ListAdapter.
 	 */
 	protected final ListAdapter mAdapter;
-
-	/**
-	 * Arrays --------------------------------------------------------------------------------------
-	 */
-
-	/**
-	 * Booleans ------------------------------------------------------------------------------------
-	 */
 
 	/**
 	 * Constructors ================================================================================

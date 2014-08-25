@@ -30,10 +30,6 @@ import android.os.Parcelable;
 public interface StateAdapter {
 
 	/**
-	 * Methods =====================================================================================
-	 */
-
-	/**
 	 * <p>
 	 * Called to save the current state of this adapter.
 	 * </p>

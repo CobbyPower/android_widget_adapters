@@ -52,10 +52,6 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 	// private static final boolean LOG_ENABLED = true;
 
 	/**
-	 * Enums =======================================================================================
-	 */
-
-	/**
 	 * Static members ==============================================================================
 	 */
 
@@ -69,14 +65,6 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 	 * This is only for internal purpose.
 	 */
 	private String mLastChar = "";
-
-	/**
-	 * Arrays --------------------------------------------------------------------------------------
-	 */
-
-	/**
-	 * Booleans ------------------------------------------------------------------------------------
-	 */
 
 	/**
 	 * Constructors ================================================================================
