@@ -37,12 +37,12 @@ import com.wit.android.ui.widget.adapter.annotation.ItemViewHolder;
  * </p>
  * <h6>Accepted annotations</h6>
  * <ul>
- * <li>{@link com.wit.android.ui.widget.adapter.annotation.ItemView @ItemView} <b>[class]</b></li>
+ * <li>{@link com.wit.android.ui.widget.adapter.annotation.ItemView @ItemView} <b>[class, recursive]</b></li>
  * <p>
  * If this annotation is presented, a resource id provided by this annotation will be used to inflate
  * the desired view in {@link #onCreateView(int, android.view.LayoutInflater, android.view.ViewGroup)}.
  * </p>
- * <li>{@link com.wit.android.ui.widget.adapter.annotation.ItemViewHolder @ItemViewHolder} <b>[class]</b></li>
+ * <li>{@link com.wit.android.ui.widget.adapter.annotation.ItemViewHolder @ItemViewHolder} <b>[class, recursive]</b></li>
  * <p>
  * If this annotation is presented, a class provided by this annotation will be used to instantiate
  * an instance of the desired holder in {@link #onCreateViewHolder(int, android.view.View)}.
@@ -228,12 +228,14 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 		 * Process class annotations.
 		 */
 		// Obtain item view.
-		if (classOfAdapter.isAnnotationPresent(ItemView.class)) {
-			this.mViewRes = classOfAdapter.getAnnotation(ItemView.class).value();
+		final ItemView itemView = AdapterAnnotations.obtainAnnotationFrom(classOfAdapter, ItemView.class, BaseAdapter.class);
+		if (itemView != null) {
+			this.mViewRes = itemView.value();
 		}
 		// Obtain item view holder.
-		if (classOfAdapter.isAnnotationPresent(ItemViewHolder.class)) {
-			this.mClassOfHolder = classOfAdapter.getAnnotation(ItemViewHolder.class).value();
+		final ItemViewHolder itemViewHolder = AdapterAnnotations.obtainAnnotationFrom(classOfAdapter, ItemViewHolder.class, BaseAdapter.class);
+		if (itemViewHolder != null) {
+			this.mClassOfHolder = itemViewHolder.value();
 		}
 
 		// Set up.

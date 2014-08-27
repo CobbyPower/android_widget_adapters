@@ -23,8 +23,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder;
 import com.wit.android.ui.widget.adapter.annotation.DropDownView;
+import com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder;
 
 /**
  * <h4>Class Overview</h4>
@@ -33,12 +33,12 @@ import com.wit.android.ui.widget.adapter.annotation.DropDownView;
  * </p>
  * <h6>Accepted annotations</h6>
  * <ul>
- * <li>{@link com.wit.android.ui.widget.adapter.annotation.DropDownView @DropDownView} <b>[class]</b></li>
+ * <li>{@link com.wit.android.ui.widget.adapter.annotation.DropDownView @DropDownView} <b>[class, recursive]</b></li>
  * <p>
  * If this annotation is presented, a resource id provided by this annotation will be used to inflate
  * the desired drop down view in {@link #onCreateDropDownView(int, android.view.LayoutInflater, android.view.ViewGroup)}.
  * </p>
- * <li>{@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder @DropDownViewHolder} <b>[class]</b></li>
+ * <li>{@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder @DropDownViewHolder} <b>[class, recursive]</b></li>
  * <p>
  * If this annotation is presented, a class provided by this annotation will be used to instantiate
  * an instance of the desired drop down view holder in {@link #onCreateDropDownViewHolder(int, android.view.View)}.
@@ -117,13 +117,15 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 		/**
 		 * Process class annotations.
 		 */
-		// Obtain item view.
-		if (classOfAdapter.isAnnotationPresent(DropDownView.class)) {
-			this.mDropDownViewRes = classOfAdapter.getAnnotation(DropDownView.class).value();
+		// Obtain drop down view.
+		final DropDownView dropDownView = AdapterAnnotations.obtainAnnotationFrom(classOfAdapter, DropDownView.class, BaseAdapter.class);
+		if (dropDownView != null) {
+			this.mDropDownViewRes = dropDownView.value();
 		}
-		// Obtain item view holder.
-		if (classOfAdapter.isAnnotationPresent(DropDownViewHolder.class)) {
-			this.mClassOfDropDownHolder = classOfAdapter.getAnnotation(DropDownViewHolder.class).value();
+		// Obtain drop down view holder.
+		final DropDownViewHolder dropDownViewHolder = AdapterAnnotations.obtainAnnotationFrom(classOfAdapter, DropDownViewHolder.class, BaseAdapter.class);
+		if (dropDownViewHolder != null) {
+			this.mClassOfDropDownHolder = dropDownViewHolder.value();
 		}
 	}
 
