@@ -28,7 +28,7 @@
     <!-- # PROJECT ARTIFACT PROPERTIES ========================================================= -->
     <groupId>com.wit.android</groupId>
     <artifactId>widget-adapters</artifactId>
-    <version>2.1</version>
+    <version>2.2</version>
     <packaging>jar</packaging>
 
     <!-- # PROJECT DEPENDENCIES ================================================================ -->
