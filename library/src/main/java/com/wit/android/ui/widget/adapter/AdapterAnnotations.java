@@ -28,27 +28,30 @@ import java.lang.annotation.Annotation;
 final class AdapterAnnotations {
 
 	/**
+	 * <p>
 	 * Same as {@link #obtainAnnotationFrom(Class, Class, Class)} with no <var>maxSuperClass</var>
 	 * specified.
+	 * </p>
 	 */
 	public static <A extends Annotation> A obtainAnnotationFrom(Class<?> fromClass, Class<A> classOfAnnotation) {
 		return obtainAnnotationFrom(fromClass, classOfAnnotation, null);
 	}
 
 	/**
-	 * Obtains the specified type of an annotation from the given <var>fromClass</var> if it is
-	 * presented.
+	 * <p>
+	 * Obtains the specified type of an annotation from the given <var>fromClass</var> if it is presented.
+	 * </p>
 	 *
-	 * @param fromClass         The class from which should be the requested annotation obtained.
-	 * @param classOfAnnotation The class of the requested annotation.
-	 * @param maxSuperClass     If <code>not null</code>, this method will be also called (recursively)
+	 * @param fromClass         A class from which should be the requested annotation obtained.
+	 * @param classOfAnnotation A class of the requested annotation.
+	 * @param maxSuperClass     If <code>not null</code>, this method will be called (recursively)
 	 *                          for all super classes of the given annotated class (max to the specified
 	 *                          <var>maxSuperClass</var>) until the requested annotation is presented
 	 *                          and obtained, otherwise annotation will be obtained only from the given
 	 *                          annotated class.
 	 * @param <A>               The type of the requested annotation.
 	 * @return Obtained annotation or <code>null</code> if the requested annotation is not presented
-	 * for the given class.
+	 * for the given class or its supers if requested.
 	 * @see #obtainAnnotationFrom(Class, Class)
 	 */
 	public static <A extends Annotation> A obtainAnnotationFrom(Class<?> fromClass, Class<A> classOfAnnotation, Class<?> maxSuperClass) {
