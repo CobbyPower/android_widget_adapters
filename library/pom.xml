@@ -32,11 +32,15 @@
     <packaging>jar</packaging>
 
     <!-- # PROJECT DEPENDENCIES ================================================================ -->
+    <!--
+        Hide dependencies on release version, so when attached to android project, there will be no
+        unnecessary android dependencies compiled within External Libraries section.
+    -->
     <dependencies>
         <dependency>
-            <groupId>com.google.android</groupId>
+            <groupId>com.android</groupId>
             <artifactId>android</artifactId>
-            <version>1.5_r3</version>
+            <version>3</version>
         </dependency>
     </dependencies>
 
