@@ -4,7 +4,7 @@
 
 Android Widget Adapters (Master)
 ===============
-> [last updated: **27.08.2014**]
+> [last updated: **02.09.2014**]
 
 ### Master branch ###
 This branch is only for **testing** and **bug fixing purpose**. Contains stable and _almost_ tested code, but if You decide to checkout it, it will be only at **Your** own **"risk"**.
