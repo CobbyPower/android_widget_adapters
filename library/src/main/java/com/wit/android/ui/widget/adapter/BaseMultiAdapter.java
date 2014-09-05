@@ -23,7 +23,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.wit.android.ui.widget.adapter.config.AdaptersConfig;
 import com.wit.android.ui.widget.adapter.module.AdapterModule;
 
 /**
