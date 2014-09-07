@@ -33,12 +33,12 @@ import com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder;
  * </p>
  * <h6>Accepted annotations</h6>
  * <ul>
- * <li>{@link com.wit.android.ui.widget.adapter.annotation.DropDownView @DropDownView} <b>[class, recursive]</b></li>
+ * <li>{@link com.wit.android.ui.widget.adapter.annotation.DropDownView @DropDownView} <b>[class - inherited]</b></li>
  * <p>
  * If this annotation is presented, a resource id provided by this annotation will be used to inflate
  * the desired drop down view in {@link #onCreateDropDownView(int, android.view.LayoutInflater, android.view.ViewGroup)}.
  * </p>
- * <li>{@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder @DropDownViewHolder} <b>[class, recursive]</b></li>
+ * <li>{@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder @DropDownViewHolder} <b>[class - inherited]</b></li>
  * <p>
  * If this annotation is presented, a class provided by this annotation will be used to instantiate
  * an instance of the desired drop down view holder in {@link #onCreateDropDownViewHolder(int, android.view.View)}.
@@ -113,20 +113,6 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 */
 	public BaseSpinnerAdapter(Context context) {
 		super(context);
-		final Class<?> classOfAdapter = ((Object) this).getClass();
-		/**
-		 * Process class annotations.
-		 */
-		// Obtain drop down view.
-		final DropDownView dropDownView = AdapterAnnotations.obtainAnnotationFrom(classOfAdapter, DropDownView.class, BaseAdapter.class);
-		if (dropDownView != null) {
-			this.mDropDownViewRes = dropDownView.value();
-		}
-		// Obtain drop down view holder.
-		final DropDownViewHolder dropDownViewHolder = AdapterAnnotations.obtainAnnotationFrom(classOfAdapter, DropDownViewHolder.class, BaseAdapter.class);
-		if (dropDownViewHolder != null) {
-			this.mClassOfDropDownHolder = dropDownViewHolder.value();
-		}
 	}
 
 	/**
@@ -355,6 +341,23 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 					"Failed to update view at position(" + position + "). " +
 							viewHolder + " is not instance of ViewHolder."
 			);
+		}
+	}
+
+	/**
+	 */
+	@Override
+	void processAnnotations(Class<?> classOfAdapter) {
+		super.processAnnotations(classOfAdapter);
+		// Obtain drop down view.
+		final DropDownView dropDownView = AdapterAnnotations.obtainAnnotationFrom(classOfAdapter, DropDownView.class, BaseAdapter.class);
+		if (dropDownView != null) {
+			this.mDropDownViewRes = dropDownView.value();
+		}
+		// Obtain drop down view holder.
+		final DropDownViewHolder dropDownViewHolder = AdapterAnnotations.obtainAnnotationFrom(classOfAdapter, DropDownViewHolder.class, BaseAdapter.class);
+		if (dropDownViewHolder != null) {
+			this.mClassOfDropDownHolder = dropDownViewHolder.value();
 		}
 	}
 

@@ -55,12 +55,15 @@ final class AdapterAnnotations {
 	 * @see #obtainAnnotationFrom(Class, Class)
 	 */
 	public static <A extends Annotation> A obtainAnnotationFrom(Class<?> fromClass, Class<A> classOfAnnotation, Class<?> maxSuperClass) {
-		if (!fromClass.isAnnotationPresent(classOfAnnotation) && maxSuperClass != null) {
+		final boolean present = fromClass.isAnnotationPresent(classOfAnnotation);
+		if (present) {
+			return fromClass.getAnnotation(classOfAnnotation);
+		} else if (maxSuperClass != null) {
 			final Class<?> parent = fromClass.getSuperclass();
 			if (parent != null && !parent.equals(maxSuperClass)) {
 				return obtainAnnotationFrom(parent, classOfAnnotation, maxSuperClass);
 			}
 		}
-		return fromClass.getAnnotation(classOfAnnotation);
+		return null;
 	}
 }

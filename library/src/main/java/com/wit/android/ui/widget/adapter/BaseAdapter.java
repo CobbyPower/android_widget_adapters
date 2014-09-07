@@ -37,12 +37,12 @@ import com.wit.android.ui.widget.adapter.annotation.ItemViewHolder;
  * </p>
  * <h6>Accepted annotations</h6>
  * <ul>
- * <li>{@link com.wit.android.ui.widget.adapter.annotation.ItemView @ItemView} <b>[class, recursive]</b></li>
+ * <li>{@link com.wit.android.ui.widget.adapter.annotation.ItemView @ItemView} <b>[class - inherited]</b></li>
  * <p>
  * If this annotation is presented, a resource id provided by this annotation will be used to inflate
  * the desired view in {@link #onCreateView(int, android.view.LayoutInflater, android.view.ViewGroup)}.
  * </p>
- * <li>{@link com.wit.android.ui.widget.adapter.annotation.ItemViewHolder @ItemViewHolder} <b>[class, recursive]</b></li>
+ * <li>{@link com.wit.android.ui.widget.adapter.annotation.ItemViewHolder @ItemViewHolder} <b>[class - inherited]</b></li>
  * <p>
  * If this annotation is presented, a class provided by this annotation will be used to instantiate
  * an instance of the desired holder in {@link #onCreateViewHolder(int, android.view.View)}.
@@ -222,22 +222,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 		if (context == null) {
 			throw new NullPointerException("Invalid context.");
 		}
-
-		final Class<?> classOfAdapter = ((Object) this).getClass();
-		/**
-		 * Process class annotations.
-		 */
-		// Obtain item view.
-		final ItemView itemView = AdapterAnnotations.obtainAnnotationFrom(classOfAdapter, ItemView.class, BaseAdapter.class);
-		if (itemView != null) {
-			this.mViewRes = itemView.value();
-		}
-		// Obtain item view holder.
-		final ItemViewHolder itemViewHolder = AdapterAnnotations.obtainAnnotationFrom(classOfAdapter, ItemViewHolder.class, BaseAdapter.class);
-		if (itemViewHolder != null) {
-			this.mClassOfHolder = itemViewHolder.value();
-		}
-
+		processAnnotations(((Object) this).getClass());
 		// Set up.
 		this.mContext = context;
 		this.mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -571,7 +556,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * @throws java.lang.IllegalStateException If the class provided by @ItemViewHolder annotation can not
 	 *                                         be accessed or does not have an empty public constructor.
 	 */
-	public Object onCreateViewHolder(int position, View itemView) {
+	protected Object onCreateViewHolder(int position, View itemView) {
 		if (mClassOfHolder != null) {
 			ViewHolder holder;
 			try {
@@ -685,10 +670,6 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	}
 
 	/**
-	 * Private -------------------------------------------------------------------------------------
-	 */
-
-	/**
 	 * Inner implementation of {@link #onBindView(int, Object)} to hide such an implementation.
 	 */
 	@SuppressWarnings("unchecked")
@@ -699,6 +680,28 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 		}
 		return false;
 	}
+
+	/**
+	 * Called to process all class annotations of this <var>classOfAdapter</var>.
+	 *
+	 * @param classOfAdapter The class of this adapter of which annotations to process.
+	 */
+	void processAnnotations(Class<?> classOfAdapter) {
+		// Obtain item view.
+		final ItemView itemView = AdapterAnnotations.obtainAnnotationFrom(classOfAdapter, ItemView.class, BaseAdapter.class);
+		if (itemView != null) {
+			this.mViewRes = itemView.value();
+		}
+		// Obtain item view holder.
+		final ItemViewHolder itemViewHolder = AdapterAnnotations.obtainAnnotationFrom(classOfAdapter, ItemViewHolder.class, BaseAdapter.class);
+		if (itemViewHolder != null) {
+			this.mClassOfHolder = itemViewHolder.value();
+		}
+	}
+
+	/**
+	 * Private -------------------------------------------------------------------------------------
+	 */
 
 	/**
 	 * Abstract methods ----------------------------------------------------------------------------
