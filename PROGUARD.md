@@ -9,6 +9,8 @@ library.
 
 > Use below rules to **obfuscate as much** source code of this library project **as possible**.
 
+    # Keep all annotations.
+    -keep public @interface *
     # Keep adapter item view holders which are instantiated using reflection.
     -keep public class * implements com.wit.android.ui.widget.adapter.ViewHolder
 
