@@ -262,7 +262,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 * annotation will be processed as described below.
 	 * </p>
 	 * <p>
-	 * <b>Note</b>, that if {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder @DropDownViewHolder}
+	 * If {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder @DropDownViewHolder}
 	 * annotation is presented, a class provided by this annotation will be used to instantiate the
 	 * requested drop down view holder, otherwise {@link #onCreateViewHolder(int, android.view.View)}
 	 * will be called.

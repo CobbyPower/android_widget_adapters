@@ -3,7 +3,7 @@ Change-Log
 
 > **RELEASE VERSION** (<i>RELEASE DATE</i>)
 
-### **2.3** (<i>**.08.2014</i>) ###
+### **2.3** (<i>**.09.2014</i>) ###
 - @ItemViewHolder, @DropDownViewHolder annotations are **deprecated** because of overhead during
 instantiation of holders using reflection.
 - Added @ItemViewHolderFactory + @DropDownViewHolderFactory annotations instead deprecated ones +
