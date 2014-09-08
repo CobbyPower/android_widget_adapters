@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 
 import com.wit.android.ui.widget.adapter.annotation.DropDownView;
 import com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder;
+import com.wit.android.ui.widget.adapter.annotation.DropDownViewHolderFactory;
 
 /**
  * <h4>Class Overview</h4>
@@ -38,6 +39,11 @@ import com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder;
  * If this annotation is presented, a resource id provided by this annotation will be used to inflate
  * the desired drop down view in {@link #onCreateDropDownView(int, android.view.LayoutInflater, android.view.ViewGroup)}.
  * </p>
+ * <li>{@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolderFactory @DropDownViewHolderFactory} <b>[class - inherited]</li>
+ * <p>
+ * If this annotation is presented, a class provided by this annotation will be used to create instances
+ * of holders for drop down views.
+ * </p>
  * <li>{@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder @DropDownViewHolder} <b>[class - inherited]</b></li>
  * <p>
  * If this annotation is presented, a class provided by this annotation will be used to instantiate
@@ -48,8 +54,6 @@ import com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder;
  *
  * @param <Item> A type of the item presented within a data set of a subclass of this BaseSpinnerAdapter.
  * @author Martin Albedinsky
- * @see com.wit.android.ui.widget.adapter.annotation.DropDownView
- * @see com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder
  */
 public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 
@@ -93,7 +97,12 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	/**
 	 * Class to be used to instantiate an instance of holder for drop down view.
 	 */
-	private Class<? extends ViewHolder> mClassOfDropDownHolder = null;
+	private Class<? extends ViewHolder> mClassOfDropDownHolder;
+
+	/**
+	 * Factory responsible for instantiation of drop down view holders for this adapter.
+	 */
+	private ViewHolderFactory mDropDownHolderFactory;
 
 	/**
 	 * Constructors ================================================================================
@@ -104,8 +113,9 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 * Creates a new instance of BaseSpinnerAdapter within the given <var>context</var>.
 	 * </p>
 	 * <p>
-	 * If {@link com.wit.android.ui.widget.adapter.annotation.DropDownView @DropDownView} or
-	 * {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder @DropDownViewHolder}
+	 * If {@link com.wit.android.ui.widget.adapter.annotation.DropDownView @DropDownView},
+	 * {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolderFactory @DropDownViewHolderFactory}
+	 * or {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder @DropDownViewHolder}
 	 * annotations are presented above subclass of this BaseSpinnerAdapter, they will be processed here.
 	 * </p>
 	 *
@@ -245,6 +255,13 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 * so as view also holder need to be created.
 	 * </p>
 	 * <p>
+	 * If {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolderFactory @DropDownViewHolderFactory}
+	 * annotation is presented, factory instantiated from the class provided by this annotation will
+	 * be used to create the requested drop down view holder, otherwise
+	 * {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder @DropDownViewHolder}
+	 * annotation will be processed as described below.
+	 * </p>
+	 * <p>
 	 * <b>Note</b>, that if {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder @DropDownViewHolder}
 	 * annotation is presented, a class provided by this annotation will be used to instantiate the
 	 * requested drop down view holder, otherwise {@link #onCreateViewHolder(int, android.view.View)}
@@ -257,11 +274,18 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 *                 {@link #onCreateDropDownView(int, android.view.LayoutInflater, android.view.ViewGroup)}
 	 *                 for the specified position.
 	 * @return New instance of the requested drop down view holder.
-	 * @throws java.lang.IllegalStateException If the class provided by @DropDownViewHolder annotation
-	 *                                         can not be accessed or does not have an empty public
-	 *                                         constructor.
+	 * @throws IllegalStateException If the class provided by @DropDownViewHolder annotation
+	 *                               can not be accessed or does not have an empty public
+	 *                               constructor.
 	 */
 	protected Object onCreateDropDownViewHolder(int position, View itemView) {
+		if (mDropDownHolderFactory != null) {
+			final ViewHolder holder = mDropDownHolderFactory.createHolder(this, position, itemView);
+			if (holder != null) {
+				holder.create(position, itemView);
+				return holder;
+			}
+		}
 		if (mClassOfDropDownHolder != null) {
 			ViewHolder holder;
 			try {
@@ -295,11 +319,11 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 * is called.
 	 * </p>
 	 * <p>
-	 * <b>Note</b>, that if {@link #onCreateDropDownViewHolder(int, android.view.View)} returns 
+	 * <b>Note</b>, that if {@link #onCreateDropDownViewHolder(int, android.view.View)} returns
 	 * <code>null</code>  for the specified <var>position</var> here passed <var>viewHolder</var> will
 	 * be the view created by {@link #onCreateDropDownView(int, android.view.LayoutInflater, android.view.ViewGroup)}
-	 * for the specified position or just recycled view for such a position. This approach can be used, 
-	 * when a view hierarchy of the specific spinner drop down item is represented by one custom view, 
+	 * for the specified position or just recycled view for such a position. This approach can be used,
+	 * when a view hierarchy of the specific spinner drop down item is represented by one custom view,
 	 * where such a view represents a holder for all its child views.
 	 * </p>
 	 * </p>
@@ -333,7 +357,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 * @param item       Always valid item obtained by {@link #getItem(int)} for the specified position.
 	 * @param viewHolder An instance of the same holder as provided by {@link #onCreateDropDownViewHolder(int, android.view.View)}
 	 *                   or {@link #onCreateViewHolder(int, android.view.View)} for the specified position.
-	 * @throws java.lang.IllegalStateException If updating process for the given <var>item</var> fails.
+	 * @throws IllegalStateException If updating process for the given <var>item</var> fails.
 	 */
 	protected void onUpdateView(int position, Item item, Object viewHolder) {
 		if (!bindViewInner(position, item, viewHolder)) {
@@ -350,12 +374,30 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	void processAnnotations(Class<?> classOfAdapter) {
 		super.processAnnotations(classOfAdapter);
 		// Obtain drop down view.
-		final DropDownView dropDownView = AdapterAnnotations.obtainAnnotationFrom(classOfAdapter, DropDownView.class, BaseAdapter.class);
+		final DropDownView dropDownView = AdapterAnnotations.obtainAnnotationFrom(
+				classOfAdapter, DropDownView.class, BaseAdapter.class
+		);
 		if (dropDownView != null) {
 			this.mDropDownViewRes = dropDownView.value();
 		}
+		// Obtain drop down view holder factory.
+		final DropDownViewHolderFactory holderFactory = AdapterAnnotations.obtainAnnotationFrom(
+				classOfAdapter, DropDownViewHolderFactory.class, BaseAdapter.class
+		);
+		if (holderFactory != null) {
+			try {
+				this.mDropDownHolderFactory = holderFactory.value().newInstance();
+			} catch (InstantiationException | IllegalAccessException e) {
+				throw new IllegalStateException(
+						"Failed to create drop down view holder factory from class(" + holderFactory.value() + "). " +
+								"Check if this factory class has public access and empty public constructor."
+				);
+			}
+		}
 		// Obtain drop down view holder.
-		final DropDownViewHolder dropDownViewHolder = AdapterAnnotations.obtainAnnotationFrom(classOfAdapter, DropDownViewHolder.class, BaseAdapter.class);
+		final DropDownViewHolder dropDownViewHolder = AdapterAnnotations.obtainAnnotationFrom(
+				classOfAdapter, DropDownViewHolder.class, BaseAdapter.class
+		);
 		if (dropDownViewHolder != null) {
 			this.mClassOfDropDownHolder = dropDownViewHolder.value();
 		}

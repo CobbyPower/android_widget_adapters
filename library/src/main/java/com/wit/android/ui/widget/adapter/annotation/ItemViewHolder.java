@@ -28,6 +28,10 @@ import java.lang.annotation.Target;
 /**
  * <h4>Annotation Overview</h4>
  * <p>
+ * <b>This annotation is deprecated</b>, use {@link com.wit.android.ui.widget.adapter.annotation.ItemViewHolderFactory @ItemViewHolderFactory}
+ * instead.
+ * </p>
+ * <p>
  * Defines an annotation for determining which class should be used to instantiate a holder for item
  * view.
  * </p>
@@ -38,6 +42,7 @@ import java.lang.annotation.Target;
  *
  * @author Martin Albedinsky
  */
+@Deprecated
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ItemViewHolder {
