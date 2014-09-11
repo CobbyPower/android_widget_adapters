@@ -25,13 +25,15 @@ import com.wit.android.ui.widget.adapter.module.AdapterModule;
 
 /**
  * <h4>Class Overview</h4>
- * <p>
  * todo: description
- * </p>
  *
  * @author Martin Albedinsky
  */
 public class ModuleManager {
+
+	/**
+	 * Interface ===================================================================================
+	 */
 
 	/**
 	 * Constants ===================================================================================
@@ -40,7 +42,7 @@ public class ModuleManager {
 	/**
 	 * Log TAG.
 	 */
-	// private static final String TAG = ModuleManager.class.getSimpleName();
+	// private static final String TAG = "ModuleManager";
 
 	/**
 	 * Flag indicating whether the output trough log-cat is enabled or not.
@@ -83,10 +85,8 @@ public class ModuleManager {
 	 */
 
 	/**
-	 * <p>
 	 * Adds the given module into the current modules of this manager. If there is already a module
 	 * with the same <var>moduleId</var>, the old module will be replaced by the new one.
-	 * </p>
 	 *
 	 * @param module   An instance of the desired module to add.
 	 * @param moduleId An id by which can be the given module obtained from this manager by {@link #getModule(int)}.
@@ -101,9 +101,7 @@ public class ModuleManager {
 	}
 
 	/**
-	 * <p>
 	 * Returns a module added into this manager.
-	 * </p>
 	 *
 	 * @param moduleId An id of the desired module to obtain.
 	 * @return The module which was added into this manager under the specified <var>moduleId</var>
@@ -115,9 +113,7 @@ public class ModuleManager {
 	}
 
 	/**
-	 * <p>
 	 * Removes a module from the current modules set of this manager.
-	 * </p>
 	 *
 	 * @param moduleId An id of the desired module to remove.
 	 */
@@ -128,9 +124,7 @@ public class ModuleManager {
 	}
 
 	/**
-	 * <p>
 	 * Called to save the current state of all modules presented within this manager.
-	 * </p>
 	 *
 	 * @return Saved state of all modules or <code>null</code> if there are not any modules presented
 	 * or none of the current modules requires state saving.
@@ -160,10 +154,8 @@ public class ModuleManager {
 	}
 
 	/**
-	 * <p>
 	 * Called to restore a previous state, saved by {@link #dispatchSaveModulesState()}, of all modules
 	 * presented within this manager.
-	 * </p>
 	 *
 	 * @param savedState Should be the same state as obtained by {@link #dispatchSaveModulesState()}
 	 *                   before.
@@ -209,14 +201,6 @@ public class ModuleManager {
 	 */
 
 	/**
-	 * Abstract methods ----------------------------------------------------------------------------
-	 */
-
-	/**
 	 * Inner classes ===============================================================================
-	 */
-
-	/**
-	 * Interface ===================================================================================
 	 */
 }

@@ -27,14 +27,11 @@ import java.lang.annotation.Target;
 
 /**
  * <h4>Annotation Overview</h4>
- * <p>
- * <b>This annotation is deprecated</b>, use {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolderFactory @DropDownViewHolderFactory}
+ * <b>This annotation was deprecated in 2.3</b>, use {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolderFactory @DropDownViewHolderFactory}
  * instead.
- * </p>
- * <p>
+ * <p/>
  * Defines an annotation for determining which class should be used to instantiate a holder for drop
  * down view.
- * </p>
  * <h6>Usage</h6>
  * <ul>
  * <li>{@link com.wit.android.ui.widget.adapter.BaseAdapter BaseAdapter}</li>

@@ -22,23 +22,18 @@ import android.view.View;
 
 /**
  * <h4>Interface Overview</h4>
- * <p>
  * todo: description
- * </p>
  *
  * @author Martin Albedinsky
  */
 public interface ViewHolderFactory {
 
 	/**
-	 * <p>
 	 * Called to instantiate an instance of ViewHolder for the specified <var>position</var> and
 	 * <var>view</var>.
-	 * </p>
-	 * <p>
+	 * <p/>
 	 * If not <code>null</code>, {@link ViewHolder#create(int, android.view.View)} will be invoked
 	 * upon instance of the created holder.
-	 * </p>
 	 *
 	 * @param adapter  An instance of adapter which requests the view holder creation.
 	 * @param position The position of an item from the adapter data set for which should be holder

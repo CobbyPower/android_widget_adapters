@@ -20,9 +20,7 @@ package com.wit.android.ui.widget.adapter;
 
 /**
  * <h4>Interface Overview</h4>
- * <p>
  * todo: description
- * </p>
  *
  * @author Martin Albedinsky
  */
@@ -33,16 +31,12 @@ public interface LoadableAdapter {
 	 */
 
 	/**
-	 * <p>
 	 * Flag for {@link #dispatchLoadingStatus(int)} to dispatch that loading of data set just started.
-	 * </p>
 	 */
 	public static final int STATUS_LOADING_STARTED = 0x01;
 
 	/**
-	 * <p>
 	 * Flag for {@link #dispatchLoadingStatus(int)} to dispatch that loading of data set just finished.
-	 * </p>
 	 */
 	public static final int STATUS_LOADING_FINISHED = 0x02;
 
@@ -51,9 +45,7 @@ public interface LoadableAdapter {
 	 */
 
 	/**
-	 * <p>
 	 * Called to dispatch loading status to this loadable adapter implementation.
-	 * </p>
 	 *
 	 * @param status Current loading status. One of {@link #STATUS_LOADING_STARTED} or {@link #STATUS_LOADING_FINISHED}.
 	 */

@@ -20,39 +20,29 @@ package com.wit.android.ui.widget.adapter.module;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.util.SparseIntArray;
 
 /**
  * <h4>Class Overview</h4>
- * <p>
  * todo: description
- * </p>
  *
  * @author Martin Albedinsky
  */
 public class SelectionModule extends AdapterModule {
 
 	/**
+	 * Interface ===================================================================================
+	 */
+
+	/**
 	 * Constants ===================================================================================
 	 */
 
 	/**
-	 * <p>
-	 * Mode to allow only single selected position.
-	 * </p>
-	 *
-	 * @see #getSelectedPosition()
+	 * Log TAG.
 	 */
-	public static final int MODE_SINGLE = 0x00;
-
-	/**
-	 * <p>
-	 * Mode to allow multiple selected positions.
-	 * </p>
-	 *
-	 * @see #getSelectedPositions()
-	 */
-	public static final int MODE_MULTIPLE = 0x01;
+	// private static final String TAG = "SelectionModule";
 
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
@@ -65,9 +55,18 @@ public class SelectionModule extends AdapterModule {
 	// private static final boolean LOG_ENABLED = true;
 
 	/**
-	 * Log TAG.
+	 * Mode to allow only single selected position.
+	 *
+	 * @see #getSelectedPosition()
 	 */
-	// private static final String TAG = SelectionModule.class.getSimpleName();
+	public static final int MODE_SINGLE = 0x00;
+
+	/**
+	 * Mode to allow multiple selected positions.
+	 *
+	 * @see #getSelectedPositions()
+	 */
+	public static final int MODE_MULTIPLE = 0x01;
 
 	/**
 	 * Static members ==============================================================================
@@ -100,9 +99,7 @@ public class SelectionModule extends AdapterModule {
 	 */
 
 	/**
-	 * <p>
 	 * Checks whether the specified position is currently selected or not.
-	 * </p>
 	 *
 	 * @param position The position of an item of which selection state to check.
 	 * @return <code>True</code> if the specified position is selected, <code>false</code> otherwise.
@@ -114,10 +111,8 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * <p>
 	 * Changes selection state of the specified position to the opposite one
 	 * (<code>selected -> unselected; unselected -> selected</code>) and <b>notifies adapter</b>.
-	 * </p>
 	 *
 	 * @param position The position of an item of which selection state to toggle.
 	 * @return Count of the currently selected positions.
@@ -130,9 +125,7 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * <p>
 	 * Changes selection state of the specified position to the desired one and <b>notifies adapter</b>.
-	 * </p>
 	 *
 	 * @param position The position of an item of which selection state to change.
 	 * @param selected New selection state.
@@ -159,9 +152,7 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * <p>
 	 * Same as {@link #selectRange(int, int)} with parameters <code>(0, ModuleAdapter.getCount())</code>.
-	 * </p>
 	 *
 	 * @see #setSelected(int, boolean)
 	 */
@@ -171,13 +162,10 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * <p>
 	 * Selects positions in the range <code>[startPosition, startPosition + count]</code> and
 	 * <b>notifies adapter</b>.
-	 * </p>
-	 * <p>
+	 * <p/>
 	 * All previously selected positions will remain selected.
-	 * </p>
 	 *
 	 * @param startPosition The position from which to start selection.
 	 * @param count         Count of items to select from the start position.
@@ -203,9 +191,7 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * <p>
 	 * Deselects all currently selected positions and <b>notifies adapter</b>.
-	 * </p>
 	 *
 	 * @see #clearSelectionInRange(int, int)
 	 * @see #isAdapterNotificationEnabled()
@@ -215,10 +201,8 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * <p>
 	 * Deselects all currently selected positions in the range <code>[startPosition, startPosition + count]</code>
 	 * and <b>notifies adapter</b>.
-	 * </p>
 	 *
 	 * @param startPosition The position from which to start deselection.
 	 * @param count         Count of items to deselect from the start position.
@@ -256,9 +240,7 @@ public class SelectionModule extends AdapterModule {
 	 */
 
 	/**
-	 * <p>
 	 * Returns the sparse array with the currently selected positions.
-	 * </p>
 	 *
 	 * @return {@link android.util.SparseIntArray} with positions which are at this time selected.
 	 * <b>Note</b> that this array is sorted for optimization (from lowest to highest position).
@@ -268,9 +250,7 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * <p>
 	 * Returns the current selection size.
-	 * </p>
 	 *
 	 * @return Count of the currently selected positions.
 	 */
@@ -279,9 +259,7 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * <p>
 	 * Returns the position which is at this time selected.
-	 * </p>
 	 *
 	 * @return Currently selected position or <code>-1</code> if there is no position selected at
 	 * this time.
@@ -294,23 +272,18 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * <p>
 	 * Same as {@link #getSelectedPositions(boolean)} with <code>true</code> for <var>ascending</var>
 	 * parameter, so items in the array will be sorted ascending.
-	 * </p>
 	 */
 	public int[] getSelectedPositions() {
 		return getSelectedPositions(true);
 	}
 
 	/**
-	 * <p>
 	 * Returns an array with all positions which are currently selected.
-	 * </p>
-	 * <p>
+	 * <p/>
 	 * <b>Note</b>, that array is obtained/processed from the {@link android.util.SparseIntArray},
 	 * so its items will be by default sorted ascending.
-	 * </p>
 	 *
 	 * @param ascending <code>False</code> to sort array items descending, <code>true</code> to ascending.
 	 * @return Array with all currently selected positions.
@@ -327,9 +300,7 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * <p>
 	 * Sets the current selection mode of this module to the specified one.
-	 * </p>
 	 *
 	 * @param mode The desired selection mode. One of {@link #MODE_SINGLE} or {@link #MODE_MULTIPLE}.
 	 * @see #getMode()
@@ -343,9 +314,7 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * <p>
 	 * Returns the current selection mode of this module.
-	 * </p>
 	 *
 	 * @return Current selection mode (one of {@link #MODE_SINGLE}, {@link #MODE_MULTIPLE}) or {@link #MODE_SINGLE}
 	 * by default.
@@ -360,9 +329,7 @@ public class SelectionModule extends AdapterModule {
 	 */
 
 	/**
-	 * <p>
 	 * Checks whether a set of the currently selected positions contains the specified position or not.
-	 * </p>
 	 *
 	 * @param position The position to check.
 	 * @return <code>True</code> if the specified position is presented within a set of the currently
@@ -373,9 +340,7 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * <p>
 	 * Adds the specified position into a set of the currently selected positions.
-	 * </p>
 	 *
 	 * @param position The position to add into the selected ones.
 	 */
@@ -384,9 +349,7 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * <p>
 	 * Removes the specified position form a set of the currently selected positions.
-	 * </p>
 	 *
 	 * @param position The position to remove from the selected ones.
 	 */
@@ -398,9 +361,7 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * <p>
 	 * Removes all positions form a set of the currently selected positions.
-	 * </p>
 	 *
 	 * @param notify <code>True</code> to notify the currently attached adapter by {@link #notifyAdapter()},
 	 *               <code>false</code> otherwise.
@@ -497,18 +458,12 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * Abstract methods ----------------------------------------------------------------------------
-	 */
-
-	/**
 	 * Inner classes ===============================================================================
 	 */
 
 	/**
 	 * <h4>Class Overview</h4>
-	 * <p>
 	 * todo: description
-	 * </p>
 	 *
 	 * @author Martin Albedinsky
 	 */
@@ -519,9 +474,7 @@ public class SelectionModule extends AdapterModule {
 		 */
 
 		/**
-		 * <p>
 		 * Creator used to create an instance or array of instances of SavedState from {@link android.os.Parcel}.
-		 * </p>
 		 */
 		public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {
 			/**
@@ -554,11 +507,9 @@ public class SelectionModule extends AdapterModule {
 		 */
 
 		/**
-		 * <p>
 		 * Creates a new instance SavedState with the given <var>superState</var> to allow
 		 * chaining of saved states in {@link #onSaveInstanceState()} and also in
 		 * {@link #onRestoreInstanceState(android.os.Parcelable)}.
-		 * </p>
 		 *
 		 * @param superState A super state obtained from <code>super.onSaveInstanceState()</code>
 		 *                   within <code>onSaveInstanceState()</code> of a specific {@link SelectionModule}
@@ -569,10 +520,8 @@ public class SelectionModule extends AdapterModule {
 		}
 
 		/**
-		 * <p>
 		 * Called form {@link #CREATOR} to create an instance of SavedState form the given parcel
 		 * <var>source</var>.
-		 * </p>
 		 *
 		 * @param source Parcel with data for a new instance.
 		 */
@@ -589,14 +538,10 @@ public class SelectionModule extends AdapterModule {
 		/**
 		 */
 		@Override
-		public void writeToParcel(Parcel dest, int flags) {
+		public void writeToParcel(@NonNull Parcel dest, int flags) {
 			super.writeToParcel(dest, flags);
 			dest.writeInt(mode);
 			dest.writeIntArray(selectedItems);
 		}
 	}
-
-	/**
-	 * Interface ===================================================================================
-	 */
 }

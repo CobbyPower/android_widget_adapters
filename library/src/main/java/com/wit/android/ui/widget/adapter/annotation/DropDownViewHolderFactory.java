@@ -27,11 +27,9 @@ import java.lang.annotation.Target;
 
 /**
  * <h4>Annotation Overview</h4>
- * <p>
  * Defines an annotation for determining a class of {@link com.wit.android.ui.widget.adapter.ViewHolderFactory}
  * responsible for instantiation of {@link com.wit.android.ui.widget.adapter.ViewHolder}
  * instances for adapter's drop down views.
- * </p>
  *
  * @author Martin Albedinsky
  */

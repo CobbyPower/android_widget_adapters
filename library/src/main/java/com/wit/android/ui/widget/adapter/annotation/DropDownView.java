@@ -25,10 +25,8 @@ import java.lang.annotation.Target;
 
 /**
  * <h4>Annotation Overview</h4>
- * <p>
  * Defines an annotation for determining a resource id of the layout which should be inflated as drop
  * down view.
- * </p>
  * <h6>Usage</h6>
  * <ul>
  * <li>{@link com.wit.android.ui.widget.adapter.BaseAdapter BaseAdapter}</li>

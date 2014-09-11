@@ -22,9 +22,7 @@ import android.util.AndroidRuntimeException;
 
 /**
  * <h4>Class Overview</h4>
- * <p>
  * todo: description
- * </p>
  *
  * @author Martin Albedinsky
  */
