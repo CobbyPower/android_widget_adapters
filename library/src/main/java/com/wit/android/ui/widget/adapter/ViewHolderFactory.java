@@ -18,31 +18,29 @@
  */
 package com.wit.android.ui.widget.adapter;
 
-import android.util.AndroidRuntimeException;
+import android.view.View;
 
 /**
- * <h4>Class Overview</h4>
+ * <h4>Interface Overview</h4>
  * todo: description
  *
  * @author Martin Albedinsky
  */
-public class MissingUIAnnotationException extends AndroidRuntimeException {
+public interface ViewHolderFactory {
 
 	/**
+	 * Called to instantiate an instance of ViewHolder for the specified <var>position</var> and
+	 * <var>view</var>.
+	 * <p/>
+	 * If not <code>null</code>, {@link ViewHolder#create(int, android.view.View)} will be invoked
+	 * upon instance of the created holder.
+	 *
+	 * @param adapter  An instance of adapter which requests the view holder creation.
+	 * @param position The position of an item from the adapter data set for which should be holder
+	 *                 created.
+	 * @param view     The view created for the specified position by the adapter for which should
+	 *                 be holder created.
+	 * @return New instance of ViewHolder.
 	 */
-	public MissingUIAnnotationException() {
-		super();
-	}
-
-	/**
-	 */
-	public MissingUIAnnotationException(String name) {
-		super(name);
-	}
-
-	/**
-	 */
-	public MissingUIAnnotationException(Exception cause) {
-		super(cause);
-	}
+	public ViewHolder createHolder(FactoryHolderAdapter adapter, int position, View view);
 }

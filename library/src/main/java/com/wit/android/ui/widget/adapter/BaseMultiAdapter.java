@@ -22,18 +22,22 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import com.wit.android.ui.widget.adapter.module.AdapterModule;
 
 /**
  * <h4>Class Overview</h4>
- * <p>
- * </p>
+ * todo: description
  *
  * @param <Item> A type of the item presented within a data set of a subclass of this BaseMultiAdapter.
  * @author Martin Albedinsky
  */
 public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implements AdapterModule.ModuleAdapter {
+
+	/**
+	 * Interface ===================================================================================
+	 */
 
 	/**
 	 * Constants ===================================================================================
@@ -42,7 +46,7 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 	/**
 	 * Log TAG.
 	 */
-	// private static final String TAG = BaseMultiAdapter.class.getSimpleName();
+	// private static final String TAG = "BaseMultiAdapter";
 
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
@@ -72,9 +76,7 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 	 */
 
 	/**
-	 * <p>
 	 * Crates a new instance of BaseMultiAdapter within the given context.
-	 * </p>
 	 *
 	 * @param context Context in which will be this adapter used.
 	 */
@@ -91,9 +93,7 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 	 */
 
 	/**
-	 * <p>
 	 * Wrapped {@link ModuleManager#addModule(AdapterModule, int)} for this adapter.
-	 * </p>
 	 *
 	 * @see #obtainModule(int)
 	 */
@@ -103,9 +103,7 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 	}
 
 	/**
-	 * <p>
 	 * Wrapped {@link ModuleManager#getModule(int)} for this adapter.
-	 * </p>
 	 *
 	 * @see #assignModule(com.wit.android.ui.widget.adapter.module.AdapterModule, int)
 	 */
@@ -114,9 +112,7 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 	}
 
 	/**
-	 * <p>
 	 * Wrapped {@link ModuleManager#removeModule(int)} for this adapter.
-	 * </p>
 	 */
 	public void removeModule(int moduleID) {
 		MODULES_MANAGER.removeModule(moduleID);
@@ -131,9 +127,7 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 	 */
 
 	/**
-	 * <p>
 	 * This will also save the state of all currently assigned modules.
-	 * </p>
 	 */
 	@Override
 	protected Parcelable onSaveInstanceState() {
@@ -147,9 +141,8 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 		return super.onSaveInstanceState();
 	}
 
-	/**<p>
+	/**
 	 * This will also restore the state of all currently assigned modules.
-	 * </p>
 	 */
 	@Override
 	protected void onRestoreInstanceState(Parcelable savedState) {
@@ -169,19 +162,13 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 	 */
 
 	/**
-	 * Abstract methods ----------------------------------------------------------------------------
-	 */
-
-	/**
 	 * Inner classes ===============================================================================
 	 */
 
 	/**
 	 * <h4>Class Overview</h4>
-	 * <p>
 	 * A {@link BaseSavedState} implementation that should be used by inheritance hierarchies of
 	 * {@link BaseMultiAdapter} to ensure the state of all classes along the chain is saved.
-	 * </p>
 	 *
 	 * @author Martin Albedinsky
 	 */
@@ -192,9 +179,7 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 		 */
 
 		/**
-		 * <p>
 		 * Creator used to create an instance or array of instances of SavedState from {@link android.os.Parcel}.
-		 * </p>
 		 */
 		public static final Creator<SavedState> CREATOR = new Creator<SavedState>() {
 			/**
@@ -223,11 +208,9 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 		 */
 
 		/**
-		 * <p>
 		 * Creates a new instance SavedState with the given <var>superState</var> to allow
 		 * chaining of saved states in {@link #onSaveInstanceState()} and also in
 		 * {@link #onRestoreInstanceState(android.os.Parcelable)}.
-		 * </p>
 		 *
 		 * @param superState A super state obtained from <code>super.onSaveInstanceState()</code>
 		 *                   within <code>onSaveInstanceState()</code> of a specific {@link BaseMultiAdapter}
@@ -238,10 +221,8 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 		}
 
 		/**
-		 * <p>
 		 * Called form {@link #CREATOR} to create an instance of SavedState form the given parcel
 		 * <var>source</var>.
-		 * </p>
 		 *
 		 * @param source Parcel with data for a new instance.
 		 */
@@ -258,13 +239,9 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 		/**
 		 */
 		@Override
-		public void writeToParcel(Parcel dest, int flags) {
+		public void writeToParcel(@NonNull Parcel dest, int flags) {
 			super.writeToParcel(dest, flags);
 			dest.writeBundle(modulesState);
 		}
 	}
-
-	/**
-	 * Interface ===================================================================================
-	 */
 }

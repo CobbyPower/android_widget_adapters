@@ -25,8 +25,8 @@ allprojects {
 /**
  * Project options =================================================================================
  */
-ext.versionCode = 221
-ext.versionName = "2.2.1"
+ext.versionCode = 230
+ext.versionName = "2.3"
 
 /**
  * Android SDK options =======================================================

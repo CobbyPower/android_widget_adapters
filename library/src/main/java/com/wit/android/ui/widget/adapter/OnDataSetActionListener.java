@@ -20,19 +20,15 @@ package com.wit.android.ui.widget.adapter;
 
 /**
  * <h4>Interface Overview</h4>
- * <p>
  * todo: description
- * </p>
  *
  * @author Martin Albedinsky
  */
 public interface OnDataSetActionListener<Adapter extends BaseAdapter> {
 
 	/**
-	 * <p>
 	 * Invoked whenever the specified <var>action</var> was selected for the specified <var>position</var>
 	 * within the passed <var>adapter</var> in which is this callback registered.
-	 * </p>
 	 *
 	 * @param adapter  An instance of the adapter in which was the specified action selected.
 	 * @param action   The action which was currently selected.

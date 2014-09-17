@@ -22,9 +22,7 @@ import android.view.View;
 
 /**
  * <h4>Interface Overview</h4>
- * <p>
  * todo: description
- * </p>
  *
  * @param <Item>    A type of the item of which data will be presented within views hold by implementation
  *                  of this holder.
@@ -34,10 +32,8 @@ import android.view.View;
 public interface ViewHolder<Item, Adapter extends BaseAdapter> {
 
 	/**
-	 * <p>
 	 * Called to perform all necessary operations to create a valid instance of this holder, like
 	 * to obtain all views which need to be hold by this holder.
-	 * </p>
 	 *
 	 * @param position The position for which is this holder being created.
 	 * @param itemView The view of an item for which is this holder being created. This view can be
@@ -47,9 +43,7 @@ public interface ViewHolder<Item, Adapter extends BaseAdapter> {
 	public void create(int position, View itemView);
 
 	/**
-	 * <p>
 	 * Called to set up and populate all views hold by this holder with data of the given <var>item</var>.
-	 * </p>
 	 *
 	 * @param position The position of the given item.
 	 * @param item     Item obtained from the given <var>adapter</var> for the specified position.

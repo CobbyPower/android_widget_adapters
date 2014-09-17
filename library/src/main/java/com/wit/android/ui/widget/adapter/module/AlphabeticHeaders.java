@@ -24,13 +24,32 @@ import java.util.List;
 
 /**
  * <h4>Class Overview</h4>
- * <p>
  * todo: description
- * </p>
  *
  * @author Martin Albedinsky
  */
 public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader> {
+
+	/**
+	 * Interface ===================================================================================
+	 */
+
+	/**
+	 * <h4>Interface Overview</h4>
+	 * Required interface for item which can be processed by {@link com.wit.android.ui.widget.adapter.module.AlphabeticHeaders}
+	 * module.
+	 *
+	 * @author Martin Albedinsky
+	 */
+	public static interface AlphabeticItem {
+
+		/**
+		 * Returns name of this alphabetic item.
+		 *
+		 * @return This item's name.
+		 */
+		public String getName();
+	}
 
 	/**
 	 * Constants ===================================================================================
@@ -39,7 +58,7 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 	/**
 	 * Log TAG.
 	 */
-	// private static final String TAG = AlphabeticHeaders.class.getSimpleName();
+	// private static final String TAG = "AlphabeticHeaders";
 
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
@@ -87,10 +106,8 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 	}
 
 	/**
-	 * <p>
 	 * Like {@link #processAlphabeticList(java.util.List)} in that difference, that here will be the
 	 * given cursor iterated to obtain first characters for headers data set.
-	 * </p>
 	 *
 	 * @param cursor An alphabetic cursor to process.
 	 * @param <C>    A type of the given alphabetic cursor.
@@ -106,20 +123,16 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 	}
 
 	/**
-	 * <p>
 	 * Processes the given list of alphabetic items. Whole list will be iterated and for each of its
 	 * items will be checked the first char of name provided by
 	 * {@link com.wit.android.ui.widget.adapter.module.AlphabeticHeaders.AlphabeticItem#getName()},
 	 * so created headers data set will contains all different first characters founded at the
 	 * first positions of obtained names.
-	 * </p>
-	 * <p>
+	 * <p/>
 	 * Also, the adapter, to which is this module attached, will be notified about data set change.
-	 * </p>
-	 * <p>
+	 * <p/>
 	 * <b>Note</b>, that the given <var>cursor</var> should be already sorted, otherwise the final
 	 * headers data set can contain duplicates.
-	 * </p>
 	 *
 	 * @param list Alphabetic list to process.
 	 * @see #processAlphabeticCursor(android.database.Cursor)
@@ -143,12 +156,9 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 	 */
 
 	/**
-	 * <p>
 	 * Process the given alphabetic <var>item</var> and creates header item from it.
-	 * </p>
-	 * <p>
+	 * <p/>
 	 * <b>Note</b>, that there is no check for the same headers within the current set of headers.
-	 * </p>
 	 *
 	 * @param item     An alphabetic item to process.
 	 * @param position The position at which should be header presented within the headers data set.
@@ -177,35 +187,6 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 	}
 
 	/**
-	 * Abstract methods ----------------------------------------------------------------------------
-	 */
-
-	/**
 	 * Inner classes ===============================================================================
 	 */
-
-	/**
-	 * Interface ===================================================================================
-	 */
-
-	/**
-	 * <h4>Interface Overview</h4>
-	 * <p>
-	 * Required interface for item which can be processed by {@link com.wit.android.ui.widget.adapter.module.AlphabeticHeaders}
-	 * module.
-	 * </p>
-	 *
-	 * @author Martin Albedinsky
-	 */
-	public static interface AlphabeticItem {
-
-		/**
-		 * <p>
-		 * Returns name of this alphabetic item.
-		 * </p>
-		 *
-		 * @return This item's name.
-		 */
-		public String getName();
-	}
 }

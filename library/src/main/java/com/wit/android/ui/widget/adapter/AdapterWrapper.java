@@ -26,13 +26,15 @@ import android.widget.WrapperListAdapter;
 
 /**
  * <h4>Class Overview</h4>
- * <p>
  * todo: description
- * </p>
  *
  * @author Martin Albedinsky
  */
 public abstract class AdapterWrapper implements WrapperListAdapter {
+
+	/**
+	 * Interface ===================================================================================
+	 */
 
 	/**
 	 * Constants ===================================================================================
@@ -41,7 +43,7 @@ public abstract class AdapterWrapper implements WrapperListAdapter {
 	/**
 	 * Log TAG.
 	 */
-	// private static final String TAG = AdapterWrapper.class.getSimpleName();
+	// private static final String TAG = "AdapterWrapper";
 
 	/**
 	 * Flag indicating whether the output trough log-cat is enabled or not.
@@ -71,9 +73,7 @@ public abstract class AdapterWrapper implements WrapperListAdapter {
 	 */
 
 	/**
-	 * <p>
 	 * Creates a new instance of AdapterWrapper which will wraps the given <var>adapter</var>.
-	 * </p>
 	 *
 	 * @param adapter An instance of the adapter to be wrapped.
 	 * @throws java.lang.NullPointerException If the given adapter is <code>null</code>.
@@ -187,14 +187,6 @@ public abstract class AdapterWrapper implements WrapperListAdapter {
 	 */
 
 	/**
-	 * Abstract methods ----------------------------------------------------------------------------
-	 */
-
-	/**
 	 * Inner classes ===============================================================================
-	 */
-
-	/**
-	 * Interface ===================================================================================
 	 */
 }

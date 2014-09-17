@@ -22,17 +22,14 @@ import android.os.Parcelable;
 
 /**
  * <h4>Interface Overview</h4>
- * <p>
- * </p>
+ * todo: description
  *
  * @author Martin Albedinsky
  */
 public interface StateAdapter {
 
 	/**
-	 * <p>
 	 * Called to save the current state of this adapter.
-	 * </p>
 	 *
 	 * @return Saved state of this adapter or an <b>empty</b> state if this adapter does not need to
 	 * save its state.
@@ -40,10 +37,8 @@ public interface StateAdapter {
 	public Parcelable dispatchSaveInstanceState();
 
 	/**
-	 * <p>
 	 * Called to restore a previous state, saved by {@link #dispatchSaveInstanceState()}, of this
 	 * adapter.
-	 * </p>
 	 *
 	 * @param savedState Should be the same state as obtained by {@link #dispatchSaveInstanceState()}
 	 *                   before.

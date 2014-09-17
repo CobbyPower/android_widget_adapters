@@ -25,14 +25,16 @@ import java.util.List;
 
 /**
  * <h4>Class Overview</h4>
- * <p>
  * todo: description
- * </p>
  *
  * @param <Item> A type of the item presented within a data set of a subclass of this SimpleAdapter.
  * @author Martin Albedinsky
  */
 public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
+
+	/**
+	 * Interface ===================================================================================
+	 */
 
 	/**
 	 * Constants ===================================================================================
@@ -41,7 +43,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	/**
 	 * Log TAG.
 	 */
-	// private static final String TAG = SimpleAdapter.class.getSimpleName();
+	// private static final String TAG = "SimpleAdapter";
 
 	/**
 	 * Flag indicating whether the debug output trough log-cat is enabled or not.
@@ -71,9 +73,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 */
 
 	/**
-	 * <p>
 	 * Creates a new instance of SimpleAdapter.
-	 * </p>
 	 *
 	 * @param context Context in which will be this adapter used.
 	 */
@@ -82,19 +82,15 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	}
 
 	/**
-	 * <p>
 	 * Same as {@link #SimpleAdapter(android.content.Context, java.util.List)} so the given <var>items</var>
 	 * array will be converted to List.
-	 * </p>
 	 */
 	public SimpleAdapter(Context context, Item[] items) {
 		this(context, Arrays.asList(items));
 	}
 
 	/**
-	 * <p>
 	 * Creates a new instance of SimpleAdapter with the given <var>items</var> data set.
-	 * </p>
 	 *
 	 * @param context Context in which will be this adapter used.
 	 * @param items   List of items to be used as initial data set for this adapter.
@@ -113,9 +109,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 */
 
 	/**
-	 * <p>
 	 * Returns the current data set of this adapter.
-	 * </p>
 	 *
 	 * @return Data set of this adapter or <code>null</code> if there is no data set presented within
 	 * this adapter.
@@ -125,9 +119,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	}
 
 	/**
-	 * <p>
 	 * Like {@link #changeItems(java.util.List)}, but this will also return the old data set.
-	 * </p>
 	 */
 	public List<Item> swapItems(List<Item> items) {
 		final List<Item> oldItems = mItems;
@@ -136,13 +128,10 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	}
 
 	/**
-	 * <p>
 	 * Changes the current data set of this adapter.
-	 * </p>
-	 * <p>
+	 * <p/>
 	 * This will also notify data set change if the given <var>items</var> are valid, otherwise will
 	 * notify data set invalidation.
-	 * </p>
 	 *
 	 * @param items A set of items to set as the current data set for this adapter.
 	 * @see #swapItems(java.util.List)
@@ -158,22 +147,17 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	}
 
 	/**
-	 * <p>
 	 * Same as {@link #changeItems(java.util.List)} so the given <var>items</var> array will be converted
 	 * to List.
-	 * </p>
 	 */
 	public void changeItems(Item[] items) {
 		changeItems(Arrays.asList(items));
 	}
 
 	/**
-	 * <p>
 	 * Clears the current data set of this adapter.
-	 * </p>
-	 * <p>
+	 * <p/>
 	 * This will also notify data set change.
-	 * </p>
 	 */
 	public void clearItems() {
 		if (hasItems()) {
@@ -183,10 +167,8 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	}
 
 	/**
-	 * <p>
 	 * Returns flag indicating whether there are some items within the current data set of this adapter
 	 * or not.
-	 * </p>
 	 *
 	 * @return <code>True</code> if this adapter has some items, <code>false</code> otherwise.
 	 */
@@ -221,14 +203,6 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 */
 
 	/**
-	 * Abstract methods ----------------------------------------------------------------------------
-	 */
-
-	/**
 	 * Inner classes ===============================================================================
-	 */
-
-	/**
-	 * Interface ===================================================================================
 	 */
 }

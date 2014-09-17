@@ -21,6 +21,7 @@ package com.wit.android.ui.widget.adapter;
 import java.lang.annotation.Annotation;
 
 /**
+ * <h4>Class Overview</h4>
  * Helper class to obtain class annotations.
  *
  * @author Martin Albedinsky
@@ -28,19 +29,15 @@ import java.lang.annotation.Annotation;
 final class AdapterAnnotations {
 
 	/**
-	 * <p>
 	 * Same as {@link #obtainAnnotationFrom(Class, Class, Class)} with no <var>maxSuperClass</var>
 	 * specified.
-	 * </p>
 	 */
-	public static <A extends Annotation> A obtainAnnotationFrom(Class<?> fromClass, Class<A> classOfAnnotation) {
+	static <A extends Annotation> A obtainAnnotationFrom(Class<?> fromClass, Class<A> classOfAnnotation) {
 		return obtainAnnotationFrom(fromClass, classOfAnnotation, null);
 	}
 
 	/**
-	 * <p>
 	 * Obtains the specified type of an annotation from the given <var>fromClass</var> if it is presented.
-	 * </p>
 	 *
 	 * @param fromClass         A class from which should be the requested annotation obtained.
 	 * @param classOfAnnotation A class of the requested annotation.
@@ -54,7 +51,7 @@ final class AdapterAnnotations {
 	 * for the given class or its supers if requested.
 	 * @see #obtainAnnotationFrom(Class, Class)
 	 */
-	public static <A extends Annotation> A obtainAnnotationFrom(Class<?> fromClass, Class<A> classOfAnnotation, Class<?> maxSuperClass) {
+	static <A extends Annotation> A obtainAnnotationFrom(Class<?> fromClass, Class<A> classOfAnnotation, Class<?> maxSuperClass) {
 		final boolean present = fromClass.isAnnotationPresent(classOfAnnotation);
 		if (present) {
 			return fromClass.getAnnotation(classOfAnnotation);

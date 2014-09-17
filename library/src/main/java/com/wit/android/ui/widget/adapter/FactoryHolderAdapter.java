@@ -18,31 +18,35 @@
  */
 package com.wit.android.ui.widget.adapter;
 
-import android.util.AndroidRuntimeException;
+import android.widget.ListAdapter;
+import android.widget.SpinnerAdapter;
 
 /**
- * <h4>Class Overview</h4>
- * todo: description
+ * <h4>Interface Overview</h4>
+ * <p>
+ * Required interface for adapter which uses {@link com.wit.android.ui.widget.adapter.ViewHolderFactory}
+ * to instantiate holder for its views.
+ * </p>
  *
  * @author Martin Albedinsky
  */
-public class MissingUIAnnotationException extends AndroidRuntimeException {
+public interface FactoryHolderAdapter extends ListAdapter, SpinnerAdapter {
 
 	/**
+	 * <p>
+	 * Returns the id of this factory holder adapter instance.
+	 * </p>
+	 *
+	 * @return Adapter id.
 	 */
-	public MissingUIAnnotationException() {
-		super();
-	}
+	public int getAdapterId();
 
 	/**
+	 * <p>
+	 * Returns a type of an item's view for the currently iterated position.
+	 * </p>
+	 *
+	 * @return View type provided by {@link #getItemViewType(int)} for the currently iterated position.
 	 */
-	public MissingUIAnnotationException(String name) {
-		super(name);
-	}
-
-	/**
-	 */
-	public MissingUIAnnotationException(Exception cause) {
-		super(cause);
-	}
+	public int getCurrentViewType();
 }
