@@ -3,6 +3,9 @@ Change-Log
 
 > **RELEASE VERSION** (<i>RELEASE DATE</i>)
 
+### **2.3.1** (<i>18.09.2014</i>) ###
+- Fixed BaseAdapter where notifyDataSetInvalidated() wrongly called super.notifyDataSetChanged().
+
 ### **2.3** (<i>11.09.2014</i>) ###
 - @ItemViewHolder, @DropDownViewHolder annotations are **deprecated** because of overhead during
 instantiation of holders using reflection.
