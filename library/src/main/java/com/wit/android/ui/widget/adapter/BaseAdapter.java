@@ -276,7 +276,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 */
 	@Override
 	public void notifyDataSetInvalidated() {
-		super.notifyDataSetChanged();
+		super.notifyDataSetInvalidated();
 		notifyDataSetInvalidatedInner();
 	}
 
