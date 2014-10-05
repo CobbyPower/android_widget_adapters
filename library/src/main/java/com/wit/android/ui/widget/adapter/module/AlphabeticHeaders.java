@@ -19,6 +19,8 @@
 package com.wit.android.ui.widget.adapter.module;
 
 import android.database.Cursor;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import java.util.List;
 
@@ -48,6 +50,7 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 		 *
 		 * @return This item's name.
 		 */
+		@NonNull
 		public String getName();
 	}
 
@@ -112,7 +115,7 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 	 * @param cursor An alphabetic cursor to process.
 	 * @param <C>    A type of the given alphabetic cursor.
 	 */
-	public <C extends Cursor & AlphabeticItem> void processAlphabeticCursor(C cursor) {
+	public <C extends Cursor & AlphabeticItem> void processAlphabeticCursor(@NonNull C cursor) {
 		clearHeaders();
 		if (cursor.getCount() > 0 && cursor.moveToFirst()) {
 			do {
@@ -137,7 +140,7 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 	 * @param list Alphabetic list to process.
 	 * @see #processAlphabeticCursor(android.database.Cursor)
 	 */
-	public void processAlphabeticList(List<AlphabeticItem> list) {
+	public void processAlphabeticList(@NonNull List<AlphabeticItem> list) {
 		// Clear current headers.
 		clearHeaders();
 		// Process the given list.
@@ -165,7 +168,7 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 	 */
 	protected final void processAlphabeticItem(AlphabeticItem item, int position) {
 		final String name = item.getName();
-		if (name != null && name.length() > 0) {
+		if (!TextUtils.isEmpty(name)) {
 			// Obtain first char from item name.
 			String currentChar = name.substring(0, 1);
 			if (!currentChar.equals(mLastChar)) {

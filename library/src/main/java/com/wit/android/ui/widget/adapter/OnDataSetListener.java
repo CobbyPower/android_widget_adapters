@@ -18,6 +18,8 @@
  */
 package com.wit.android.ui.widget.adapter;
 
+import android.support.annotation.NonNull;
+
 /**
  * <h4>Interface Overview</h4>
  * todo: description
@@ -31,12 +33,12 @@ public interface OnDataSetListener<Adapter extends BaseAdapter> {
 	 *
 	 * @param adapter An instance of the adapter of which current data set was just changed.
 	 */
-	public void onDataSetChanged(Adapter adapter);
+	public void onDataSetChanged(@NonNull Adapter adapter);
 
 	/**
 	 * Invoked whenever the current data set within the passed <var>adapter</var> was invalidated.
 	 *
 	 * @param adapter An instance of the adapter of which current data set was just invalidated.
 	 */
-	public void onDataSetInvalidated(Adapter adapter);
+	public void onDataSetInvalidated(@NonNull Adapter adapter);
 }

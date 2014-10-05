@@ -18,6 +18,9 @@
  */
 package com.wit.android.ui.widget.adapter;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.lang.annotation.Annotation;
 
 /**
@@ -32,7 +35,8 @@ final class AdapterAnnotations {
 	 * Same as {@link #obtainAnnotationFrom(Class, Class, Class)} with no <var>maxSuperClass</var>
 	 * specified.
 	 */
-	static <A extends Annotation> A obtainAnnotationFrom(Class<?> fromClass, Class<A> classOfAnnotation) {
+	@Nullable
+	static <A extends Annotation> A obtainAnnotationFrom(@NonNull Class<?> fromClass, @NonNull Class<A> classOfAnnotation) {
 		return obtainAnnotationFrom(fromClass, classOfAnnotation, null);
 	}
 
@@ -51,7 +55,8 @@ final class AdapterAnnotations {
 	 * for the given class or its supers if requested.
 	 * @see #obtainAnnotationFrom(Class, Class)
 	 */
-	static <A extends Annotation> A obtainAnnotationFrom(Class<?> fromClass, Class<A> classOfAnnotation, Class<?> maxSuperClass) {
+	@Nullable
+	static <A extends Annotation> A obtainAnnotationFrom(@NonNull Class<?> fromClass, @NonNull Class<A> classOfAnnotation, Class<?> maxSuperClass) {
 		final boolean present = fromClass.isAnnotationPresent(classOfAnnotation);
 		if (present) {
 			return fromClass.getAnnotation(classOfAnnotation);

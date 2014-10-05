@@ -18,6 +18,9 @@
  */
 package com.wit.android.ui.widget.adapter;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 /**
  * <h4>Interface Overview</h4>
  * todo: description
@@ -37,5 +40,5 @@ public interface OnDataSetActionListener<Adapter extends BaseAdapter> {
 	 *                 passed adapter.
 	 * @param data     Additional data for the selected action.
 	 */
-	public void onDataSetActionSelected(Adapter adapter, int action, int position, long id, Object data);
+	public void onDataSetActionSelected(@NonNull Adapter adapter, int action, int position, long id, @Nullable Object data);
 }

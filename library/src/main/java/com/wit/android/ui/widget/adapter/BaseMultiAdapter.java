@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.wit.android.ui.widget.adapter.module.AdapterModule;
 
@@ -80,7 +81,7 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 	 *
 	 * @param context Context in which will be this adapter used.
 	 */
-	public BaseMultiAdapter(Context context) {
+	public BaseMultiAdapter(@NonNull Context context) {
 		super(context);
 	}
 
@@ -97,25 +98,26 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 	 *
 	 * @see #obtainModule(int)
 	 */
-	public void assignModule(AdapterModule module, int moduleID) {
+	public void attachModule(@NonNull AdapterModule module, int moduleId) {
 		module.dispatchAttachToAdapter(this);
-		MODULES_MANAGER.addModule(module, moduleID);
+		MODULES_MANAGER.addModule(module, moduleId);
 	}
 
 	/**
 	 * Wrapped {@link ModuleManager#getModule(int)} for this adapter.
 	 *
-	 * @see #assignModule(com.wit.android.ui.widget.adapter.module.AdapterModule, int)
+	 * @see #attachModule(com.wit.android.ui.widget.adapter.module.AdapterModule, int)
 	 */
-	public AdapterModule obtainModule(int moduleID) {
-		return MODULES_MANAGER.getModule(moduleID);
+	@Nullable
+	public AdapterModule obtainModule(int moduleId) {
+		return MODULES_MANAGER.getModule(moduleId);
 	}
 
 	/**
 	 * Wrapped {@link ModuleManager#removeModule(int)} for this adapter.
 	 */
-	public void removeModule(int moduleID) {
-		MODULES_MANAGER.removeModule(moduleID);
+	public void removeModule(int moduleId) {
+		MODULES_MANAGER.removeModule(moduleId);
 	}
 
 	/**
@@ -129,6 +131,7 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 	/**
 	 * This will also save the state of all currently assigned modules.
 	 */
+	@NonNull
 	@Override
 	protected Parcelable onSaveInstanceState() {
 		final Bundle modulesState = MODULES_MANAGER.dispatchSaveModulesState();
@@ -145,7 +148,7 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 	 * This will also restore the state of all currently assigned modules.
 	 */
 	@Override
-	protected void onRestoreInstanceState(Parcelable savedState) {
+	protected void onRestoreInstanceState(@NonNull Parcelable savedState) {
 		if (!(savedState instanceof SavedState)) {
 			super.onRestoreInstanceState(savedState);
 			return;

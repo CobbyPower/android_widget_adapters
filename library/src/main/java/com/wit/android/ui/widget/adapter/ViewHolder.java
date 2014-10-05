@@ -18,6 +18,7 @@
  */
 package com.wit.android.ui.widget.adapter;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 
 /**
@@ -40,7 +41,7 @@ public interface ViewHolder<Item, Adapter extends BaseAdapter> {
 	 *                 used to access all views to be hold by this holder for later easy access.
 	 * @see #bind(int, Object, BaseAdapter)
 	 */
-	public void create(int position, View itemView);
+	public void create(int position, @NonNull View itemView);
 
 	/**
 	 * Called to set up and populate all views hold by this holder with data of the given <var>item</var>.
@@ -50,5 +51,5 @@ public interface ViewHolder<Item, Adapter extends BaseAdapter> {
 	 * @param adapter  An instance of the adapter which requests to bind views of this holder.
 	 * @see #create(int, android.view.View)
 	 */
-	public void bind(int position, Item item, Adapter adapter);
+	public void bind(int position, @NonNull Item item, @NonNull Adapter adapter);
 }

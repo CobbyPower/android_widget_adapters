@@ -3,6 +3,9 @@ Change-Log
 
 > **RELEASE VERSION** (<i>RELEASE DATE</i>)
 
+### **2.4** (<i>05.10.2014</i>) ###
+- Added @NonNull + @Nullable annotations.
+
 ### **2.3.1** (<i>18.09.2014</i>) ###
 - Fixed BaseAdapter where notifyDataSetInvalidated() wrongly called super.notifyDataSetChanged().
 
