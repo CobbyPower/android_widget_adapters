@@ -2,7 +2,7 @@
 <img align="left" src="http://www.wolf-itechnologies.com/images/wit/android/wit_ic_android_100.png" />
 </a>
 
-Android Widget Adapters (2.3.1)
+Android Widget Adapters (2.4)
 ===============
 > [last updated: **05.10.2014**]
 
