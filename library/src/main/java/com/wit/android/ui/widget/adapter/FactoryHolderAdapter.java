@@ -23,28 +23,22 @@ import android.widget.SpinnerAdapter;
 
 /**
  * <h4>Interface Overview</h4>
- * <p>
  * Required interface for adapter which uses {@link com.wit.android.ui.widget.adapter.ViewHolderFactory}
  * to instantiate holder for its views.
- * </p>
  *
  * @author Martin Albedinsky
  */
 public interface FactoryHolderAdapter extends ListAdapter, SpinnerAdapter {
 
 	/**
-	 * <p>
 	 * Returns the id of this factory holder adapter instance.
-	 * </p>
 	 *
 	 * @return Adapter id.
 	 */
 	public int getAdapterId();
 
 	/**
-	 * <p>
 	 * Returns a type of an item's view for the currently iterated position.
-	 * </p>
 	 *
 	 * @return View type provided by {@link #getItemViewType(int)} for the currently iterated position.
 	 */

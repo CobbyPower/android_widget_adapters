@@ -19,6 +19,8 @@
 package com.wit.android.ui.widget.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -77,7 +79,7 @@ public abstract class SimpleSpinnerAdapter<Item> extends BaseSpinnerAdapter<Item
 	 *
 	 * @param context Context in which will be this adapter used.
 	 */
-	public SimpleSpinnerAdapter(Context context) {
+	public SimpleSpinnerAdapter(@NonNull Context context) {
 		super(context);
 	}
 
@@ -85,7 +87,7 @@ public abstract class SimpleSpinnerAdapter<Item> extends BaseSpinnerAdapter<Item
 	 * Same as {@link #SimpleSpinnerAdapter(android.content.Context, java.util.List)} so the given
 	 * <var>items</var> array will be converted to List.
 	 */
-	public SimpleSpinnerAdapter(Context context, Item[] items) {
+	public SimpleSpinnerAdapter(@NonNull Context context, @NonNull Item[] items) {
 		this(context, Arrays.asList(items));
 	}
 
@@ -95,7 +97,7 @@ public abstract class SimpleSpinnerAdapter<Item> extends BaseSpinnerAdapter<Item
 	 * @param context Context in which will be this adapter used.
 	 * @param items   List of items to be used as initial data set for this adapter.
 	 */
-	public SimpleSpinnerAdapter(Context context, List<Item> items) {
+	public SimpleSpinnerAdapter(@NonNull Context context, @NonNull List<Item> items) {
 		super(context);
 		this.mItems = items;
 	}
@@ -121,7 +123,8 @@ public abstract class SimpleSpinnerAdapter<Item> extends BaseSpinnerAdapter<Item
 	/**
 	 * Like {@link #changeItems(java.util.List)}, but this will also return the old data set.
 	 */
-	public List<Item> swapItems(List<Item> items) {
+	@Nullable
+	public List<Item> swapItems(@Nullable List<Item> items) {
 		final List<Item> oldItems = mItems;
 		changeItems(items);
 		return oldItems;
@@ -137,7 +140,7 @@ public abstract class SimpleSpinnerAdapter<Item> extends BaseSpinnerAdapter<Item
 	 * @see #swapItems(java.util.List)
 	 * @see #clearItems()
 	 */
-	public void changeItems(List<Item> items) {
+	public void changeItems(@Nullable List<Item> items) {
 		this.mItems = items;
 		if (items != null) {
 			notifyDataSetChanged();
@@ -150,7 +153,7 @@ public abstract class SimpleSpinnerAdapter<Item> extends BaseSpinnerAdapter<Item
 	 * Same as {@link #changeItems(java.util.List)} so the given <var>items</var> array will be converted
 	 * to List.
 	 */
-	public void changeItems(Item[] items) {
+	public void changeItems(@NonNull Item[] items) {
 		changeItems(Arrays.asList(items));
 	}
 
@@ -189,6 +192,7 @@ public abstract class SimpleSpinnerAdapter<Item> extends BaseSpinnerAdapter<Item
 
 	/**
 	 */
+	@Nullable
 	@Override
 	public Item getItem(int position) {
 		return (hasItems() && (position >= 0 && position < mItems.size())) ? mItems.get(position) : null;

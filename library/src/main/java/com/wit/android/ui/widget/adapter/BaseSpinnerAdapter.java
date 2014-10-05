@@ -19,6 +19,8 @@
 package com.wit.android.ui.widget.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -120,7 +122,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 *
 	 * @param context Context in which will be this adapter used.
 	 */
-	public BaseSpinnerAdapter(Context context) {
+	public BaseSpinnerAdapter(@NonNull Context context) {
 		super(context);
 	}
 
@@ -153,14 +155,11 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 * Performs optimized algorithm for this method using the <b>Holder</b> pattern.
 	 */
 	@Override
-	public View getDropDownView(int position, View convertView, ViewGroup parent) {
+	public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 		Object viewHolder;
 		if (convertView == null) {
 			// Dispatch to create new drop down view.
 			convertView = onCreateDropDownView(position, mLayoutInflater, parent);
-			if (convertView == null) {
-				throw new NullPointerException("Created drop down view for position(" + position + ") can not be null.");
-			}
 			// Resolve holder for the newly created drop down view.
 			final Object holder = onCreateDropDownViewHolder(position, convertView);
 			if (holder != null) {
@@ -187,6 +186,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 * @return An item obtained by {@link #getItem(int)} for the current selected position.
 	 * @see #getSelectedPosition()
 	 */
+	@Nullable
 	public Item getSelectedItem() {
 		return getItem(mSelectedPosition);
 	}
@@ -224,7 +224,8 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 * @return New instance of the requested view.
 	 * @see #inflate(int, android.view.ViewGroup)
 	 */
-	protected View onCreateDropDownView(int position, LayoutInflater inflater, ViewGroup parent) {
+	@NonNull
+	protected View onCreateDropDownView(int position, @NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
 		if (mDropDownViewRes >= 0) {
 			return inflater.inflate(mDropDownViewRes, parent, false);
 		}
@@ -260,7 +261,8 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 *                               can not be accessed or does not have an empty public
 	 *                               constructor.
 	 */
-	protected Object onCreateDropDownViewHolder(int position, View itemView) {
+	@Nullable
+	protected Object onCreateDropDownViewHolder(int position, @NonNull View itemView) {
 		if (mDropDownHolderFactory != null) {
 			final ViewHolder holder = mDropDownHolderFactory.createHolder(this, position, itemView);
 			if (holder != null) {
@@ -287,7 +289,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	/**
 	 */
 	@Override
-	protected void onBindView(int position, Object viewHolder) {
+	protected void onBindView(int position, @NonNull Object viewHolder) {
 		final Item selectedItem = getSelectedItem();
 		if (selectedItem != null) {
 			onUpdateView(position, selectedItem, viewHolder);
@@ -314,7 +316,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 * @param viewHolder An instance of the same holder as provided by {@link #onCreateDropDownViewHolder(int, android.view.View)}
 	 *                   for the specified position or converted view as holder as described above.
 	 */
-	protected void onBindDropDownView(int position, Object viewHolder) {
+	protected void onBindDropDownView(int position, @NonNull Object viewHolder) {
 		final Item item = getItem(position);
 		if (item != null) {
 			onUpdateView(position, item, viewHolder);
@@ -333,7 +335,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 *                   or {@link #onCreateViewHolder(int, android.view.View)} for the specified position.
 	 * @throws IllegalStateException If updating process for the given <var>item</var> fails.
 	 */
-	protected void onUpdateView(int position, Item item, Object viewHolder) {
+	protected void onUpdateView(int position, @NonNull Item item, @NonNull Object viewHolder) {
 		if (!bindViewInner(position, item, viewHolder)) {
 			throw new IllegalStateException(
 					"Failed to update view at position(" + position + "). " +

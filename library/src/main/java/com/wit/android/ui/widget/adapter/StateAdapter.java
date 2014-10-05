@@ -19,6 +19,7 @@
 package com.wit.android.ui.widget.adapter;
 
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 /**
  * <h4>Interface Overview</h4>
@@ -34,6 +35,7 @@ public interface StateAdapter {
 	 * @return Saved state of this adapter or an <b>empty</b> state if this adapter does not need to
 	 * save its state.
 	 */
+	@NonNull
 	public Parcelable dispatchSaveInstanceState();
 
 	/**
@@ -43,5 +45,5 @@ public interface StateAdapter {
 	 * @param savedState Should be the same state as obtained by {@link #dispatchSaveInstanceState()}
 	 *                   before.
 	 */
-	public void dispatchRestoreInstanceState(Parcelable savedState);
+	public void dispatchRestoreInstanceState(@NonNull Parcelable savedState);
 }

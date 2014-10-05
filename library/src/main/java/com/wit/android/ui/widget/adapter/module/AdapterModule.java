@@ -20,6 +20,7 @@ package com.wit.android.ui.widget.adapter.module;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.view.AbsSavedState;
 
 /**
@@ -180,7 +181,8 @@ public abstract class AdapterModule {
 	 * @return Saved state of this module or {@link BaseSavedState#EMPTY_STATE} if this module does
 	 * not need to save its state.
 	 */
-	public Parcelable dispatchSaveInstanceState() {
+	@NonNull
+	public final Parcelable dispatchSaveInstanceState() {
 		return onSaveInstanceState();
 	}
 
@@ -191,10 +193,8 @@ public abstract class AdapterModule {
 	 * @param savedState Should be the same state as obtained by {@link #dispatchSaveInstanceState()}
 	 *                   before.
 	 */
-	public void dispatchRestoreInstanceState(Parcelable savedState) {
-		if (savedState != null) {
-			onRestoreInstanceState(savedState);
-		}
+	public final void dispatchRestoreInstanceState(@NonNull Parcelable savedState) {
+		onRestoreInstanceState(savedState);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public abstract class AdapterModule {
 	 *
 	 * @param adapter An instance of the adapter by which will be this module used.
 	 */
-	public final void dispatchAttachToAdapter(ModuleAdapter adapter) {
+	public final void dispatchAttachToAdapter(@NonNull ModuleAdapter adapter) {
 		onAttachedToAdapter(mAdapter = adapter);
 	}
 
@@ -258,18 +258,19 @@ public abstract class AdapterModule {
 	 * @return Return here your implementation of {@link BaseSavedState} if you want to save state of
 	 * your module, otherwise no implementation of this method is necessary.
 	 */
+	@NonNull
 	protected Parcelable onSaveInstanceState() {
 		return BaseSavedState.EMPTY_STATE;
 	}
 
 	/**
-	 * Called immediately after {@link #dispatchRestoreInstanceState(android.os.Parcelable)} was called
-	 * with the valid (not-null) <var>savedState</var> to restore a previous state, (saved in {@link #onSaveInstanceState()}),
+	 * Called immediately after {@link #dispatchRestoreInstanceState(android.os.Parcelable)} was called,
+	 * to restore a previous state, (saved in {@link #onSaveInstanceState()}),
 	 * of this module.
 	 *
 	 * @param savedState Before saved state of this module.
 	 */
-	protected void onRestoreInstanceState(Parcelable savedState) {
+	protected void onRestoreInstanceState(@NonNull Parcelable savedState) {
 	}
 
 	/**
@@ -277,7 +278,7 @@ public abstract class AdapterModule {
 	 *
 	 * @param adapter An instance of the adapter to which was this module right now attached.
 	 */
-	protected void onAttachedToAdapter(ModuleAdapter adapter) {
+	protected void onAttachedToAdapter(@NonNull ModuleAdapter adapter) {
 	}
 
 	/**

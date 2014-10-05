@@ -19,6 +19,8 @@
 package com.wit.android.ui.widget.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -77,7 +79,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 *
 	 * @param context Context in which will be this adapter used.
 	 */
-	public SimpleAdapter(Context context) {
+	public SimpleAdapter(@NonNull Context context) {
 		super(context);
 	}
 
@@ -85,7 +87,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 * Same as {@link #SimpleAdapter(android.content.Context, java.util.List)} so the given <var>items</var>
 	 * array will be converted to List.
 	 */
-	public SimpleAdapter(Context context, Item[] items) {
+	public SimpleAdapter(@NonNull Context context, @NonNull Item[] items) {
 		this(context, Arrays.asList(items));
 	}
 
@@ -95,7 +97,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 * @param context Context in which will be this adapter used.
 	 * @param items   List of items to be used as initial data set for this adapter.
 	 */
-	public SimpleAdapter(Context context, List<Item> items) {
+	public SimpleAdapter(@NonNull Context context, @NonNull List<Item> items) {
 		super(context);
 		this.mItems = items;
 	}
@@ -113,6 +115,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 *
 	 * @return Data set of this adapter or <code>null</code> if there is no data set presented within
 	 * this adapter.
+	 * @see #hasItems()
 	 */
 	public List<Item> getItems() {
 		return mItems;
@@ -121,7 +124,8 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	/**
 	 * Like {@link #changeItems(java.util.List)}, but this will also return the old data set.
 	 */
-	public List<Item> swapItems(List<Item> items) {
+	@Nullable
+	public List<Item> swapItems(@Nullable List<Item> items) {
 		final List<Item> oldItems = mItems;
 		changeItems(items);
 		return oldItems;
@@ -137,7 +141,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 * @see #swapItems(java.util.List)
 	 * @see #clearItems()
 	 */
-	public void changeItems(List<Item> items) {
+	public void changeItems(@Nullable List<Item> items) {
 		this.mItems = items;
 		if (items != null) {
 			notifyDataSetChanged();
@@ -150,7 +154,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 * Same as {@link #changeItems(java.util.List)} so the given <var>items</var> array will be converted
 	 * to List.
 	 */
-	public void changeItems(Item[] items) {
+	public void changeItems(@NonNull Item[] items) {
 		changeItems(Arrays.asList(items));
 	}
 
@@ -160,7 +164,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 * This will also notify data set change.
 	 */
 	public void clearItems() {
-		if (hasItems()) {
+		if (mItems != null) {
 			mItems.clear();
 			notifyDataSetChanged();
 		}
@@ -189,6 +193,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 
 	/**
 	 */
+	@Nullable
 	@Override
 	public Item getItem(int position) {
 		return (hasItems() && (position >= 0 && position < mItems.size())) ? mItems.get(position) : null;

@@ -18,6 +18,8 @@
  */
 package com.wit.android.ui.widget.adapter;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 /**
@@ -40,7 +42,9 @@ public interface ViewHolderFactory {
 	 *                 created.
 	 * @param view     The view created for the specified position by the adapter for which should
 	 *                 be holder created.
-	 * @return New instance of ViewHolder.
+	 * @return New instance of ViewHolder or <code>null</code> if this factory does not provide
+	 * holder for the specified adapter.
 	 */
-	public ViewHolder createHolder(FactoryHolderAdapter adapter, int position, View view);
+	@Nullable
+	public ViewHolder createHolder(@NonNull FactoryHolderAdapter adapter, int position, @NonNull View view);
 }

@@ -22,6 +22,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.AbsSavedState;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -227,10 +229,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * @param context Context in which will be this adapter used.
 	 * @throws NullPointerException If the given context is <code>null</code>.
 	 */
-	public BaseAdapter(Context context) {
-		if (context == null) {
-			throw new NullPointerException("Invalid context.");
-		}
+	public BaseAdapter(@NonNull Context context) {
 		processAnnotations(((Object) this).getClass());
 		// Set up.
 		this.mContext = context;
@@ -248,6 +247,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 
 	/**
 	 */
+	@NonNull
 	@Override
 	public Parcelable dispatchSaveInstanceState() {
 		return onSaveInstanceState();
@@ -256,10 +256,8 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	/**
 	 */
 	@Override
-	public void dispatchRestoreInstanceState(Parcelable savedState) {
-		if (savedState != null) {
-			onRestoreInstanceState(savedState);
-		}
+	public void dispatchRestoreInstanceState(@NonNull Parcelable savedState) {
+		onRestoreInstanceState(savedState);
 	}
 
 	/**
@@ -287,16 +285,13 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 *                              returns <code>null</code> for the specified <var>position</var>.
 	 */
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 		Object viewHolder;
 		// Obtain current item view type.
 		this.mCurrentViewType = getItemViewType(position);
 		if (convertView == null) {
 			// Dispatch to create new view.
 			convertView = onCreateView(position, mLayoutInflater, parent);
-			if (convertView == null) {
-				throw new NullPointerException("Created view for position(" + position + ") can not be null.");
-			}
 			// Resolve holder for the newly created view.
 			final Object holder = onCreateViewHolder(position, convertView);
 			if (holder != null) {
@@ -322,6 +317,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 *
 	 * @return Same context as passed during initialization.
 	 */
+	@NonNull
 	public Context getContext() {
 		return mContext;
 	}
@@ -332,6 +328,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 *
 	 * @return An instance of LayoutInflater.
 	 */
+	@NonNull
 	public LayoutInflater getLayoutInflater() {
 		return mLayoutInflater;
 	}
@@ -342,6 +339,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 *
 	 * @return An application's resources.
 	 */
+	@NonNull
 	public Resources getResources() {
 		return mResources;
 	}
@@ -349,6 +347,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	/**
 	 * Wrapped {@link android.content.res.Resources#getString(int)} for the current resources.
 	 */
+	@NonNull
 	public String getString(int resId) {
 		return (mResources != null) ? mResources.getString(resId) : "";
 	}
@@ -356,6 +355,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	/**
 	 * Wrapped {@link android.content.res.Resources#getString(int, Object...)} for the current resources.
 	 */
+	@NonNull
 	public String getString(int resId, Object... args) {
 		return (mResources != null) ? mResources.getString(resId, args) : "";
 	}
@@ -363,6 +363,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	/**
 	 * Wrapped {@link android.content.res.Resources#getText(int)} for the current resources.
 	 */
+	@NonNull
 	public CharSequence getText(int resId) {
 		return (mResources != null) ? mResources.getText(resId) : "";
 	}
@@ -370,9 +371,16 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	/**
 	 * Wrapped {@link android.content.res.Resources#getText(int, CharSequence)} for the current resources.
 	 */
+	@NonNull
 	public CharSequence getText(int resId, CharSequence def) {
 		return (mResources != null) ? mResources.getText(resId, def) : "";
 	}
+
+	/**
+	 */
+	@Nullable
+	@Override
+	public abstract Item getItem(int position);
 
 	/**
 	 * @return By default, the given position as id.
@@ -448,7 +456,8 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * @return The root view of the inflated view hierarchy.
 	 * @see android.view.LayoutInflater#inflate(int, android.view.ViewGroup)
 	 */
-	protected final View inflate(int resource, ViewGroup parent) {
+	@NonNull
+	protected final View inflate(int resource, @NonNull ViewGroup parent) {
 		return mLayoutInflater.inflate(resource, parent, false);
 	}
 
@@ -462,7 +471,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * @param position The position for which was the given action performed.
 	 * @param data     Additional data for the selected action to be dispatched to the listener.
 	 */
-	protected void notifyDataSetActionSelected(int action, int position, Object data) {
+	protected void notifyDataSetActionSelected(int action, int position, @Nullable Object data) {
 		if (!onDataSetActionSelected(action, position, data)) {
 			notifyDataSetActionSelectedInner(action, position, data);
 		}
@@ -474,7 +483,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * @return <code>True</code> to indicate that this event was processed here, otherwise the current
 	 * {@link OnDataSetActionListener} will be notified about this event if it is presented.
 	 */
-	protected boolean onDataSetActionSelected(int action, int position, Object data) {
+	protected boolean onDataSetActionSelected(int action, int position, @Nullable Object data) {
 		return false;
 	}
 
@@ -497,7 +506,8 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * @throws MissingUIAnnotationException If there is no @ItemView annotation presented.
 	 * @see #inflate(int, android.view.ViewGroup)
 	 */
-	protected View onCreateView(int position, LayoutInflater inflater, ViewGroup parent) {
+	@NonNull
+	protected View onCreateView(int position, @NonNull LayoutInflater inflater, @NonNull ViewGroup parent) {
 		if (mViewRes >= 0) {
 			return inflater.inflate(mViewRes, parent, false);
 		}
@@ -536,7 +546,8 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * @throws IllegalStateException If the class provided by @ItemViewHolder annotation can not
 	 *                               be accessed or does not have an empty public constructor.
 	 */
-	protected Object onCreateViewHolder(int position, View itemView) {
+	@Nullable
+	protected Object onCreateViewHolder(int position, @NonNull View itemView) {
 		if (mHolderFactory != null) {
 			final ViewHolder holder = mHolderFactory.createHolder(this, position, itemView);
 			if (holder != null) {
@@ -581,7 +592,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 *                   for the specified position or converted view as holder as described above.
 	 * @throws IllegalStateException If binding process for the specified position fails.
 	 */
-	protected void onBindView(int position, Object viewHolder) {
+	protected void onBindView(int position, @NonNull Object viewHolder) {
 		final Item item = getItem(position);
 		if (item == null || !bindViewInner(position, item, viewHolder)) {
 			throw new IllegalStateException(
@@ -602,18 +613,18 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * @return Return here your implementation of {@link BaseSavedState} if you want to save state of
 	 * your adapter, otherwise no implementation of this method is necessary.
 	 */
+	@NonNull
 	protected Parcelable onSaveInstanceState() {
 		return BaseSavedState.EMPTY_STATE;
 	}
 
 	/**
-	 * Called immediately after {@link #dispatchRestoreInstanceState(android.os.Parcelable)} was called
-	 * with the valid (not-null) <var>savedState</var> to restore a previous state, (saved in {@link #onSaveInstanceState()}),
-	 * of this adapter.
+	 * Called immediately after {@link #dispatchRestoreInstanceState(android.os.Parcelable)} was called,
+	 * to restore a previous state, (saved in {@link #onSaveInstanceState()}), of this adapter.
 	 *
 	 * @param savedState Before saved state of this adapter.
 	 */
-	protected void onRestoreInstanceState(Parcelable savedState) {
+	protected void onRestoreInstanceState(@NonNull Parcelable savedState) {
 	}
 
 	/**
@@ -698,15 +709,6 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	/**
 	 * Private -------------------------------------------------------------------------------------
 	 */
-
-	/**
-	 * Abstract methods ----------------------------------------------------------------------------
-	 */
-
-	/**
-	 */
-	@Override
-	public abstract Item getItem(int position);
 
 	/**
 	 * Inner classes ===============================================================================

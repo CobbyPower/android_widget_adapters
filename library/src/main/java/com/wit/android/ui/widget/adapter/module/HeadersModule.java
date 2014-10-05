@@ -19,6 +19,8 @@
 package com.wit.android.ui.widget.adapter.module;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -56,6 +58,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 		 *
 		 * @return The text value of this header item.
 		 */
+		@NonNull
 		public String getText();
 	}
 
@@ -161,7 +164,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	 * @param root     The parent to that should be header's view eventually attached to.
 	 * @return A view corresponding to the header item at the specified position.
 	 */
-	public View createHeaderView(int position, LayoutInflater inflater, ViewGroup root) {
+	public View createHeaderView(int position, @NonNull LayoutInflater inflater, @NonNull ViewGroup root) {
 		return HeaderHolder.createView(inflater.getContext(), mHeaderStyleAttr);
 	}
 
@@ -175,7 +178,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	 * @param headerView The header's view, for which should be holder created.
 	 * @return An instance of HeaderHolder for header's view at the specified position.
 	 */
-	public Object createHeaderViewHolder(int position, View headerView) {
+	public Object createHeaderViewHolder(int position, @NonNull View headerView) {
 		return (headerView instanceof TextView) ? new HeaderHolder((TextView) headerView) : new Object();
 	}
 
@@ -189,7 +192,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	 * @param headerHolder An instance of holder created by {@link #createHeaderViewHolder(int, android.view.View)}
 	 *                     for the specified position.
 	 */
-	public void bindHeaderView(int position, Object headerHolder) {
+	public void bindHeaderView(int position, @NonNull Object headerHolder) {
 		if (headerHolder instanceof HeaderHolder) {
 			final Header header = getHeader(position);
 			if (header != null) {
@@ -262,6 +265,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	 * @return An instance of header at the requested position or <code>null</code> if there is no
 	 * header item at the requested position.
 	 */
+	@Nullable
 	public H getHeader(int position) {
 		return HEADERS.get(position);
 	}
@@ -271,6 +275,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	 *
 	 * @return Set of headers mapped to theirs positions.
 	 */
+	@NonNull
 	public SparseArray<H> getHeaders() {
 		return HEADERS;
 	}
@@ -280,6 +285,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	 *
 	 * @return List of the current headers.
 	 */
+	@NonNull
 	public List<H> getHeadersList() {
 		final List<H> headers = new ArrayList<>(HEADERS.size());
 		for (int i = 0; i < HEADERS.size(); i++) {
@@ -300,7 +306,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	 * @param header   Header to add.
 	 * @param position The position, at which should be header added.
 	 */
-	protected void addHeader(H header, int position) {
+	protected void addHeader(@NonNull H header, int position) {
 		HEADERS.append(position, header);
 	}
 
@@ -347,7 +353,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 		 *
 		 * @param textView Root view of this holder.
 		 */
-		public HeaderHolder(TextView textView) {
+		public HeaderHolder(@NonNull TextView textView) {
 			this.mTextView = textView;
 		}
 
@@ -363,7 +369,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 		 *                  {@link android.widget.TextView#TextView(android.content.Context, android.util.AttributeSet, int)}.
 		 * @return New instance of TextView.
 		 */
-		public static TextView createView(Context context, int styleAttr) {
+		public static TextView createView(@NonNull Context context, int styleAttr) {
 			return new TextView(context, null, styleAttr);
 		}
 
@@ -372,6 +378,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 		 *
 		 * @return Instance of TextView of this holder.
 		 */
+		@NonNull
 		public TextView getTextView() {
 			return mTextView;
 		}
@@ -382,9 +389,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 		 * @param resId A resource id of the desired text.
 		 */
 		public void setText(int resId) {
-			if (mTextView != null) {
-				mTextView.setText(resId);
-			}
+			mTextView.setText(resId);
 		}
 
 		/**
@@ -393,9 +398,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 		 * @param text The desired text.
 		 */
 		public void setText(CharSequence text) {
-			if (mTextView != null) {
-				mTextView.setText(text);
-			}
+			mTextView.setText(text);
 		}
 	}
 
@@ -426,7 +429,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 		 *
 		 * @param text Text value for header.
 		 */
-		public SimpleHeader(String text) {
+		public SimpleHeader(@NonNull String text) {
 			this.mText = text;
 		}
 
@@ -436,6 +439,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 
 		/**
 		 */
+		@NonNull
 		@Override
 		public String getText() {
 			return mText;

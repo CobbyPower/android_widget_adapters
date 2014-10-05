@@ -19,6 +19,8 @@
 package com.wit.android.ui.widget.adapter;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.SparseArray;
 
 import com.wit.android.ui.widget.adapter.module.AdapterModule;
@@ -91,13 +93,11 @@ public class ModuleManager {
 	 * @param module   An instance of the desired module to add.
 	 * @param moduleId An id by which can be the given module obtained from this manager by {@link #getModule(int)}.
 	 */
-	public void addModule(AdapterModule module, int moduleId) {
-		if (module != null) {
-			if (mModules == null) {
-				this.mModules = new SparseArray<>();
-			}
-			mModules.append(moduleId, module);
+	public void addModule(@NonNull AdapterModule module, int moduleId) {
+		if (mModules == null) {
+			this.mModules = new SparseArray<>();
 		}
+		mModules.append(moduleId, module);
 	}
 
 	/**
@@ -108,6 +108,7 @@ public class ModuleManager {
 	 * by {@link #addModule(AdapterModule, int)} or <code>null</code> if there is no module with
 	 * such an id.
 	 */
+	@Nullable
 	public AdapterModule getModule(int moduleId) {
 		return mModules != null ? mModules.get(moduleId) : null;
 	}
@@ -126,10 +127,11 @@ public class ModuleManager {
 	/**
 	 * Called to save the current state of all modules presented within this manager.
 	 *
-	 * @return Saved state of all modules or <code>null</code> if there are not any modules presented
+	 * @return Saved state of all modules or {@link Bundle#EMPTY} if there are not any modules presented
 	 * or none of the current modules requires state saving.
 	 * @see AdapterModule#requiresStateSaving()
 	 */
+	@NonNull
 	public Bundle dispatchSaveModulesState() {
 		final int n = mModules != null ? mModules.size() : 0;
 		if (n > 0) {
@@ -148,9 +150,9 @@ public class ModuleManager {
 					);
 				}
 			}
-			return save ? states : null;
+			return save ? states : Bundle.EMPTY;
 		}
-		return null;
+		return Bundle.EMPTY;
 	}
 
 	/**
@@ -160,8 +162,8 @@ public class ModuleManager {
 	 * @param savedState Should be the same state as obtained by {@link #dispatchSaveModulesState()}
 	 *                   before.
 	 */
-	public void dispatchRestoreModulesState(Bundle savedState) {
-		if (savedState != null && mModules != null) {
+	public void dispatchRestoreModulesState(@NonNull Bundle savedState) {
+		if (mModules != null) {
 			final int n = mModules.size();
 			if (n > 0) {
 				String key;
@@ -189,11 +191,11 @@ public class ModuleManager {
 	/**
 	 * Creates a bundle key for the specified <var>moduleId</var>.
 	 *
-	 * @param moduleID The id for which should be key created.
+	 * @param moduleId The id for which should be key created.
 	 * @return Created bundle key.
 	 */
-	String createModuleStateKey(int moduleID) {
-		return String.format(BUNDLE_MODULE_STATE_KEY_FORMAT, moduleID);
+	String createModuleStateKey(int moduleId) {
+		return String.format(BUNDLE_MODULE_STATE_KEY_FORMAT, moduleId);
 	}
 
 	/**
