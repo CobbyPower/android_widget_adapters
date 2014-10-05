@@ -26,23 +26,23 @@ import android.util.AndroidRuntimeException;
  *
  * @author Martin Albedinsky
  */
-public class MissingUIAnnotationException extends AndroidRuntimeException {
+public class MissingUiAnnotationException extends AndroidRuntimeException {
 
 	/**
 	 */
-	public MissingUIAnnotationException() {
+	public MissingUiAnnotationException() {
 		super();
 	}
 
 	/**
 	 */
-	public MissingUIAnnotationException(String name) {
+	public MissingUiAnnotationException(String name) {
 		super(name);
 	}
 
 	/**
 	 */
-	public MissingUIAnnotationException(Exception cause) {
+	public MissingUiAnnotationException(Exception cause) {
 		super(cause);
 	}
 }
