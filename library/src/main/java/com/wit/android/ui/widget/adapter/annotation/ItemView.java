@@ -18,6 +18,8 @@
  */
 package com.wit.android.ui.widget.adapter.annotation;
 
+import android.support.annotation.LayoutRes;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -41,5 +43,6 @@ public @interface ItemView {
 	/**
 	 * A resource id of the desired layout which should be inflated as item view.
 	 */
+	@LayoutRes
 	int value();
 }

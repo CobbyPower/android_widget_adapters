@@ -117,6 +117,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 * this adapter.
 	 * @see #hasItems()
 	 */
+	@Nullable
 	public List<Item> getItems() {
 		return mItems;
 	}

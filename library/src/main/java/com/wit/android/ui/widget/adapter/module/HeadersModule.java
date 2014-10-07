@@ -19,8 +19,10 @@
 package com.wit.android.ui.widget.adapter.module;
 
 import android.content.Context;
+import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -164,6 +166,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	 * @param root     The parent to that should be header's view eventually attached to.
 	 * @return A view corresponding to the header item at the specified position.
 	 */
+	@NonNull
 	public View createHeaderView(int position, @NonNull LayoutInflater inflater, @NonNull ViewGroup root) {
 		return HeaderHolder.createView(inflater.getContext(), mHeaderStyleAttr);
 	}
@@ -178,6 +181,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	 * @param headerView The header's view, for which should be holder created.
 	 * @return An instance of HeaderHolder for header's view at the specified position.
 	 */
+	@Nullable
 	public Object createHeaderViewHolder(int position, @NonNull View headerView) {
 		return (headerView instanceof TextView) ? new HeaderHolder((TextView) headerView) : new Object();
 	}
@@ -216,7 +220,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	 * @see #getHeaderStyleAttr()
 	 * @see com.wit.android.ui.widget.adapter.module.AlphabeticHeaders.HeaderHolder
 	 */
-	public void setHeaderStyleAttr(int styleAttr) {
+	public void setHeaderStyleAttr(@AttrRes int styleAttr) {
 		this.mHeaderStyleAttr = styleAttr;
 	}
 
@@ -226,6 +230,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 	 * @return Xml attribute.
 	 * @see #setHeaderStyleAttr(int)
 	 */
+	@AttrRes
 	public int getHeaderStyleAttr() {
 		return mHeaderStyleAttr;
 	}
@@ -369,7 +374,8 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 		 *                  {@link android.widget.TextView#TextView(android.content.Context, android.util.AttributeSet, int)}.
 		 * @return New instance of TextView.
 		 */
-		public static TextView createView(@NonNull Context context, int styleAttr) {
+		@NonNull
+		public static TextView createView(@NonNull Context context, @AttrRes int styleAttr) {
 			return new TextView(context, null, styleAttr);
 		}
 
@@ -388,7 +394,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 		 *
 		 * @param resId A resource id of the desired text.
 		 */
-		public void setText(int resId) {
+		public void setText(@StringRes int resId) {
 			mTextView.setText(resId);
 		}
 
@@ -397,7 +403,7 @@ public abstract class HeadersModule<H extends HeadersModule.Header> extends Adap
 		 *
 		 * @param text The desired text.
 		 */
-		public void setText(CharSequence text) {
+		public void setText(@Nullable CharSequence text) {
 			mTextView.setText(text);
 		}
 	}

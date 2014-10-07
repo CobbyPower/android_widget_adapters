@@ -56,7 +56,7 @@ final class AdapterAnnotations {
 	 * @see #obtainAnnotationFrom(Class, Class)
 	 */
 	@Nullable
-	static <A extends Annotation> A obtainAnnotationFrom(@NonNull Class<?> fromClass, @NonNull Class<A> classOfAnnotation, Class<?> maxSuperClass) {
+	static <A extends Annotation> A obtainAnnotationFrom(@NonNull Class<?> fromClass, @NonNull Class<A> classOfAnnotation, @Nullable Class<?> maxSuperClass) {
 		final boolean present = fromClass.isAnnotationPresent(classOfAnnotation);
 		if (present) {
 			return fromClass.getAnnotation(classOfAnnotation);
