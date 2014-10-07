@@ -136,7 +136,7 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 	protected Parcelable onSaveInstanceState() {
 		final Bundle modulesState = MODULES_MANAGER.dispatchSaveModulesState();
 		// If some of the modules save its state we need to save state of this adapter.
-		if (modulesState != null) {
+		if (!Bundle.EMPTY.equals(modulesState)) {
 			final SavedState savedState = new SavedState(super.onSaveInstanceState());
 			savedState.modulesState = modulesState;
 			return savedState;
@@ -219,7 +219,7 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 		 *                   within <code>onSaveInstanceState()</code> of a specific {@link BaseMultiAdapter}
 		 *                   implementation.
 		 */
-		protected SavedState(Parcelable superState) {
+		protected SavedState(@Nullable Parcelable superState) {
 			super(superState);
 		}
 
@@ -229,7 +229,7 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 		 *
 		 * @param source Parcel with data for a new instance.
 		 */
-		protected SavedState(Parcel source) {
+		protected SavedState(@NonNull Parcel source) {
 			super(source);
 			// Use class loader for classes out of the Android SDK.
 			this.modulesState = source.readBundle(AdaptersConfig.class.getClassLoader());

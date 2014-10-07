@@ -20,8 +20,13 @@ package com.wit.android.ui.widget.adapter.module;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.SparseIntArray;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * <h4>Class Overview</h4>
@@ -34,6 +39,14 @@ public class SelectionModule extends AdapterModule {
 	/**
 	 * Interface ===================================================================================
 	 */
+
+	/**
+	 * <h4>Annotation Overview</h4>
+	 * Defines an annotation for determining set of allowed modes for {@link #setMode(int)} method.
+	 */
+	@Retention(RetentionPolicy.SOURCE)
+	@IntDef({MODE_SINGLE, MODE_MULTIPLE})
+	public @interface Mode {}
 
 	/**
 	 * Constants ===================================================================================
@@ -308,7 +321,7 @@ public class SelectionModule extends AdapterModule {
 	 * @param mode The desired selection mode. One of {@link #MODE_SINGLE} or {@link #MODE_MULTIPLE}.
 	 * @see #getMode()
 	 */
-	public void setMode(int mode) {
+	public void setMode(@Mode int mode) {
 		switch (mode) {
 			case MODE_SINGLE:
 			case MODE_MULTIPLE:
@@ -323,6 +336,7 @@ public class SelectionModule extends AdapterModule {
 	 * by default.
 	 * @see #setMode(int)
 	 */
+	@Mode
 	public int getMode() {
 		return mMode;
 	}
@@ -519,7 +533,7 @@ public class SelectionModule extends AdapterModule {
 		 *                   within <code>onSaveInstanceState()</code> of a specific {@link SelectionModule}
 		 *                   implementation.
 		 */
-		protected SavedState(Parcelable superState) {
+		protected SavedState(@Nullable Parcelable superState) {
 			super(superState);
 		}
 
@@ -529,7 +543,7 @@ public class SelectionModule extends AdapterModule {
 		 *
 		 * @param source Parcel with data for a new instance.
 		 */
-		protected SavedState(Parcel source) {
+		protected SavedState(@NonNull Parcel source) {
 			super(source);
 			this.mode = source.readInt();
 			this.selectedItems = source.createIntArray();

@@ -166,7 +166,7 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 	 * @param item     An alphabetic item to process.
 	 * @param position The position at which should be header presented within the headers data set.
 	 */
-	protected final void processAlphabeticItem(AlphabeticItem item, int position) {
+	protected final void processAlphabeticItem(@NonNull AlphabeticItem item, int position) {
 		final String name = item.getName();
 		if (!TextUtils.isEmpty(name)) {
 			// Obtain first char from item name.

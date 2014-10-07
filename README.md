@@ -4,7 +4,7 @@
 
 Android Widget Adapters (2.4)
 ===============
-> [last updated: **05.10.2014**]
+> [last updated: **07.10.2014**]
 
 Efficient and optimized adapters for Android widgets as [ListView](http://developer.android.com/reference/android/widget/ListView.html) and [GridView](http://developer.android.com/reference/android/widget/GridView.html).
 

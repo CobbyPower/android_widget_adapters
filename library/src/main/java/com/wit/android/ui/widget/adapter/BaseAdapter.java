@@ -22,8 +22,10 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.view.AbsSavedState;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -348,7 +350,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * Wrapped {@link android.content.res.Resources#getString(int)} for the current resources.
 	 */
 	@NonNull
-	public String getString(int resId) {
+	public String getString(@StringRes int resId) {
 		return (mResources != null) ? mResources.getString(resId) : "";
 	}
 
@@ -356,7 +358,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * Wrapped {@link android.content.res.Resources#getString(int, Object...)} for the current resources.
 	 */
 	@NonNull
-	public String getString(int resId, Object... args) {
+	public String getString(@StringRes int resId, @Nullable Object... args) {
 		return (mResources != null) ? mResources.getString(resId, args) : "";
 	}
 
@@ -364,7 +366,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * Wrapped {@link android.content.res.Resources#getText(int)} for the current resources.
 	 */
 	@NonNull
-	public CharSequence getText(int resId) {
+	public CharSequence getText(@StringRes int resId) {
 		return (mResources != null) ? mResources.getText(resId) : "";
 	}
 
@@ -372,7 +374,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * Wrapped {@link android.content.res.Resources#getText(int, CharSequence)} for the current resources.
 	 */
 	@NonNull
-	public CharSequence getText(int resId, CharSequence def) {
+	public CharSequence getText(@StringRes int resId, @NonNull CharSequence def) {
 		return (mResources != null) ? mResources.getText(resId, def) : "";
 	}
 
@@ -402,7 +404,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 *
 	 * @param listener Listener callback.
 	 */
-	public void setOnDataSetListener(OnDataSetListener listener) {
+	public void setOnDataSetListener(@NonNull OnDataSetListener listener) {
 		this.mDataSetListener = listener;
 	}
 
@@ -419,7 +421,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 *
 	 * @param listener Listener callback.
 	 */
-	public void setOnDataSetActionListener(OnDataSetActionListener listener) {
+	public void setOnDataSetActionListener(@NonNull OnDataSetActionListener listener) {
 		this.mDataSetActionListener = listener;
 	}
 
@@ -457,7 +459,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * @see android.view.LayoutInflater#inflate(int, android.view.ViewGroup)
 	 */
 	@NonNull
-	protected final View inflate(int resource, @NonNull ViewGroup parent) {
+	protected final View inflate(@LayoutRes int resource, @NonNull ViewGroup parent) {
 		return mLayoutInflater.inflate(resource, parent, false);
 	}
 
@@ -759,7 +761,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 		 *                   within <code>onSaveInstanceState()</code> of a specific {@link BaseAdapter}
 		 *                   implementation.
 		 */
-		protected BaseSavedState(Parcelable superState) {
+		protected BaseSavedState(@Nullable Parcelable superState) {
 			super(superState);
 		}
 
@@ -769,7 +771,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 		 *
 		 * @param source Parcel with data for a new instance.
 		 */
-		protected BaseSavedState(Parcel source) {
+		protected BaseSavedState(@NonNull Parcel source) {
 			super(source);
 		}
 	}

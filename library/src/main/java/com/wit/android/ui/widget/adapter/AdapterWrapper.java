@@ -95,14 +95,14 @@ public abstract class AdapterWrapper implements WrapperListAdapter {
 	/**
 	 */
 	@Override
-	public void registerDataSetObserver(DataSetObserver observer) {
+	public void registerDataSetObserver(@NonNull DataSetObserver observer) {
 		mAdapter.registerDataSetObserver(observer);
 	}
 
 	/**
 	 */
 	@Override
-	public void unregisterDataSetObserver(DataSetObserver observer) {
+	public void unregisterDataSetObserver(@NonNull DataSetObserver observer) {
 		mAdapter.unregisterDataSetObserver(observer);
 	}
 

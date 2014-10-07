@@ -116,6 +116,7 @@ public abstract class SimpleSpinnerAdapter<Item> extends BaseSpinnerAdapter<Item
 	 * @return Data set of this adapter or <code>null</code> if there is no data set presented within
 	 * this adapter.
 	 */
+	@Nullable
 	public List<Item> getItems() {
 		return mItems;
 	}
