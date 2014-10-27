@@ -13,7 +13,7 @@ Efficient and optimized adapters for Android widgets as [ListView](http://develo
 	<br/>
 	series by
 	<br/>
-	<a href="https://plus.google.com/u/0/104376986791224020588/" title="Google+ Page">Wolf-ITechnologies</a>
+	<a href="https://github.com/Wolf-ITechnologies" title="Google+ Page">Wolf-ITechnologies</a>
 </h1>
 <p align="right">
 	<a href="" title="">
@@ -76,7 +76,7 @@ Licensed under the **Apache License**: **[Version 2.0](http://www.apache.org/lic
 
 ## Bee In Touch ##
 
-[![](http://www.wolf-itechnologies.com/images/wit/social/google/wit_ic_google+_100.png)](https://plus.google.com/104376986791224020588 "Visit our Google+ page for Android")
-[![](http://www.wolf-itechnologies.com/images/wit/social/facebook/wit_ic_facebook_100.png)](https://www.facebook.com/pages/AndroidWolf-ITechnologies/627264120638706 "Visit our Facebook page for Android")
-[![](http://www.wolf-itechnologies.com/images/wit/social/twitter/wit_ic_twitter_100.png)](https://twitter.com/AndroidWIT "Visit our Twitter page for Android")
+[![](http://www.wolf-itechnologies.com/images/wit/social/google/wit_ic_google+_100.png)](https://plus.google.com/u/0/b/108026506130584504970/108026506130584504970 "Google+ page dedicated to Android coding")
+[![](http://www.wolf-itechnologies.com/images/wit/social/facebook/wit_ic_facebook_100.png)](https://www.facebook.com/pages/Android-Code/585345241591914 "Facebook page dedicated to Android coding")
+[![](http://www.wolf-itechnologies.com/images/wit/social/twitter/wit_ic_twitter_100.png)](https://twitter.com/AndroidCoode "Twitter page dedicated to Android coding")
 
