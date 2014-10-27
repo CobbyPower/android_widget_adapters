@@ -30,25 +30,28 @@ import com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder;
 import com.wit.android.ui.widget.adapter.annotation.DropDownViewHolderFactory;
 
 /**
- * <h4>Class Overview</h4>
+ * <h3>Class Overview</h3>
  * todo: description
- * <h6>Accepted annotations</h6>
+ * <h3>Accepted annotations</h3>
  * <ul>
- * <li>{@link com.wit.android.ui.widget.adapter.annotation.DropDownView @DropDownView} <b>[class - inherited]</b></li>
+ * <li>
+ * {@link com.wit.android.ui.widget.adapter.annotation.DropDownView @DropDownView} <b>[class - inherited]</b>
  * <p>
  * If this annotation is presented, a resource id provided by this annotation will be used to inflate
  * the desired drop down view in {@link #onCreateDropDownView(int, android.view.LayoutInflater, android.view.ViewGroup)}.
- * </p>
- * <li>{@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolderFactory @DropDownViewHolderFactory} <b>[class - inherited]</li>
+ * </li>
+ * <li>
+ * {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolderFactory @DropDownViewHolderFactory} <b>[class - inherited]</b>
  * <p>
  * If this annotation is presented, a class provided by this annotation will be used to create instances
  * of holders for drop down views.
- * </p>
- * <li>{@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder @DropDownViewHolder} <b>[class - inherited]</b></li>
+ * </li>
+ * <li>
+ * {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder @DropDownViewHolder} <b>[class - inherited]</b>
  * <p>
  * If this annotation is presented, a class provided by this annotation will be used to instantiate
  * an instance of the desired drop down view holder in {@link #onCreateDropDownViewHolder(int, android.view.View)}.
- * </p>
+ * </li>
  * <li>{@link BaseAdapter + super annotations}</li>
  * </ul>
  *
@@ -114,7 +117,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 
 	/**
 	 * Creates a new instance of BaseSpinnerAdapter within the given <var>context</var>.
-	 * <p/>
+	 * <p>
 	 * If {@link com.wit.android.ui.widget.adapter.annotation.DropDownView @DropDownView},
 	 * {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolderFactory @DropDownViewHolderFactory}
 	 * or {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder @DropDownViewHolder}
@@ -139,8 +142,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 * {@link android.widget.Spinner Spinner} to which is this adapter attached.
 	 *
 	 * @param position Position of an item which was selected.
-	 * @return <code>True</code> if the current selected position was changed, <code>false</code>
-	 * otherwise.
+	 * @return {@code True} if the current selected position was changed, {@code false} otherwise.
 	 */
 	public boolean dispatchItemSelected(int position) {
 		if (mSelectedPosition != position) {
@@ -194,7 +196,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	/**
 	 * Returns the currently selected position.
 	 *
-	 * @return Position which was set as selected by {@link #dispatchItemSelected(int)} or <code>0</code>
+	 * @return Position which was set as selected by {@link #dispatchItemSelected(int)} or {@code 0}
 	 * by default.
 	 * @see #getSelectedItem()
 	 */
@@ -208,10 +210,10 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 
 	/**
 	 * Invoked to create a drop down view for an item from the current data set at the specified position.
-	 * <p/>
+	 * <p>
 	 * This is invoked only if <var>convertView</var> for the specified <var>position</var> in
-	 * {@link #getDropDownView(int, android.view.View, android.view.ViewGroup)} was <code>null</code>.
-	 * <p/>
+	 * {@link #getDropDownView(int, android.view.View, android.view.ViewGroup)} was {@code null}.
+	 * <p>
 	 * <b>Note</b>, that if {@link com.wit.android.ui.widget.adapter.annotation.DropDownView @DropDownView}
 	 * annotation is presented, a resource id provided by this annotation will be used to inflate the
 	 * requested view, otherwise {@link #onCreateView(int, android.view.LayoutInflater, android.view.ViewGroup)}
@@ -235,17 +237,17 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	/**
 	 * Invoked to create a view holder for a drop down view of an item from the current data set at
 	 * the specified position.
-	 * <p/>
+	 * <p>
 	 * This is invoked only if <var>convertView</var> for the specified <var>position</var> in
-	 * {@link #getDropDownView(int, android.view.View, android.view.ViewGroup)} was <code>null</code>,
+	 * {@link #getDropDownView(int, android.view.View, android.view.ViewGroup)} was {@code null},
 	 * so as view also holder need to be created.
-	 * <p/>
+	 * <p>
 	 * If {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolderFactory @DropDownViewHolderFactory}
 	 * annotation is presented, factory instantiated from the class provided by this annotation will
 	 * be used to create the requested drop down view holder, otherwise
 	 * {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder @DropDownViewHolder}
 	 * annotation will be processed as described below.
-	 * <p/>
+	 * <p>
 	 * If {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolder @DropDownViewHolder}
 	 * annotation is presented, a class provided by this annotation will be used to instantiate the
 	 * requested drop down view holder, otherwise {@link #onCreateViewHolder(int, android.view.View)}
@@ -300,14 +302,14 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 * Invoked to set up and populate a drop down view of an item from the current data set at the
 	 * specified position. This is invoked whenever {@link #getDropDownView(int, android.view.View, android.view.ViewGroup)}
 	 * is called.
-	 * <p/>
+	 * <p>
 	 * <b>Note</b>, that if {@link #onCreateDropDownViewHolder(int, android.view.View)} returns
-	 * <code>null</code>  for the specified <var>position</var> here passed <var>viewHolder</var> will
+	 * {@code null}  for the specified <var>position</var> here passed <var>viewHolder</var> will
 	 * be the view created by {@link #onCreateDropDownView(int, android.view.LayoutInflater, android.view.ViewGroup)}
 	 * for the specified position or just recycled view for such a position. This approach can be used,
 	 * when a view hierarchy of the specific spinner drop down item is represented by one custom view,
 	 * where such a view represents a holder for all its child views.
-	 * <p/>
+	 * <p>
 	 * By default this will call {@link #onUpdateView(int, Object, Object)} with an item obtained by
 	 * {@link #getItem(int)} for the specified position.
 	 *
@@ -325,7 +327,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 
 	/**
 	 * Invoked to update views within the given <var>viewHolder</var> with data of the given <var>item</var>.
-	 * <p/>
+	 * <p>
 	 * By default this will try to bind the given <var>viewHolder</var> (if it is instanceof {@link ViewHolder}),
 	 * otherwise implementation of this method is <b>required</b> or exception will be thrown.
 	 *

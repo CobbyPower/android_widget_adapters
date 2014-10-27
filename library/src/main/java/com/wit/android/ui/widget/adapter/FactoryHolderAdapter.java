@@ -22,7 +22,7 @@ import android.widget.ListAdapter;
 import android.widget.SpinnerAdapter;
 
 /**
- * <h4>Interface Overview</h4>
+ * <h3>Interface Overview</h3>
  * Required interface for adapter which uses {@link com.wit.android.ui.widget.adapter.ViewHolderFactory}
  * to instantiate holder for its views.
  *

@@ -22,7 +22,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 /**
- * <h4>Interface Overview</h4>
+ * <h3>Interface Overview</h3>
  * todo: description
  *
  * @author Martin Albedinsky

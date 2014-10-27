@@ -27,7 +27,7 @@ import android.widget.ListAdapter;
 import android.widget.WrapperListAdapter;
 
 /**
- * <h4>Class Overview</h4>
+ * <h3>Class Overview</h3>
  * todo: description
  *
  * @author Martin Albedinsky
@@ -78,7 +78,7 @@ public abstract class AdapterWrapper implements WrapperListAdapter {
 	 * Creates a new instance of AdapterWrapper which will wraps the given <var>adapter</var>.
 	 *
 	 * @param adapter An instance of the adapter to be wrapped.
-	 * @throws java.lang.NullPointerException If the given adapter is <code>null</code>.
+	 * @throws java.lang.NullPointerException If the given adapter is {@code null}.
 	 */
 	public AdapterWrapper(@NonNull ListAdapter adapter) {
 		this.mAdapter = adapter;

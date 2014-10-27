@@ -25,9 +25,9 @@ import android.support.annotation.Nullable;
 import android.view.AbsSavedState;
 
 /**
- * <h4>Class Overview</h4>
+ * <h3>Class Overview</h3>
  * todo: description
- * <h5>State saving</h5>
+ * <h3>State saving</h3>
  * <pre>
  * public class MyModule extends AdapterModule {
  *
@@ -108,7 +108,7 @@ public abstract class AdapterModule {
 	 */
 
 	/**
-	 * <h4>Interface Overview</h4>
+	 * <h3>Interface Overview</h3>
 	 * Base interface for "module based" adapter which want to use one of {@link AdapterModule} implementations.
 	 *
 	 * @author Martin Albedinsky
@@ -210,8 +210,8 @@ public abstract class AdapterModule {
 	/**
 	 * Returns flag indicating whether this module requires to be its state staved or not.
 	 *
-	 * @return <code>True</code> to call {@link #dispatchSaveInstanceState()} up on this module,
-	 * <code>false</code> otherwise.
+	 * @return {@code True} to call {@link #dispatchSaveInstanceState()} up on this module,
+	 * {@code false} otherwise.
 	 */
 	public boolean requiresStateSaving() {
 		return false;
@@ -225,7 +225,7 @@ public abstract class AdapterModule {
 	 * Returns flag indicating whether the adapter to which is this module attached should be notified
 	 * in case, that its data set should be changed due to changes made by this module.
 	 *
-	 * @return <code>True</code> when adapter auto-notification is enabled, <code>false</code> otherwise.
+	 * @return {@code True} when adapter auto-notification is enabled, {@code false} otherwise.
 	 * @see #setAdapterNotificationEnabled(boolean)
 	 */
 	public boolean isAdapterNotificationEnabled() {
@@ -236,7 +236,7 @@ public abstract class AdapterModule {
 	 * Sets flag indicating whether the adapter to which is this module attached should be notified in case,
 	 * that its data set should be changed due to changes made by this module.
 	 *
-	 * @param enabled <code>True</code> to enable adapter auto-notification, <code>false</code> to
+	 * @param enabled {@code True} to enable adapter auto-notification, {@code false} to
 	 *                disable it.
 	 * @see #isAdapterNotificationEnabled()
 	 */
@@ -251,8 +251,8 @@ public abstract class AdapterModule {
 	/**
 	 * Invoked immediately after {@link #dispatchSaveInstanceState()} was called, to save the current
 	 * state of this module.
-	 * <p/>
-	 * If you decide to override this method, do not forget to call <code>super.onSaveInstanceState()</code>
+	 * <p>
+	 * If you decide to override this method, do not forget to call {@code super.onSaveInstanceState()}
 	 * and pass super state obtained from the super to constructor of your {@link BaseSavedState}
 	 * implementation with such a parameter to ensure the state of all classes along the chain is saved.
 	 *
@@ -284,7 +284,7 @@ public abstract class AdapterModule {
 
 	/**
 	 * Notifies the adapter to which is this module attached by {@link ModuleAdapter#notifyDataSetChanged()}.
-	 * <p/>
+	 * <p>
 	 * This should be called whenever the data set of the attached adapter should be reloaded due
 	 * to changes made by this module.
 	 *
@@ -305,7 +305,7 @@ public abstract class AdapterModule {
 	 */
 
 	/**
-	 * <h4>Class Overview</h4>
+	 * <h3>Class Overview</h3>
 	 * A {@link AbsSavedState} implementation that should be used by inheritance hierarchies of
 	 * {@link AdapterModule} to ensure the state of all classes along the chain is saved.
 	 *
@@ -345,8 +345,8 @@ public abstract class AdapterModule {
 		 * chaining of saved states in {@link #onSaveInstanceState()} and also in
 		 * {@link #onRestoreInstanceState(android.os.Parcelable)}.
 		 *
-		 * @param superState A super state obtained from <code>super.onSaveInstanceState()</code>
-		 *                   within <code>onSaveInstanceState()</code> of a specific {@link AdapterModule}
+		 * @param superState A super state obtained from {@code super.onSaveInstanceState()}
+		 *                   within {@code onSaveInstanceState()} of a specific {@link AdapterModule}
 		 *                   implementation.
 		 */
 		protected BaseSavedState(@Nullable Parcelable superState) {

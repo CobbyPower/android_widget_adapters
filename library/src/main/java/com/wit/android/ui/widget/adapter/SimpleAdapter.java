@@ -26,7 +26,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * <h4>Class Overview</h4>
+ * <h3>Class Overview</h3>
  * todo: description
  *
  * @param <Item> A type of the item presented within a data set of a subclass of this SimpleAdapter.
@@ -113,7 +113,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	/**
 	 * Returns the current data set of this adapter.
 	 *
-	 * @return Data set of this adapter or <code>null</code> if there is no data set presented within
+	 * @return Data set of this adapter or {@code null} if there is no data set presented within
 	 * this adapter.
 	 * @see #hasItems()
 	 */
@@ -134,7 +134,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 
 	/**
 	 * Changes the current data set of this adapter.
-	 * <p/>
+	 * <p>
 	 * This will also notify data set change if the given <var>items</var> are valid, otherwise will
 	 * notify data set invalidation.
 	 *
@@ -161,7 +161,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 
 	/**
 	 * Clears the current data set of this adapter.
-	 * <p/>
+	 * <p>
 	 * This will also notify data set change.
 	 */
 	public void clearItems() {
@@ -175,7 +175,7 @@ public abstract class SimpleAdapter<Item> extends BaseAdapter<Item> {
 	 * Returns flag indicating whether there are some items within the current data set of this adapter
 	 * or not.
 	 *
-	 * @return <code>True</code> if this adapter has some items, <code>false</code> otherwise.
+	 * @return {@code True} if this adapter has some items, {@code false} otherwise.
 	 */
 	public boolean hasItems() {
 		return mItems != null && mItems.size() > 0;

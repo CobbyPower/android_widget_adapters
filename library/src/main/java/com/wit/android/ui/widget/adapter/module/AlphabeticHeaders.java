@@ -25,7 +25,7 @@ import android.text.TextUtils;
 import java.util.List;
 
 /**
- * <h4>Class Overview</h4>
+ * <h3>Class Overview</h3>
  * todo: description
  *
  * @author Martin Albedinsky
@@ -37,7 +37,7 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 	 */
 
 	/**
-	 * <h4>Interface Overview</h4>
+	 * <h3>Interface Overview</h3>
 	 * Required interface for item which can be processed by {@link com.wit.android.ui.widget.adapter.module.AlphabeticHeaders}
 	 * module.
 	 *
@@ -83,7 +83,7 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 
 	/**
 	 * Char which was lastly processed from the current alphabetic data set.
-	 * <p/>
+	 * <p>
 	 * This is only for internal purpose.
 	 */
 	private String mLastChar = "";
@@ -131,9 +131,9 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 	 * {@link com.wit.android.ui.widget.adapter.module.AlphabeticHeaders.AlphabeticItem#getName()},
 	 * so created headers data set will contains all different first characters founded at the
 	 * first positions of obtained names.
-	 * <p/>
+	 * <p>
 	 * Also, the adapter, to which is this module attached, will be notified about data set change.
-	 * <p/>
+	 * <p>
 	 * <b>Note</b>, that the given <var>cursor</var> should be already sorted, otherwise the final
 	 * headers data set can contain duplicates.
 	 *
@@ -160,7 +160,7 @@ public class AlphabeticHeaders extends HeadersModule<HeadersModule.SimpleHeader>
 
 	/**
 	 * Process the given alphabetic <var>item</var> and creates header item from it.
-	 * <p/>
+	 * <p>
 	 * <b>Note</b>, that there is no check for the same headers within the current set of headers.
 	 *
 	 * @param item     An alphabetic item to process.

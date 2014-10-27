@@ -26,10 +26,10 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * <h4>Annotation Overview</h4>
+ * <h3>Annotation Overview</h3>
  * Defines an annotation for determining a resource id of the layout which should be inflated as item
  * view.
- * <h6>Usage</h6>
+ * <h3>Usage</h3>
  * <ul>
  * <li>{@link com.wit.android.ui.widget.adapter.BaseAdapter BaseAdapter}</li>
  * </ul>

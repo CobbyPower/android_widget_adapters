@@ -22,7 +22,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 /**
- * <h4>Interface Overview</h4>
+ * <h3>Interface Overview</h3>
  * todo: description
  *
  * @param <Item>    A type of the item of which data will be presented within views hold by implementation

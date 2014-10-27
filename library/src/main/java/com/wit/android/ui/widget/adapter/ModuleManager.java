@@ -26,7 +26,7 @@ import android.util.SparseArray;
 import com.wit.android.ui.widget.adapter.module.AdapterModule;
 
 /**
- * <h4>Class Overview</h4>
+ * <h3>Class Overview</h3>
  * todo: description
  *
  * @author Martin Albedinsky
@@ -105,7 +105,7 @@ public class ModuleManager {
 	 *
 	 * @param moduleId An id of the desired module to obtain.
 	 * @return The module which was added into this manager under the specified <var>moduleId</var>
-	 * by {@link #addModule(AdapterModule, int)} or <code>null</code> if there is no module with
+	 * by {@link #addModule(AdapterModule, int)} or {@code null} if there is no module with
 	 * such an id.
 	 */
 	@Nullable
