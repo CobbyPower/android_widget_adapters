@@ -19,7 +19,7 @@
 package com.wit.android.ui.widget.adapter;
 
 /**
- * <h4>Interface Overview</h4>
+ * <h3>Interface Overview</h3>
  * todo: description
  *
  * @author Martin Albedinsky

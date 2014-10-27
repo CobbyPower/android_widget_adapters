@@ -28,7 +28,7 @@ import android.support.annotation.Nullable;
 import com.wit.android.ui.widget.adapter.module.AdapterModule;
 
 /**
- * <h4>Class Overview</h4>
+ * <h3>Class Overview</h3>
  * todo: description
  *
  * @param <Item> A type of the item presented within a data set of a subclass of this BaseMultiAdapter.
@@ -169,7 +169,7 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 	 */
 
 	/**
-	 * <h4>Class Overview</h4>
+	 * <h3>Class Overview</h3>
 	 * A {@link BaseSavedState} implementation that should be used by inheritance hierarchies of
 	 * {@link BaseMultiAdapter} to ensure the state of all classes along the chain is saved.
 	 *
@@ -215,8 +215,8 @@ public abstract class BaseMultiAdapter<Item> extends BaseAdapter<Item> implement
 		 * chaining of saved states in {@link #onSaveInstanceState()} and also in
 		 * {@link #onRestoreInstanceState(android.os.Parcelable)}.
 		 *
-		 * @param superState A super state obtained from <code>super.onSaveInstanceState()</code>
-		 *                   within <code>onSaveInstanceState()</code> of a specific {@link BaseMultiAdapter}
+		 * @param superState A super state obtained from {@code super.onSaveInstanceState()}
+		 *                   within {@code onSaveInstanceState()} of a specific {@link BaseMultiAdapter}
 		 *                   implementation.
 		 */
 		protected SavedState(@Nullable Parcelable superState) {

@@ -29,7 +29,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * <h4>Class Overview</h4>
+ * <h3>Class Overview</h3>
  * todo: description
  *
  * @author Martin Albedinsky
@@ -41,7 +41,7 @@ public class SelectionModule extends AdapterModule {
 	 */
 
 	/**
-	 * <h4>Annotation Overview</h4>
+	 * <h3>Annotation Overview</h3>
 	 * Defines an annotation for determining set of allowed modes for {@link #setMode(int)} method.
 	 */
 	@Retention(RetentionPolicy.SOURCE)
@@ -115,7 +115,7 @@ public class SelectionModule extends AdapterModule {
 	 * Checks whether the specified position is currently selected or not.
 	 *
 	 * @param position The position of an item of which selection state to check.
-	 * @return <code>True</code> if the specified position is selected, <code>false</code> otherwise.
+	 * @return {@code True} if the specified position is selected, {@code false} otherwise.
 	 * @see #setSelected(int, boolean)
 	 * @see #toggleSelectionState(int)
 	 */
@@ -125,7 +125,7 @@ public class SelectionModule extends AdapterModule {
 
 	/**
 	 * Changes selection state of the specified position to the opposite one
-	 * (<code>selected -> unselected; unselected -> selected</code>) and <b>notifies adapter</b>.
+	 * ({@code selected -> unselected; unselected -> selected}) and <b>notifies adapter</b>.
 	 *
 	 * @param position The position of an item of which selection state to toggle.
 	 * @return Count of the currently selected positions.
@@ -165,7 +165,7 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * Same as {@link #selectRange(int, int)} with parameters <code>(0, ModuleAdapter.getCount())</code>.
+	 * Same as {@link #selectRange(int, int)} with parameters {@code (0, ModuleAdapter.getCount())}.
 	 *
 	 * @see #setSelected(int, boolean)
 	 */
@@ -175,15 +175,15 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * Selects positions in the range <code>[startPosition, startPosition + count]</code> and
+	 * Selects positions in the range {@code [startPosition, startPosition + count]} and
 	 * <b>notifies adapter</b>.
-	 * <p/>
+	 * <p>
 	 * All previously selected positions will remain selected.
 	 *
 	 * @param startPosition The position from which to start selection.
 	 * @param count         Count of items to select from the start position.
 	 * @throws IllegalStateException     If the current mode is not set to {@link #MODE_MULTIPLE}.
-	 * @throws IndexOutOfBoundsException If <code>startPosition + count > n</code>.
+	 * @throws IndexOutOfBoundsException If {@code startPosition + count > n}.
 	 * @see #selectAll()
 	 * @see #setSelected(int, boolean)
 	 * @see #isAdapterNotificationEnabled()
@@ -214,13 +214,13 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * Deselects all currently selected positions in the range <code>[startPosition, startPosition + count]</code>
+	 * Deselects all currently selected positions in the range {@code [startPosition, startPosition + count]}
 	 * and <b>notifies adapter</b>.
 	 *
 	 * @param startPosition The position from which to start deselection.
 	 * @param count         Count of items to deselect from the start position.
 	 * @throws IllegalStateException     If the current mode is not set to {@link #MODE_MULTIPLE}.
-	 * @throws IndexOutOfBoundsException If <code>startPosition + count > n</code>.
+	 * @throws IndexOutOfBoundsException If {@code startPosition + count > n}.
 	 * @see #clearSelection()
 	 * @see #isAdapterNotificationEnabled()
 	 */
@@ -240,7 +240,7 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * @return <code>True</code> whether there are some selected positions to save, <code>false</code>
+	 * @return {@code True} whether there are some selected positions to save, {@code false}
 	 * otherwise.
 	 */
 	@Override
@@ -275,7 +275,7 @@ public class SelectionModule extends AdapterModule {
 	/**
 	 * Returns the position which is at this time selected.
 	 *
-	 * @return Currently selected position or <code>-1</code> if there is no position selected at
+	 * @return Currently selected position or {@code -1} if there is no position selected at
 	 * this time.
 	 * @throws IllegalStateException If the current mode is not set to {@link #MODE_SINGLE}.
 	 * @see #getSelectedPositions()
@@ -286,7 +286,7 @@ public class SelectionModule extends AdapterModule {
 	}
 
 	/**
-	 * Same as {@link #getSelectedPositions(boolean)} with <code>true</code> for <var>ascending</var>
+	 * Same as {@link #getSelectedPositions(boolean)} with {@code true} for <var>ascending</var>
 	 * parameter, so items in the array will be sorted ascending.
 	 */
 	@NonNull
@@ -296,11 +296,11 @@ public class SelectionModule extends AdapterModule {
 
 	/**
 	 * Returns an array with all positions which are currently selected.
-	 * <p/>
+	 * <p>
 	 * <b>Note</b>, that array is obtained/processed from the {@link android.util.SparseIntArray},
 	 * so its items will be by default sorted ascending.
 	 *
-	 * @param ascending <code>False</code> to sort array items descending, <code>true</code> to ascending.
+	 * @param ascending {@code False} to sort array items descending, {@code true} to ascending.
 	 * @return Array with all currently selected positions.
 	 * @throws IllegalStateException If the current mode is not set to {@link #MODE_MULTIPLE}.
 	 * @see #getSelectedPositions()
@@ -349,8 +349,8 @@ public class SelectionModule extends AdapterModule {
 	 * Checks whether a set of the currently selected positions contains the specified position or not.
 	 *
 	 * @param position The position to check.
-	 * @return <code>True</code> if the specified position is presented within a set of the currently
-	 * selected positions, <code>false</code> otherwise.
+	 * @return {@code True} if the specified position is presented within a set of the currently
+	 * selected positions, {@code false} otherwise.
 	 */
 	protected final boolean contains(int position) {
 		return SELECTION.indexOfKey(position) >= 0;
@@ -380,8 +380,8 @@ public class SelectionModule extends AdapterModule {
 	/**
 	 * Removes all positions form a set of the currently selected positions.
 	 *
-	 * @param notify <code>True</code> to notify the currently attached adapter by {@link #notifyAdapter()},
-	 *               <code>false</code> otherwise.
+	 * @param notify {@code True} to notify the currently attached adapter by {@link #notifyAdapter()},
+	 *               {@code false} otherwise.
 	 */
 	protected final void clearSelection(boolean notify) {
 		SELECTION.clear();
@@ -480,7 +480,7 @@ public class SelectionModule extends AdapterModule {
 	 */
 
 	/**
-	 * <h4>Class Overview</h4>
+	 * <h3>Class Overview</h3>
 	 * todo: description
 	 *
 	 * @author Martin Albedinsky
@@ -529,8 +529,8 @@ public class SelectionModule extends AdapterModule {
 		 * chaining of saved states in {@link #onSaveInstanceState()} and also in
 		 * {@link #onRestoreInstanceState(android.os.Parcelable)}.
 		 *
-		 * @param superState A super state obtained from <code>super.onSaveInstanceState()</code>
-		 *                   within <code>onSaveInstanceState()</code> of a specific {@link SelectionModule}
+		 * @param superState A super state obtained from {@code super.onSaveInstanceState()}
+		 *                   within {@code onSaveInstanceState()} of a specific {@link SelectionModule}
 		 *                   implementation.
 		 */
 		protected SavedState(@Nullable Parcelable superState) {

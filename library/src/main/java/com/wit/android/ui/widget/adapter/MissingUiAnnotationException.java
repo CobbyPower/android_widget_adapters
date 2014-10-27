@@ -21,7 +21,7 @@ package com.wit.android.ui.widget.adapter;
 import android.util.AndroidRuntimeException;
 
 /**
- * <h4>Class Overview</h4>
+ * <h3>Class Overview</h3>
  * todo: description
  *
  * @author Martin Albedinsky

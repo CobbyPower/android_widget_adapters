@@ -24,7 +24,7 @@ import android.support.annotation.Nullable;
 import java.lang.annotation.Annotation;
 
 /**
- * <h4>Class Overview</h4>
+ * <h3>Class Overview</h3>
  * Helper class to obtain class annotations.
  *
  * @author Martin Albedinsky
@@ -45,13 +45,13 @@ final class AdapterAnnotations {
 	 *
 	 * @param fromClass         A class from which should be the requested annotation obtained.
 	 * @param classOfAnnotation A class of the requested annotation.
-	 * @param maxSuperClass     If <code>not null</code>, this method will be called (recursively)
+	 * @param maxSuperClass     If {@code not null}, this method will be called (recursively)
 	 *                          for all super classes of the given annotated class (max to the specified
 	 *                          <var>maxSuperClass</var>) until the requested annotation is presented
 	 *                          and obtained, otherwise annotation will be obtained only from the given
 	 *                          annotated class.
 	 * @param <A>               The type of the requested annotation.
-	 * @return Obtained annotation or <code>null</code> if the requested annotation is not presented
+	 * @return Obtained annotation or {@code null} if the requested annotation is not presented
 	 * for the given class or its supers if requested.
 	 * @see #obtainAnnotationFrom(Class, Class)
 	 */

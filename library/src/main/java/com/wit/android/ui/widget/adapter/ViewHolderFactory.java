@@ -23,7 +23,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 /**
- * <h4>Interface Overview</h4>
+ * <h3>Interface Overview</h3>
  * todo: description
  *
  * @author Martin Albedinsky
@@ -33,8 +33,8 @@ public interface ViewHolderFactory {
 	/**
 	 * Called to instantiate an instance of ViewHolder for the specified <var>position</var> and
 	 * <var>view</var>.
-	 * <p/>
-	 * If not <code>null</code>, {@link ViewHolder#create(int, android.view.View)} will be invoked
+	 * <p>
+	 * If not {@code null}, {@link ViewHolder#create(int, android.view.View)} will be invoked
 	 * upon instance of the created holder.
 	 *
 	 * @param adapter  An instance of adapter which requests the view holder creation.
@@ -42,7 +42,7 @@ public interface ViewHolderFactory {
 	 *                 created.
 	 * @param view     The view created for the specified position by the adapter for which should
 	 *                 be holder created.
-	 * @return New instance of ViewHolder or <code>null</code> if this factory does not provide
+	 * @return New instance of ViewHolder or {@code null} if this factory does not provide
 	 * holder for the specified adapter.
 	 */
 	@Nullable

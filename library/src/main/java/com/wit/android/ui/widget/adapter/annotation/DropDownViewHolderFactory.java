@@ -26,7 +26,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * <h4>Annotation Overview</h4>
+ * <h3>Annotation Overview</h3>
  * Defines an annotation for determining a class of {@link com.wit.android.ui.widget.adapter.ViewHolderFactory}
  * responsible for instantiation of {@link com.wit.android.ui.widget.adapter.ViewHolder}
  * instances for adapter's drop down views.
@@ -39,7 +39,7 @@ public @interface DropDownViewHolderFactory {
 
 	/**
 	 * A class of the desired ViewHolderFactory.
-	 * <p/>
+	 * <p>
 	 * <b>Note</b>, that such a class must have public access and empty public constructor without
 	 * parameters.
 	 */

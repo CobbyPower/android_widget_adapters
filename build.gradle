@@ -1,15 +1,15 @@
 /*
-Global gradle configuration. This will be applied to all sub-projects.
-*/
+ * Global gradle configuration. This configuration will be used for all sub-projects.
+ */
 /**
- * Global build script =============================================================================
+ * Global build script configuration ===============================================================
  */
 buildscript {
     repositories {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.13.0'
+        classpath 'com.android.tools.build:gradle:0.13.2'
     }
 }
 
@@ -21,17 +21,3 @@ allprojects {
         jcenter()
     }
 }
-
-/**
- * Project options =================================================================================
- */
-ext.versionCode = 240
-ext.versionName = "2.4.0"
-
-/**
- * Android SDK options =======================================================
- */
-ext.compileSdkVersion = 20
-ext.buildToolsVersion = "20.0.0"
-ext.minSdkVersion = 3
-ext.targetSdkVersion = 20

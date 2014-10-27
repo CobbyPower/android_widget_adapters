@@ -19,7 +19,7 @@
 package com.wit.android.ui.widget.adapter;
 
 /**
- * <h4>Class Overview</h4>
+ * <h3>Class Overview</h3>
  * Configuration options for this library.
  *
  * @author Martin Albedinsky

@@ -26,13 +26,13 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * <h4>Annotation Overview</h4>
+ * <h3>Annotation Overview</h3>
  * <b>This annotation was deprecated in 2.3</b>, use {@link com.wit.android.ui.widget.adapter.annotation.DropDownViewHolderFactory @DropDownViewHolderFactory}
  * instead.
- * <p/>
+ * <p>
  * Defines an annotation for determining which class should be used to instantiate a holder for drop
  * down view.
- * <h6>Usage</h6>
+ * <h3>Usage</h3>
  * <ul>
  * <li>{@link com.wit.android.ui.widget.adapter.BaseAdapter BaseAdapter}</li>
  * </ul>
@@ -46,7 +46,7 @@ public @interface DropDownViewHolder {
 
 	/**
 	 * A class to be used to instantiate the <b>holder</b> for drop down view.
-	 * <p/>
+	 * <p>
 	 * <b>Note</b>, that such a class must have public access and empty public constructor without
 	 * parameters.
 	 */

@@ -36,27 +36,30 @@ import com.wit.android.ui.widget.adapter.annotation.ItemViewHolder;
 import com.wit.android.ui.widget.adapter.annotation.ItemViewHolderFactory;
 
 /**
- * <h4>Class Overview</h4>
+ * <h3>Class Overview</h3>
  * todo: description
- * <h6>Accepted annotations</h6>
+ * <h3>Accepted annotations</h3>
  * <ul>
- * <li>{@link com.wit.android.ui.widget.adapter.annotation.ItemView @ItemView} <b>[class - inherited]</b></li>
+ * <li>
+ * {@link com.wit.android.ui.widget.adapter.annotation.ItemView @ItemView} <b>[class - inherited]</b>
  * <p>
  * If this annotation is presented, a resource id provided by this annotation will be used to inflate
  * the desired view in {@link #onCreateView(int, android.view.LayoutInflater, android.view.ViewGroup)}.
- * </p>
- * <li>{@link com.wit.android.ui.widget.adapter.annotation.ItemViewHolderFactory @ItemViewHolderFactory} <b>[class - inherited]</li>
+ * </li>
+ * <li>
+ * {@link com.wit.android.ui.widget.adapter.annotation.ItemViewHolderFactory @ItemViewHolderFactory} <b>[class - inherited]</b>
  * <p>
  * If this annotation is presented, a class provided by this annotation will be used to create instances
  * of holders for item views.
- * </p>
- * <li>{@link com.wit.android.ui.widget.adapter.annotation.ItemViewHolder @ItemViewHolder} <b>[class - inherited]</b></li>
+ * </li>
+ * <li>
+ * {@link com.wit.android.ui.widget.adapter.annotation.ItemViewHolder @ItemViewHolder} <b>[class - inherited]</b>
  * <p>
  * If this annotation is presented, a class provided by this annotation will be used to instantiate
  * an instance of the desired holder in {@link #onCreateViewHolder(int, android.view.View)}.
- * </p>
+ * </li>
  * </ul>
- * <h5>State saving</h5>
+ * <h3>State saving</h3>
  * <pre>
  * public class MyAdapter extends BaseAdapter&lt;String&gt; {
  *
@@ -222,14 +225,14 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 
 	/**
 	 * Creates a new instance of BaseAdapter within the given <var>context</var>.
-	 * <p/>
+	 * <p>
 	 * If {@link com.wit.android.ui.widget.adapter.annotation.ItemView @ItemView},
 	 * {@link com.wit.android.ui.widget.adapter.annotation.ItemViewHolderFactory @ItemViewHolderFactory}
 	 * {@link com.wit.android.ui.widget.adapter.annotation.ItemViewHolder @ItemViewHolder}
 	 * annotations are presented above subclass of this BaseAdapter, they will be processed here.
 	 *
 	 * @param context Context in which will be this adapter used.
-	 * @throws NullPointerException If the given context is <code>null</code>.
+	 * @throws NullPointerException If the given context is {@code null}.
 	 */
 	public BaseAdapter(@NonNull Context context) {
 		processAnnotations(((Object) this).getClass());
@@ -284,7 +287,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * Performs optimized algorithm for this method using the <b>Holder</b> pattern.
 	 *
 	 * @throws NullPointerException If {@link #onCreateView(int, android.view.LayoutInflater, android.view.ViewGroup)}
-	 *                              returns <code>null</code> for the specified <var>position</var>.
+	 *                              returns {@code null} for the specified <var>position</var>.
 	 */
 	@Override
 	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -465,7 +468,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 
 	/**
 	 * Called to notify, that the given <var>action</var> was performed for the specified <var>position</var>.
-	 * <p/>
+	 * <p>
 	 * If {@link #onDataSetActionSelected(int, int, Object)} will not process this call, the current
 	 * {@link OnDataSetActionListener} will be notified if it is presented.
 	 *
@@ -482,7 +485,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	/**
 	 * Invoked immediately after {@link #notifyDataSetActionSelected(int, int, Object)} was called.
 	 *
-	 * @return <code>True</code> to indicate that this event was processed here, otherwise the current
+	 * @return {@code True} to indicate that this event was processed here, otherwise the current
 	 * {@link OnDataSetActionListener} will be notified about this event if it is presented.
 	 */
 	protected boolean onDataSetActionSelected(int action, int position, @Nullable Object data) {
@@ -491,10 +494,10 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 
 	/**
 	 * Invoked to create a view for an item from the current data set at the specified position.
-	 * <p/>
+	 * <p>
 	 * This is invoked only if <var>convertView</var> for the specified <var>position</var> in
-	 * {@link #getView(int, android.view.View, android.view.ViewGroup)} was <code>null</code>.
-	 * <p/>
+	 * {@link #getView(int, android.view.View, android.view.ViewGroup)} was {@code null}.
+	 * <p>
 	 * <b>Note</b>, that if {@link com.wit.android.ui.widget.adapter.annotation.ItemView @ItemView}
 	 * annotation is presented, a resource id provided by this annotation will be used to inflate the
 	 * requested view, otherwise implementation of this method is <b>required</b> or exception will
@@ -522,20 +525,20 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	/**
 	 * Invoked to create a view holder for a view of an item from the current data set at the
 	 * specified position.
-	 * <p/>
+	 * <p>
 	 * This is invoked only if <var>convertView</var> for the specified <var>position</var> in
-	 * {@link #getView(int, android.view.View, android.view.ViewGroup)} was <code>null</code>, so as
+	 * {@link #getView(int, android.view.View, android.view.ViewGroup)} was {@code null}, so as
 	 * view also holder need to be created.
-	 * <p/>
+	 * <p>
 	 * If {@link com.wit.android.ui.widget.adapter.annotation.ItemViewHolderFactory @ItemViewHolderFactory}
 	 * annotation is presented, factory instantiated from the class provided by this annotation will
 	 * be used to create the requested view holder, otherwise
 	 * {@link com.wit.android.ui.widget.adapter.annotation.ItemViewHolder @ItemViewHolder}
 	 * annotation will be processed as described below.
-	 * <p/>
+	 * <p>
 	 * If {@link com.wit.android.ui.widget.adapter.annotation.ItemViewHolder @ItemViewHolder}
 	 * annotation is presented, a class provided by this annotation will be used to instantiate the
-	 * requested view holder, otherwise <code>null</code> holder will be returned so the view created
+	 * requested view holder, otherwise {@code null} holder will be returned so the view created
 	 * by {@link #onCreateView(int, android.view.LayoutInflater, android.view.ViewGroup)} for the
 	 * specified position will be passed as holder to {@link #onBindView(int, Object)}.
 	 *
@@ -578,14 +581,14 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * Invoked to set up and populate a view of an item from the current data set at the specified
 	 * position. This is invoked whenever {@link #getView(int, android.view.View, android.view.ViewGroup)}
 	 * is called.
-	 * <p/>
-	 * <b>Note</b>, that if {@link #onCreateViewHolder(int, android.view.View)} returns <code>null</code>
+	 * <p>
+	 * <b>Note</b>, that if {@link #onCreateViewHolder(int, android.view.View)} returns {@code null}
 	 * for the specified <var>position</var> here passed <var>viewHolder</var> will be the view created
 	 * by {@link #onCreateView(int, android.view.LayoutInflater, android.view.ViewGroup)} for the
 	 * specified position or just recycled view for such a position. This approach can be used, when
 	 * a view hierarchy of the specific list item is represented by one custom view, where such a view
 	 * represents a holder for all its child views.
-	 * <p/>
+	 * <p>
 	 * By default this will try to bind the given <var>viewHolder</var> (if it is instanceof {@link ViewHolder}),
 	 * otherwise implementation of this method is <b>required</b> or exception will be thrown.
 	 *
@@ -607,8 +610,8 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	/**
 	 * Invoked immediately after {@link #dispatchSaveInstanceState()} was called, to save the current
 	 * state of this adapter.
-	 * <p/>
-	 * If you decide to override this method, do not forget to call <code>super.onSaveInstanceState()</code>
+	 * <p>
+	 * If you decide to override this method, do not forget to call {@code super.onSaveInstanceState()}
 	 * and pass super state obtained from the super to constructor of your {@link BaseSavedState}
 	 * implementation with such a parameter to ensure the state of all classes along the chain is saved.
 	 *
@@ -717,7 +720,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 */
 
 	/**
-	 * <h4>Class Overview</h4>
+	 * <h3>Class Overview</h3>
 	 * A {@link android.view.AbsSavedState} implementation that should be used by inheritance hierarchies of {@link BaseAdapter}
 	 * to ensure the state of all classes along the chain is saved.
 	 *
@@ -757,8 +760,8 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 		 * chaining of saved states in {@link #onSaveInstanceState()} and also in
 		 * {@link #onRestoreInstanceState(android.os.Parcelable)}.
 		 *
-		 * @param superState A super state obtained from <code>super.onSaveInstanceState()</code>
-		 *                   within <code>onSaveInstanceState()</code> of a specific {@link BaseAdapter}
+		 * @param superState A super state obtained from {@code super.onSaveInstanceState()}
+		 *                   within {@code onSaveInstanceState()} of a specific {@link BaseAdapter}
 		 *                   implementation.
 		 */
 		protected BaseSavedState(@Nullable Parcelable superState) {
