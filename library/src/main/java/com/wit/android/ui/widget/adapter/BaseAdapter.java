@@ -508,7 +508,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * @param inflater Layout inflater which can be used to inflate the requested view.
 	 * @param parent   A parent view, to resolve correct layout params for the newly creating view.
 	 * @return New instance of the requested view.
-	 * @throws MissingUiAnnotationException If there is no @ItemView annotation presented.
+	 * @throws MissingUIAnnotationException If there is no @ItemView annotation presented.
 	 * @see #inflate(int, android.view.ViewGroup)
 	 */
 	@NonNull
@@ -516,7 +516,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 		if (mViewRes >= 0) {
 			return inflater.inflate(mViewRes, parent, false);
 		}
-		throw new MissingUiAnnotationException(
+		throw new MissingUIAnnotationException(
 				"Can not to create view for position(" + position + ") without resource id. " +
 						"No @ItemView annotation presented."
 		);

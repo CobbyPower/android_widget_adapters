@@ -21,28 +21,28 @@ package com.wit.android.ui.widget.adapter;
 import android.util.AndroidRuntimeException;
 
 /**
- * <h4>Class Overview</h4>
+ * <h3>Class Overview</h3>
  * todo: description
  *
  * @author Martin Albedinsky
  */
-public class MissingUiAnnotationException extends AndroidRuntimeException {
+public class MissingUIAnnotationException extends AndroidRuntimeException {
 
 	/**
 	 */
-	public MissingUiAnnotationException() {
+	public MissingUIAnnotationException() {
 		super();
 	}
 
 	/**
 	 */
-	public MissingUiAnnotationException(String name) {
+	public MissingUIAnnotationException(String name) {
 		super(name);
 	}
 
 	/**
 	 */
-	public MissingUiAnnotationException(Exception cause) {
+	public MissingUIAnnotationException(Exception cause) {
 		super(cause);
 	}
 }
