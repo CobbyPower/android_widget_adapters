@@ -3,6 +3,12 @@ Change-Log
 
 > **RELEASE VERSION** (<i>RELEASE DATE</i>)
 
+### **2.5** (<i>28.10.2014</i>) ###
+- Annotations processing fix.
+- Updated `BaseSpinnerAdapter`:
+    - `BaseSpinnerAdapter.dispatchItemSelected(int)` has been deprecated
+    - Implemented "position auto-selection" using framework's `Spinner#setSelection(int)` or `Spinner#setSelection(int, boolean)`
+
 ### **2.4** (<i>05.10.2014</i>) ###
 - Added @NonNull + @Nullable annotations.
 

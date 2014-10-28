@@ -235,7 +235,7 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	 * @throws NullPointerException If the given context is {@code null}.
 	 */
 	public BaseAdapter(@NonNull Context context) {
-		processAnnotations(((Object) this).getClass());
+		this.processAnnotations(((Object) this).getClass());
 		// Set up.
 		this.mContext = context;
 		this.mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -676,11 +676,15 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 	}
 
 	/**
+	 * Private -------------------------------------------------------------------------------------
+	 */
+
+	/**
 	 * Called to process all class annotations of this <var>classOfAdapter</var>.
 	 *
 	 * @param classOfAdapter The class of this adapter of which annotations to process.
 	 */
-	void processAnnotations(Class<?> classOfAdapter) {
+	private void processAnnotations(Class<?> classOfAdapter) {
 		// Obtain item view.
 		final ItemView itemView = AdapterAnnotations.obtainAnnotationFrom(
 				classOfAdapter, ItemView.class, BaseAdapter.class
@@ -710,10 +714,6 @@ public abstract class BaseAdapter<Item> extends android.widget.BaseAdapter imple
 			this.mClassOfHolder = itemViewHolder.value();
 		}
 	}
-
-	/**
-	 * Private -------------------------------------------------------------------------------------
-	 */
 
 	/**
 	 * Inner classes ===============================================================================
