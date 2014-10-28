@@ -127,6 +127,7 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 */
 	public BaseSpinnerAdapter(@NonNull Context context) {
 		super(context);
+		this.processAnnotations(((Object) this).getClass());
 	}
 
 	/**
@@ -138,12 +139,17 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	 */
 
 	/**
+	 * <b>This method was deprecated in 2.4</b>, use {@link android.widget.Spinner#setSelection(int) Spinner#setSelection(int)}
+	 * or {@link android.widget.Spinner#setSelection(int, boolean) Spinner#setSelection(int, boolean)}
+	 * instead.
+	 * <p>
 	 * Called to dispatch that item at the specified <var>position</var> was selected within the
 	 * {@link android.widget.Spinner Spinner} to which is this adapter attached.
 	 *
 	 * @param position Position of an item which was selected.
 	 * @return {@code True} if the current selected position was changed, {@code false} otherwise.
 	 */
+	@Deprecated
 	public boolean dispatchItemSelected(int position) {
 		if (mSelectedPosition != position) {
 			this.mSelectedPosition = position;
@@ -151,6 +157,14 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 			return true;
 		}
 		return false;
+	}
+
+	/**
+	 */
+	@Override
+	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+		this.mSelectedPosition = position;
+		return super.getView(position, convertView, parent);
 	}
 
 	/**
@@ -347,10 +361,15 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 	}
 
 	/**
+	 * Private -------------------------------------------------------------------------------------
 	 */
-	@Override
-	void processAnnotations(Class<?> classOfAdapter) {
-		super.processAnnotations(classOfAdapter);
+
+	/**
+	 * Called to process all class annotations of this <var>classOfAdapter</var>.
+	 *
+	 * @param classOfAdapter The class of this adapter of which annotations to process.
+	 */
+	private void processAnnotations(Class<?> classOfAdapter) {
 		// Obtain drop down view.
 		final DropDownView dropDownView = AdapterAnnotations.obtainAnnotationFrom(
 				classOfAdapter, DropDownView.class, BaseAdapter.class
@@ -380,10 +399,6 @@ public abstract class BaseSpinnerAdapter<Item> extends BaseAdapter<Item> {
 			this.mClassOfDropDownHolder = dropDownViewHolder.value();
 		}
 	}
-
-	/**
-	 * Private -------------------------------------------------------------------------------------
-	 */
 
 	/**
 	 * Inner classes ===============================================================================
