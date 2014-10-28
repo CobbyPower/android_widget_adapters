@@ -58,23 +58,23 @@ afterEvaluate { project ->
     //noinspection GroovyAssignabilityCheck
     task generateJavadoc(type: Javadoc) {
         source android.sourceSets.main.java.sourceFiles
+        final Properties properties = new Properties()
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        final String sdkDir = properties.getProperty('sdk.dir')
         options {
             author = true
             memberLevel = JavadocMemberLevel.PROTECTED
             header = project.property('maven.pom.project.name') + ' ' + project.property('maven.pom.version') + ' Documentation'
-            linksOffline 'http://developer.android.com/reference', '${android.sdkDirectory}/docs/reference'
+            linksOffline 'http://developer.android.com/reference', sdkDir + '\\docs\\reference'
         }
         if (JavaVersion.current().isJava8Compatible()) {
             // Uncomment this when Javadoc tool outputs some (not resolvable) errors like 'reference not found for R.attr#...'.
-            // options.addStringOption('Xdoclint:none', '-quiet')
+            //options.addStringOption('Xdoclint:none', '-quiet')
         }
-        final Properties properties = new Properties()
-        properties.load(project.rootProject.file('local.properties').newDataInputStream())
-        final String sdkDir = properties.getProperty('sdk.dir')
         // Append class path with dependencies.
         classpath += files(
                 android.getBootClasspath(),
-                sdkDir + '/extras/android/m2repository/com/android/support/support-annotations/' + project.property('android.support.version') + '/support-annotations-' + project.property('android.support.version') + '.jar'
+                sdkDir + '\\extras\\android\\m2repository\\com\\android\\support\\support-annotations\\' + project.property('android.support.version') + '\\support-annotations-' + project.property('android.support.version') + '.jar'
         )
     }
 
